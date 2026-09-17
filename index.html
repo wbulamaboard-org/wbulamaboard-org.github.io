@@ -34,8 +34,13 @@ section{padding:55px 0}
 footer{background:#062d23;color:#d6dfdb;padding:35px 0;font-size:12px}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}
 
+.menu-btn{display:none;background:#d7b45b;color:#17372d;border:0;border-radius:8px;padding:9px 13px;font-weight:800}
+
 @media(max-width:800px){
-nav{display:none}
+.menu-btn{display:block}
+nav{display:none;position:absolute;top:72px;left:0;right:0;background:#073f31;padding:15px 20px;flex-direction:column;gap:10px;z-index:1000}
+nav.open{display:flex}
+.nav{position:relative}
 .grid,.split,.footer-grid{grid-template-columns:1fr}
 .hero{padding:55px 0}
 }
