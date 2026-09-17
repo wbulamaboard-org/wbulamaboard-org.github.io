@@ -1,684 +1,206 @@
 <!doctype html>
-<html lang="en">
+<html lang="bn">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Wazeen ID Card | WAYEJIN E FURFURA SHARIF</title>
+<title>Wazeen ID Card Generator | West Bengal Ulama Board</title>
 
 <style>
 *{box-sizing:border-box}
-
 body{
 margin:0;
 font-family:Arial,"Noto Sans Bengali",sans-serif;
-background:#f3f4f1;
-color:#17251f;
-line-height:1.5
+background:#f3f5f2;
+color:#17352c
 }
-
-a{text-decoration:none;color:inherit}
-
-.wrap{
-max-width:1150px;
-margin:auto;
-padding:0 20px
-}
-
-/* TOP */
+.wrap{max-width:900px;margin:auto;padding:20px}
 .top{
-background:#062d23;
-color:#ead47d;
-text-align:center;
-padding:8px;
-font-size:12px
+background:#062d23;color:#ead47d;text-align:center;
+padding:9px;font-size:12px
 }
-
-/* HEADER */
 header{
-background:#073f31;
-color:#fff
+background:#073f31;color:white
 }
-
 .nav{
-min-height:72px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-position:relative
+min-height:65px;display:flex;align-items:center;
+justify-content:space-between;position:relative
 }
-
-.brand{
-font-weight:900;
-font-size:16px
-}
-
+.brand{font-weight:900;font-size:15px}
 .brand small{
-display:block;
-font-size:9px;
-letter-spacing:1px;
-color:#d9dfda
+display:block;font-size:8px;letter-spacing:1px;color:#d8dfdb
+}
+nav{display:flex;gap:13px;font-size:11px}
+.menu{
+display:none;background:#d7b45b;border:0;
+padding:9px 12px;border-radius:7px;font-weight:bold
 }
 
-nav{
-display:flex;
-gap:14px;
-flex-wrap:wrap;
-font-size:12px
+h1{text-align:center;font-family:Georgia,serif}
+.subtitle{text-align:center;color:#6d7771}
+
+.generator{
+background:white;padding:25px;border-radius:18px;
+box-shadow:0 8px 30px #0002;margin:25px auto
 }
 
-.menu-btn{
-display:none;
-background:#d8b85c;
-color:#17372d;
-border:0;
-border-radius:8px;
-padding:9px 13px;
-font-weight:900
+.form-grid{
+display:grid;grid-template-columns:1fr 1fr;gap:15px
 }
 
-/* PAGE */
-section{
-padding:50px 0
+label{
+font-size:12px;font-weight:bold;display:block;margin-bottom:5px
 }
 
-.page-title{
-text-align:center;
-margin-bottom:35px
+input,select{
+width:100%;padding:12px;border:1px solid #ccd6d0;
+border-radius:8px;font-size:14px
 }
 
-.page-title h1{
-font-family:Georgia,serif;
-font-size:32px;
-margin:0
+.full{grid-column:1/-1}
+
+.photo-box{
+border:2px dashed #c5a94f;
+padding:15px;border-radius:10px;text-align:center
 }
 
-.page-title p{
-margin:5px 0;
-color:#6d7772;
-font-size:13px
+button.action{
+width:100%;margin-top:20px;padding:14px;
+border:0;border-radius:9px;
+background:#073f31;color:white;
+font-size:16px;font-weight:bold
 }
 
-/* CARD DISPLAY */
-.cards{
-display:flex;
-justify-content:center;
-align-items:flex-start;
-gap:35px;
-flex-wrap:wrap
+button.download{
+background:#c9a84e;color:#17352c
 }
 
-/* PVC CARD */
-.id-card{
-width:560px;
-height:353px;
-position:relative;
-overflow:hidden;
-border-radius:20px;
-background:
-radial-gradient(circle at 20% 20%,#17644c 0,#073f31 35%,#042b22 100%);
-border:4px solid #c9a746;
-box-shadow:
-0 15px 35px rgba(0,0,0,.25),
-inset 0 0 0 2px #f0d77b
+/* CARD */
+
+.preview{
+margin:35px auto 10px;
+display:flex;justify-content:center
 }
 
-.id-card:after{
+.card{
+width:360px;height:570px;
+position:relative;overflow:hidden;
+border-radius:22px;
+border:4px solid #c9a84e;
+background:linear-gradient(145deg,#073f31,#052a21);
+color:white;
+box-shadow:0 15px 35px #0004;
+padding:18px
+}
+
+.card:before{
 content:"";
 position:absolute;
-inset:10px;
-border:1px solid rgba(236,211,117,.7);
-border-radius:13px;
-pointer-events:none
+inset:9px;
+border:1px solid #e4ca6b;
+border-radius:15px
 }
 
-/* DECORATIVE GOLD CURVES */
-.curve1{
-position:absolute;
-width:500px;
-height:180px;
-border:5px solid #d9ba59;
-border-left:0;
-border-bottom:0;
-border-radius:0 100% 0 0;
-right:-180px;
-bottom:-90px;
-transform:rotate(-8deg);
-opacity:.9
+.card>*{position:relative;z-index:2}
+
+.card-top{text-align:center}
+
+.fake-logo{
+width:70px;height:70px;border-radius:50%;
+margin:auto;
+display:flex;align-items:center;justify-content:center;
+background:#f5f2e8;color:#073f31;
+border:3px solid #d8b75b;
+font-size:28px;font-weight:bold
 }
 
-.curve2{
-position:absolute;
-width:480px;
-height:170px;
-border:3px solid #f0d77b;
-border-right:0;
-border-bottom:0;
-border-radius:100% 0 0 0;
-left:-170px;
-bottom:-75px;
-transform:rotate(8deg);
-opacity:.7
+.org{
+font-family:Georgia,serif;
+font-size:21px;font-weight:bold;
+margin-top:8px
 }
 
-.card-inner{
-position:relative;
-z-index:3;
-height:100%;
-padding:22px 25px
-}
-
-/* LOGO */
-.logo{
-width:66px;
-height:66px;
-border-radius:50%;
-border:3px solid #e3c762;
-background:#f7f4e9;
-color:#07503b;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:30px;
-font-weight:bold;
-box-shadow:0 3px 10px #0005
-}
-
-.logo-text{
-position:absolute;
-top:30px;
-left:105px;
-font-size:10px;
-font-weight:900;
-color:#073f31
-}
-
-/* FRONT HEADER */
-.front-head{
-display:flex;
-align-items:flex-start;
-gap:18px
-}
-
-.org-title{
+.board{
+font-size:12px;color:#e5c65d;font-weight:bold;
 margin-top:3px
 }
 
-.org-title h2{
-margin:0;
-font-family:Georgia,serif;
-font-size:24px;
-letter-spacing:1px;
-color:#fff
-}
-
-.org-title h3{
-margin:3px 0;
-font-size:14px;
-color:#e5c65d;
-letter-spacing:.5px
-}
-
-.org-title p{
-margin:0;
-font-size:9px;
-color:#fff
-}
-
-/* CONTENT */
-.card-main{
-position:absolute;
-left:45px;
-right:35px;
-top:135px;
-display:flex;
-gap:20px;
-align-items:flex-start
-}
+.branch{font-size:8px;margin-top:3px}
 
 .photo{
-width:145px;
-height:170px;
-border:4px solid #d9b955;
-border-radius:16px;
-background:#f8f7f1;
+width:145px;height:175px;
+margin:20px auto 12px;
+border:4px solid #d8b75b;
+border-radius:14px;
+background:#eee;
 display:flex;
 align-items:center;
 justify-content:center;
-text-align:center;
-color:#777;
-font-size:11px;
-flex-shrink:0;
 overflow:hidden;
-box-shadow:0 4px 12px #0004
+color:#777;font-size:11px
 }
 
 .photo img{
-width:100%;
-height:100%;
-object-fit:cover
+width:100%;height:100%;object-fit:cover
+}
+
+.card-name{
+background:#fff;color:#14251f;
+padding:8px 5px;text-align:center;
+border-radius:8px;
+font-size:18px;font-weight:900
 }
 
 .info{
-background:#fff;
-color:#15231e;
-border-radius:12px;
-padding:13px 17px;
-flex:1;
-min-height:170px;
-box-shadow:0 5px 15px #0003
+background:#fff;color:#17251f;
+margin-top:10px;padding:10px 15px;
+border-radius:9px;font-size:11px
 }
 
-.wazeen-badge{
-display:inline-block;
-background:#d8b75b;
-color:#15392f;
-font-size:10px;
-font-weight:900;
-padding:4px 11px;
-border-radius:20px;
-margin-bottom:5px
-}
-
-.name{
-font-size:20px;
-font-weight:900;
-margin:0 0 9px;
-border-bottom:2px solid #d5b653;
-padding-bottom:6px
-}
-
-.data{
+.info div{
 display:grid;
-grid-template-columns:95px 1fr;
-font-size:11px;
-margin:5px 0
+grid-template-columns:105px 1fr;
+margin:4px 0
 }
 
-.data b{
-color:#38584d
-}
+.info b{color:#31594b}
 
-/* SIGNATURE */
 .signature{
-position:absolute;
-right:42px;
-bottom:20px;
-text-align:center;
-color:#fff;
-font-size:9px
+margin-top:10px;text-align:center;
+font-size:9px;color:#e8d27c
 }
 
-.signature-name{
-font-family:cursive;
-font-size:20px;
-color:#ead075;
-border-bottom:1px solid #d7b75b;
-padding:0 18px
+.bottom{
+position:absolute;bottom:15px;left:20px;right:20px;
+text-align:center;color:#e8d27c;
+font-size:9px;font-weight:bold
 }
 
-.signature strong{
-display:block;
-font-size:10px;
-margin-top:3px
-}
-
-/* FRONT FOOTER */
-.front-bottom{
-position:absolute;
-left:30px;
-bottom:17px;
-font-size:10px;
-color:#ead47d;
-font-weight:bold;
-letter-spacing:.5px
-}
-
-/* BACK CARD */
-.back{
-background:
-linear-gradient(135deg,#f8f7ef,#eeece2);
-color:#17251f
-}
-
-.back:before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-right:0;
-height:65px;
-background:#073f31;
-border-bottom:4px solid #d8b75b
-}
-
-.back-inner{
-position:relative;
-z-index:3;
-padding:22px 28px;
-height:100%
-}
-
-.back-title{
-text-align:center;
-margin-top:3px
-}
-
-.back-title h2{
-margin:0;
-font-size:20px;
-font-weight:900;
-color:#073f31
-}
-
-.back-title h3{
-margin:2px 0;
-font-size:15px;
-color:#073f31
-}
-
-.back-title p{
-margin:0;
-font-size:8px;
-font-weight:bold
-}
-
-.instructions{
-position:absolute;
-left:45px;
-right:45px;
-top:100px
-}
-
-.instructions h3{
-display:inline-block;
-background:#073f31;
-color:#fff;
-border:2px solid #d8b75b;
-border-radius:20px;
-padding:5px 28px;
-margin:0 0 9px;
-font-size:13px
-}
-
-.instructions ol{
-margin:0;
-padding-left:20px;
-font-size:10px;
-line-height:1.65
-}
-
-.instructions li{
-padding-left:3px;
-margin-bottom:2px
-}
-
-.motto{
-position:absolute;
-left:55px;
-right:55px;
-bottom:70px;
-background:#073f31;
-border:2px solid #d8b75b;
-border-radius:30px;
-color:#ead47d;
-text-align:center;
-padding:7px;
-font-family:Georgia,serif;
-font-size:16px
-}
-
-.contact{
-position:absolute;
-left:42px;
-right:42px;
-bottom:18px;
-border-top:1px solid #c8a94e;
-padding-top:6px;
-display:flex;
-justify-content:space-between;
-font-size:8px
-}
-
-.qr{
-width:54px;
-height:54px;
-background:#fff;
-border:2px solid #173f32;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:7px;
-font-weight:bold;
-text-align:center
-}
-
-/* NOTE */
-.note{
-text-align:center;
-margin-top:25px;
-font-size:12px;
-color:#6c7771
-}
-
-/* FOOTER */
-footer{
-background:#062d23;
-color:#d6dfdb;
-padding:35px 0;
-font-size:12px;
-margin-top:20px
-}
-
-.footer-grid{
-display:grid;
-grid-template-columns:2fr 1fr 1fr;
-gap:20px
-}
-
-.gold{
-color:#e2c879
-}
-
-/* MOBILE */
 @media(max-width:1100px){
-
-.menu-btn{
-display:block
-}
-
+.menu{display:block}
 nav{
-display:none;
-position:absolute;
-top:72px;
-left:0;
-right:0;
-background:#073f31;
-padding:15px 20px;
-flex-direction:column;
-gap:10px;
-z-index:9999
+display:none;position:absolute;top:65px;left:0;right:0;
+background:#073f31;padding:15px;flex-direction:column;
+z-index:1000
+}
+nav.open{display:flex}
 }
 
-nav.open{
-display:flex
-}
-
-.cards{
-flex-direction:column;
-align-items:center
-}
-
-.id-card{
-max-width:100%;
-height:auto;
-aspect-ratio:560/353
-}
-
-.footer-grid{
-grid-template-columns:1fr
-}
-}
-
-/* SMALL PHONE */
 @media(max-width:600px){
-
-section{
-padding:30px 5px
+.wrap{padding:12px}
+.form-grid{grid-template-columns:1fr}
+.full{grid-column:auto}
+.card{
+width:320px;height:507px
 }
-
-.page-title h1{
-font-size:25px
-}
-
-.cards{
-gap:22px
-}
-
-.id-card{
-width:100%;
-border-radius:14px
-}
-
-.card-inner{
-padding:12px 14px
-}
-
-.logo{
-width:43px;
-height:43px;
-font-size:19px
-}
-
-.front-head{
-gap:9px
-}
-
-.org-title h2{
-font-size:13px
-}
-
-.org-title h3{
-font-size:8px
-}
-
-.org-title p{
-font-size:6px
-}
-
-.card-main{
-left:22px;
-right:20px;
-top:82px;
-gap:9px
-}
-
+.fake-logo{width:58px;height:58px;font-size:23px}
+.org{font-size:18px}
+.board{font-size:10px}
 .photo{
-width:78px;
-height:100px;
-border-width:2px;
-border-radius:9px
+width:115px;height:140px;margin:14px auto 9px
 }
-
-.info{
-padding:7px 9px;
-min-height:100px;
-border-radius:7px
-}
-
-.wazeen-badge{
-font-size:6px;
-padding:2px 6px
-}
-
-.name{
-font-size:10px;
-margin-bottom:4px;
-padding-bottom:3px
-}
-
-.data{
-grid-template-columns:52px 1fr;
-font-size:6px;
-margin:2px 0
-}
-
-.signature{
-right:18px;
-bottom:9px;
-font-size:5px
-}
-
-.signature-name{
-font-size:11px;
-padding:0 7px
-}
-
-.signature strong{
-font-size:5px
-}
-
-.front-bottom{
-left:15px;
-bottom:9px;
-font-size:5px
-}
-
-/* BACK MOBILE */
-
-.back-inner{
-padding:12px 15px
-}
-
-.back-title h2{
-font-size:11px
-}
-
-.back-title h3{
-font-size:9px
-}
-
-.back-title p{
-font-size:5px
-}
-
-.instructions{
-left:22px;
-right:22px;
-top:60px
-}
-
-.instructions h3{
-font-size:7px;
-padding:3px 15px;
-margin-bottom:5px
-}
-
-.instructions ol{
-font-size:5.5px;
-line-height:1.5;
-padding-left:13px
-}
-
-.motto{
-left:25px;
-right:25px;
-bottom:43px;
-font-size:8px;
-padding:4px
-}
-
-.contact{
-left:20px;
-right:20px;
-bottom:9px;
-font-size:4.5px
-}
-
-.qr{
-width:35px;
-height:35px;
-font-size:5px
-}
+.card-name{font-size:15px}
+.info{font-size:9px;padding:8px 11px}
+.info div{grid-template-columns:80px 1fr;margin:3px 0}
 }
 </style>
 </head>
@@ -702,15 +224,13 @@ font-size:5px
 <a href="about.html">পরিচিতি</a>
 <a href="organization.html">সংগঠন</a>
 <a href="leadership.html">নেতৃত্ব</a>
-<a href="activities.html">কার্যক্রম</a>
 <a href="wazeens.html">ওয়েজিন</a>
 <a href="wazeen-id.html">ID Card</a>
 <a href="verification.html">ভেরিফিকেশন</a>
 <a href="registration.html">নিবন্ধন</a>
-<a href="news-events.html">নিউজ</a>
 </nav>
 
-<button class="menu-btn"
+<button class="menu"
 onclick="document.querySelector('nav').classList.toggle('open')">
 ☰ MENU
 </button>
@@ -719,213 +239,261 @@ onclick="document.querySelector('nav').classList.toggle('open')">
 </header>
 
 
-<section>
-
 <div class="wrap">
 
-<div class="page-title">
-<h1>Wazeen ID Card</h1>
-<p>WAYEJIN E FURFURA SHARIF</p>
+<h1>Wazeen ID Card Generator</h1>
+<div class="subtitle">
+WEST BENGAL ULAMA BOARD • WAYEJIN FURFURA SHARIF
 </div>
 
 
-<div class="cards">
+<div class="generator">
 
-<!-- ================= FRONT ================= -->
+<div class="form-grid">
 
-<div class="id-card">
+<div>
+<label>Full Name</label>
+<input id="name" placeholder="Maulana / Hafiz / Qari">
+</div>
 
-<div class="curve1"></div>
-<div class="curve2"></div>
+<div>
+<label>Designation</label>
+<select id="designation">
+<option>Wazeen</option>
+<option>Advisor</option>
+<option>State Committee Member</option>
+<option>District Committee Member</option>
+<option>Block Committee Member</option>
+<option>General Member</option>
+</select>
+</div>
 
-<div class="card-inner">
+<div>
+<label>ID Number</label>
+<input id="idno" placeholder="WBUB/WF/0123/26">
+</div>
 
-<div class="front-head">
+<div>
+<label>District</label>
+<input id="district" placeholder="South 24 Parganas">
+</div>
 
-<div class="logo">
+<div>
+<label>Valid Till</label>
+<input id="valid" type="date">
+</div>
+
+<div>
+<label>Mobile Number</label>
+<input id="phone" placeholder="+91 XXXXX XXXXX">
+</div>
+
+<div class="full photo-box">
+<label>Member Photo</label>
+<input id="photoInput" type="file" accept="image/*">
+</div>
+
+</div>
+
+<button class="action" onclick="generateCard()">
+GENERATE ID CARD
+</button>
+
+<button class="action download" onclick="downloadCard()">
+⬇ DOWNLOAD ID CARD
+</button>
+
+</div>
+
+
+<div class="preview">
+
+<div class="card" id="card">
+
+<div class="card-top">
+
+<div class="fake-logo">
 و
 </div>
 
-<div class="org-title">
+<div class="org">
+WAYEJIN FURFURA SHARIF
+</div>
 
-<h2>WAYEJIN<br>FURFURA SHARIF</h2>
+<div class="board">
+WEST BENGAL ULAMA BOARD
+</div>
 
-<h3>WEST BENGAL ULAMA BOARD</h3>
-
-<p>A BRANCH OF JAMYIATE ULAMA BANGLA-ASAM</p>
-
+<div class="branch">
+A BRANCH OF JAMYIATE ULAMA BANGLA-ASAM
 </div>
 
 </div>
 
 
-<div class="card-main">
-
-<div class="photo">
+<div class="photo" id="cardPhoto">
 PHOTO
 </div>
 
+
+<div class="card-name" id="cardName">
+MEMBER NAME
+</div>
+
+
 <div class="info">
 
-<div class="wazeen-badge">
-WAZEEN
-</div>
-
-<div class="name">
-MAULANA AMANULLAH AMAN
-</div>
-
-<div class="data">
+<div>
 <b>Designation</b>
-<span>Wazeen</span>
+<span id="cardDesignation">Wazeen</span>
 </div>
 
-<div class="data">
+<div>
 <b>ID No.</b>
-<span>WBUB/WF/0123/26</span>
+<span id="cardId">WBUB/WF/0123/26</span>
 </div>
 
-<div class="data">
+<div>
 <b>District</b>
-<span>South 24 Parganas</span>
+<span id="cardDistrict">West Bengal</span>
 </div>
 
-<div class="data">
+<div>
 <b>Valid Till</b>
-<span>31 Dec 2026</span>
+<span id="cardValid">31 Dec 2026</span>
 </div>
 
+<div>
+<b>Mobile</b>
+<span id="cardPhone">+91 XXXXX XXXXX</span>
 </div>
 
-</div>
-
-
-<div class="front-bottom">
-UNITY • EDUCATION • SOCIAL REFORM
 </div>
 
 
 <div class="signature">
-
-<div class="signature-name">
-Pirjada Mehrab
-</div>
-
-<strong>PIRJADA MEHRAB UDDIN SIDDIQUI</strong>
-CONTROLLER
-
-</div>
-
-</div>
+Controller<br>
+PIRJADA MEHRAB UDDIN SIDDIQUI
 </div>
 
 
-<!-- ================= BACK ================= -->
-
-<div class="id-card back">
-
-<div class="back-inner">
-
-<div class="back-title">
-
-<h2>WEST BENGAL ULAMA BOARD</h2>
-
-<h3>WAYEJIN FURFURA SHARIF</h3>
-
-<p>A BRANCH OF JAMYIATE ULAMA BANGLA-ASAM</p>
-
-</div>
-
-
-<div class="instructions">
-
-<h3>INSTRUCTIONS</h3>
-
-<ol>
-
-<li>
-This card is the official identity of a registered Wazeen of West Bengal Ulama Board.
-</li>
-
-<li>
-The card holder must follow the rules and constitution of the organisation.
-</li>
-
-<li>
-This card is non-transferable.
-</li>
-
-<li>
-In case of loss, inform the nearest committee.
-</li>
-
-<li>
-Use this identity with responsibility and for the welfare of society.
-</li>
-
-</ol>
-
-</div>
-
-
-<div class="motto">
-May Allah accept our efforts
-</div>
-
-
-<div class="contact">
-
-<div>
-<strong>WEST BENGAL ULAMA BOARD</strong><br>
-Furfura Sharif, Hooghly, West Bengal, India
-</div>
-
-<div>
-<strong>SCAN TO VERIFY</strong><br>
-<div class="qr">QR<br>VERIFY</div>
+<div class="bottom">
+ঐক্য • শিক্ষা • সমাজ সংস্কার<br>
+UNITY • EDUCATION • SOCIAL REFORM
 </div>
 
 </div>
 
 </div>
-</div>
 
 </div>
 
 
-<div class="note">
-PVC Card Size: 85.6 × 54 mm • Premium Front & Back Design
-</div>
+<script>
 
-</div>
+function generateCard(){
 
-</section>
+document.getElementById("cardName").innerText =
+document.getElementById("name").value || "MEMBER NAME";
 
+document.getElementById("cardDesignation").innerText =
+document.getElementById("designation").value;
 
-<footer>
+document.getElementById("cardId").innerText =
+document.getElementById("idno").value || "WBUB/WF/0123/26";
 
-<div class="wrap footer-grid">
+document.getElementById("cardDistrict").innerText =
+document.getElementById("district").value || "West Bengal";
 
-<div>
-<b>WAYEJIN E FURFURA SHARIF</b>
-<p>ঐক্য • শিক্ষা • সমাজ সংস্কার</p>
-</div>
+let date=document.getElementById("valid").value;
 
-<div>
-<b class="gold">দ্রুত লিংক</b>
-<p><a href="registration.html">নিবন্ধন</a></p>
-<p><a href="verification.html">ভেরিফিকেশন</a></p>
-</div>
+if(date){
+let d=new Date(date);
+document.getElementById("cardValid").innerText =
+d.toLocaleDateString("en-GB",{
+day:"2-digit",month:"short",year:"numeric"
+});
+}else{
+document.getElementById("cardValid").innerText="31 Dec 2026";
+}
 
-<div>
-<b class="gold">প্ল্যাটফর্ম</b>
-<p><a href="wazeens.html">ওয়েজিন</a></p>
-<p><a href="contact.html">যোগাযোগ</a></p>
-</div>
+document.getElementById("cardPhone").innerText =
+document.getElementById("phone").value || "+91 XXXXX XXXXX";
 
-</div>
+let file=document.getElementById("photoInput").files[0];
 
-</footer>
+if(file){
+
+let reader=new FileReader();
+
+reader.onload=function(e){
+
+document.getElementById("cardPhoto").innerHTML =
+'<img src="'+e.target.result+'">';
+
+};
+
+reader.readAsDataURL(file);
+}
+
+}
+
+function downloadCard(){
+
+let card=document.getElementById("card");
+
+let width=card.offsetWidth;
+let height=card.offsetHeight;
+
+let canvas=document.createElement("canvas");
+
+canvas.width=width*3;
+canvas.height=height*3;
+
+let ctx=canvas.getContext("2d");
+
+ctx.scale(3,3);
+
+let data=new XMLSerializer().serializeToString(
+new DOMParser().parseFromString(
+'<svg xmlns="http://www.w3.org/2000/svg" width="'+width+'" height="'+height+'">'+
+'<foreignObject width="100%" height="100%">'+
+'<div xmlns="http://www.w3.org/1999/xhtml">'+
+card.outerHTML+
+'</div>'+
+'</foreignObject></svg>','image/svg+xml'
+).documentElement
+);
+
+let svgBlob=new Blob([data],{
+type:"image/svg+xml;charset=utf-8"
+});
+
+let url=URL.createObjectURL(svgBlob);
+
+let img=new Image();
+
+img.onload=function(){
+
+ctx.drawImage(img,0,0,width,height);
+
+URL.revokeObjectURL(url);
+
+let link=document.createElement("a");
+
+link.download="Wazeen-ID-Card.png";
+
+link.href=canvas.toDataURL("image/png");
+
+link.click();
+
+};
+
+img.src=url;
+
+}
+
+</script>
 
 </body>
 </html>
