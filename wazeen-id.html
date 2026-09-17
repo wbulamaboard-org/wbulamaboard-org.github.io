@@ -7,200 +7,439 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
 margin:0;
 font-family:Arial,"Noto Sans Bengali",sans-serif;
 background:#f3f5f2;
 color:#17352c
 }
-.wrap{max-width:900px;margin:auto;padding:20px}
-.top{
-background:#062d23;color:#ead47d;text-align:center;
-padding:9px;font-size:12px
-}
-header{
-background:#073f31;color:white
-}
-.nav{
-min-height:65px;display:flex;align-items:center;
-justify-content:space-between;position:relative
-}
-.brand{font-weight:900;font-size:15px}
-.brand small{
-display:block;font-size:8px;letter-spacing:1px;color:#d8dfdb
-}
-nav{display:flex;gap:13px;font-size:11px}
-.menu{
-display:none;background:#d7b45b;border:0;
-padding:9px 12px;border-radius:7px;font-weight:bold
+
+.wrap{
+max-width:900px;
+margin:auto;
+padding:20px
 }
 
-h1{text-align:center;font-family:Georgia,serif}
-.subtitle{text-align:center;color:#6d7771}
+.top{
+background:#062d23;
+color:#ead47d;
+text-align:center;
+padding:9px;
+font-size:12px
+}
+
+header{
+background:#073f31;
+color:#fff
+}
+
+.nav{
+min-height:65px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+position:relative
+}
+
+.brand{
+font-weight:900;
+font-size:15px
+}
+
+.brand small{
+display:block;
+font-size:8px;
+letter-spacing:1px;
+color:#d8dfdb
+}
+
+nav{
+display:flex;
+gap:13px;
+font-size:11px
+}
+
+.menu{
+display:none;
+background:#d7b45b;
+border:0;
+padding:9px 12px;
+border-radius:7px;
+font-weight:bold
+}
+
+h1{
+text-align:center;
+font-family:Georgia,serif;
+margin-bottom:5px
+}
+
+.subtitle{
+text-align:center;
+color:#6d7771;
+font-size:12px
+}
 
 .generator{
-background:white;padding:25px;border-radius:18px;
-box-shadow:0 8px 30px #0002;margin:25px auto
+background:white;
+padding:25px;
+border-radius:18px;
+box-shadow:0 8px 30px #0002;
+margin:25px auto
 }
 
 .form-grid{
-display:grid;grid-template-columns:1fr 1fr;gap:15px
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px
 }
 
 label{
-font-size:12px;font-weight:bold;display:block;margin-bottom:5px
+font-size:12px;
+font-weight:bold;
+display:block;
+margin-bottom:5px
 }
 
 input,select{
-width:100%;padding:12px;border:1px solid #ccd6d0;
-border-radius:8px;font-size:14px
+width:100%;
+padding:12px;
+border:1px solid #ccd6d0;
+border-radius:8px;
+font-size:14px
 }
 
-.full{grid-column:1/-1}
+.full{
+grid-column:1/-1
+}
 
 .photo-box{
 border:2px dashed #c5a94f;
-padding:15px;border-radius:10px;text-align:center
+padding:15px;
+border-radius:10px;
+text-align:center
 }
 
-button.action{
-width:100%;margin-top:20px;padding:14px;
-border:0;border-radius:9px;
-background:#073f31;color:white;
-font-size:16px;font-weight:bold
+.action{
+width:100%;
+margin-top:18px;
+padding:14px;
+border:0;
+border-radius:9px;
+background:#073f31;
+color:white;
+font-size:15px;
+font-weight:bold
 }
 
-button.download{
-background:#c9a84e;color:#17352c
+.download{
+background:#c9a84e;
+color:#17352c
 }
 
 /* CARD */
 
 .preview{
-margin:35px auto 10px;
-display:flex;justify-content:center
+margin:35px auto;
+display:flex;
+justify-content:center
 }
 
 .card{
-width:360px;height:570px;
-position:relative;overflow:hidden;
-border-radius:22px;
-border:4px solid #c9a84e;
-background:linear-gradient(145deg,#073f31,#052a21);
+width:420px;
+height:665px;
+position:relative;
+overflow:hidden;
+border-radius:24px;
+border:5px solid #c9a84e;
+background:
+radial-gradient(circle at 50% 20%,#0c5b44,#073f31 45%,#042b22);
 color:white;
 box-shadow:0 15px 35px #0004;
-padding:18px
+padding:22px
 }
 
 .card:before{
 content:"";
 position:absolute;
-inset:9px;
+inset:10px;
 border:1px solid #e4ca6b;
-border-radius:15px
+border-radius:17px
 }
 
-.card>*{position:relative;z-index:2}
+.card:after{
+content:"";
+position:absolute;
+left:-50px;
+right:-50px;
+bottom:90px;
+height:110px;
+border-top:4px solid #d9ba59;
+border-radius:50%;
+opacity:.8
+}
 
-.card-top{text-align:center}
+.card-top{
+position:relative;
+z-index:2;
+text-align:center
+}
 
 .fake-logo{
-width:70px;height:70px;border-radius:50%;
+width:72px;
+height:72px;
+border-radius:50%;
 margin:auto;
-display:flex;align-items:center;justify-content:center;
-background:#f5f2e8;color:#073f31;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#f5f2e8;
+color:#073f31;
 border:3px solid #d8b75b;
-font-size:28px;font-weight:bold
+font-size:29px;
+font-weight:bold
 }
 
 .org{
 font-family:Georgia,serif;
-font-size:21px;font-weight:bold;
-margin-top:8px
+font-size:22px;
+font-weight:bold;
+margin-top:10px
 }
 
 .board{
-font-size:12px;color:#e5c65d;font-weight:bold;
-margin-top:3px
+font-size:12px;
+color:#e5c65d;
+font-weight:bold;
+margin-top:4px
 }
 
-.branch{font-size:8px;margin-top:3px}
+.branch{
+font-size:8px;
+margin-top:4px
+}
+
+.side-left,
+.side-right{
+position:absolute;
+z-index:2;
+top:270px;
+color:#e6cd70;
+font-size:9px;
+font-weight:bold;
+line-height:2;
+writing-mode:vertical-rl
+}
+
+.side-left{
+left:12px;
+transform:rotate(180deg)
+}
+
+.side-right{
+right:12px
+}
 
 .photo{
-width:145px;height:175px;
-margin:20px auto 12px;
+position:relative;
+z-index:3;
+width:155px;
+height:185px;
+margin:22px auto 14px;
 border:4px solid #d8b75b;
-border-radius:14px;
+border-radius:15px;
 background:#eee;
 display:flex;
 align-items:center;
 justify-content:center;
 overflow:hidden;
-color:#777;font-size:11px
+color:#777;
+font-size:11px;
+box-shadow:0 4px 15px #0005
 }
 
 .photo img{
-width:100%;height:100%;object-fit:cover
+width:100%;
+height:100%;
+object-fit:cover
 }
 
 .card-name{
-background:#fff;color:#14251f;
-padding:8px 5px;text-align:center;
-border-radius:8px;
-font-size:18px;font-weight:900
+position:relative;
+z-index:3;
+background:white;
+color:#132a23;
+padding:10px 7px;
+text-align:center;
+border-radius:10px;
+font-size:18px;
+font-weight:900;
+border:2px solid #d8b75b
 }
 
 .info{
-background:#fff;color:#17251f;
-margin-top:10px;padding:10px 15px;
-border-radius:9px;font-size:11px
+position:relative;
+z-index:3;
+background:white;
+color:#17251f;
+margin-top:11px;
+padding:12px 15px;
+border-radius:10px;
+font-size:11px;
+border:1px solid #d8b75b
 }
 
 .info div{
 display:grid;
 grid-template-columns:105px 1fr;
-margin:4px 0
+margin:5px 0
 }
 
-.info b{color:#31594b}
+.info b{
+color:#31594b
+}
 
 .signature{
-margin-top:10px;text-align:center;
-font-size:9px;color:#e8d27c
+position:relative;
+z-index:3;
+margin-top:13px;
+text-align:center;
+font-size:9px;
+color:#e8d27c;
+font-weight:bold
+}
+
+.signature-line{
+width:150px;
+border-bottom:1px solid #e8d27c;
+margin:4px auto
 }
 
 .bottom{
-position:absolute;bottom:15px;left:20px;right:20px;
-text-align:center;color:#e8d27c;
-font-size:9px;font-weight:bold
+position:absolute;
+z-index:3;
+bottom:18px;
+left:20px;
+right:20px;
+text-align:center;
+color:#e8d27c;
+font-size:10px;
+font-weight:bold
 }
 
-@media(max-width:1100px){
-.menu{display:block}
-nav{
-display:none;position:absolute;top:65px;left:0;right:0;
-background:#073f31;padding:15px;flex-direction:column;
-z-index:1000
+.download-note{
+text-align:center;
+color:#68756f;
+font-size:11px;
+margin-bottom:30px
 }
-nav.open{display:flex}
+
+/* MOBILE */
+
+@media(max-width:1100px){
+
+.menu{
+display:block
+}
+
+nav{
+display:none;
+position:absolute;
+top:65px;
+left:0;
+right:0;
+background:#073f31;
+padding:15px;
+flex-direction:column;
+z-index:9999
+}
+
+nav.open{
+display:flex
+}
+
 }
 
 @media(max-width:600px){
-.wrap{padding:12px}
-.form-grid{grid-template-columns:1fr}
-.full{grid-column:auto}
+
+.wrap{
+padding:12px
+}
+
+.form-grid{
+grid-template-columns:1fr
+}
+
+.full{
+grid-column:auto
+}
+
+.generator{
+padding:15px
+}
+
 .card{
-width:320px;height:507px
+width:340px;
+height:540px;
+border-width:4px;
+padding:16px
 }
-.fake-logo{width:58px;height:58px;font-size:23px}
-.org{font-size:18px}
-.board{font-size:10px}
+
+.fake-logo{
+width:58px;
+height:58px;
+font-size:23px
+}
+
+.org{
+font-size:18px
+}
+
+.board{
+font-size:10px
+}
+
+.branch{
+font-size:6px
+}
+
 .photo{
-width:115px;height:140px;margin:14px auto 9px
+width:125px;
+height:150px;
+margin:16px auto 11px
 }
-.card-name{font-size:15px}
-.info{font-size:9px;padding:8px 11px}
-.info div{grid-template-columns:80px 1fr;margin:3px 0}
+
+.card-name{
+font-size:15px;
+padding:8px 5px
+}
+
+.info{
+font-size:9px;
+padding:9px 11px
+}
+
+.info div{
+grid-template-columns:85px 1fr;
+margin:4px 0
+}
+
+.side-left,
+.side-right{
+font-size:7px
+}
+
+.signature{
+font-size:7px;
+margin-top:9px
+}
+
+.bottom{
+font-size:7px;
+bottom:12px
+}
+
 }
 </style>
 </head>
@@ -224,6 +463,7 @@ width:115px;height:140px;margin:14px auto 9px
 <a href="about.html">পরিচিতি</a>
 <a href="organization.html">সংগঠন</a>
 <a href="leadership.html">নেতৃত্ব</a>
+<a href="activities.html">কার্যক্রম</a>
 <a href="wazeens.html">ওয়েজিন</a>
 <a href="wazeen-id.html">ID Card</a>
 <a href="verification.html">ভেরিফিকেশন</a>
@@ -242,6 +482,7 @@ onclick="document.querySelector('nav').classList.toggle('open')">
 <div class="wrap">
 
 <h1>Wazeen ID Card Generator</h1>
+
 <div class="subtitle">
 WEST BENGAL ULAMA BOARD • WAYEJIN FURFURA SHARIF
 </div>
@@ -253,7 +494,7 @@ WEST BENGAL ULAMA BOARD • WAYEJIN FURFURA SHARIF
 
 <div>
 <label>Full Name</label>
-<input id="name" placeholder="Maulana / Hafiz / Qari">
+<input id="name" placeholder="Full Name">
 </div>
 
 <div>
@@ -331,6 +572,15 @@ A BRANCH OF JAMYIATE ULAMA BANGLA-ASAM
 </div>
 
 
+<div class="side-left">
+SERVICE • DAWAH • SOCIETY
+</div>
+
+<div class="side-right">
+IDENTITY • RESPONSIBILITY • UNITY
+</div>
+
+
 <div class="photo" id="cardPhoto">
 PHOTO
 </div>
@@ -372,21 +622,37 @@ MEMBER NAME
 
 
 <div class="signature">
-Controller<br>
+
+Controller
+
+<div class="signature-line"></div>
+
 PIRJADA MEHRAB UDDIN SIDDIQUI
+
 </div>
 
 
 <div class="bottom">
+
 ঐক্য • শিক্ষা • সমাজ সংস্কার<br>
+
 UNITY • EDUCATION • SOCIAL REFORM
-</div>
 
 </div>
 
 </div>
 
 </div>
+
+<div class="download-note">
+Premium Vertical PVC ID Card • 54 × 85.6 mm
+</div>
+
+</div>
+
+
+<!-- DOWNLOAD LIBRARY -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 
 <script>
@@ -405,20 +671,28 @@ document.getElementById("idno").value || "WBUB/WF/0123/26";
 document.getElementById("cardDistrict").innerText =
 document.getElementById("district").value || "West Bengal";
 
+document.getElementById("cardPhone").innerText =
+document.getElementById("phone").value || "+91 XXXXX XXXXX";
+
 let date=document.getElementById("valid").value;
 
 if(date){
+
 let d=new Date(date);
+
 document.getElementById("cardValid").innerText =
 d.toLocaleDateString("en-GB",{
-day:"2-digit",month:"short",year:"numeric"
+day:"2-digit",
+month:"short",
+year:"numeric"
 });
+
 }else{
+
 document.getElementById("cardValid").innerText="31 Dec 2026";
+
 }
 
-document.getElementById("cardPhone").innerText =
-document.getElementById("phone").value || "+91 XXXXX XXXXX";
 
 let file=document.getElementById("photoInput").files[0];
 
@@ -429,67 +703,80 @@ let reader=new FileReader();
 reader.onload=function(e){
 
 document.getElementById("cardPhoto").innerHTML =
-'<img src="'+e.target.result+'">';
+'<img src="'+e.target.result+'" crossorigin="anonymous">';
 
 };
 
 reader.readAsDataURL(file);
-}
 
 }
 
-function downloadCard(){
+}
 
-let card=document.getElementById("card");
 
-let width=card.offsetWidth;
-let height=card.offsetHeight;
+async function downloadCard(){
 
-let canvas=document.createElement("canvas");
+generateCard();
 
-canvas.width=width*3;
-canvas.height=height*3;
+let button=document.querySelector(".download");
 
-let ctx=canvas.getContext("2d");
+button.innerText="PLEASE WAIT...";
 
-ctx.scale(3,3);
+try{
 
-let data=new XMLSerializer().serializeToString(
-new DOMParser().parseFromString(
-'<svg xmlns="http://www.w3.org/2000/svg" width="'+width+'" height="'+height+'">'+
-'<foreignObject width="100%" height="100%">'+
-'<div xmlns="http://www.w3.org/1999/xhtml">'+
-card.outerHTML+
-'</div>'+
-'</foreignObject></svg>','image/svg+xml'
-).documentElement
-);
+const card=document.getElementById("card");
 
-let svgBlob=new Blob([data],{
-type:"image/svg+xml;charset=utf-8"
+const canvas=await html2canvas(card,{
+scale:3,
+useCORS:true,
+allowTaint:true,
+backgroundColor:null,
+logging:false
 });
 
-let url=URL.createObjectURL(svgBlob);
+canvas.toBlob(function(blob){
 
-let img=new Image();
+if(!blob){
 
-img.onload=function(){
+alert("Download তৈরি করা যায়নি। আবার চেষ্টা করুন।");
 
-ctx.drawImage(img,0,0,width,height);
+button.innerText="⬇ DOWNLOAD ID CARD";
 
-URL.revokeObjectURL(url);
+return;
+
+}
+
+let url=URL.createObjectURL(blob);
 
 let link=document.createElement("a");
 
-link.download="Wazeen-ID-Card.png";
+link.href=url;
 
-link.href=canvas.toDataURL("image/png");
+link.download="WAYEJIN-FURFURA-SHARIF-ID-CARD.png";
+
+document.body.appendChild(link);
 
 link.click();
 
-};
+document.body.removeChild(link);
 
-img.src=url;
+setTimeout(function(){
+URL.revokeObjectURL(url);
+},1000);
+
+button.innerText="⬇ DOWNLOAD ID CARD";
+
+}, "image/png");
+
+}catch(error){
+
+console.log(error);
+
+alert("Download তৈরি করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+
+button.innerText="⬇ DOWNLOAD ID CARD";
+
+}
 
 }
 
