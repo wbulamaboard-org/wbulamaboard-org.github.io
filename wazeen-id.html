@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ID Card | WAYEJIN E FURFURA SHARIF</title>
+<title>Wazeen ID Card | WAYEJIN E FURFURA SHARIF</title>
 
 <style>
 *{box-sizing:border-box}
@@ -11,9 +11,9 @@
 body{
 margin:0;
 font-family:Arial,"Noto Sans Bengali",sans-serif;
-background:#f8faf9;
-color:#17372d;
-line-height:1.7
+background:#f5f6f4;
+color:#17251f;
+line-height:1.6
 }
 
 a{text-decoration:none;color:inherit}
@@ -75,7 +75,9 @@ padding:9px 13px;
 font-weight:800
 }
 
-section{padding:50px 0}
+section{
+padding:50px 0
+}
 
 .head{
 text-align:center;
@@ -84,103 +86,247 @@ margin-bottom:30px
 
 .head h1{
 font-family:Georgia,serif;
-font-size:34px;
-margin:0
+font-size:32px;
+margin:0 0 5px
 }
 
 .head p{
-color:#69756f;
-font-size:14px
+margin:0;
+color:#69756f
 }
 
-.id-box{
-max-width:650px;
-margin:auto
+/* CARD AREA */
+
+.cards{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:35px;
+margin-top:25px
 }
 
 .id-card{
-background:#fff;
-border:2px solid #d7b45b;
-border-radius:18px;
-overflow:hidden;
-box-shadow:0 8px 25px #1232
-}
-
-.id-head{
+width:540px;
+max-width:100%;
+aspect-ratio:85.6/54;
 background:#073f31;
+border-radius:18px;
+position:relative;
+overflow:hidden;
 color:#fff;
-padding:20px;
-text-align:center
+box-shadow:0 15px 40px #0003;
+border:3px solid #c9a84e
 }
 
-.id-head h2{
-margin:0;
-font-size:22px
+.id-card:before{
+content:"";
+position:absolute;
+inset:7px;
+border:1px solid #e1c76d;
+border-radius:12px;
+pointer-events:none
 }
 
-.id-head small{
-letter-spacing:1px
+.gold-line{
+height:5px;
+background:#d7b45b;
+position:absolute;
+left:0;
+right:0;
+top:0
 }
 
-.id-body{
-padding:25px
+.card-content{
+position:relative;
+z-index:2;
+padding:25px 28px;
+height:100%
 }
 
-.id-row{
+.logo{
+width:62px;
+height:62px;
+border:2px solid #d7b45b;
+border-radius:50%;
 display:flex;
-justify-content:space-between;
-gap:20px;
-padding:10px 0;
-border-bottom:1px solid #e5e9e7
+align-items:center;
+justify-content:center;
+font-size:25px;
+color:#d7b45b;
+font-weight:bold;
+margin-bottom:8px
+}
+
+.org{
+font-size:17px;
+font-weight:900;
+letter-spacing:.5px;
+color:#fff
+}
+
+.sub{
+font-size:10px;
+color:#e2c879;
+letter-spacing:1.5px;
+font-weight:bold
+}
+
+.front-main{
+display:flex;
+align-items:center;
+gap:25px;
+margin-top:20px
+}
+
+.photo{
+width:125px;
+height:145px;
+border:3px solid #d7b45b;
+border-radius:10px;
+background:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#777;
+font-size:12px;
+text-align:center;
+flex-shrink:0;
+overflow:hidden
+}
+
+.photo img{
+width:100%;
+height:100%;
+object-fit:cover
+}
+
+.info{
+flex:1
+}
+
+.role{
+display:inline-block;
+background:#d7b45b;
+color:#17372d;
+padding:4px 10px;
+border-radius:20px;
+font-size:10px;
+font-weight:900;
+margin-bottom:7px
+}
+
+.name{
+font-size:22px;
+font-weight:900;
+margin:3px 0 10px
+}
+
+.row{
+display:flex;
+gap:8px;
+font-size:11px;
+margin:5px 0
 }
 
 .label{
-font-weight:800
+color:#d7b45b;
+font-weight:bold;
+min-width:55px
 }
 
-.value{
-text-align:right
+.card-footer{
+position:absolute;
+bottom:18px;
+left:28px;
+right:28px;
+display:flex;
+justify-content:space-between;
+align-items:end;
+font-size:9px
 }
 
-.status{
-display:inline-block;
-margin-top:18px;
-padding:6px 12px;
-border-radius:20px;
-background:#e7f4ec;
-color:#14613d;
-font-size:11px;
-font-weight:800
+.valid{
+color:#d9e2dd
 }
 
-.verify{
-margin-top:25px;
-text-align:center
+.signature{
+text-align:center;
+min-width:125px
 }
 
-.btn{
-display:inline-block;
-padding:12px 20px;
-border-radius:9px;
-background:#d7b45b;
-color:#17372d;
-font-weight:800
+.signature-line{
+border-top:1px solid #d7b45b;
+padding-top:3px;
+font-size:8px
+}
+
+/* BACK */
+
+.back-content{
+padding:24px 28px
+}
+
+.back-title{
+font-size:18px;
+font-weight:900;
+color:#d7b45b;
+margin-bottom:4px
+}
+
+.back-sub{
+font-size:9px;
+letter-spacing:1px;
+margin-bottom:18px
+}
+
+.rules{
+font-size:10px;
+line-height:1.7;
+padding-left:18px
+}
+
+.rules li{
+margin-bottom:4px
+}
+
+.contact{
+position:absolute;
+bottom:20px;
+left:28px;
+right:28px;
+border-top:1px solid #d7b45b;
+padding-top:8px;
+font-size:9px;
+display:flex;
+justify-content:space-between;
+gap:10px
+}
+
+.qr{
+width:62px;
+height:62px;
+background:#fff;
+color:#111;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:9px;
+text-align:center;
+border-radius:5px
 }
 
 .note{
-margin-top:25px;
-background:#eef5f1;
-padding:18px;
-border-radius:12px;
-font-size:13px
+text-align:center;
+margin-top:30px;
+font-size:12px;
+color:#68756f
 }
 
 footer{
 background:#062d23;
 color:#d6dfdb;
 padding:35px 0;
-font-size:12px;
-margin-top:20px
+font-size:12px
 }
 
 .footer-grid{
@@ -189,9 +335,13 @@ grid-template-columns:2fr 1fr 1fr;
 gap:20px
 }
 
-.gold{color:#e2c879}
+.gold{
+color:#e2c879
+}
 
-@media(max-width:1400px){
+/* MOBILE */
+
+@media(max-width:1100px){
 
 .menu-btn{
 display:block
@@ -214,17 +364,99 @@ nav.open{
 display:flex
 }
 
-.id-row{
-flex-direction:column;
-gap:2px
+.id-card{
+width:100%;
+max-width:540px
 }
 
-.value{
-text-align:left
+.cards{
+gap:25px
 }
 
 .footer-grid{
 grid-template-columns:1fr
+}
+}
+
+@media(max-width:600px){
+
+section{
+padding:35px 8px
+}
+
+.head h1{
+font-size:25px
+}
+
+.id-card{
+border-radius:12px;
+aspect-ratio:auto;
+min-height:310px
+}
+
+.card-content{
+padding:18px 20px
+}
+
+.logo{
+width:45px;
+height:45px;
+font-size:18px
+}
+
+.org{
+font-size:12px
+}
+
+.sub{
+font-size:7px
+}
+
+.front-main{
+gap:12px;
+margin-top:12px
+}
+
+.photo{
+width:85px;
+height:100px
+}
+
+.name{
+font-size:14px
+}
+
+.row{
+font-size:8px
+}
+
+.label{
+min-width:38px
+}
+
+.card-footer{
+left:20px;
+right:20px;
+bottom:12px
+}
+
+.back-content{
+padding:18px 20px
+}
+
+.rules{
+font-size:8px
+}
+
+.contact{
+left:20px;
+right:20px;
+font-size:7px
+}
+
+.qr{
+width:45px;
+height:45px
 }
 }
 </style>
@@ -240,7 +472,7 @@ grid-template-columns:1fr
 <div class="wrap nav">
 
 <a class="brand" href="index.html">
-ওয়েজিন এ ফুরফুরা শরীফ
+ওয়েজিন ফুরফুরা শরীফ
 <small>WAYEJIN E FURFURA SHARIF</small>
 </a>
 
@@ -265,6 +497,7 @@ onclick="document.querySelector('nav').classList.toggle('open')">
 </div>
 </header>
 
+
 <section>
 
 <div class="wrap">
@@ -274,21 +507,185 @@ onclick="document.querySelector('nav').classList.toggle('open')">
 <p>WAYEJIN E FURFURA SHARIF</p>
 </div>
 
-<div class="id-box">
+
+<div class="cards">
+
+<!-- FRONT -->
 
 <div class="id-card">
 
-<div class="id-head">
-<h2>WAYEJIN E FURFURA SHARIF</h2>
-<small>WEST BENGAL ULAMA BOARD</small>
+<div class="gold-line"></div>
+
+<div class="card-content">
+
+<div class="logo">و</div>
+
+<div class="org">
+WAYEJIN E FURFURA SHARIF
 </div>
 
-<div class="id-body">
-
-<div class="id-row">
-<span class="label">Name</span>
-<span class="value">Maulana Example</span>
+<div class="sub">
+WEST BENGAL ULAMA BOARD
 </div>
 
-<div class="id-row">
-<span class="label
+<div class="front-main">
+
+<div class="photo">
+PHOTO
+</div>
+
+<div class="info">
+
+<div class="role">
+WAZEEN
+</div>
+
+<div class="name">
+MAULANA AMANULLAH AMAN
+</div>
+
+<div class="row">
+<span class="label">ID NO:</span>
+<span>WEFS/0001/26</span>
+</div>
+
+<div class="row">
+<span class="label">DISTRICT:</span>
+<span>WEST BENGAL</span>
+</div>
+
+<div class="row">
+<span class="label">STATUS:</span>
+<span>AUTHORIZED WAZEEN</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card-footer">
+
+<div class="valid">
+VALID ID CARD<br>
+WAYEJIN E FURFURA SHARIF
+</div>
+
+<div class="signature">
+PIRJADA MEHRAB UDDIN SIDDIQUI
+<div class="signature-line">
+CONTROLLER
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- BACK -->
+
+<div class="id-card">
+
+<div class="gold-line"></div>
+
+<div class="back-content">
+
+<div class="logo">و</div>
+
+<div class="back-title">
+WAYEJIN E FURFURA SHARIF
+</div>
+
+<div class="back-sub">
+WEST BENGAL ULAMA BOARD
+</div>
+
+<ul class="rules">
+
+<li>
+এই পরিচয়পত্র শুধুমাত্র অনুমোদিত ওয়েজিনের জন্য প্রযোজ্য।
+</li>
+
+<li>
+পরিচয়পত্রটি সংশ্লিষ্ট কর্তৃপক্ষের অনুমতি ব্যতীত হস্তান্তরযোগ্য নয়।
+</li>
+
+<li>
+কার্ডটি হারিয়ে গেলে দ্রুত বোর্ড কর্তৃপক্ষকে জানাতে হবে।
+</li>
+
+<li>
+ভেরিফিকেশনের জন্য ID Number ব্যবহার করুন।
+</li>
+
+<li>
+এই কার্ড বোর্ডের সম্পত্তি। প্রয়োজন হলে কর্তৃপক্ষ কার্ডটি বাতিল করতে পারে।
+</li>
+
+</ul>
+
+
+<div class="qr">
+QR<br>
+VERIFY
+</div>
+
+
+<div class="contact">
+
+<div>
+HEAD OFFICE: FURFURA SHARIF<br>
+BRANCH OFFICE: SIMULTALA HOSPITAL MORE,<br>
+BASANTI, SOUTH 24 PARGANAS
+</div>
+
+<div style="text-align:right">
+WEST BENGAL ULAMA BOARD<br>
+ঐক্য • শিক্ষা • সমাজ সংস্কার
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+<div class="note">
+PVC Card Size: 85.6 × 54 mm • Front & Back Design
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<div class="wrap footer-grid">
+
+<div>
+<b>WAYEJIN E FURFURA SHARIF</b>
+<p>ঐক্য • শিক্ষা • সমাজ সংস্কার</p>
+</div>
+
+<div>
+<b class="gold">দ্রুত লিংক</b>
+<p><a href="registration.html">নিবন্ধন</a></p>
+<p><a href="verification.html">ভেরিফিকেশন</a></p>
+</div>
+
+<div>
+<b class="gold">প্ল্যাটফর্ম</b>
+<p><a href="wazeens.html">ওয়েজিন</a></p>
+<p><a href="contact.html">যোগাযোগ</a></p>
+</div>
+
+</div>
+
+</footer>
+
+</body>
+</html>
