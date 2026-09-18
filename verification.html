@@ -1,258 +1,250 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Wazeen ID Verification | WAYEJIN FURFURA SHARIF</title>
+<title>Wazeen ID Verification</title>
 
 <style>
-
 *{
-    box-sizing:border-box;
+  box-sizing:border-box;
 }
 
 body{
-    margin:0;
-    font-family:Arial,"Noto Sans Bengali",sans-serif;
-    background:#f3f5f3;
-    color:#18352d;
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f7f6;
+  color:#173d35;
 }
 
 .top{
-    background:#06372c;
-    color:#e4ca6b;
-    text-align:center;
-    padding:8px;
-    font-size:11px;
-}
-
-header{
-    background:#064c3c;
-    color:white;
+  background:#064f40;
+  color:white;
+  text-align:center;
+  font-size:9px;
+  padding:7px 5px;
 }
 
 .header{
-    max-width:1100px;
-    margin:auto;
-    padding:15px 18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+  background:#005440;
+  padding:12px 14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.brand{
-    font-weight:bold;
-    font-size:15px;
+.logo-text{
+  color:white;
+  font-weight:bold;
+  font-size:13px;
+  line-height:1.4;
 }
 
-.brand small{
-    display:block;
-    font-size:8px;
-    margin-top:3px;
+.logo-sub{
+  font-size:8px;
+  font-weight:normal;
 }
 
 .menu{
-    background:#d9b95b;
-    color:#18352d;
-    padding:9px 13px;
-    border-radius:7px;
-    font-size:11px;
-    font-weight:bold;
+  background:#d6ad48;
+  color:#173d35;
+  border:0;
+  border-radius:5px;
+  padding:7px 10px;
+  font-size:11px;
+  font-weight:bold;
 }
 
 .container{
-    max-width:750px;
-    margin:auto;
-    padding:40px 15px 60px;
+  width:92%;
+  max-width:700px;
+  margin:28px auto 60px;
 }
 
 h1{
-    text-align:center;
-    font-family:Georgia,serif;
-    margin:0;
-    font-size:30px;
+  text-align:center;
+  margin:0;
+  font-family:Georgia,serif;
+  font-size:24px;
+  color:#29443d;
 }
 
 .subtitle{
-    text-align:center;
-    color:#78827e;
-    font-size:11px;
-    margin:7px 0 25px;
+  text-align:center;
+  color:#777;
+  font-size:9px;
+  margin-top:5px;
+  margin-bottom:28px;
 }
 
 .search-box{
-    background:white;
-    padding:22px;
-    border-radius:15px;
-    box-shadow:0 6px 25px rgba(0,0,0,.10);
+  background:white;
+  padding:14px;
+  border-radius:12px;
+  box-shadow:0 4px 18px rgba(0,0,0,.10);
+  display:flex;
+  gap:8px;
 }
 
-label{
-    display:block;
-    font-weight:bold;
-    font-size:12px;
-    margin-bottom:7px;
+.search-box input{
+  flex:1;
+  min-width:0;
+  border:1px solid #ddd;
+  border-radius:7px;
+  padding:11px;
+  font-size:13px;
+  outline:none;
 }
 
-.search{
-    display:flex;
-    gap:10px;
+.search-box button{
+  background:#005b48;
+  color:white;
+  border:0;
+  border-radius:7px;
+  padding:0 17px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-input{
-    flex:1;
-    height:47px;
-    border:1px solid #d7ddd9;
-    border-radius:8px;
-    padding:0 13px;
-    font-size:13px;
+.result{
+  margin-top:16px;
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 5px 20px rgba(0,0,0,.12);
 }
 
-button{
-    height:47px;
-    padding:0 22px;
-    border:0;
-    border-radius:8px;
-    background:#064c3c;
-    color:white;
-    font-weight:bold;
-}
-
-#result{
-    margin-top:22px;
-}
-
-.card{
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 7px 25px rgba(0,0,0,.12);
-}
-
-.card-head{
-    background:#064c3c;
-    color:white;
-    text-align:center;
-    padding:22px;
-}
-
-.card-head h2{
-    margin:9px 0 3px;
-    font-size:22px;
-}
-
-.card-head p{
-    margin:0;
-    font-size:10px;
+.result-head{
+  background:#005744;
+  color:white;
+  text-align:center;
+  padding:14px;
 }
 
 .status{
-    display:inline-block;
-    padding:6px 15px;
-    border-radius:20px;
-    background:#fff0bd;
-    color:#705500;
-    font-size:10px;
-    font-weight:bold;
+  display:inline-block;
+  background:#f4d978;
+  color:#604e00;
+  border-radius:20px;
+  padding:4px 10px;
+  font-size:9px;
+  font-weight:bold;
+  margin-bottom:7px;
 }
 
-.status.approved{
-    background:#d7f3e3;
-    color:#14603d;
+.name{
+  font-size:19px;
+  font-weight:bold;
 }
 
-.status.rejected{
-    background:#ffdede;
-    color:#8b2020;
+.wazeen-text{
+  font-size:8px;
+  margin-top:3px;
 }
 
 .info{
-    padding:20px;
+  padding:14px;
 }
 
 .row{
-    display:flex;
-    border-bottom:1px solid #edf0ee;
-    padding:10px 0;
-    font-size:12px;
+  display:flex;
+  border-bottom:1px solid #eee;
+  padding:9px 0;
+  font-size:11px;
 }
 
 .row:last-child{
-    border-bottom:0;
+  border-bottom:0;
 }
 
-.key{
-    width:42%;
-    color:#68766f;
-    font-weight:bold;
+.label{
+  width:42%;
+  color:#777;
+  font-weight:bold;
 }
 
 .value{
-    width:58%;
-    font-weight:bold;
-    word-break:break-word;
+  width:58%;
+  color:#29443d;
+  font-weight:bold;
+  word-break:break-word;
 }
 
 .success{
-    margin:0 20px 20px;
-    background:#edf8f2;
-    color:#17603e;
-    text-align:center;
-    padding:12px;
-    border-radius:8px;
-    font-size:11px;
-    font-weight:bold;
+  margin:0 14px 14px;
+  padding:9px;
+  border-radius:6px;
+  background:#eaf7f2;
+  color:#16604f;
+  text-align:center;
+  font-size:8px;
+  font-weight:bold;
 }
 
-.message{
-    background:white;
-    padding:25px;
-    text-align:center;
-    border-radius:14px;
-    box-shadow:0 6px 20px rgba(0,0,0,.08);
-    font-size:13px;
+.error{
+  margin-top:16px;
+  background:#fff;
+  color:#a33;
+  padding:16px;
+  border-radius:10px;
+  text-align:center;
+  font-size:12px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
 }
 
-footer{
-    background:#06372c;
-    color:#dce5e0;
-    text-align:center;
-    padding:25px;
-    font-size:10px;
+.hidden{
+  display:none;
 }
 
-footer strong{
-    color:#e4ca6b;
+.footer{
+  background:#064f40;
+  color:white;
+  text-align:center;
+  padding:16px;
+  font-size:8px;
+}
+
+.footer strong{
+  color:#d6ad48;
 }
 
 @media(max-width:600px){
 
-    .container{
-        padding:30px 13px 50px;
-    }
+  .container{
+    width:92%;
+    margin-top:26px;
+  }
 
-    h1{
-        font-size:25px;
-    }
+  h1{
+    font-size:22px;
+  }
 
-    .search{
-        flex-direction:column;
-    }
+  .search-box{
+    padding:12px;
+  }
 
-    button{
-        width:100%;
-    }
+  .search-box input{
+    font-size:12px;
+  }
 
-    .row{
-        font-size:11px;
-    }
+  .search-box button{
+    padding:0 13px;
+  }
 
+  .row{
+    font-size:10px;
+  }
+
+  .label{
+    width:40%;
+  }
+
+  .value{
+    width:60%;
+  }
 }
-
 </style>
-
 </head>
 
 <body>
@@ -261,22 +253,14 @@ footer strong{
 WAYEJIN FURFURA SHARIF • WEST BENGAL ULAMA BOARD
 </div>
 
-<header>
-
 <div class="header">
+  <div class="logo-text">
+    ওয়েজিন ফুরফুরা শরীফ
+    <div class="logo-sub">WAYEJIN E FURFURA SHARIF</div>
+  </div>
 
-<div class="brand">
-ওয়েজিন ফুরফুরা শরীফ
-<small>WAYEJIN E FURFURA SHARIF</small>
+  <button class="menu">☰ MENU</button>
 </div>
-
-<div class="menu">
-☰ MENU
-</div>
-
-</div>
-
-</header>
 
 
 <div class="container">
@@ -290,16 +274,10 @@ WEST BENGAL ULAMA BOARD • OFFICIAL VERIFICATION PORTAL
 
 <div class="search-box">
 
-<label>
-Application No অথবা Wazeen ID
-</label>
-
-<div class="search">
-
 <input
-id="searchInput"
-type="text"
-placeholder="WEFS/APP/2026/00000001 অথবা WBUB/WF/0001/26"
+  id="searchInput"
+  type="text"
+  placeholder="Application No অথবা Wazeen ID"
 >
 
 <button onclick="verify()">
@@ -308,307 +286,342 @@ VERIFY
 
 </div>
 
+
+<div id="errorBox" class="error hidden"></div>
+
+
+<div id="resultBox" class="result hidden">
+
+  <div class="result-head">
+
+    <div id="status" class="status">
+      PENDING
+    </div>
+
+    <div id="name" class="name">
+      WAZEEN
+    </div>
+
+    <div class="wazeen-text">
+      WAYEJIN E FURFURA SHARIF
+    </div>
+
+  </div>
+
+
+  <div class="info">
+
+    <div class="row">
+      <div class="label">Application No</div>
+      <div id="applicationNo" class="value">-</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Wazeen ID</div>
+      <div id="wazeenId" class="value">-</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Designation</div>
+      <div id="designation" class="value">Wazeen</div>
+    </div>
+
+    <div class="row">
+      <div class="label">District</div>
+      <div id="district" class="value">-</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Mobile</div>
+      <div id="mobile" class="value">-</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Valid Till</div>
+      <div id="validTill" class="value">-</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Application Date</div>
+      <div id="applicationDate" class="value">-</div>
+    </div>
+
+  </div>
+
+
+  <div class="success">
+    ✓ RECORD FOUND IN WEST BENGAL ULAMA BOARD DATABASE
+  </div>
+
+</div>
+
 </div>
 
 
-<div id="result"></div>
-
+<div class="footer">
+  <strong>WAYEJIN FURFURA SHARIF</strong>
+  <br><br>
+  WEST BENGAL ULAMA BOARD
 </div>
-
-
-<footer>
-
-<strong>WAYEJIN FURFURA SHARIF</strong>
-
-<br><br>
-
-WEST BENGAL ULAMA BOARD
-
-</footer>
 
 
 <script>
 
-/* ================= API ================= */
-
 const API =
-"https://script.google.com/macros/s/AKfycbwSxUaa1FKHM4xXFauCApz5aT1usl11-BAAQ9OULwL1uGd8G_78Qh6JhJEcFo1kJz6UWw/exec";
+"https://script.google.com/macros/s/AKfycbwSxUaa1FKHM4xXFauCApz5a1Tusl11-BAAQ9OULwL1uGd8G_78Qh6JhJEcFo1kJz6UWw/exec";
+
+
+/* ================= SAFE VALUE ================= */
+
+function safeValue(value, fallback="-"){
+
+  if(value === null || value === undefined){
+    return fallback;
+  }
+
+  let text = String(value).trim();
+
+  if(
+    text === "" ||
+    text === "#ERROR!" ||
+    text === "#REF!" ||
+    text === "#VALUE!" ||
+    text === "#N/A" ||
+    text === "undefined" ||
+    text === "null"
+  ){
+    return fallback;
+  }
+
+  return text;
+}
+
+
+/* ================= DATE FORMAT ================= */
+
+function formatDate(value){
+
+  if(!value){
+    return "-";
+  }
+
+  let date = new Date(value);
+
+  if(isNaN(date.getTime())){
+
+    let text = String(value).trim();
+
+    if(text){
+      return text;
+    }
+
+    return "-";
+  }
+
+  return date.toLocaleString(
+    "en-IN",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric",
+      hour:"2-digit",
+      minute:"2-digit",
+      hour12:true
+    }
+  );
+}
 
 
 /* ================= VERIFY ================= */
 
 async function verify(){
 
-    const input =
-        document.getElementById("searchInput");
+  const input =
+    document.getElementById("searchInput");
 
-    const result =
-        document.getElementById("result");
+  const query =
+    input.value.trim();
+
+  const resultBox =
+    document.getElementById("resultBox");
+
+  const errorBox =
+    document.getElementById("errorBox");
+
+
+  resultBox.classList.add("hidden");
+  errorBox.classList.add("hidden");
+
+
+  if(!query){
+
+    errorBox.textContent =
+      "Application No অথবা Wazeen ID দিন।";
+
+    errorBox.classList.remove("hidden");
+
+    return;
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        API +
+        "?id=" +
+        encodeURIComponent(query),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      !data ||
+      data.found !== true ||
+      !data.record
+    ){
+
+      errorBox.textContent =
+        data.message ||
+        "এই নম্বরের কোনো রেকর্ড পাওয়া যায়নি।";
+
+      errorBox.classList.remove("hidden");
+
+      return;
+    }
+
+
+    const record =
+      data.record;
+
+
+    /* ================= NAME ================= */
+
+    document.getElementById("name").textContent =
+      safeValue(
+        record.name,
+        "WAZEEN"
+      );
+
+
+    /* ================= STATUS ================= */
+
+    document.getElementById("status").textContent =
+      safeValue(
+        record.status,
+        "PENDING"
+      );
+
+
+    /* ================= APPLICATION ================= */
+
+    document.getElementById("applicationNo").textContent =
+      safeValue(
+        record.application_no
+      );
+
+
+    /* ================= WAZEEN ID ================= */
+
+    document.getElementById("wazeenId").textContent =
+      safeValue(
+        record.wazeen_id
+      );
+
+
+    /* ================= DESIGNATION ================= */
+
+    document.getElementById("designation").textContent =
+      safeValue(
+        record.designation ||
+        record.position ||
+        "Wazeen"
+      );
+
+
+    /* ================= DISTRICT ================= */
+
+    document.getElementById("district").textContent =
+      safeValue(
+        record.district
+      );
+
+
+    /* ================= MOBILE ================= */
+
+    document.getElementById("mobile").textContent =
+      safeValue(
+        record.mobile
+      );
+
+
+    /* ================= VALID TILL ================= */
+
+    document.getElementById("validTill").textContent =
+      safeValue(
+        record.valid_till ||
+        record.validTill
+      );
+
+
+    /* ================= APPLICATION DATE ================= */
+
+    document.getElementById("applicationDate").textContent =
+      formatDate(
+        record.created_at ||
+        record.application_date
+      );
+
+
+    resultBox.classList.remove("hidden");
+
+
+  }catch(error){
+
+    errorBox.textContent =
+      "Verification service বর্তমানে সংযোগ করা যাচ্ছে না।";
+
+    errorBox.classList.remove("hidden");
+
+    console.error(error);
+  }
+
+}
+
+
+/* ================= AUTO VERIFY ================= */
+
+window.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
 
     const id =
-        input.value.trim();
+      params.get("id");
 
+    if(id){
 
-    if(!id){
+      document.getElementById(
+        "searchInput"
+      ).value = id;
 
-        result.innerHTML = `
-        <div class="message">
-            অনুগ্রহ করে Application No অথবা Wazeen ID লিখুন।
-        </div>
-        `;
-
-        return;
-    }
-
-
-    result.innerHTML = `
-    <div class="message">
-        যাচাই করা হচ্ছে...
-    </div>
-    `;
-
-
-    try{
-
-        const response =
-            await fetch(
-                API +
-                "?id=" +
-                encodeURIComponent(id)
-            );
-
-
-        const data =
-            await response.json();
-
-
-        if(
-            data.ok &&
-            data.found &&
-            data.record
-        ){
-
-            showResult(
-                data.record
-            );
-
-        }else{
-
-            result.innerHTML = `
-            <div class="message">
-                ❌ এই নম্বরের কোনো রেকর্ড পাওয়া যায়নি।
-            </div>
-            `;
-
-        }
-
-
-    }catch(error){
-
-        result.innerHTML = `
-        <div class="message">
-            ⚠️ Verification server-এর সঙ্গে সংযোগ করা যায়নি।
-            <br><br>
-            কিছুক্ষণ পরে আবার চেষ্টা করুন।
-        </div>
-        `;
+      verify();
 
     }
 
-}
-
-
-/* ================= SHOW RESULT ================= */
-
-function showResult(r){
-
-    const result =
-        document.getElementById("result");
-
-
-    let status =
-        String(
-            r.status || "PENDING"
-        ).toUpperCase();
-
-
-    let statusClass = "";
-
-    if(status === "APPROVED"){
-        statusClass = "approved";
-    }
-
-    if(status === "REJECTED"){
-        statusClass = "rejected";
-    }
-
-
-    result.innerHTML = `
-
-    <div class="card">
-
-        <div class="card-head">
-
-            <span class="status ${statusClass}">
-                ${safe(status)}
-            </span>
-
-            <h2>
-                ${safe(r.name || "Name Not Available")}
-            </h2>
-
-            <p>
-                WAYEJIN FURFURA SHARIF
-            </p>
-
-        </div>
-
-
-        <div class="info">
-
-            <div class="row">
-                <div class="key">
-                    Application No
-                </div>
-
-                <div class="value">
-                    ${safe(r.application_no || "-")}
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="key">
-                    Wazeen ID
-                </div>
-
-                <div class="value">
-                    ${safe(r.wazeen_id || "-")}
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="key">
-                    Designation
-                </div>
-
-                <div class="value">
-                    ${safe(r.designation || r.experience || "Wazeen")}
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="key">
-                    District
-                </div>
-
-                <div class="value">
-                    ${safe(r.district || "-")}
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="key">
-                    Mobile
-                </div>
-
-                <div class="value">
-                    ${safe(r.mobile || "-")}
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="key">
-                    Valid Till
-                </div>
-
-                <div class="value">
-                    ${safe(r.valid_till || "-")}
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="key">
-                    Application Date
-                </div>
-
-                <div class="value">
-                    ${safe(r.created_at || "-")}
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="success">
-
-            ✓ RECORD FOUND IN
-            WEST BENGAL ULAMA BOARD DATABASE
-
-        </div>
-
-    </div>
-
-    `;
-
-}
-
-
-/* ================= SECURITY ================= */
-
-function safe(value){
-
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-
-/* ================= ENTER ================= */
-
-document
-.getElementById("searchInput")
-.addEventListener(
-    "keydown",
-    function(e){
-
-        if(e.key === "Enter"){
-            verify();
-        }
-
-    }
+  }
 );
-
-
-/* ================= QR AUTO SEARCH ================= */
-
-const params =
-    new URLSearchParams(
-        window.location.search
-    );
-
-const qrId =
-    params.get("id");
-
-
-if(qrId){
-
-    document
-    .getElementById("searchInput")
-    .value = qrId;
-
-    verify();
-
-}
 
 </script>
 
