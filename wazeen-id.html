@@ -162,9 +162,10 @@ async function load(){
   if(d.found!==true||!d.record)throw 0;
   const r=d.record;
   if(!["verified","approved","active"].includes(String(r.status||"").toLowerCase()))throw 0;
+  const memberId=r.member_id||r.wazeen_id||id;
   document.getElementById("name").textContent=r.name||"Approved Member";
-  document.getElementById("mid").textContent=r.member_id||id;
-  document.getElementById("idbottom").textContent=r.member_id||id;
+  document.getElementById("mid").textContent=memberId;
+  document.getElementById("idbottom").textContent=memberId;
   document.getElementById("des").textContent=r.designation||"Member";
   document.getElementById("district").textContent=r.district||"-";
   document.getElementById("valid").textContent=r.valid_till||"-";
