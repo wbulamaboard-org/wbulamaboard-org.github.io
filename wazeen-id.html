@@ -27,16 +27,16 @@
 .org-name{font-size:19px;line-height:1.05;font-weight:900;margin-top:3px}
 .org-sub{font-size:8px;letter-spacing:.12em;color:#e9dfc4;font-weight:800;margin-top:4px}
 .arabic{font-family:Georgia,serif;color:#e2c879;font-size:18px;line-height:1.1}
-.front-body{display:grid;grid-template-columns:105px 1fr 74px;gap:13px;align-items:center;margin-top:18px;position:relative;z-index:1}
+.front-body{display:grid;grid-template-columns:105px minmax(0,1fr) 82px;gap:14px;align-items:start;margin-top:16px;position:relative;z-index:1}.front-body>div:nth-child(2){min-width:0}.front-bottom{left:19px;right:19px;bottom:11px}
 .photo{width:105px;height:123px;border:2px solid #e2c879;border-radius:12px;object-fit:cover;background:#edf2ef}
 .photo.placeholder{visibility:hidden}
 .name{font-size:20px;line-height:1.12;font-weight:900}
 .designation{display:inline-block;margin-top:7px;padding:3px 8px;border-radius:20px;background:#e2c879;color:#17372d;font-size:10px;font-weight:900}
 .meta{font-size:10px;line-height:1.35;margin-top:7px}
 .meta b{color:#f2e1a5}
-.qr{width:74px;height:74px;padding:4px;background:#fff;border-radius:8px}
-.scan{font-size:8px;text-align:center;color:#17372d;font-weight:900;background:#fff;border-radius:0 0 6px 6px;margin-top:-18px;padding-top:20px}
-.front-bottom{position:absolute;left:19px;right:19px;bottom:11px;display:flex;justify-content:space-between;align-items:end;z-index:1;border-top:1px solid rgba(226,200,121,.38);padding-top:6px}
+.qr{width:82px;height:82px;padding:4px;background:#fff;border-radius:8px;display:block}
+.scan{font-size:8px;text-align:center;color:#17372d;font-weight:900;background:#fff;border-radius:0 0 6px 6px;margin-top:-18px;padding-top:20px;position:relative}
+.front-bottom{position:absolute;display:flex;justify-content:space-between;align-items:end;z-index:1;border-top:1px solid rgba(226,200,121,.38);padding-top:6px}
 .id-number{font-size:11px;font-weight:900;color:#f4e4a7}
 .slogan{font-size:9px;font-weight:800;letter-spacing:.06em}
 .back{padding:18px 21px;background:linear-gradient(145deg,#f7f5ed,#fff 55%,#eef4ef);color:#17372d}
@@ -46,11 +46,11 @@
 .back h3{font-size:11px;margin:0;color:#0b6952}
 .instructions{margin:12px 0 0;padding-left:20px;font-size:10px;line-height:1.55}
 .instructions li{margin-bottom:3px}
-.contact{position:absolute;left:21px;right:21px;bottom:16px;display:grid;grid-template-columns:1fr 78px;gap:14px;align-items:end}
+.contact{position:absolute;left:21px;right:21px;bottom:14px;display:grid;grid-template-columns:1fr 78px;gap:14px;align-items:end;background:rgba(255,255,255,.82);padding-top:7px;border-top:1px solid #d8c27a}
 .contact-lines{font-size:9px;line-height:1.65}
 .contact-lines b{color:#07513f}
 .back-qr{width:72px;height:72px;background:#fff;padding:4px;border-radius:6px}
-.back-quote{position:absolute;left:21px;right:105px;bottom:69px;border-radius:9px;padding:5px 8px;text-align:center;background:#063b2e;color:#f1df9c;font-family:Georgia,serif;font-size:11px}
+.back-quote{position:absolute;left:21px;right:115px;bottom:72px;border-radius:9px;padding:5px 8px;text-align:center;background:#063b2e;color:#f1df9c;font-family:Georgia,serif;font-size:10px}
 .actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:24px auto 0;max-width:720px}
 .actions button,.actions a{border:0;border-radius:10px;padding:12px 18px;background:#d7b45b;color:#17372d;font-weight:900;text-decoration:none}
 .message{max-width:650px;margin:18px auto;padding:14px;border-radius:10px;text-align:center;background:#fff0f0;color:#8a2222}
@@ -59,9 +59,9 @@
  .id-page{padding:22px 10px 45px}
  .cards{gap:16px}
  .front{padding:12px 13px}.logo{width:51px;height:51px}.org-small{font-size:7px}.org-name{font-size:13px}.org-sub{font-size:6px}.arabic{font-size:14px}
- .front-body{grid-template-columns:75px 1fr 54px;gap:8px;margin-top:11px}.photo{width:75px;height:88px}.name{font-size:13px}.designation{font-size:7px;margin-top:4px}.meta{font-size:7px;margin-top:4px}.qr{width:54px;height:54px}
+ .front-body{grid-template-columns:72px minmax(0,1fr) 56px;gap:8px;margin-top:10px}.photo{width:72px;height:84px}.name{font-size:13px}.designation{font-size:7px;margin-top:4px}.meta{font-size:7px;margin-top:4px}.qr{width:56px;height:56px}
  .front-bottom{left:13px;right:13px;bottom:7px;padding-top:4px}.id-number{font-size:7px}.slogan{font-size:6px}
- .back{padding:12px 14px}.back .back-logo{width:36px;height:36px}.back h2{font-size:11px}.back h3{font-size:8px}.instructions{font-size:7px;line-height:1.4;margin-top:7px}.contact{left:14px;right:14px;bottom:9px;grid-template-columns:1fr 52px}.contact-lines{font-size:6.5px}.back-qr{width:50px;height:50px}.back-quote{left:14px;right:75px;bottom:48px;font-size:7px;padding:3px}
+ .back{padding:12px 14px}.back .back-logo{width:36px;height:36px}.back h2{font-size:11px}.back h3{font-size:8px}.instructions{font-size:7px;line-height:1.4;margin-top:7px}.contact{left:14px;right:14px;bottom:8px;grid-template-columns:1fr 52px;gap:8px;padding-top:5px}.contact-lines{font-size:6.2px}.back-qr{width:50px;height:50px}.back-quote{left:14px;right:76px;bottom:50px;font-size:7px;padding:3px}
  .actions{flex-direction:column;padding-inline:10px}.actions button,.actions a{width:100%;text-align:center}
 }
 @media print{
@@ -170,7 +170,7 @@ async function load(){
   document.getElementById("district").textContent=r.district||"-";
   document.getElementById("valid").textContent=r.valid_till||"-";
   const photo=document.getElementById("photo");
-  if(r.photo_url){photo.src=r.photo_url;photo.onerror=()=>photo.classList.add("placeholder")}else photo.classList.add("placeholder");
+  const photoUrl=r.photo_url||r.photo||"";if(photoUrl){photo.src=photoUrl;photo.onerror=()=>photo.classList.add("placeholder")}else photo.classList.add("placeholder");
   const verify=origin+location.pathname.replace("wazeen-id.html","verification.html")+"?id="+encodeURIComponent(memberId);
   document.getElementById("verify").href=verify;
   const qr="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data="+encodeURIComponent(verify);
@@ -188,7 +188,7 @@ async function load(){
    ctx.fillStyle="#eef2ef";ctx.fillRect(0,0,canvas.width,canvas.height);
    ctx.drawImage(frontCanvas,0,0);
    ctx.drawImage(backCanvas,frontCanvas.width+gap*scale,0);
-   const a=document.createElement("a");a.download=(r.member_id||id)+"-ID-Card.png";a.href=canvas.toDataURL("image/png");a.click();
+   const a=document.createElement("a");a.download=(memberId||id)+"-ID-Card.png";a.href=canvas.toDataURL("image/png");a.click();
   };
  }catch(e){WBUB_WORKFLOW.showMessage(msg,"error","Member ID Not Found / Invalid")}
 }
