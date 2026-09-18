@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>
-Wazeen ID Verification | WAYEJIN FURFURA SHARIF
-</title>
-
+<title>Wazeen ID Verification | WAYEJIN FURFURA SHARIF</title>
 
 <style>
 
@@ -21,19 +15,14 @@ Wazeen ID Verification | WAYEJIN FURFURA SHARIF
 
 body{
     margin:0;
-    font-family:Arial,
-    "Noto Sans Bengali",
-    sans-serif;
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
     background:#f3f5f3;
     color:#18352d;
 }
 
-
-/* ================= HEADER ================= */
-
 .top{
-    background:#062d23;
-    color:#e8d58c;
+    background:#06372c;
+    color:#e4ca6b;
     text-align:center;
     padding:8px;
     font-size:11px;
@@ -44,13 +33,13 @@ header{
     color:white;
 }
 
-.header-inner{
+.header{
     max-width:1100px;
     margin:auto;
-    padding:18px 20px;
+    padding:15px 18px;
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
 }
 
 .brand{
@@ -60,297 +49,204 @@ header{
 
 .brand small{
     display:block;
-    font-size:9px;
+    font-size:8px;
     margin-top:3px;
-    letter-spacing:.7px;
-    color:#dce8e3;
 }
 
 .menu{
     background:#d9b95b;
     color:#18352d;
-    padding:9px 14px;
+    padding:9px 13px;
     border-radius:7px;
     font-size:11px;
     font-weight:bold;
 }
 
-
-/* ================= MAIN ================= */
-
 .container{
-    max-width:850px;
+    max-width:750px;
     margin:auto;
-    padding:45px 18px 70px;
+    padding:40px 15px 60px;
 }
 
-.title{
+h1{
     text-align:center;
     font-family:Georgia,serif;
-    font-size:32px;
     margin:0;
+    font-size:30px;
 }
 
 .subtitle{
     text-align:center;
-    color:#718079;
-    font-size:12px;
-    margin-top:7px;
-    margin-bottom:28px;
+    color:#78827e;
+    font-size:11px;
+    margin:7px 0 25px;
 }
-
-
-/* ================= SEARCH ================= */
 
 .search-box{
     background:white;
-    padding:25px;
-    border-radius:16px;
-    box-shadow:0 8px 28px rgba(0,0,0,.10);
+    padding:22px;
+    border-radius:15px;
+    box-shadow:0 6px 25px rgba(0,0,0,.10);
 }
 
-.search-label{
+label{
     display:block;
     font-weight:bold;
-    font-size:13px;
-    margin-bottom:8px;
+    font-size:12px;
+    margin-bottom:7px;
 }
 
-.search-row{
+.search{
     display:flex;
     gap:10px;
 }
 
-#idInput{
+input{
     flex:1;
-    height:48px;
-    border:1px solid #d5ddd8;
+    height:47px;
+    border:1px solid #d7ddd9;
     border-radius:8px;
-    padding:0 14px;
-    font-size:14px;
-    outline:none;
-}
-
-#idInput:focus{
-    border-color:#d0af4e;
-}
-
-.verify-btn{
-    border:0;
-    background:#064c3c;
-    color:white;
-    border-radius:8px;
-    padding:0 25px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-
-/* ================= RESULT ================= */
-
-#result{
-    margin-top:25px;
-}
-
-
-.result-card{
-    background:white;
-    border-radius:17px;
-    overflow:hidden;
-    box-shadow:0 8px 28px rgba(0,0,0,.12);
-    border:1px solid #e0e6e2;
-}
-
-
-.result-head{
-    background:#064c3c;
-    color:white;
-    padding:20px;
-    text-align:center;
-}
-
-.result-head h2{
-    margin:8px 0 2px;
-    font-size:23px;
-}
-
-.result-head p{
-    margin:0;
-    font-size:11px;
-    color:#d9e5df;
-}
-
-
-/* STATUS */
-
-.status{
-    display:inline-block;
-    padding:6px 14px;
-    border-radius:30px;
-    font-size:11px;
-    font-weight:bold;
-}
-
-.status.pending{
-    background:#fff2c9;
-    color:#765900;
-}
-
-.status.approved{
-    background:#d9f4e5;
-    color:#12613d;
-}
-
-.status.rejected{
-    background:#ffe0e0;
-    color:#8a2222;
-}
-
-
-/* DETAILS */
-
-.details{
-    padding:23px;
-}
-
-.detail-row{
-    display:flex;
-    padding:11px 0;
-    border-bottom:1px solid #edf0ee;
+    padding:0 13px;
     font-size:13px;
 }
 
-.detail-row:last-child{
+button{
+    height:47px;
+    padding:0 22px;
+    border:0;
+    border-radius:8px;
+    background:#064c3c;
+    color:white;
+    font-weight:bold;
+}
+
+#result{
+    margin-top:22px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 7px 25px rgba(0,0,0,.12);
+}
+
+.card-head{
+    background:#064c3c;
+    color:white;
+    text-align:center;
+    padding:22px;
+}
+
+.card-head h2{
+    margin:9px 0 3px;
+    font-size:22px;
+}
+
+.card-head p{
+    margin:0;
+    font-size:10px;
+}
+
+.status{
+    display:inline-block;
+    padding:6px 15px;
+    border-radius:20px;
+    background:#fff0bd;
+    color:#705500;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.status.approved{
+    background:#d7f3e3;
+    color:#14603d;
+}
+
+.status.rejected{
+    background:#ffdede;
+    color:#8b2020;
+}
+
+.info{
+    padding:20px;
+}
+
+.row{
+    display:flex;
+    border-bottom:1px solid #edf0ee;
+    padding:10px 0;
+    font-size:12px;
+}
+
+.row:last-child{
     border-bottom:0;
 }
 
-.detail-label{
+.key{
     width:42%;
     color:#68766f;
     font-weight:bold;
 }
 
-.detail-value{
+.value{
     width:58%;
-    color:#18352d;
     font-weight:bold;
     word-break:break-word;
 }
 
-
-/* VERIFIED */
-
-.verified-message{
-    margin:0 23px 23px;
-    padding:13px;
-    border-radius:9px;
-    background:#eef8f2;
+.success{
+    margin:0 20px 20px;
+    background:#edf8f2;
     color:#17603e;
     text-align:center;
-    font-size:12px;
+    padding:12px;
+    border-radius:8px;
+    font-size:11px;
     font-weight:bold;
 }
 
-
-/* NOT FOUND */
-
-.not-found{
-    background:white;
-    border-radius:16px;
-    padding:30px 20px;
-    text-align:center;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-}
-
-.not-found-icon{
-    font-size:40px;
-    margin-bottom:10px;
-}
-
-.not-found h3{
-    margin:0 0 6px;
-}
-
-.not-found p{
-    margin:0;
-    color:#6d7772;
-    font-size:13px;
-}
-
-
-/* LOADING */
-
-.loading{
+.message{
     background:white;
     padding:25px;
     text-align:center;
-    border-radius:15px;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-    font-weight:bold;
+    border-radius:14px;
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
+    font-size:13px;
 }
 
-
-/* ================= FOOTER ================= */
-
 footer{
-    background:#062d23;
-    color:#dbe2de;
-    padding:30px 20px;
+    background:#06372c;
+    color:#dce5e0;
     text-align:center;
-    font-size:11px;
+    padding:25px;
+    font-size:10px;
 }
 
 footer strong{
-    color:#e2c879;
+    color:#e4ca6b;
 }
-
-footer p{
-    margin:6px 0;
-}
-
-
-/* ================= MOBILE ================= */
 
 @media(max-width:600px){
 
-    .header-inner{
-        padding:15px;
-    }
-
     .container{
-        padding:32px 13px 50px;
+        padding:30px 13px 50px;
     }
 
-    .title{
+    h1{
         font-size:25px;
     }
 
-    .search-box{
-        padding:18px;
-    }
-
-    .search-row{
+    .search{
         flex-direction:column;
     }
 
-    #idInput{
+    button{
         width:100%;
     }
 
-    .verify-btn{
-        height:46px;
-    }
-
-    .detail-row{
-        font-size:12px;
-    }
-
-    .detail-label{
-        width:43%;
-    }
-
-    .detail-value{
-        width:57%;
+    .row{
+        font-size:11px;
     }
 
 }
@@ -359,35 +255,19 @@ footer p{
 
 </head>
 
-
 <body>
 
-
-<!-- TOP -->
-
 <div class="top">
-
-WAYEJIN FURFURA SHARIF
-&nbsp; • &nbsp;
-WEST BENGAL ULAMA BOARD
-
+WAYEJIN FURFURA SHARIF • WEST BENGAL ULAMA BOARD
 </div>
-
-
-<!-- HEADER -->
 
 <header>
 
-<div class="header-inner">
+<div class="header">
 
 <div class="brand">
-
 ওয়েজিন ফুরফুরা শরীফ
-
-<small>
-WAYEJIN E FURFURA SHARIF
-</small>
-
+<small>WAYEJIN E FURFURA SHARIF</small>
 </div>
 
 <div class="menu">
@@ -399,51 +279,31 @@ WAYEJIN E FURFURA SHARIF
 </header>
 
 
-<!-- MAIN -->
+<div class="container">
 
-<main class="container">
-
-
-<h1 class="title">
-Wazeen ID Verification
-</h1>
+<h1>Wazeen ID Verification</h1>
 
 <div class="subtitle">
-
-WEST BENGAL ULAMA BOARD
-•
-OFFICIAL VERIFICATION PORTAL
-
+WEST BENGAL ULAMA BOARD • OFFICIAL VERIFICATION PORTAL
 </div>
 
 
-<!-- SEARCH -->
-
 <div class="search-box">
 
-<label class="search-label">
-
+<label>
 Application No অথবা Wazeen ID
-
 </label>
 
-
-<div class="search-row">
+<div class="search">
 
 <input
-id="idInput"
+id="searchInput"
 type="text"
 placeholder="WEFS/APP/2026/00000001 অথবা WBUB/WF/0001/26"
-autocomplete="off"
 >
 
-<button
-class="verify-btn"
-onclick="verifyID()"
->
-
+<button onclick="verify()">
 VERIFY
-
 </button>
 
 </div>
@@ -451,76 +311,50 @@ VERIFY
 </div>
 
 
-<!-- RESULT -->
-
 <div id="result"></div>
 
+</div>
 
-</main>
-
-
-<!-- FOOTER -->
 
 <footer>
 
-<strong>
-WAYEJIN FURFURA SHARIF
-</strong>
+<strong>WAYEJIN FURFURA SHARIF</strong>
 
-<p>
+<br><br>
+
 WEST BENGAL ULAMA BOARD
-</p>
-
-<p>
-Official Wazeen Verification Portal
-</p>
 
 </footer>
 
 
 <script>
 
-
 /* ================= API ================= */
 
 const API =
-"https://script.google.com/macros/s/AKfycbwSxUaa1FKHM4xXFauCApz5a1Tusl11-BAAQ9OULwL1uGd8G_78Qh6JhJEcFo1kJz6UWw/exec";
+"https://script.google.com/macros/s/AKfycbwSxUaa1FKHM4xXFauCApz5aT1usl11-BAAQ9OULwL1uGd8G_78Qh6JhJEcFo1kJz6UWw/exec";
 
 
 /* ================= VERIFY ================= */
 
-async function verifyID(){
+async function verify(){
 
     const input =
-        document.getElementById("idInput");
+        document.getElementById("searchInput");
 
     const result =
         document.getElementById("result");
 
-    const query =
+    const id =
         input.value.trim();
 
 
-    if(!query){
+    if(!id){
 
         result.innerHTML = `
-
-        <div class="not-found">
-
-            <div class="not-found-icon">
-                🔎
-            </div>
-
-            <h3>
-                নম্বর লিখুন
-            </h3>
-
-            <p>
-                Application No অথবা Wazeen ID লিখে Verify করুন।
-            </p>
-
+        <div class="message">
+            অনুগ্রহ করে Application No অথবা Wazeen ID লিখুন।
         </div>
-
         `;
 
         return;
@@ -528,11 +362,9 @@ async function verifyID(){
 
 
     result.innerHTML = `
-
-    <div class="loading">
+    <div class="message">
         যাচাই করা হচ্ছে...
     </div>
-
     `;
 
 
@@ -542,7 +374,7 @@ async function verifyID(){
             await fetch(
                 API +
                 "?id=" +
-                encodeURIComponent(query)
+                encodeURIComponent(id)
             );
 
 
@@ -556,13 +388,17 @@ async function verifyID(){
             data.record
         ){
 
-            showRecord(
+            showResult(
                 data.record
             );
 
         }else{
 
-            showNotFound();
+            result.innerHTML = `
+            <div class="message">
+                ❌ এই নম্বরের কোনো রেকর্ড পাওয়া যায়নি।
+            </div>
+            `;
 
         }
 
@@ -570,23 +406,11 @@ async function verifyID(){
     }catch(error){
 
         result.innerHTML = `
-
-        <div class="not-found">
-
-            <div class="not-found-icon">
-                ⚠️
-            </div>
-
-            <h3>
-                Database Connection সমস্যা
-            </h3>
-
-            <p>
-                কিছুক্ষণ পরে আবার চেষ্টা করুন।
-            </p>
-
+        <div class="message">
+            ⚠️ Verification server-এর সঙ্গে সংযোগ করা যায়নি।
+            <br><br>
+            কিছুক্ষণ পরে আবার চেষ্টা করুন।
         </div>
-
         `;
 
     }
@@ -594,9 +418,9 @@ async function verifyID(){
 }
 
 
-/* ================= SHOW RECORD ================= */
+/* ================= SHOW RESULT ================= */
 
-function showRecord(record){
+function showResult(r){
 
     const result =
         document.getElementById("result");
@@ -604,14 +428,11 @@ function showRecord(record){
 
     let status =
         String(
-            record.status ||
-            "PENDING"
+            r.status || "PENDING"
         ).toUpperCase();
 
 
-    let statusClass =
-        "pending";
-
+    let statusClass = "";
 
     if(status === "APPROVED"){
         statusClass = "approved";
@@ -622,59 +443,18 @@ function showRecord(record){
     }
 
 
-    const name =
-        record.name ||
-        "Not Available";
-
-
-    const applicationNo =
-        record.application_no ||
-        "Not Available";
-
-
-    const wazeenId =
-        record.wazeen_id ||
-        "Not Assigned";
-
-
-    const designation =
-        record.designation ||
-        "Wazeen";
-
-
-    const district =
-        record.district ||
-        "-";
-
-
-    const mobile =
-        record.mobile ||
-        "-";
-
-
-    const validTill =
-        record.valid_till ||
-        "-";
-
-
-    const created =
-        record.created_at ||
-        "-";
-
-
     result.innerHTML = `
 
-    <div class="result-card">
+    <div class="card">
 
-
-        <div class="result-head">
+        <div class="card-head">
 
             <span class="status ${statusClass}">
-                ${escapeHTML(status)}
+                ${safe(status)}
             </span>
 
             <h2>
-                ${escapeHTML(name)}
+                ${safe(r.name || "Name Not Available")}
             </h2>
 
             <p>
@@ -684,143 +464,93 @@ function showRecord(record){
         </div>
 
 
-        <div class="details">
+        <div class="info">
 
-
-            <div class="detail-row">
-
-                <div class="detail-label">
-                    Wazeen ID
-                </div>
-
-                <div class="detail-value">
-                    ${escapeHTML(wazeenId)}
-                </div>
-
-            </div>
-
-
-            <div class="detail-row">
-
-                <div class="detail-label">
+            <div class="row">
+                <div class="key">
                     Application No
                 </div>
 
-                <div class="detail-value">
-                    ${escapeHTML(applicationNo)}
+                <div class="value">
+                    ${safe(r.application_no || "-")}
                 </div>
-
             </div>
 
 
-            <div class="detail-row">
+            <div class="row">
+                <div class="key">
+                    Wazeen ID
+                </div>
 
-                <div class="detail-label">
+                <div class="value">
+                    ${safe(r.wazeen_id || "-")}
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="key">
                     Designation
                 </div>
 
-                <div class="detail-value">
-                    ${escapeHTML(designation)}
+                <div class="value">
+                    ${safe(r.designation || r.experience || "Wazeen")}
                 </div>
-
             </div>
 
 
-            <div class="detail-row">
-
-                <div class="detail-label">
+            <div class="row">
+                <div class="key">
                     District
                 </div>
 
-                <div class="detail-value">
-                    ${escapeHTML(district)}
+                <div class="value">
+                    ${safe(r.district || "-")}
                 </div>
-
             </div>
 
 
-            <div class="detail-row">
-
-                <div class="detail-label">
+            <div class="row">
+                <div class="key">
                     Mobile
                 </div>
 
-                <div class="detail-value">
-                    ${escapeHTML(mobile)}
+                <div class="value">
+                    ${safe(r.mobile || "-")}
                 </div>
-
             </div>
 
 
-            <div class="detail-row">
-
-                <div class="detail-label">
+            <div class="row">
+                <div class="key">
                     Valid Till
                 </div>
 
-                <div class="detail-value">
-                    ${escapeHTML(validTill)}
+                <div class="value">
+                    ${safe(r.valid_till || "-")}
                 </div>
-
             </div>
 
 
-            <div class="detail-row">
-
-                <div class="detail-label">
+            <div class="row">
+                <div class="key">
                     Application Date
                 </div>
 
-                <div class="detail-value">
-                    ${escapeHTML(created)}
+                <div class="value">
+                    ${safe(r.created_at || "-")}
                 </div>
-
             </div>
 
-
         </div>
 
 
-        <div class="verified-message">
+        <div class="success">
 
-            ✓ Record found in
-            WEST BENGAL ULAMA BOARD
-            Database
+            ✓ RECORD FOUND IN
+            WEST BENGAL ULAMA BOARD DATABASE
 
         </div>
-
-
-    </div>
-
-    `;
-
-}
-
-
-/* ================= NOT FOUND ================= */
-
-function showNotFound(){
-
-    const result =
-        document.getElementById("result");
-
-
-    result.innerHTML = `
-
-    <div class="not-found">
-
-        <div class="not-found-icon">
-            ❌
-        </div>
-
-        <h3>
-            Record Not Found
-        </h3>
-
-        <p>
-            এই Application No অথবা Wazeen ID
-            Database-এ পাওয়া যায়নি।
-        </p>
 
     </div>
 
@@ -831,7 +561,7 @@ function showNotFound(){
 
 /* ================= SECURITY ================= */
 
-function escapeHTML(value){
+function safe(value){
 
     return String(value)
         .replace(/&/g,"&amp;")
@@ -843,51 +573,44 @@ function escapeHTML(value){
 }
 
 
-/* ================= ENTER KEY ================= */
+/* ================= ENTER ================= */
 
 document
-.getElementById("idInput")
+.getElementById("searchInput")
 .addEventListener(
     "keydown",
-    function(event){
+    function(e){
 
-        if(
-            event.key === "Enter"
-        ){
-
-            verifyID();
-
+        if(e.key === "Enter"){
+            verify();
         }
 
     }
 );
 
 
-/* ================= QR AUTO VERIFY ================= */
+/* ================= QR AUTO SEARCH ================= */
 
 const params =
     new URLSearchParams(
         window.location.search
     );
 
-
-const qrID =
+const qrId =
     params.get("id");
 
 
-if(qrID){
+if(qrId){
 
     document
-    .getElementById("idInput")
-    .value = qrID;
+    .getElementById("searchInput")
+    .value = qrId;
 
-    verifyID();
+    verify();
 
 }
 
 </script>
 
-
 </body>
-
 </html>
