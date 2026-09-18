@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+<defs><path id="top" d="M95 300a205 205 0 0 1 410 0"/><path id="bottom" d="M505 300a205 205 0 0 1-410 0"/></defs>
+<circle cx="300" cy="300" r="286" fill="#111"/><circle cx="300" cy="300" r="270" fill="#c71919" stroke="#e0b72f" stroke-width="18"/>
+<circle cx="300" cy="300" r="205" fill="#fff" stroke="#111" stroke-width="8"/>
+<text font-family="Noto Sans Bengali, Nirmala UI, sans-serif" font-size="42" font-weight="800" fill="#111"><textPath href="#top" startOffset="50%" text-anchor="middle">পশ্চিমবঙ্গ উলামা বোর্ড</textPath></text>
+<text font-family="Arial, sans-serif" font-size="27" font-weight="800" fill="#111" letter-spacing="1"><textPath href="#bottom" startOffset="50%" text-anchor="middle">WEST BENGAL ULAMA BOARD</textPath></text>
+<circle cx="300" cy="300" r="128" fill="#c71919" stroke="#e0b72f" stroke-width="9"/>
+<path d="M300 205c-43 35-68 75-68 116 0 45 30 78 68 78s68-33 68-78c0-41-25-81-68-116z" fill="#fff"/>
+<path d="M300 225c-25 25-39 51-39 78 0 25 17 45 39 45s39-20 39-45c0-27-14-53-39-78z" fill="#c71919"/>
+<path d="M256 354h88v17h-88z" fill="#fff"/>
+<text x="300" y="402" text-anchor="middle" font-family="Georgia,serif" font-size="28" font-weight="700" fill="#111">WAYEJIN • FURFURA SHARIF</text>
+</svg>
