@@ -23,7 +23,7 @@ async function verify(){
  WBUB_WORKFLOW.setBusy(btn,true,"VERIFYING…");
  try{const d=await WBUB_WORKFLOW.publicVerify(id);if(d.found!==true||!d.record)throw new Error("NOT_FOUND");const r=d.record;
  const status=String(r.status||"").toLowerCase();if(!["verified","approved","active"].includes(status))throw new Error("NOT_FOUND");
- document.getElementById("status").textContent="✓ VERIFIED";document.getElementById("name").textContent=safe(r.name,"Approved Member");document.getElementById("mid").textContent=safe(r.member_id||id);document.getElementById("org").textContent=safe(r.organization,"West Bengal Ulama Board");document.getElementById("des").textContent=safe(r.designation||r.position,"Member");document.getElementById("district").textContent=safe(r.district||r.block);document.getElementById("valid").textContent=safe(r.valid_till||r.validTill,"—");
+ document.getElementById("status").textContent="✓ VERIFIED";document.getElementById("name").textContent=safe(r.name,"Approved Member");const memberId=r.member_id||r.wazeen_id||id;document.getElementById("mid").textContent=safe(memberId);document.getElementById("org").textContent=safe(r.organization,"West Bengal Ulama Board");document.getElementById("des").textContent=safe(r.designation||r.position,"Member");document.getElementById("district").textContent=safe(r.district||r.block);document.getElementById("valid").textContent=safe(r.valid_till||r.validTill,"—");
  const photo=document.getElementById("photo");if(r.photo_url){photo.src=r.photo_url;photo.hidden=false}else photo.hidden=true;box.hidden=false;
  }catch(e){WBUB_WORKFLOW.showMessage(err,"error","Member ID Not Found / Invalid");}finally{WBUB_WORKFLOW.setBusy(btn,false)}
 }
