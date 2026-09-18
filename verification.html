@@ -1,1 +1,893 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ভেরিফিকেশন | WAYEJIN FURFURA SHARIF</title><style>*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#fbfcfb;color:#17251f;line-height:1.7}a{text-decoration:none;color:inherit}.wrap{max-width:1100px;margin:auto;padding:0 20px}.top{background:#062d23;color:#e9dfc4;text-align:center;padding:8px;font-size:12px}header{background:#073f31;color:#fff}.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{font-weight:800}.brand small{display:block;font-size:9px;color:#d8e2dd;letter-spacing:1px}nav{display:flex;gap:14px;flex-wrap:wrap;font-size:12px}section{padding:55px 0}.hero{background:linear-gradient(135deg,#073f31,#052b22);color:white;padding:75px 0}.hero h1{font-size:clamp(38px,6vw,64px);line-height:1.1}.gold{color:#e2c879}.head{text-align:center;margin-bottom:28px}.head h1,.head h2{font-family:Georgia,serif}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card,.panel{background:#fff;border:1px solid #e1e7e3;border-radius:16px;padding:23px;box-shadow:0 7px 22px #1231}.split{display:grid;grid-template-columns:1fr 1fr;gap:20px}.green{background:#073f31;color:#fff;border-radius:18px;padding:28px}.btn{display:inline-block;padding:11px 17px;border-radius:9px;background:#d7b45b;color:#17372d;font-weight:800;font-size:12px}.muted{color:#69756f;font-size:13px}.badge{display:inline-block;padding:5px 9px;border-radius:99px;background:#e7f4ec;color:#14613d;font-size:10px;font-weight:900}footer{background:#062d23;color:#d6dfdb;padding:35px 0;font-size:12px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}@media(max-width:800px){nav{display:none}.grid,.split,.footer-grid{grid-template-columns:1fr}.hero{padding:55px 0}}</style></head><body><div class="top">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ • ঐক্য • শিক্ষা • সমাজ সংস্কার</div><header><div class="wrap nav"><a class="brand" href="index.html">ওয়েজিন ফুরফুরা শরীফ<small>WAYEJIN FURFURA SHARIF</small></a><nav><a href="index.html">হোম</a><a href="about.html">পরিচিতি</a><a href="organization.html">সংগঠন</a><a href="leadership.html">নেতৃত্ব</a><a href="activities.html">কার্যক্রম</a><a href="wazeens.html">ওয়েজিন</a><a href="wazeen-id.html">ID Card</a><a href="verification.html">ভেরিফিকেশন</a><a href="registration.html">নিবন্ধন</a><a href="news-events.html">নিউজ</a></nav></div></header><section><div class="wrap"><div class="head"><h1>Wazeen ID Verification</h1><p class="muted">Application No অথবা Wazeen ID দিয়ে যাচাই করুন।</p></div><div class="panel"><input id="id" style="width:75%;padding:12px" placeholder="WEFS/APP/2026/00000001"> <button class="btn" onclick="verify()">Verify</button></div><div id="out"></div></div></section><footer><div class="wrap footer-grid"><div><b>WAYEJIN FURFURA SHARIF</b><p>ঐক্য • শিক্ষা • সমাজ সংস্কার</p></div><div><b class="gold">দ্রুত লিংক</b><p><a href="registration.html">নিবন্ধন</a></p><p><a href="verification.html">ভেরিফিকেশন</a></p></div><div><b class="gold">প্ল্যাটফর্ম</b><p><a href="wazeens.html">ওয়েজিন</a></p><p><a href="contact.html">যোগাযোগ</a></p></div></div></footer><script>const API="https://script.google.com/macros/s/AKfycbwSxUaa1FKHM4xXFauCApz5aT1usl11-BAAQ9OULwL1uGd8G_78Qh6JhJEcFo1kJz6UWw/exec";async function verify(){let q=id.value.trim();if(!q)return;out.innerHTML="<div class=panel>যাচাই করা হচ্ছে...</div>";try{let r=await fetch(API+"?id="+encodeURIComponent(q));let o=await r.json();out.innerHTML=o.found?`<div class=panel><span class=badge>${o.record.status||"FOUND"}</span><h2>${o.record.name||""}</h2><p class=muted>ID: ${o.record.wazeen_id||o.record.application_no||q}<br>District: ${o.record.district||"-"}</p></div>`:"<div class=panel>রেকর্ড পাওয়া যায়নি।</div>"}catch(e){out.innerHTML="<div class=panel>Database connection-এ সমস্যা।</div>"}}let p=new URLSearchParams(location.search).get("id");if(p){id.value=p;verify()}</script></body></html>
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Wazeen ID Verification | WAYEJIN FURFURA SHARIF
+</title>
+
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,
+    "Noto Sans Bengali",
+    sans-serif;
+    background:#f3f5f3;
+    color:#18352d;
+}
+
+
+/* ================= HEADER ================= */
+
+.top{
+    background:#062d23;
+    color:#e8d58c;
+    text-align:center;
+    padding:8px;
+    font-size:11px;
+}
+
+header{
+    background:#064c3c;
+    color:white;
+}
+
+.header-inner{
+    max-width:1100px;
+    margin:auto;
+    padding:18px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.brand{
+    font-weight:bold;
+    font-size:15px;
+}
+
+.brand small{
+    display:block;
+    font-size:9px;
+    margin-top:3px;
+    letter-spacing:.7px;
+    color:#dce8e3;
+}
+
+.menu{
+    background:#d9b95b;
+    color:#18352d;
+    padding:9px 14px;
+    border-radius:7px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+
+/* ================= MAIN ================= */
+
+.container{
+    max-width:850px;
+    margin:auto;
+    padding:45px 18px 70px;
+}
+
+.title{
+    text-align:center;
+    font-family:Georgia,serif;
+    font-size:32px;
+    margin:0;
+}
+
+.subtitle{
+    text-align:center;
+    color:#718079;
+    font-size:12px;
+    margin-top:7px;
+    margin-bottom:28px;
+}
+
+
+/* ================= SEARCH ================= */
+
+.search-box{
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    box-shadow:0 8px 28px rgba(0,0,0,.10);
+}
+
+.search-label{
+    display:block;
+    font-weight:bold;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.search-row{
+    display:flex;
+    gap:10px;
+}
+
+#idInput{
+    flex:1;
+    height:48px;
+    border:1px solid #d5ddd8;
+    border-radius:8px;
+    padding:0 14px;
+    font-size:14px;
+    outline:none;
+}
+
+#idInput:focus{
+    border-color:#d0af4e;
+}
+
+.verify-btn{
+    border:0;
+    background:#064c3c;
+    color:white;
+    border-radius:8px;
+    padding:0 25px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+
+/* ================= RESULT ================= */
+
+#result{
+    margin-top:25px;
+}
+
+
+.result-card{
+    background:white;
+    border-radius:17px;
+    overflow:hidden;
+    box-shadow:0 8px 28px rgba(0,0,0,.12);
+    border:1px solid #e0e6e2;
+}
+
+
+.result-head{
+    background:#064c3c;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.result-head h2{
+    margin:8px 0 2px;
+    font-size:23px;
+}
+
+.result-head p{
+    margin:0;
+    font-size:11px;
+    color:#d9e5df;
+}
+
+
+/* STATUS */
+
+.status{
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:30px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.status.pending{
+    background:#fff2c9;
+    color:#765900;
+}
+
+.status.approved{
+    background:#d9f4e5;
+    color:#12613d;
+}
+
+.status.rejected{
+    background:#ffe0e0;
+    color:#8a2222;
+}
+
+
+/* DETAILS */
+
+.details{
+    padding:23px;
+}
+
+.detail-row{
+    display:flex;
+    padding:11px 0;
+    border-bottom:1px solid #edf0ee;
+    font-size:13px;
+}
+
+.detail-row:last-child{
+    border-bottom:0;
+}
+
+.detail-label{
+    width:42%;
+    color:#68766f;
+    font-weight:bold;
+}
+
+.detail-value{
+    width:58%;
+    color:#18352d;
+    font-weight:bold;
+    word-break:break-word;
+}
+
+
+/* VERIFIED */
+
+.verified-message{
+    margin:0 23px 23px;
+    padding:13px;
+    border-radius:9px;
+    background:#eef8f2;
+    color:#17603e;
+    text-align:center;
+    font-size:12px;
+    font-weight:bold;
+}
+
+
+/* NOT FOUND */
+
+.not-found{
+    background:white;
+    border-radius:16px;
+    padding:30px 20px;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.not-found-icon{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.not-found h3{
+    margin:0 0 6px;
+}
+
+.not-found p{
+    margin:0;
+    color:#6d7772;
+    font-size:13px;
+}
+
+
+/* LOADING */
+
+.loading{
+    background:white;
+    padding:25px;
+    text-align:center;
+    border-radius:15px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    font-weight:bold;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#062d23;
+    color:#dbe2de;
+    padding:30px 20px;
+    text-align:center;
+    font-size:11px;
+}
+
+footer strong{
+    color:#e2c879;
+}
+
+footer p{
+    margin:6px 0;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:600px){
+
+    .header-inner{
+        padding:15px;
+    }
+
+    .container{
+        padding:32px 13px 50px;
+    }
+
+    .title{
+        font-size:25px;
+    }
+
+    .search-box{
+        padding:18px;
+    }
+
+    .search-row{
+        flex-direction:column;
+    }
+
+    #idInput{
+        width:100%;
+    }
+
+    .verify-btn{
+        height:46px;
+    }
+
+    .detail-row{
+        font-size:12px;
+    }
+
+    .detail-label{
+        width:43%;
+    }
+
+    .detail-value{
+        width:57%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- TOP -->
+
+<div class="top">
+
+WAYEJIN FURFURA SHARIF
+&nbsp; • &nbsp;
+WEST BENGAL ULAMA BOARD
+
+</div>
+
+
+<!-- HEADER -->
+
+<header>
+
+<div class="header-inner">
+
+<div class="brand">
+
+ওয়েজিন ফুরফুরা শরীফ
+
+<small>
+WAYEJIN E FURFURA SHARIF
+</small>
+
+</div>
+
+<div class="menu">
+☰ MENU
+</div>
+
+</div>
+
+</header>
+
+
+<!-- MAIN -->
+
+<main class="container">
+
+
+<h1 class="title">
+Wazeen ID Verification
+</h1>
+
+<div class="subtitle">
+
+WEST BENGAL ULAMA BOARD
+•
+OFFICIAL VERIFICATION PORTAL
+
+</div>
+
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+<label class="search-label">
+
+Application No অথবা Wazeen ID
+
+</label>
+
+
+<div class="search-row">
+
+<input
+id="idInput"
+type="text"
+placeholder="WEFS/APP/2026/00000001 অথবা WBUB/WF/0001/26"
+autocomplete="off"
+>
+
+<button
+class="verify-btn"
+onclick="verifyID()"
+>
+
+VERIFY
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- RESULT -->
+
+<div id="result"></div>
+
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<strong>
+WAYEJIN FURFURA SHARIF
+</strong>
+
+<p>
+WEST BENGAL ULAMA BOARD
+</p>
+
+<p>
+Official Wazeen Verification Portal
+</p>
+
+</footer>
+
+
+<script>
+
+
+/* ================= API ================= */
+
+const API =
+"https://script.google.com/macros/s/AKfycbwSxUaa1FKHM4xXFauCApz5a1Tusl11-BAAQ9OULwL1uGd8G_78Qh6JhJEcFo1kJz6UWw/exec";
+
+
+/* ================= VERIFY ================= */
+
+async function verifyID(){
+
+    const input =
+        document.getElementById("idInput");
+
+    const result =
+        document.getElementById("result");
+
+    const query =
+        input.value.trim();
+
+
+    if(!query){
+
+        result.innerHTML = `
+
+        <div class="not-found">
+
+            <div class="not-found-icon">
+                🔎
+            </div>
+
+            <h3>
+                নম্বর লিখুন
+            </h3>
+
+            <p>
+                Application No অথবা Wazeen ID লিখে Verify করুন।
+            </p>
+
+        </div>
+
+        `;
+
+        return;
+    }
+
+
+    result.innerHTML = `
+
+    <div class="loading">
+        যাচাই করা হচ্ছে...
+    </div>
+
+    `;
+
+
+    try{
+
+        const response =
+            await fetch(
+                API +
+                "?id=" +
+                encodeURIComponent(query)
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            data.ok &&
+            data.found &&
+            data.record
+        ){
+
+            showRecord(
+                data.record
+            );
+
+        }else{
+
+            showNotFound();
+
+        }
+
+
+    }catch(error){
+
+        result.innerHTML = `
+
+        <div class="not-found">
+
+            <div class="not-found-icon">
+                ⚠️
+            </div>
+
+            <h3>
+                Database Connection সমস্যা
+            </h3>
+
+            <p>
+                কিছুক্ষণ পরে আবার চেষ্টা করুন।
+            </p>
+
+        </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ================= SHOW RECORD ================= */
+
+function showRecord(record){
+
+    const result =
+        document.getElementById("result");
+
+
+    let status =
+        String(
+            record.status ||
+            "PENDING"
+        ).toUpperCase();
+
+
+    let statusClass =
+        "pending";
+
+
+    if(status === "APPROVED"){
+        statusClass = "approved";
+    }
+
+    if(status === "REJECTED"){
+        statusClass = "rejected";
+    }
+
+
+    const name =
+        record.name ||
+        "Not Available";
+
+
+    const applicationNo =
+        record.application_no ||
+        "Not Available";
+
+
+    const wazeenId =
+        record.wazeen_id ||
+        "Not Assigned";
+
+
+    const designation =
+        record.designation ||
+        "Wazeen";
+
+
+    const district =
+        record.district ||
+        "-";
+
+
+    const mobile =
+        record.mobile ||
+        "-";
+
+
+    const validTill =
+        record.valid_till ||
+        "-";
+
+
+    const created =
+        record.created_at ||
+        "-";
+
+
+    result.innerHTML = `
+
+    <div class="result-card">
+
+
+        <div class="result-head">
+
+            <span class="status ${statusClass}">
+                ${escapeHTML(status)}
+            </span>
+
+            <h2>
+                ${escapeHTML(name)}
+            </h2>
+
+            <p>
+                WAYEJIN FURFURA SHARIF
+            </p>
+
+        </div>
+
+
+        <div class="details">
+
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    Wazeen ID
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(wazeenId)}
+                </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    Application No
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(applicationNo)}
+                </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    Designation
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(designation)}
+                </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    District
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(district)}
+                </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    Mobile
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(mobile)}
+                </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    Valid Till
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(validTill)}
+                </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    Application Date
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(created)}
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="verified-message">
+
+            ✓ Record found in
+            WEST BENGAL ULAMA BOARD
+            Database
+
+        </div>
+
+
+    </div>
+
+    `;
+
+}
+
+
+/* ================= NOT FOUND ================= */
+
+function showNotFound(){
+
+    const result =
+        document.getElementById("result");
+
+
+    result.innerHTML = `
+
+    <div class="not-found">
+
+        <div class="not-found-icon">
+            ❌
+        </div>
+
+        <h3>
+            Record Not Found
+        </h3>
+
+        <p>
+            এই Application No অথবা Wazeen ID
+            Database-এ পাওয়া যায়নি।
+        </p>
+
+    </div>
+
+    `;
+
+}
+
+
+/* ================= SECURITY ================= */
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* ================= ENTER KEY ================= */
+
+document
+.getElementById("idInput")
+.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Enter"
+        ){
+
+            verifyID();
+
+        }
+
+    }
+);
+
+
+/* ================= QR AUTO VERIFY ================= */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const qrID =
+    params.get("id");
+
+
+if(qrID){
+
+    document
+    .getElementById("idInput")
+    .value = qrID;
+
+    verifyID();
+
+}
+
+</script>
+
+
+</body>
+
+</html>
