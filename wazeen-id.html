@@ -7,67 +7,63 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link rel="stylesheet" href="assets/site.css">
 <style>
-.id-page{max-width:1120px;margin:auto;padding:35px 18px 65px}
-.id-intro{text-align:center;margin-bottom:25px}
-.id-intro h1{margin-bottom:8px}
-.id-intro p{margin:0}
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;justify-content:center}
-.id-card{
- width:100%;max-width:520px;aspect-ratio:1.586/1;margin:auto;position:relative;overflow:hidden;
- border-radius:20px;border:3px solid #c89f38;color:#fff;
- box-shadow:0 18px 45px rgba(0,0,0,.18);
- background:linear-gradient(145deg,#022a20,#07513f 58%,#04382c)
-}
-.id-card:before{content:"";position:absolute;width:330px;height:330px;border:1px solid rgba(226,200,121,.22);border-radius:50%;right:-155px;top:-150px}
-.id-card:after{content:"";position:absolute;width:260px;height:260px;border:1px solid rgba(226,200,121,.15);border-radius:50%;left:-150px;bottom:-145px}
-.front{padding:17px 19px}
-.id-header{display:flex;align-items:center;gap:13px;position:relative;z-index:1}
-.logo{width:67px;height:67px;object-fit:contain;border-radius:50%;background:#fff;padding:3px;flex:none}
-.org-small{font-size:10px;font-weight:900;letter-spacing:.09em;color:#f0dfa4}
-.org-name{font-size:19px;line-height:1.05;font-weight:900;margin-top:3px}
-.org-sub{font-size:8px;letter-spacing:.12em;color:#e9dfc4;font-weight:800;margin-top:4px}
-.arabic{font-family:Georgia,serif;color:#e2c879;font-size:18px;line-height:1.1}
-.front-body{display:grid;grid-template-columns:105px minmax(0,1fr) 82px;gap:14px;align-items:start;margin-top:16px;position:relative;z-index:1}.front-body>div:nth-child(2){min-width:0}.front-bottom{left:19px;right:19px;bottom:11px}
-.photo{width:105px;height:123px;border:2px solid #e2c879;border-radius:12px;object-fit:cover;background:#edf2ef}
+:root{--green:#064d3b;--deep:#033a2d;--gold:#d9b44f;--cream:#f7f7f2;--ink:#10251f}
+.id-page{max-width:1220px;margin:auto;padding:28px 20px 70px}
+.id-intro{text-align:center;margin-bottom:24px}
+.id-intro h1{font-family:Georgia,serif;font-size:42px;line-height:1.1;color:var(--deep);margin:0 0 8px;font-weight:800}
+.id-intro p{font-size:15px;color:#68736f;margin:0}
+.id-intro p:after{content:"";display:block;width:70px;height:3px;background:var(--gold);margin:12px auto 0}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px;align-items:start}
+.id-card{width:100%;max-width:560px;aspect-ratio:1.586/1;margin:auto;position:relative;overflow:hidden;border-radius:22px;border:2px solid var(--gold);box-shadow:0 18px 42px rgba(0,0,0,.16)}
+.id-card:before{content:"";position:absolute;width:390px;height:390px;border:1px solid rgba(217,180,79,.18);border-radius:50%;right:-190px;top:-180px}
+.id-card:after{content:"";position:absolute;width:330px;height:330px;border:1px solid rgba(217,180,79,.14);border-radius:50%;left:-190px;bottom:-180px}
+.front{padding:24px 27px;background:linear-gradient(145deg,#043d2f,#075a45 62%,#04372b);color:#fff}
+.id-header{display:flex;align-items:flex-start;gap:16px;position:relative;z-index:2}
+.logo{width:94px;height:94px;object-fit:contain;border-radius:50%;flex:none}
+.org-small{font-size:16px;font-weight:900;letter-spacing:.02em;color:#f0dfa4;margin-top:4px}
+.org-name{font-size:30px;line-height:1.03;font-weight:900;margin-top:5px}
+.org-sub{font-size:11px;letter-spacing:.12em;color:#e9dfc4;font-weight:800;margin-top:7px}
+.front:after{content:"";position:absolute;left:0;right:0;top:47%;height:48px;background:linear-gradient(180deg,transparent 0,#d7b04e 20%,#f3e6bc 48%,#d7b04e 75%,transparent);transform:skewY(-3deg);opacity:.98}
+.front-body{display:grid;grid-template-columns:150px minmax(0,1fr) 105px;gap:18px;align-items:start;margin-top:50px;position:relative;z-index:3}
+.front-body>div:nth-child(2){min-width:0}
+.photo{width:150px;height:176px;border:3px solid var(--gold);border-radius:16px;object-fit:cover;background:#edf2ef}
 .photo.placeholder{visibility:hidden}
-.name{font-size:20px;line-height:1.12;font-weight:900}
-.designation{display:inline-block;margin-top:7px;padding:3px 8px;border-radius:20px;background:#e2c879;color:#17372d;font-size:10px;font-weight:900}
-.meta{font-size:10px;line-height:1.35;margin-top:7px}
-.meta b{color:#f2e1a5}
-.qr{width:82px;height:82px;padding:4px;background:#fff;border-radius:8px;display:block}
-.scan{font-size:8px;text-align:center;color:#17372d;font-weight:900;background:#fff;border-radius:0 0 6px 6px;margin-top:-18px;padding-top:20px;position:relative}
-.front-bottom{position:absolute;display:flex;justify-content:space-between;align-items:end;z-index:1;border-top:1px solid rgba(226,200,121,.38);padding-top:6px}
-.id-number{font-size:11px;font-weight:900;color:#f4e4a7}
-.slogan{font-size:9px;font-weight:800;letter-spacing:.06em}
-.back{padding:18px 21px;background:linear-gradient(145deg,#f7f5ed,#fff 55%,#eef4ef);color:#17372d}
-.back .back-top{display:flex;align-items:center;gap:10px;border-bottom:2px solid #c89f38;padding-bottom:9px}
-.back .back-logo{width:48px;height:48px;object-fit:contain}
-.back h2{font-size:15px;margin:0;color:#063b2e}
-.back h3{font-size:11px;margin:0;color:#0b6952}
-.instructions{margin:12px 0 0;padding-left:20px;font-size:10px;line-height:1.55}
-.instructions li{margin-bottom:3px}
-.contact{position:absolute;left:21px;right:21px;bottom:14px;display:grid;grid-template-columns:1fr 78px;gap:14px;align-items:end;background:rgba(255,255,255,.82);padding-top:7px;border-top:1px solid #d8c27a}
-.contact-lines{font-size:9px;line-height:1.65}
+.name{font-size:21px;line-height:1.08;font-weight:900;color:#111;margin-top:4px}
+.designation{display:inline-block;margin-top:8px;padding:6px 12px;border-radius:20px;background:#e2c879;color:#17372d;font-size:11px;font-weight:900}
+.meta{font-size:12px;line-height:1.25;margin-top:9px;color:#14231f}
+.meta b{color:#07513f;font-size:11px}
+.qr{width:105px;height:105px;padding:5px;background:#fff;border-radius:7px;display:block}
+.scan{font-size:9px;text-align:center;color:#17372d;font-weight:900;background:#fff;margin-top:-1px;padding:4px 2px;border-radius:0 0 5px 5px}
+.front-bottom{position:absolute;left:27px;right:27px;bottom:13px;display:flex;justify-content:space-between;align-items:end;z-index:4;border-top:1px solid rgba(226,200,121,.65);padding-top:7px}
+.id-number{font-size:12px;font-weight:900;color:#f4e4a7}
+.slogan{font-size:10px;font-weight:800;letter-spacing:.06em}
+.back{padding:24px 27px;background:#fbfbf7;color:var(--ink)}
+.back:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(6,77,59,.04) 1px,transparent 1px);background-size:10px 10px;opacity:.35}
+.back .back-top{display:flex;align-items:center;gap:16px;border-bottom:2px solid var(--gold);padding-bottom:12px;position:relative;z-index:2}
+.back .back-logo{width:82px;height:82px;object-fit:contain}
+.back h2{font-size:22px;line-height:1.05;margin:0;color:#063b2e}
+.back h3{font-size:12px;letter-spacing:.06em;margin:7px 0 0;color:#0b6952}
+.back>h3{position:relative;z-index:2;background:var(--green);color:#fff;border-radius:13px 13px 0 0;text-align:center;padding:9px;margin-top:17px!important;font-size:15px}
+.instructions{position:relative;z-index:2;margin:0;padding:10px 18px 10px 34px;background:#fff;border:1px solid #d7c27a;border-top:0;border-radius:0 0 13px 13px;font-size:11px;line-height:1.45}
+.instructions li{margin-bottom:5px}
+.back-quote{position:absolute;left:27px;right:27px;bottom:77px;border-radius:0;text-align:center;color:#07513f;font-family:Georgia,serif;font-style:italic;font-weight:700;font-size:17px}
+.contact{position:absolute;left:27px;right:27px;bottom:16px;display:grid;grid-template-columns:1fr 95px;gap:15px;align-items:end;padding-top:8px;border-top:2px solid var(--gold);z-index:3}
+.contact-lines{font-size:10px;line-height:1.55}
 .contact-lines b{color:#07513f}
-.back-qr{width:72px;height:72px;background:#fff;padding:4px;border-radius:6px}
-.back-quote{position:absolute;left:21px;right:115px;bottom:72px;border-radius:9px;padding:5px 8px;text-align:center;background:#063b2e;color:#f1df9c;font-family:Georgia,serif;font-size:10px}
-.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:24px auto 0;max-width:720px}
-.actions button,.actions a{border:0;border-radius:10px;padding:12px 18px;background:#d7b45b;color:#17372d;font-weight:900;text-decoration:none}
+.back-qr{width:88px;height:88px;background:#fff;padding:4px;border-radius:6px}
+.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:26px auto 0}
+.actions button,.actions a{border:0;border-radius:9px;padding:13px 22px;background:var(--gold);color:#17372d;font-weight:900;text-decoration:none;box-shadow:0 4px 10px rgba(0,0,0,.08)}
 .message{max-width:650px;margin:18px auto;padding:14px;border-radius:10px;text-align:center;background:#fff0f0;color:#8a2222}
-@media(max-width:850px){.cards{grid-template-columns:1fr}.id-card{max-width:560px}}
+@media(max-width:900px){.cards{grid-template-columns:1fr}.id-card{max-width:620px}}
 @media(max-width:560px){
- .id-page{padding:22px 10px 45px}
- .cards{gap:16px}
- .front{padding:12px 13px}.logo{width:51px;height:51px}.org-small{font-size:7px}.org-name{font-size:13px}.org-sub{font-size:6px}.arabic{font-size:14px}
- .front-body{grid-template-columns:72px minmax(0,1fr) 56px;gap:8px;margin-top:10px}.photo{width:72px;height:84px}.name{font-size:13px}.designation{font-size:7px;margin-top:4px}.meta{font-size:7px;margin-top:4px}.qr{width:56px;height:56px}
- .front-bottom{left:13px;right:13px;bottom:7px;padding-top:4px}.id-number{font-size:7px}.slogan{font-size:6px}
- .back{padding:12px 14px}.back .back-logo{width:36px;height:36px}.back h2{font-size:11px}.back h3{font-size:8px}.instructions{font-size:7px;line-height:1.4;margin-top:7px}.contact{left:14px;right:14px;bottom:8px;grid-template-columns:1fr 52px;gap:8px;padding-top:5px}.contact-lines{font-size:6.2px}.back-qr{width:50px;height:50px}.back-quote{left:14px;right:76px;bottom:50px;font-size:7px;padding:3px}
- .actions{flex-direction:column;padding-inline:10px}.actions button,.actions a{width:100%;text-align:center}
+ .id-page{padding:22px 10px 45px}.id-intro h1{font-size:30px}.id-intro p{font-size:11px}
+ .cards{gap:18px}.front{padding:14px 15px}.logo{width:58px;height:58px}.org-small{font-size:8px}.org-name{font-size:16px}.org-sub{font-size:6px}
+ .front:after{top:46%;height:34px}.front-body{grid-template-columns:76px minmax(0,1fr) 58px;gap:8px;margin-top:34px}
+ .photo{width:76px;height:90px;border-radius:10px}.name{font-size:13px}.designation{font-size:7px;padding:4px 8px;margin-top:5px}.meta{font-size:7px;margin-top:5px}.meta b{font-size:6px}.qr{width:58px;height:58px}.scan{font-size:6px}
+ .front-bottom{left:15px;right:15px;bottom:7px}.id-number{font-size:7px}.slogan{font-size:5px}
+ .back{padding:14px 15px}.back .back-logo{width:58px;height:58px}.back h2{font-size:13px}.back h3{font-size:7px}.back>h3{font-size:9px;padding:6px;margin-top:9px!important}.instructions{font-size:7px;line-height:1.35;padding:7px 9px 6px 22px}.instructions li{margin-bottom:3px}.back-quote{left:15px;right:15px;bottom:59px;font-size:10px}.contact{left:15px;right:15px;bottom:7px;grid-template-columns:1fr 57px;gap:7px}.contact-lines{font-size:6px}.back-qr{width:54px;height:54px}.actions{flex-direction:column;padding-inline:10px}.actions button,.actions a{width:100%;text-align:center}
 }
-@media print{
- body{background:#fff!important}.top,header,.id-intro,.actions,.message{display:none!important}
- .id-page{padding:0}.cards{display:grid;grid-template-columns:1fr 1fr;gap:10mm;page-break-inside:avoid}.id-card{box-shadow:none}
-}
+@media print{body{background:#fff!important}.top,header,.id-intro,.actions,.message{display:none!important}.id-page{padding:0}.cards{display:grid;grid-template-columns:1fr 1fr;gap:8mm;page-break-inside:avoid}.id-card{box-shadow:none}}
 </style>
 </head>
 <body>
@@ -92,7 +88,7 @@
 
 <div class="org-small">WEST BENGAL ULAMA BOARD</div>
 <div class="org-name">WAYEJIN E FURFURA SHARIF</div>
-<div class="org-sub">OFFICIAL MEMBER IDENTITY CARD</div>
+<div class="org-sub">OFFICIAL MEMBER IDENTITY CARD</div><div class="org-sub" style="letter-spacing:.02em">A BRANCH OF JAMIYATE ULAMA BANGLA-ASAM • CENTRAL OFFICE: FURFURA SHARIF</div>
 </div>
 </div>
 <div class="front-body">
@@ -111,7 +107,7 @@
 </div>
 <div class="front-bottom">
 <div class="id-number" id="idbottom"></div>
-<div class="slogan">UNITY • EDUCATION • SOCIAL REFORM</div>
+<div class="slogan">WORKING FOR A BETTER UMMAH</div>
 </div>
 </section>
 
@@ -126,9 +122,9 @@
 <li>This card is non-transferable.</li>
 <li>Validity is subject to the official membership record.</li>
 <li>If lost, please inform the nearest committee.</li>
-<li>Scan the QR code to verify membership online.</li>
+<li>Use the QR code to verify the member’s details online.</li><li>This card is valid only for the mentioned period.</li>
 </ol>
-<div class="back-quote">May Allah accept our efforts.</div>
+<div class="back-quote">“Ulama for a Better Society”</div>
 <div class="contact">
 <div class="contact-lines">
 <div><b>☎</b> +91 93304 48262</div>
