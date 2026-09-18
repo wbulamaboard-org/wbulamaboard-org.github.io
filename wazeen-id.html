@@ -1,1 +1,197 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Digital Member ID | WAYEJIN FURFURA SHARIF</title><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><link rel="stylesheet" href="assets/site.css"><style>.wrapx{max-width:1050px;margin:auto;padding:28px 18px}.cardbox{max-width:520px;margin:20px auto;background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:18px}.idcard{width:430px;max-width:100%;aspect-ratio:1.586/1;margin:auto;border-radius:18px;overflow:hidden;background:linear-gradient(135deg,#073f31,#07513f);color:#fff;padding:20px;position:relative}.idcard:after{content:"";position:absolute;width:180px;height:180px;border:1px solid rgba(226,200,121,.25);border-radius:50%;right:-55px;bottom:-80px}.gold{color:#e2c879}.idtop{font-size:11px;letter-spacing:.08em;font-weight:900}.idtitle{font-size:20px;font-weight:900;margin-top:5px}.idbody{display:grid;grid-template-columns:90px 1fr;gap:14px;align-items:center;margin-top:24px}.photo{width:90px;height:105px;border-radius:10px;background:#e8eeea;object-fit:cover}.name{font-size:20px;font-weight:900}.line{font-size:11px;margin-top:5px}.qr{width:82px;height:82px;background:#fff;border-radius:7px;padding:4px}.bottom{display:flex;justify-content:space-between;align-items:end;margin-top:20px}.actions{display:flex;gap:10px;margin-top:18px}.actions button,.actions a{flex:1;padding:12px;border:0;border-radius:9px;background:#d7b45b;color:#17372d;font-weight:900;text-align:center}.message{padding:14px;border-radius:9px;background:#fff0f0;color:#8a2222;margin-top:16px}@media(max-width:620px){.wrapx{padding:18px 12px}.idcard{padding:15px}.idbody{grid-template-columns:72px 1fr}.photo{width:72px;height:86px}.name{font-size:17px}.qr{width:68px;height:68px}.actions{flex-direction:column}}@media print{header,.cardbox>p,.actions,.message{display:none!important}.wrapx{padding:0}.idcard{box-shadow:none}}</style></head><body><header><div class="wrap nav"><a class="brand" href="index.html">ওয়েজিন ফুরফুরা শরীফ<small>WAYEJIN E FURFURA SHARIF</small></a><nav><a href="registration.html">নিবন্ধন</a><a href="verification.html">ভেরিফিকেশন</a></nav></div></header><main><div class="wrapx"><div class="head"><h1>Digital Member ID</h1><p class="muted">Official ID view is driven by the approved backend record.</p></div><div class="cardbox"><div id="message" class="message" hidden></div><div id="card" class="idcard" hidden><div class="idtop gold">WEST BENGAL ULAMA BOARD</div><div class="idtitle">WAYEJIN FURFURA SHARIF</div><div class="idbody"><img id="photo" class="photo" alt="Member photo"><div><div id="name" class="name"></div><div class="line">Member ID: <strong id="mid"></strong></div><div class="line">Designation: <strong id="des"></strong></div><div class="line">District: <strong id="district"></strong></div><div class="line">Valid Till: <strong id="valid"></strong></div></div></div><div class="bottom"><div class="line">OFFICIAL DIGITAL ID</div><img id="qr" class="qr" alt="QR verification"></div></div><div class="actions" id="actions" hidden><button onclick="window.print()">Print / PDF</button><button id="download">Download PNG</button><a id="verify" href="#">Verify</a></div></div></div></main><script src="assets/member-workflow.js"></script><script src="assets/site.js" defer></script><script>const id=new URLSearchParams(location.search).get("id"),msg=document.getElementById("message"),card=document.getElementById("card"),actions=document.getElementById("actions");async function load(){if(!id){WBUB_WORKFLOW.showMessage(msg,"error","Member ID দেওয়া হয়নি।");return}try{const d=await WBUB_WORKFLOW.publicVerify(id);if(d.found!==true||!d.record)throw 0;const r=d.record;if(!["verified","approved","active"].includes(String(r.status||"").toLowerCase()))throw 0;document.getElementById("name").textContent=r.name||"Approved Member";document.getElementById("mid").textContent=r.member_id||id;document.getElementById("des").textContent=r.designation||"Member";document.getElementById("district").textContent=r.district||"-";document.getElementById("valid").textContent=r.valid_till||"-";const photo=document.getElementById("photo");if(r.photo_url)photo.src=r.photo_url;else photo.style.visibility="hidden";const verify=location.origin+location.pathname.replace("wazeen-id.html","verification.html")+"?id="+encodeURIComponent(r.member_id||id);document.getElementById("verify").href=verify;document.getElementById("qr").src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data="+encodeURIComponent(verify);card.hidden=false;actions.hidden=false;document.getElementById("download").onclick=async()=>{const canvas=await html2canvas(card,{scale:3,useCORS:true,backgroundColor:null});const a=document.createElement("a");a.download=(r.member_id||id)+"-ID.png";a.href=canvas.toDataURL("image/png");a.click()}}catch(e){WBUB_WORKFLOW.showMessage(msg,"error","Member ID Not Found / Invalid")}}load()</script></body></html>
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Digital Member ID | WAYEJIN E FURFURA SHARIF</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="stylesheet" href="assets/site.css">
+<style>
+.id-page{max-width:1120px;margin:auto;padding:35px 18px 65px}
+.id-intro{text-align:center;margin-bottom:25px}
+.id-intro h1{margin-bottom:8px}
+.id-intro p{margin:0}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;justify-content:center}
+.id-card{
+ width:100%;max-width:520px;aspect-ratio:1.586/1;margin:auto;position:relative;overflow:hidden;
+ border-radius:20px;border:3px solid #c89f38;color:#fff;
+ box-shadow:0 18px 45px rgba(0,0,0,.18);
+ background:linear-gradient(145deg,#022a20,#07513f 58%,#04382c)
+}
+.id-card:before{content:"";position:absolute;width:330px;height:330px;border:1px solid rgba(226,200,121,.22);border-radius:50%;right:-155px;top:-150px}
+.id-card:after{content:"";position:absolute;width:260px;height:260px;border:1px solid rgba(226,200,121,.15);border-radius:50%;left:-150px;bottom:-145px}
+.front{padding:17px 19px}
+.id-header{display:flex;align-items:center;gap:13px;position:relative;z-index:1}
+.logo{width:67px;height:67px;object-fit:contain;border-radius:50%;background:#fff;padding:3px;flex:none}
+.org-small{font-size:10px;font-weight:900;letter-spacing:.09em;color:#f0dfa4}
+.org-name{font-size:19px;line-height:1.05;font-weight:900;margin-top:3px}
+.org-sub{font-size:8px;letter-spacing:.12em;color:#e9dfc4;font-weight:800;margin-top:4px}
+.arabic{font-family:Georgia,serif;color:#e2c879;font-size:18px;line-height:1.1}
+.front-body{display:grid;grid-template-columns:105px 1fr 74px;gap:13px;align-items:center;margin-top:18px;position:relative;z-index:1}
+.photo{width:105px;height:123px;border:2px solid #e2c879;border-radius:12px;object-fit:cover;background:#edf2ef}
+.photo.placeholder{visibility:hidden}
+.name{font-size:20px;line-height:1.12;font-weight:900}
+.designation{display:inline-block;margin-top:7px;padding:3px 8px;border-radius:20px;background:#e2c879;color:#17372d;font-size:10px;font-weight:900}
+.meta{font-size:10px;line-height:1.35;margin-top:7px}
+.meta b{color:#f2e1a5}
+.qr{width:74px;height:74px;padding:4px;background:#fff;border-radius:8px}
+.scan{font-size:8px;text-align:center;color:#17372d;font-weight:900;background:#fff;border-radius:0 0 6px 6px;margin-top:-18px;padding-top:20px}
+.front-bottom{position:absolute;left:19px;right:19px;bottom:11px;display:flex;justify-content:space-between;align-items:end;z-index:1;border-top:1px solid rgba(226,200,121,.38);padding-top:6px}
+.id-number{font-size:11px;font-weight:900;color:#f4e4a7}
+.slogan{font-size:9px;font-weight:800;letter-spacing:.06em}
+.back{padding:18px 21px;background:linear-gradient(145deg,#f7f5ed,#fff 55%,#eef4ef);color:#17372d}
+.back .back-top{display:flex;align-items:center;gap:10px;border-bottom:2px solid #c89f38;padding-bottom:9px}
+.back .back-logo{width:48px;height:48px;object-fit:contain}
+.back h2{font-size:15px;margin:0;color:#063b2e}
+.back h3{font-size:11px;margin:0;color:#0b6952}
+.instructions{margin:12px 0 0;padding-left:20px;font-size:10px;line-height:1.55}
+.instructions li{margin-bottom:3px}
+.contact{position:absolute;left:21px;right:21px;bottom:16px;display:grid;grid-template-columns:1fr 78px;gap:14px;align-items:end}
+.contact-lines{font-size:9px;line-height:1.65}
+.contact-lines b{color:#07513f}
+.back-qr{width:72px;height:72px;background:#fff;padding:4px;border-radius:6px}
+.back-quote{position:absolute;left:21px;right:105px;bottom:69px;border-radius:9px;padding:5px 8px;text-align:center;background:#063b2e;color:#f1df9c;font-family:Georgia,serif;font-size:11px}
+.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:24px auto 0;max-width:720px}
+.actions button,.actions a{border:0;border-radius:10px;padding:12px 18px;background:#d7b45b;color:#17372d;font-weight:900;text-decoration:none}
+.message{max-width:650px;margin:18px auto;padding:14px;border-radius:10px;text-align:center;background:#fff0f0;color:#8a2222}
+@media(max-width:850px){.cards{grid-template-columns:1fr}.id-card{max-width:560px}}
+@media(max-width:560px){
+ .id-page{padding:22px 10px 45px}
+ .cards{gap:16px}
+ .front{padding:12px 13px}.logo{width:51px;height:51px}.org-small{font-size:7px}.org-name{font-size:13px}.org-sub{font-size:6px}.arabic{font-size:14px}
+ .front-body{grid-template-columns:75px 1fr 54px;gap:8px;margin-top:11px}.photo{width:75px;height:88px}.name{font-size:13px}.designation{font-size:7px;margin-top:4px}.meta{font-size:7px;margin-top:4px}.qr{width:54px;height:54px}
+ .front-bottom{left:13px;right:13px;bottom:7px;padding-top:4px}.id-number{font-size:7px}.slogan{font-size:6px}
+ .back{padding:12px 14px}.back .back-logo{width:36px;height:36px}.back h2{font-size:11px}.back h3{font-size:8px}.instructions{font-size:7px;line-height:1.4;margin-top:7px}.contact{left:14px;right:14px;bottom:9px;grid-template-columns:1fr 52px}.contact-lines{font-size:6.5px}.back-qr{width:50px;height:50px}.back-quote{left:14px;right:75px;bottom:48px;font-size:7px;padding:3px}
+ .actions{flex-direction:column;padding-inline:10px}.actions button,.actions a{width:100%;text-align:center}
+}
+@media print{
+ body{background:#fff!important}.top,header,.id-intro,.actions,.message{display:none!important}
+ .id-page{padding:0}.cards{display:grid;grid-template-columns:1fr 1fr;gap:10mm;page-break-inside:avoid}.id-card{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="brand" href="index.html">ওয়েজিন ফুরফুরা শরীফ<small>WAYEJIN E FURFURA SHARIF</small></a>
+<nav><a href="registration.html">নিবন্ধন</a><a href="member.html">সদস্য এলাকা</a><a href="verification.html">ভেরিফিকেশন</a></nav>
+</div></header>
+
+<main class="id-page">
+<div class="id-intro">
+<div class="head"><h1>Digital Member ID Card</h1></div>
+<p class="muted">অনুমোদিত সদস্যের তথ্য থেকে ID Card স্বয়ংক্রিয়ভাবে তৈরি হবে।</p>
+</div>
+
+<div id="message" class="message" hidden></div>
+
+<div id="cards" class="cards" hidden>
+<section id="front" class="id-card front">
+<div class="id-header">
+<img class="logo" src="assets/wbub-logo.webp" alt="West Bengal Ulama Board logo">
+<div>
+<div class="arabic">وَيْجِنْ إِ فُرْفُرَة شَرِيفْ</div>
+<div class="org-small">WEST BENGAL ULAMA BOARD</div>
+<div class="org-name">WAYEJIN E FURFURA SHARIF</div>
+<div class="org-sub">OFFICIAL MEMBER IDENTITY CARD</div>
+</div>
+</div>
+<div class="front-body">
+<img id="photo" class="photo" alt="Member photo">
+<div>
+<div id="name" class="name">Approved Member</div>
+<div id="des" class="designation">Member</div>
+<div class="meta"><b>MEMBER ID</b><br><span id="mid"></span></div>
+<div class="meta"><b>DISTRICT</b><br><span id="district"></span></div>
+<div class="meta"><b>VALID TILL</b><br><span id="valid"></span></div>
+</div>
+<div>
+<img id="qr" class="qr" alt="QR verification">
+<div class="scan">SCAN TO VERIFY</div>
+</div>
+</div>
+<div class="front-bottom">
+<div class="id-number" id="idbottom"></div>
+<div class="slogan">UNITY • EDUCATION • SOCIAL REFORM</div>
+</div>
+</section>
+
+<section id="back" class="id-card back">
+<div class="back-top">
+<img class="back-logo" src="assets/wbub-logo.webp" alt="Board logo">
+<div><h2>WEST BENGAL ULAMA BOARD</h2><h3>WAYEJIN FURFURA SHARIF</h3></div>
+</div>
+<h3 style="margin-top:10px">CARD INSTRUCTIONS</h3>
+<ol class="instructions">
+<li>This card is the official identity of an approved member.</li>
+<li>The card is non-transferable and must be used responsibly.</li>
+<li>Validity depends on the official membership record.</li>
+<li>If the card is lost, inform the nearest committee.</li>
+<li>For verification, scan the QR code or visit the official verification page.</li>
+</ol>
+<div class="back-quote">May Allah accept our efforts</div>
+<div class="contact">
+<div class="contact-lines">
+<div><b>☎</b> +91 93304 48262</div>
+<div><b>✉</b> westbengalulamaboard@gmail.com</div>
+<div><b>⌂</b> Furfura Sharif, Hooghly, West Bengal, India</div>
+<div><b>🌐</b> <span id="site-url"></span></div>
+</div>
+<img id="backqr" class="back-qr" alt="Verification QR">
+</div>
+</section>
+</div>
+
+<div class="actions" id="actions" hidden>
+<button id="download">⬇ Download ID Card</button>
+<button id="print" onclick="window.print()">🖨 Print / Save PDF</button>
+<a id="verify" href="#">✓ Verify Member</a>
+</div>
+</main>
+
+<script src="assets/member-workflow.js"></script>
+<script src="assets/site.js" defer></script>
+<script>
+const id=new URLSearchParams(location.search).get("id");
+const msg=document.getElementById("message"),cards=document.getElementById("cards"),actions=document.getElementById("actions");
+const origin=location.origin;
+document.getElementById("site-url").textContent=origin.replace(/^https?:\/\//,"");
+async function load(){
+ if(!id){WBUB_WORKFLOW.showMessage(msg,"error","Member ID দেওয়া হয়নি।");return}
+ try{
+  const d=await WBUB_WORKFLOW.publicVerify(id);
+  if(d.found!==true||!d.record)throw 0;
+  const r=d.record;
+  if(!["verified","approved","active"].includes(String(r.status||"").toLowerCase()))throw 0;
+  document.getElementById("name").textContent=r.name||"Approved Member";
+  document.getElementById("mid").textContent=r.member_id||id;
+  document.getElementById("idbottom").textContent=r.member_id||id;
+  document.getElementById("des").textContent=r.designation||"Member";
+  document.getElementById("district").textContent=r.district||"-";
+  document.getElementById("valid").textContent=r.valid_till||"-";
+  const photo=document.getElementById("photo");
+  if(r.photo_url){photo.src=r.photo_url;photo.onerror=()=>photo.classList.add("placeholder")}else photo.classList.add("placeholder");
+  const verify=origin+location.pathname.replace("wazeen-id.html","verification.html")+"?id="+encodeURIComponent(r.member_id||id);
+  document.getElementById("verify").href=verify;
+  const qr="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data="+encodeURIComponent(verify);
+  document.getElementById("qr").src=qr;
+  document.getElementById("backqr").src=qr;
+  cards.hidden=false;actions.hidden=false;
+  document.getElementById("download").onclick=async()=>{
+   const canvas=document.createElement("canvas");
+   const scale=3,gap=35;
+   const frontCanvas=await html2canvas(document.getElementById("front"),{scale,useCORS:true,backgroundColor:null});
+   const backCanvas=await html2canvas(document.getElementById("back"),{scale,useCORS:true,backgroundColor:null});
+   canvas.width=frontCanvas.width+backCanvas.width+gap*scale;
+   canvas.height=Math.max(frontCanvas.height,backCanvas.height);
+   const ctx=canvas.getContext("2d");
+   ctx.fillStyle="#eef2ef";ctx.fillRect(0,0,canvas.width,canvas.height);
+   ctx.drawImage(frontCanvas,0,0);
+   ctx.drawImage(backCanvas,frontCanvas.width+gap*scale,0);
+   const a=document.createElement("a");a.download=(r.member_id||id)+"-ID-Card.png";a.href=canvas.toDataURL("image/png");a.click();
+  };
+ }catch(e){WBUB_WORKFLOW.showMessage(msg,"error","Member ID Not Found / Invalid")}
+}
+load();
+</script>
+</body>
+</html>
