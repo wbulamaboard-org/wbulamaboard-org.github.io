@@ -171,7 +171,7 @@ async function load(){
   document.getElementById("valid").textContent=r.valid_till||"-";
   const photo=document.getElementById("photo");
   if(r.photo_url){photo.src=r.photo_url;photo.onerror=()=>photo.classList.add("placeholder")}else photo.classList.add("placeholder");
-  const verify=origin+location.pathname.replace("wazeen-id.html","verification.html")+"?id="+encodeURIComponent(r.member_id||id);
+  const verify=origin+location.pathname.replace("wazeen-id.html","verification.html")+"?id="+encodeURIComponent(memberId);
   document.getElementById("verify").href=verify;
   const qr="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data="+encodeURIComponent(verify);
   document.getElementById("qr").src=qr;
