@@ -13,13 +13,32 @@
     button.setAttribute('aria-expanded', 'false');
     button.setAttribute('aria-controls', 'primary-navigation');
     nav.id = 'primary-navigation';
-    button.addEventListener('click', () => {
+    const closeMenu = () => {
+      nav.classList.remove('open');
+      button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-label', 'নেভিগেশন মেনু খুলুন');
+    };
+    const toggleMenu = () => {
       const isOpen = nav.classList.toggle('open');
       button.setAttribute('aria-expanded', String(isOpen));
-    });
+      button.setAttribute('aria-label', isOpen ? 'নেভিগেশন মেনু বন্ধ করুন' : 'নেভিগেশন মেনু খুলুন');
+    };
+    button.addEventListener('click', toggleMenu);
     nav.querySelectorAll('a').forEach(link => {
       if (new URL(link.href).pathname === location.pathname) link.setAttribute('aria-current', 'page');
-      link.addEventListener('click', () => { nav.classList.remove('open'); button.setAttribute('aria-expanded', 'false'); });
+      link.addEventListener('click', closeMenu);
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && nav.classList.contains('open')) {
+        closeMenu();
+        button.focus();
+      }
+    });
+    document.addEventListener('click', event => {
+      if (nav.classList.contains('open') && !nav.contains(event.target) && !button.contains(event.target)) closeMenu();
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1100) closeMenu();
     });
   }
 })();
