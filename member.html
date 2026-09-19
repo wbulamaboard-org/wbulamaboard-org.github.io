@@ -1,1 +1,114 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>সদস্য এলাকা | WAYEJIN FURFURA SHARIF</title><link rel="stylesheet" href="assets/site.css"><style>.workflow{max-width:760px;margin:auto}.cardx{background:#fff;border:1px solid #dce6e0;border-radius:18px;padding:24px;box-shadow:var(--shadow)}label{display:block;font-weight:800;margin:14px 0 7px}input{width:100%;padding:13px;border:1px solid #cbd9d2;border-radius:9px;font-size:16px}button{width:100%;margin-top:16px;padding:14px;border:0;border-radius:9px;background:#d7b45b;color:#17372d;font-weight:900;font-size:16px}.workflow-message{margin-top:16px;padding:13px;border-radius:9px}.workflow-message.error{background:#fff0f0;color:#8a2222}.profile{margin-top:18px;padding:18px;border-radius:12px;background:#f5f8f6}.success-head{color:#0b654d}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.actions a{flex:1;min-width:180px;text-align:center;padding:12px;border-radius:9px;background:#d7b45b;color:#17372d;font-weight:900;text-decoration:none}.actions a.secondary{background:#07513f;color:#fff}.note{margin-top:14px;font-size:13px;color:#52645c}@media(max-width:620px){.cardx{padding:18px}.actions{flex-direction:column}}</style></head><body><header><div class="wrap nav"><a class="brand" href="index.html">ওয়েজিন ফুরফুরা শরীফ<small>WAYEJIN E FURFURA SHARIF</small></a><nav><a href="registration.html">নিবন্ধন</a><a href="status.html">স্ট্যাটাস</a><a href="verification.html">ভেরিফিকেশন</a></nav></div></header><main><section><div class="wrap workflow"><div class="cardx"><h1>সদস্য এলাকা</h1><p class="muted">Application Number ও নিবন্ধিত মোবাইল নম্বর দিয়ে নিজের approved membership profile এবং Digital ID Card দেখুন।</p><form id="f"><label>Application Number *</label><input id="a" required autocomplete="off"><label>নিবন্ধিত মোবাইল নম্বর *</label><input id="m" required inputmode="numeric" maxlength="10" placeholder="১০ সংখ্যার মোবাইল নম্বর"><button id="b">প্রোফাইল দেখুন</button></form><div id="msg" hidden></div><div id="p" class="profile" hidden></div></div></div></section></main><script src="assets/member-workflow.js"></script><script src="assets/site.js" defer></script><script>const f=document.getElementById("f"),msg=document.getElementById("msg"),p=document.getElementById("p"),b=document.getElementById("b");f.addEventListener("submit",async e=>{e.preventDefault();msg.hidden=true;p.hidden=true;const a=document.getElementById("a").value.trim(),m=document.getElementById("m").value;if(!a||!WBUB_WORKFLOW.validMobile(m)){WBUB_WORKFLOW.showMessage(msg,"error","সঠিক তথ্য দিন।");return}WBUB_WORKFLOW.setBusy(b,true,"তথ্য যাচাই হচ্ছে…");try{const d=await WBUB_WORKFLOW.lookupMember(a,m);if(d.found!==true||!d.record)throw new Error("NOT_FOUND");const r=d.record;const memberId=r.member_id||r.wazeen_id||"";if(String(r.status||"").toLowerCase()!=="approved"||!memberId)throw new Error("NOT_APPROVED");const mid=encodeURIComponent(memberId);p.innerHTML="<h2 class='success-head'>✓ সদস্যপদ অনুমোদিত</h2><p><strong>নাম:</strong> "+WBUB_WORKFLOW.escapeHtml(r.name||"Member")+"</p><p><strong>Member ID:</strong> "+WBUB_WORKFLOW.escapeHtml(memberId)+"</p><p><strong>Designation:</strong> "+WBUB_WORKFLOW.escapeHtml(r.designation||"Member")+"</p><p><strong>District:</strong> "+WBUB_WORKFLOW.escapeHtml(r.district||"-")+"</p><div class='actions'><a class='secondary' href='wazeen-id.html?id="+mid+"'>🪪 ID Card খুলুন ও Download করুন</a><a href='verification.html?id="+mid+"'>✓ QR Verification</a></div><p class='note'>ID Card পেজে approved photo, নাম, Member ID, জেলা, validity ও verification QR স্বয়ংক্রিয়ভাবে বসবে। সেখান থেকে PNG Download অথবা Print / Save PDF করা যাবে।</p>";p.hidden=false}catch(err){WBUB_WORKFLOW.showMessage(msg,"error",err.message==="NOT_FOUND"?"রেকর্ড পাওয়া যায়নি।":err.message==="NOT_APPROVED"?"আপনার আবেদন এখনও অনুমোদিত হয়নি।":"সদস্য সার্ভিসে সংযোগ করা যাচ্ছে না। পরে আবার চেষ্টা করুন।")}finally{WBUB_WORKFLOW.setBusy(b,false)}});</script></body></html>
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Member Area | WAYEJIN E FURFURA SHARIF</title>
+<link rel="stylesheet" href="assets/site.css">
+<style>
+:root{--green:#07513f;--deep:#033a2d;--gold:#d7b45b;--soft:#f4f8f6;--line:#dce6e0}
+.member-wrap{max-width:900px;margin:auto}
+.cardx{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow)}
+.hero{text-align:center;margin-bottom:20px}.hero h1{margin:0;color:var(--deep);font-size:34px}.hero p{margin:8px 0 0;color:#66756e}
+.login-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:block;font-weight:800;margin:6px 0 7px}
+input{width:100%;padding:13px;border:1px solid #cbd9d2;border-radius:9px;font-size:16px;box-sizing:border-box}
+button{width:100%;margin-top:16px;padding:14px;border:0;border-radius:9px;background:var(--gold);color:#17372d;font-weight:900;font-size:16px;cursor:pointer}
+.workflow-message{margin-top:16px;padding:13px;border-radius:9px}.workflow-message.error{background:#fff0f0;color:#8a2222}
+.dashboard{margin-top:20px}.member-head{background:linear-gradient(135deg,var(--deep),var(--green));color:#fff;border-radius:16px;padding:20px;display:flex;gap:16px;align-items:center}
+.avatar{width:76px;height:76px;border-radius:14px;object-fit:cover;background:#fff;border:2px solid var(--gold);display:none}.member-head h2{margin:0;font-size:24px}.verified{display:inline-block;margin-top:6px;background:#e4cc79;color:#294437;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:900}
+.member-id{margin-left:auto;text-align:right}.member-id small{display:block;color:#dbe9e3;font-size:11px}.member-id strong{font-size:18px;color:#f2dc91}
+.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}.info{background:var(--soft);border-radius:12px;padding:13px}.info small{display:block;color:#687770;margin-bottom:4px}.info strong{display:block;color:#17372d}
+.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}.actions a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:46px;border-radius:9px;background:var(--gold);color:#17372d;font-weight:900;text-decoration:none;padding:7px}.actions a.dark{background:var(--green);color:#fff}
+.note{margin-top:14px;font-size:13px;color:#52645c;background:#fffdf4;border:1px solid #eadcae;padding:12px;border-radius:10px}
+.security{margin-top:16px;padding:12px;border-radius:10px;background:#eef7f2;color:#285a48;font-size:13px}
+@media(max-width:650px){.cardx{padding:18px}.hero h1{font-size:28px}.login-grid{grid-template-columns:1fr}.member-head{align-items:flex-start}.avatar{width:62px;height:62px}.member-head h2{font-size:19px}.member-id{margin-left:0;text-align:left}.member-head{flex-wrap:wrap}.info-grid{grid-template-columns:1fr}.actions{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="brand" href="index.html">ওয়েজিন ফুরফুরা শরীফ<small>WAYEJIN E FURFURA SHARIF</small></a>
+<nav><a href="registration.html">নিবন্ধন</a><a href="status.html">স্ট্যাটাস</a><a href="verification.html">ভেরিফিকেশন</a></nav>
+</div></header>
+
+<main><section><div class="wrap member-wrap">
+<div class="hero"><h1>Member Area</h1><p>WAYEJIN E FURFURA SHARIF • WEST BENGAL ULAMA BOARD</p></div>
+
+<div class="cardx">
+<h2 style="margin-top:0">নিজের সদস্য তথ্য দেখুন</h2>
+<p class="muted">আপনার Application Number এবং নিবন্ধিত মোবাইল নম্বর দিয়ে শুধু নিজের approved membership profile খুলুন।</p>
+
+<form id="f">
+<div class="login-grid">
+<div><label>Application Number *</label><input id="a" required autocomplete="off" placeholder="WEFS/APP/2026/00000006"></div>
+<div><label>নিবন্ধিত মোবাইল নম্বর *</label><input id="m" required inputmode="numeric" maxlength="10" placeholder="১০ সংখ্যার মোবাইল নম্বর"></div>
+</div>
+<button id="b" type="submit">🔐 আমার Member Area খুলুন</button>
+</form>
+
+<div id="msg" hidden></div>
+
+<div id="dashboard" class="dashboard" hidden>
+<div class="member-head">
+<img id="avatar" class="avatar" alt="Member photo">
+<div>
+<h2 id="name">Approved Member</h2>
+<span class="verified">✓ APPROVED MEMBER</span>
+</div>
+<div class="member-id"><small>OFFICIAL MEMBER ID</small><strong id="mid"></strong></div>
+</div>
+
+<div class="info-grid">
+<div class="info"><small>Designation / Category</small><strong id="des">-</strong></div>
+<div class="info"><small>District</small><strong id="district">-</strong></div>
+<div class="info"><small>Block / Area</small><strong id="block">-</strong></div>
+<div class="info"><small>Validity</small><strong id="valid">-</strong></div>
+</div>
+
+<div class="actions">
+<a class="dark" id="idCard" href="#">🪪 Digital ID Card</a>
+<a id="verify" href="#">✓ QR Verification</a>
+<a id="status" href="#">📋 Application Status</a>
+</div>
+
+<div class="note">আপনার Digital ID Card-এ Member ID, নাম, Designation, জেলা, Validity এবং QR Verification স্বয়ংক্রিয়ভাবে থাকবে।</div>
+<div class="security">🔒 এই Member Area-তে প্রবেশের জন্য Application Number ও নিবন্ধিত মোবাইল—দুটিই মিলতে হবে।</div>
+</div>
+</div>
+</div></section></main>
+
+<script src="assets/member-workflow.js"></script>
+<script src="assets/site.js" defer></script>
+<script>
+const f=document.getElementById("f"),msg=document.getElementById("msg"),dash=document.getElementById("dashboard"),b=document.getElementById("b");
+function showError(t){WBUB_WORKFLOW.showMessage(msg,"error",t)}
+f.addEventListener("submit",async e=>{
+ e.preventDefault();msg.hidden=true;dash.hidden=true;
+ const a=document.getElementById("a").value.trim(),m=document.getElementById("m").value.trim();
+ if(!a||!WBUB_WORKFLOW.validMobile(m)){showError("সঠিক Application Number এবং ১০ সংখ্যার মোবাইল নম্বর দিন।");return}
+ WBUB_WORKFLOW.setBusy(b,true,"সদস্য তথ্য যাচাই হচ্ছে…");
+ try{
+  const d=await WBUB_WORKFLOW.lookupMember(a,m);
+  if(d.found!==true||!d.record)throw new Error("NOT_FOUND");
+  const r=d.record,status=String(r.status||"").trim().toLowerCase(),memberId=r.member_id||r.wazeen_id||"";
+  if(status!=="approved"||!memberId)throw new Error("NOT_APPROVED");
+  const mid=encodeURIComponent(memberId);
+  document.getElementById("name").textContent=r.name||"Approved Member";
+  document.getElementById("mid").textContent=memberId;
+  document.getElementById("des").textContent=r.designation||"Member";
+  document.getElementById("district").textContent=r.district||"-";
+  document.getElementById("block").textContent=r.block||"-";
+  document.getElementById("valid").textContent=r.valid_till||"-";
+  document.getElementById("idCard").href="wazeen-id.html?id="+mid;
+  document.getElementById("verify").href="verification.html?id="+mid;
+  document.getElementById("status").href="status.html";
+  const avatar=document.getElementById("avatar"),photo=r.photo_url||r.photo||"";
+  if(photo){avatar.src=photo;avatar.style.display="block";avatar.onerror=()=>avatar.style.display="none"}else avatar.style.display="none";
+  dash.hidden=false;
+ }catch(err){
+  showError(err.message==="NOT_FOUND"?"এই Application Number ও মোবাইলের কোনো সদস্য রেকর্ড পাওয়া যায়নি।":err.message==="NOT_APPROVED"?"আপনার আবেদন এখনও অনুমোদিত হয়নি। Approved হওয়ার পর Member Area চালু হবে.":"Member Service-এ সংযোগ করা যাচ্ছে না। পরে আবার চেষ্টা করুন।");
+ }finally{WBUB_WORKFLOW.setBusy(b,false)}
+});
+</script>
+</body>
+</html>
