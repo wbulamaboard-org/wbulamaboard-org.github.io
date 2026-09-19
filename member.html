@@ -88,7 +88,11 @@ f.addEventListener("submit",async e=>{
  if(!a||!WBUB_WORKFLOW.validMobile(m)){showError("সঠিক Application Number এবং ১০ সংখ্যার মোবাইল নম্বর দিন।");return}
  WBUB_WORKFLOW.setBusy(b,true,"সদস্য তথ্য যাচাই হচ্ছে…");
  try{
-  const d=await WBUB_WORKFLOW.lookupMember(a,m);
+  let d=null;
+  try{d=await WBUB_WORKFLOW.lookupMember(a,m)}catch(_){}
+  if(!d||d.found!==true||!d.record){
+   d=await WBUB_WORKFLOW.lookupApplication(a,m);
+  }
   if(d.found!==true||!d.record)throw new Error("NOT_FOUND");
   const r=d.record,status=String(r.status||"").trim().toLowerCase(),memberId=r.member_id||r.wazeen_id||"";
   if(status!=="approved"||!memberId)throw new Error("NOT_APPROVED");
