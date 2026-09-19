@@ -167,7 +167,27 @@ async function load(){
   document.getElementById("district").textContent=r.district||"-";
   document.getElementById("valid").textContent=r.valid_till||"-";
   const photo=document.getElementById("photo");
-  const photoUrl=r.photo_url||r.photo||"";if(photoUrl){photo.src=photoUrl;photo.onerror=()=>photo.classList.add("placeholder")}else photo.classList.add("placeholder");
+  const photoUrl=String(r.photo_url||r.photo||"").trim();
+  if(photoUrl){
+   const driveIdMatch=photoUrl.match(/(?:id=|\\/d\\/)([A-Za-z0-9_-]{20,})/);
+   const driveId=driveIdMatch?driveIdMatch[1]:"";
+   const photoSources=[];
+   if(driveId){
+    photoSources.push("https://drive.google.com/thumbnail?id="+encodeURIComponent(driveId)+"&sz=w1000");
+    photoSources.push("https://drive.google.com/uc?export=view&id="+encodeURIComponent(driveId));
+   }
+   photoSources.push(photoUrl);
+   let photoIndex=0;
+   const loadNextPhoto=()=>{
+    if(photoIndex>=photoSources.length){photo.classList.add("placeholder");return}
+    const next=photoSources[photoIndex++];
+    if(photo.src===next){loadNextPhoto();return}
+    photo.classList.remove("placeholder");
+    photo.src=next;
+   };
+   photo.onerror=loadNextPhoto;
+   loadNextPhoto();
+  }else photo.classList.add("placeholder");
   const verify=origin+location.pathname.replace("wazeen-id.html","verification.html")+"?id="+encodeURIComponent(memberId);
   document.getElementById("verify").href=verify;
   const qr="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data="+encodeURIComponent(verify);
