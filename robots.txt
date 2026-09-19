@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wbulamaboard-org.github.io/sitemap.xml
