@@ -190,7 +190,7 @@ async function load(){
   }else photo.classList.add("placeholder");
   const verify=origin+location.pathname.replace("wazeen-id.html","verification.html")+"?id="+encodeURIComponent(memberId);
   document.getElementById("verify").href=verify;
-  const qr="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data="+encodeURIComponent(verify);
+  const qr="https://quickchart.io/qr?size=240&margin=1&text="+encodeURIComponent(verify);
   document.getElementById("qr").src=qr;
   document.getElementById("backqr").src=qr;
   cards.hidden=false;actions.hidden=false;
