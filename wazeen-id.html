@@ -145,8 +145,8 @@
 </div>
 </main>
 
-<script src="assets/member-workflow.js"></script>
-<script src="assets/site.js" defer></script>
+<script src="assets/member-workflow.js?v=20260920-2"></script>
+<script src="assets/site.js?v=20260920-2" defer></script>
 <script>
 const id=new URLSearchParams(location.search).get("id");
 const msg=document.getElementById("message"),cards=document.getElementById("cards"),actions=document.getElementById("actions");
@@ -173,6 +173,7 @@ async function load(){
    const driveId=driveIdMatch?driveIdMatch[1]:"";
    const photoSources=[];
    if(driveId){
+    photoSources.push("https://lh3.googleusercontent.com/d/"+encodeURIComponent(driveId)+"=w1000");
     photoSources.push("https://drive.google.com/thumbnail?id="+encodeURIComponent(driveId)+"&sz=w1000");
     photoSources.push("https://drive.google.com/uc?export=view&id="+encodeURIComponent(driveId));
    }
@@ -190,7 +191,7 @@ async function load(){
   }else photo.classList.add("placeholder");
   const verify=origin+location.pathname.replace("wazeen-id.html","verification.html")+"?id="+encodeURIComponent(memberId);
   document.getElementById("verify").href=verify;
-  const qr="https://quickchart.io/qr?size=240&margin=1&text="+encodeURIComponent(verify);
+  const qr="https://quickchart.io/qr?size=240&margin=1&text="+encodeURIComponent(verify)+"&v=20260920";
   document.getElementById("qr").src=qr;
   document.getElementById("backqr").src=qr;
   cards.hidden=false;actions.hidden=false;
