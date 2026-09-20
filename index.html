@@ -30,7 +30,7 @@
 .cta{padding:65px 0;background:linear-gradient(135deg,var(--forest-900),var(--forest-950));color:#fff;text-align:center}
 .cta h2{color:#fff;margin-top:0}
 .cta p{color:#dcebe5;max-width:680px;margin:0 auto 22px}
-@media(max-width:700px){.notice{margin-top:-20px}.notice-card{display:block}.notice-card .btn{margin-top:12px}.about-box{grid-template-columns:1fr}.about-main,.quick-box{padding:22px}}
+@media(max-width:700px){.notice{margin-top:-20px}.notice-card{display:block}.notice-card .btn{margin-top:12px}.about-box{grid-template-columns:1fr}.about-main,.quick-box{padding:22px}}.member-hub{margin-top:8px}.member-hub-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:18px}.member-hub-head h2{margin:0}.member-hub-head p{margin:4px 0 0}.member-services{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.member-service{display:flex;align-items:center;gap:12px;padding:17px 15px;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:var(--shadow-soft);position:relative}.member-service:after{content:"›";margin-left:auto;font-size:25px;color:var(--gold-500);font-weight:900}.member-service .service-icon{font-size:25px;margin:0}.member-service h3{margin:0;color:var(--forest-800);font-size:15px}.member-service p{margin:2px 0 0;font-size:11px;color:var(--muted)}.ornament-line{display:flex;align-items:center;gap:10px;margin:18px 0 24px;color:var(--gold-500)}.ornament-line:before,.ornament-line:after{content:"";height:1px;background:linear-gradient(90deg,transparent,var(--gold-500));flex:1}.ornament-line:after{background:linear-gradient(90deg,var(--gold-500),transparent)}.ornament-line span{width:20px;height:20px;border:1px solid var(--gold-500);transform:rotate(45deg);display:block;position:relative}.ornament-line span:after{content:"";position:absolute;inset:4px;border:1px solid var(--gold-500)}@media(max-width:900px){.member-services{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.member-hub-head{display:block}.member-services{grid-template-columns:1fr}.member-service{padding:15px}}
 </style>
 </head>
 <body>
@@ -59,7 +59,6 @@
 <section class="hero">
 <div class="wrap home-intro">
 <div class="gold">OFFICIAL DIGITAL PLATFORM</div>
-<div class="arabic">وَيْجِنْ إِ فُرْفُرَة شَرِيفْ</div>
 <h1>WAYEJIN E FURFURA SHARIF</h1>
 <div class="subtitle">WEST BENGAL ULAMA BOARD</div>
 <p>উলামায়ে কেরামের ঐক্য, শিক্ষা ও সমাজ সংস্কারের লক্ষ্যে একটি আধুনিক ডিজিটাল প্ল্যাটফর্ম। সদস্য নিবন্ধন থেকে শুরু করে আবেদন স্ট্যাটাস, অনুমোদিত Member ID এবং QR Verification—সবকিছু এক জায়গায়।</p>
@@ -79,14 +78,18 @@
 </div>
 </section>
 
-<section>
+<section class="member-hub">
 <div class="wrap">
-<div class="head"><h2>সদস্য সেবা</h2></div>
-<div class="grid">
-<a class="card" href="registration.html"><div class="service-icon">📝</div><h3>অনলাইন নিবন্ধন</h3><p class="muted">মোবাইল থেকেই সদস্যপদের আবেদন পূরণ, যাচাই ও জমা দিন।</p></a>
-<a class="card" href="status.html"><div class="service-icon">🔎</div><h3>আবেদন স্ট্যাটাস</h3><p class="muted">Application Number ও নিবন্ধিত মোবাইল দিয়ে আপনার আবেদনের অবস্থা দেখুন।</p></a>
-<a class="card" href="member.html"><div class="service-icon">🪪</div><h3>সদস্য এলাকা</h3><p class="muted">অনুমোদনের পরে আপনার Member ID ও সদস্য তথ্য দেখুন।</p></a>
-<a class="card" href="verification.html"><div class="service-icon">📱</div><h3>QR Verification</h3><p class="muted">Member ID যাচাই করে অনুমোদিত সদস্যের তথ্য নিশ্চিত করুন।</p></a>
+<div class="member-hub-head">
+<div><div class="head" style="margin-bottom:0!important"><h2>সদস্য সেবা</h2></div><p class="muted">সদস্য হওয়ার পর প্রয়োজনীয় সব সেবা এক জায়গায়</p></div>
+<a class="btn" href="registration.html">সদস্য নিবন্ধন →</a>
+</div>
+<div class="ornament-line" aria-hidden="true"><span></span></div>
+<div class="member-services">
+<a class="member-service" href="registration.html"><div class="service-icon">📝</div><div><h3>অনলাইন নিবন্ধন</h3><p>নতুন সদস্য আবেদন</p></div></a>
+<a class="member-service" href="status.html"><div class="service-icon">🔎</div><div><h3>আবেদন স্ট্যাটাস</h3><p>আবেদনের অবস্থা দেখুন</p></div></a>
+<a class="member-service" href="member.html"><div class="service-icon">🪪</div><div><h3>সদস্য এলাকা</h3><p>Member ID ও তথ্য</p></div></a>
+<a class="member-service" href="verification.html"><div class="service-icon">📱</div><div><h3>ID যাচাই / QR</h3><p>সদস্য ভেরিফিকেশন</p></div></a>
 </div>
 </div>
 </section>
