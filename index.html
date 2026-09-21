@@ -12,170 +12,34 @@
 <link rel="stylesheet" href="assets/site.css">
 <style>
 :root{--deep:#052d24;--deep2:#073c30;--green:#0a5b47;--gold:#d9b75d;--gold2:#f2d98b;--cream:#fffaf0;--ink:#17352d;--line:#e7e1d0}
-*{box-sizing:border-box}
-body{background:#fafbf9;color:var(--ink)}
+*{box-sizing:border-box}body{background:#fafbf9;color:var(--ink)}
 .top{background:#031f19;color:#e9dba8;text-align:center;font-size:11px;padding:8px 12px;letter-spacing:.4px}
 header{background:rgba(5,45,36,.98);border-bottom:1px solid rgba(242,217,139,.22);position:relative;z-index:10}
-.nav{min-height:76px}.brand{color:#fff!important;font-weight:900;letter-spacing:.6px}.brand small{color:var(--gold2)!important}
-nav a{color:#eaf3ef!important}
-.hero{position:relative;overflow:hidden;background:
-radial-gradient(circle at 88% 20%,rgba(217,183,93,.16),transparent 24%),
-radial-gradient(circle at 8% 90%,rgba(24,122,94,.22),transparent 28%),
-linear-gradient(135deg,#062e25 0%,#073f31 52%,#05271f 100%);color:#fff;padding:76px 0 92px}
+.nav{min-height:76px}.brand{color:#fff!important;font-weight:900;letter-spacing:.6px}.brand small{color:var(--gold2)!important}nav a{color:#eaf3ef!important}
+.hero{position:relative;overflow:hidden;background:radial-gradient(circle at 88% 20%,rgba(217,183,93,.16),transparent 24%),radial-gradient(circle at 8% 90%,rgba(24,122,94,.22),transparent 28%),linear-gradient(135deg,#062e25 0%,#073f31 52%,#05271f 100%);color:#fff;padding:76px 0 92px}
 .hero:before{content:"";position:absolute;inset:0;opacity:.13;background-image:linear-gradient(30deg,rgba(255,255,255,.7) 1px,transparent 1px),linear-gradient(150deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent)}
 .hero:after{content:"";position:absolute;width:420px;height:420px;border:1px solid rgba(242,217,139,.2);border-radius:50%;right:-170px;top:-180px;box-shadow:0 0 0 35px rgba(242,217,139,.035),0 0 0 70px rgba(242,217,139,.025)}
-.hero .wrap{position:relative;z-index:2}
-.hero-kicker{display:inline-flex;align-items:center;gap:10px;color:var(--gold2);font-size:12px;font-weight:900;letter-spacing:2.2px;text-transform:uppercase}
-.hero-kicker:before{content:"";width:34px;height:1px;background:var(--gold)}
-.hero h1{font-size:clamp(34px,7vw,72px);line-height:1.02;margin:18px 0 10px;letter-spacing:-2px;font-weight:950;max-width:900px}
-.hero .arabic{font-family:serif;color:var(--gold2);font-size:clamp(18px,3vw,28px);margin-bottom:8px}
-.hero .subtitle{font-size:14px;letter-spacing:3px;color:#d6e6e0;font-weight:800}
-.hero p{max-width:720px;color:#dbeae5;line-height:1.9;font-size:15px;margin:20px 0 0}
-.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
-.hero .btn{border-radius:10px;padding:13px 20px}
-.hero .btn:first-child{background:linear-gradient(135deg,#f0cf73,#c99f3e);box-shadow:0 10px 30px rgba(0,0,0,.2)}
-.hero .btn.secondary{background:rgba(255,255,255,.08);border:1px solid rgba(242,217,139,.5);color:#fff}
-.hero-badge{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}
-.hero-badge span{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.055);padding:8px 12px;border-radius:99px;font-size:11px;color:#e9f2ef}
-.section{padding:64px 0}
-.section-head{text-align:center;max-width:720px;margin:0 auto 30px}
-.section-head .eyebrow{color:#a88438;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase}
-.section-head h2{font-size:clamp(26px,5vw,40px);margin:8px 0;color:var(--deep)}
-.section-head p{color:#718079;line-height:1.8;margin:0}
-.service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-.service-card{position:relative;padding:24px 20px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#fff,#fffdf8);box-shadow:0 12px 32px rgba(27,58,47,.07);text-decoration:none!important;overflow:hidden;transition:.22s}
-.service-card:before{content:"";position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(var(--gold),transparent)}
-.service-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(27,58,47,.13);border-color:#d8c48c}
-.service-icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:#edf6f2;color:var(--green);font-size:22px;margin-bottom:16px}
-.service-card h3{font-size:16px;margin:0 0 7px;color:var(--deep)}
-.service-card p{font-size:12px;line-height:1.6;color:#7a8782;margin:0}
-.service-card .arrow{position:absolute;right:18px;top:20px;color:#b28a38;font-size:24px}
-.membership{background:linear-gradient(135deg,#f7f1df,#fffdf7);border-top:1px solid #eee5cd;border-bottom:1px solid #eee5cd}
-.membership-box{display:grid;grid-template-columns:1.35fr .65fr;gap:24px;align-items:stretch}
-.membership-main,.fee-card{border:1px solid #e7dcc1;border-radius:22px;background:#fff;box-shadow:0 15px 40px rgba(80,63,24,.08)}
-.membership-main{padding:34px}
-.membership-main h2{margin:0 0 10px;color:var(--deep);font-size:30px}
-.membership-main p{color:#68766f;line-height:1.8}
-.points{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}
-.point{padding:14px;border-radius:14px;background:#f7faf8;border:1px solid #e3eee9;font-size:12px;color:#486057}
-.point b{display:block;color:var(--green);font-size:18px;margin-bottom:3px}
-.fee-card{padding:28px;background:linear-gradient(145deg,#063a2d,#0a5b47);color:#fff;display:flex;flex-direction:column;justify-content:center;text-align:center}
-.fee-card small{color:#bcd6cc}.fee-card .price{font-size:46px;font-weight:950;color:var(--gold2);margin:5px 0}.fee-card .price span{font-size:15px;color:#dce9e4}.fee-card .btn{background:var(--gold);color:#18382e;margin-top:14px}
-.leadership-home{background:#fff}
-.leadership-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
-.leadership-card{padding:16px 10px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 10px 26px rgba(27,58,47,.06);text-align:center;transition:.2s}
-.leadership-card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(27,58,47,.1)}
-.leadership-card img{width:108px;height:108px;object-fit:cover;border-radius:50%;border:3px solid var(--gold);padding:2px;background:#fff;display:block;margin:0 auto 11px}
-.leadership-card h3{margin:0;color:var(--deep);font-size:13px;line-height:1.35}
-.leadership-card p{margin:5px 0 0;color:#8a918d;font-size:9px;line-height:1.4}
-.about-box{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
-.about-main,.quick-box{padding:30px;border-radius:20px;border:1px solid var(--line);box-shadow:0 12px 30px rgba(27,58,47,.06)}
-.about-main{background:#fff}
-.about-main h3{color:var(--green);font-size:24px}
-.about-main p{line-height:1.85;color:#6e7b76}
-.quick-box{background:linear-gradient(145deg,#062f25,#0a5b47);color:#fff}
-.quick-box h3{color:var(--gold2);margin-top:0}
-.quick-list{list-style:none;padding:0;margin:0}.quick-list li{border-bottom:1px solid rgba(255,255,255,.12);padding:12px 0}.quick-list li:last-child{border:0}.quick-list a{color:#fff!important;text-decoration:none}
-.cta{position:relative;overflow:hidden;padding:72px 0;background:linear-gradient(135deg,#062e25,#031f19);color:#fff;text-align:center}
-.cta:before{content:"✦";position:absolute;font-size:260px;color:rgba(242,217,139,.035);left:5%;top:-80px}
-.cta h2{color:#fff;font-size:38px;margin:0 0 8px}.cta p{color:#cbdcd5;max-width:650px;margin:0 auto 22px;line-height:1.8}
-.cta .btn{background:linear-gradient(135deg,#f0cf73,#c99f3e);color:#17372d}
-footer{background:#021c17;color:#b8ccc4;border-top:1px solid rgba(242,217,139,.18)}
-footer b{color:#fff}
-@media(max-width:900px){.service-grid{grid-template-columns:repeat(2,1fr)}.leadership-grid{grid-template-columns:repeat(3,1fr)}.membership-box,.about-box{grid-template-columns:1fr}.points{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:620px){.hero{padding:52px 0 68px}.hero h1{font-size:34px;letter-spacing:-1px}.hero p{font-size:13px}.hero-actions{display:grid;grid-template-columns:1fr 1fr}.hero-actions .btn{text-align:center}.service-grid{grid-template-columns:repeat(2,1fr);gap:9px}.service-card{padding:18px 14px}.service-icon{width:40px;height:40px;font-size:19px}.service-card h3{font-size:13px}.service-card p{font-size:10px}.membership-main{padding:22px}.membership-main h2{font-size:25px}.points{grid-template-columns:1fr;gap:8px}.fee-card{padding:24px}.leadership-grid{grid-template-columns:repeat(2,1fr);gap:9px}.leadership-card{padding:12px 7px}.leadership-card img{width:82px;height:82px}.leadership-card h3{font-size:10px}.leadership-card p{font-size:7px}.about-main,.quick-box{padding:22px}.cta h2{font-size:30px}}
+.hero .wrap{position:relative;z-index:2}.hero-kicker{display:inline-flex;align-items:center;gap:10px;color:var(--gold2);font-size:12px;font-weight:900;letter-spacing:2.2px;text-transform:uppercase}.hero-kicker:before{content:"";width:34px;height:1px;background:var(--gold)}
+.hero h1{font-size:clamp(34px,7vw,72px);line-height:1.02;margin:18px 0 10px;letter-spacing:-2px;font-weight:950;max-width:900px}.hero .arabic{font-family:serif;color:var(--gold2);font-size:clamp(18px,3vw,28px);margin-bottom:8px}.hero .subtitle{font-size:14px;letter-spacing:3px;color:#d6e6e0;font-weight:800}.hero p{max-width:720px;color:#dbeae5;line-height:1.9;font-size:15px;margin:20px 0 0}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}.hero .btn{border-radius:10px;padding:13px 20px}.hero .btn:first-child{background:linear-gradient(135deg,#f0cf73,#c99f3e);box-shadow:0 10px 30px rgba(0,0,0,.2)}.hero .btn.secondary{background:rgba(255,255,255,.08);border:1px solid rgba(242,217,139,.5);color:#fff}.hero-badge{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}.hero-badge span{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.055);padding:8px 12px;border-radius:99px;font-size:11px;color:#e9f2ef}
+.section{padding:64px 0}.membership{background:linear-gradient(135deg,#f7f1df,#fffdf7);border-top:1px solid #eee5cd;border-bottom:1px solid #eee5cd}.membership-box{display:grid;grid-template-columns:1.35fr .65fr;gap:24px;align-items:stretch}.membership-main,.fee-card{border:1px solid #e7dcc1;border-radius:22px;background:#fff;box-shadow:0 15px 40px rgba(80,63,24,.08)}.membership-main{padding:34px}.membership-main h2{margin:0 0 10px;color:var(--deep);font-size:30px}.membership-main p{color:#68766f;line-height:1.8}.points{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}.point{padding:14px;border-radius:14px;background:#f7faf8;border:1px solid #e3eee9;font-size:12px;color:#486057}.point b{display:block;color:var(--green);font-size:18px;margin-bottom:3px}.fee-card{padding:28px;background:linear-gradient(145deg,#063a2d,#0a5b47);color:#fff;display:flex;flex-direction:column;justify-content:center;text-align:center}.fee-card small{color:#bcd6cc}.fee-card .price{font-size:46px;font-weight:950;color:var(--gold2);margin:5px 0}.fee-card .price span{font-size:15px;color:#dce9e4}.fee-card .btn{background:var(--gold);color:#18382e;margin-top:14px}
+.section-head{text-align:center;max-width:720px;margin:0 auto 30px}.section-head .eyebrow{color:#a88438;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase}.section-head h2{font-size:clamp(26px,5vw,40px);margin:8px 0;color:var(--deep)}.section-head p{color:#718079;line-height:1.8;margin:0}
+.leadership-home{background:#fff}.leadership-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}.leadership-card{padding:16px 10px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 10px 26px rgba(27,58,47,.06);text-align:center;transition:.2s}.leadership-card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(27,58,47,.1)}.leadership-card img{width:108px;height:108px;object-fit:cover;border-radius:50%;border:3px solid var(--gold);padding:2px;background:#fff;display:block;margin:0 auto 11px}.leadership-card h3{margin:0;color:var(--deep);font-size:13px;line-height:1.35}.leadership-card p{margin:5px 0 0;color:#8a918d;font-size:9px;line-height:1.4}
+.about-box{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}.about-main,.quick-box{padding:30px;border-radius:20px;border:1px solid var(--line);box-shadow:0 12px 30px rgba(27,58,47,.06)}.about-main{background:#fff}.about-main h3{color:var(--green);font-size:24px}.about-main p{line-height:1.85;color:#6e7b76}.quick-box{background:linear-gradient(145deg,#062f25,#0a5b47);color:#fff}.quick-box h3{color:var(--gold2);margin-top:0}.quick-list{list-style:none;padding:0;margin:0}.quick-list li{border-bottom:1px solid rgba(255,255,255,.12);padding:12px 0}.quick-list li:last-child{border:0}.quick-list a{color:#fff!important;text-decoration:none}
+.cta{position:relative;overflow:hidden;padding:72px 0;background:linear-gradient(135deg,#062e25,#031f19);color:#fff;text-align:center}.cta:before{content:"✦";position:absolute;font-size:260px;color:rgba(242,217,139,.035);left:5%;top:-80px}.cta h2{color:#fff;font-size:38px;margin:0 0 8px}.cta p{color:#cbdcd5;max-width:650px;margin:0 auto 22px;line-height:1.8}.cta .btn{background:linear-gradient(135deg,#f0cf73,#c99f3e);color:#17372d}
+footer{background:#021c17;color:#b8ccc4;border-top:1px solid rgba(242,217,139,.18)}footer b{color:#fff}
+@media(max-width:900px){.leadership-grid{grid-template-columns:repeat(3,1fr)}.membership-box,.about-box{grid-template-columns:1fr}.points{grid-template-columns:repeat(3,1fr)}}@media(max-width:620px){.hero{padding:52px 0 68px}.hero h1{font-size:34px;letter-spacing:-1px}.hero p{font-size:13px}.hero-actions{display:grid;grid-template-columns:1fr 1fr}.hero-actions .btn{text-align:center}.membership-main{padding:22px}.membership-main h2{font-size:25px}.points{grid-template-columns:1fr;gap:8px}.fee-card{padding:24px}.leadership-grid{grid-template-columns:repeat(2,1fr);gap:9px}.leadership-card{padding:12px 7px}.leadership-card img{width:82px;height:82px}.leadership-card h3{font-size:10px}.leadership-card p{font-size:7px}.about-main,.quick-box{padding:22px}.cta h2{font-size:30px}}
 </style>
 </head>
 <body>
 <div class="top">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ &nbsp; • &nbsp; ঐক্য • শিক্ষা • সমাজ সংস্কার</div>
-<header>
-<div class="wrap nav">
-<a class="brand" href="index.html">وَيْجِنْ إِ فُرْفُرَة شَرِيفْ <small>WAYEJIN E FURFURA SHARIF</small></a>
-<nav>
-<a href="index.html">হোম</a><a href="about.html">পরিচিতি</a><a href="organization.html">সংগঠন</a><a href="leadership.html">নেতৃত্ব</a><a href="activities.html">কার্যক্রম</a><a href="wazeens.html">ওয়েজিন</a><a href="wazeen-id.html">ID Card</a><a href="verification.html">ভেরিফিকেশন</a><a href="registration.html">নিবন্ধন</a><a href="status.html">স্ট্যাটাস</a>
-</nav>
-</div>
-</header>
-
-<section class="hero">
-<div class="wrap">
-<div class="hero-kicker">OFFICIAL DIGITAL PLATFORM</div>
-<div class="arabic">وَايِجِنْ إِ فُرْفُرَة شَرِيفْ</div>
-<h1>WAYEJIN E<br>FURFURA SHARIF</h1>
-<div class="subtitle">WEST BENGAL ULAMA BOARD</div>
-<p>উলামায়ে কেরামের ঐক্য, শিক্ষা ও সমাজ সংস্কারের লক্ষ্যে একটি আধুনিক ডিজিটাল প্ল্যাটফর্ম। সদস্য নিবন্ধন, আবেদন স্ট্যাটাস, অনুমোদিত Member ID এবং QR Verification—সবকিছু এখন এক জায়গায়।</p>
-<div class="hero-actions">
-<a class="btn" href="registration.html">📝 সদস্য নিবন্ধন</a>
-<a class="btn secondary" href="verification.html">✓ ID যাচাই</a>
-</div>
-<div class="hero-badge"><span>✦ Digital Membership</span><span>✦ Member ID</span><span>✦ QR Verification</span><span>✦ Online Status</span></div>
-</div>
-</section>
-
-<section class="section">
-<div class="wrap">
-<div class="section-head"><div class="eyebrow">Member Services</div><h2>সদস্যদের জন্য ডিজিটাল সেবা</h2><p>নিবন্ধন থেকে যাচাই—প্রয়োজনীয় সেবাগুলো দ্রুত ও সহজভাবে ব্যবহার করুন।</p></div>
-<div class="service-grid">
-<a class="service-card" href="registration.html"><span class="arrow">›</span><div class="service-icon">📝</div><h3>অনলাইন নিবন্ধন</h3><p>নতুন সদস্য হিসেবে আবেদন করুন।</p></a>
-<a class="service-card" href="status.html"><span class="arrow">›</span><div class="service-icon">🔎</div><h3>আবেদন স্ট্যাটাস</h3><p>Application Number দিয়ে অবস্থা দেখুন।</p></a>
-<a class="service-card" href="member.html"><span class="arrow">›</span><div class="service-icon">🪪</div><h3>Member Area</h3><p>Approved সদস্যের তথ্য ও ID।</p></a>
-<a class="service-card" href="verification.html"><span class="arrow">›</span><div class="service-icon">📱</div><h3>QR Verification</h3><p>Member ID ও QR দিয়ে যাচাই।</p></a>
-</div>
-</div>
-</section>
-
-<section class="section membership">
-<div class="wrap">
-<div class="membership-box">
-<div class="membership-main">
-<div class="section-head" style="text-align:left;margin:0"><div class="eyebrow">Membership</div><h2>ওয়েজিন সদস্যপদ</h2></div>
-<p>পশ্চিমবঙ্গের উলামায়ে কেরামের একটি সুসংগঠিত ডিজিটাল নেটওয়ার্ক গড়ে তোলার উদ্দেশ্যে অনলাইন সদস্যপদ চালু রয়েছে। আবেদন সম্পন্ন করার পরে আপনার Application Number সংরক্ষণ করুন।</p>
-<div class="points">
-<div class="point"><b>₹500</b>বার্ষিক সদস্যপদ</div>
-<div class="point"><b>01</b>অনলাইন আবেদন</div>
-<div class="point"><b>QR</b>ডিজিটাল যাচাই</div>
-</div>
-<a class="btn" href="registration.html">সদস্যপদ আবেদন করুন →</a>
-</div>
-<div class="fee-card"><small>ANNUAL MEMBERSHIP</small><div class="price">₹500 <span>/ Year</span></div><small>WAYEJIN E FURFURA SHARIF</small><a class="btn" href="registration.html">এখনই আবেদন</a></div>
-</div>
-</div>
-</section>
-
-<section class="section leadership-home">
-<div class="wrap">
-<div class="section-head"><div class="eyebrow">Leadership</div><h2>নেতৃত্ব</h2><p>West Bengal Ulama Board</p></div>
-<div class="leadership-grid">
-<div class="leadership-card"><img src="assets/FB_IMG_1789891917922.jpg" alt="Pirjada Mehrab Uddin Siddiqui Al Quraish"><h3>Pirjada Mehrab Uddin Siddiqui Al Quraish</h3><p>CONTROLLER • ULAMA BOARD</p></div>
-<div class="leadership-card"><img src="assets/file_00000000df888211b75f11be6eacb18a.png" alt="Md Younus Ali Baidya"><h3>Md Younus Ali Baidya</h3><p>PRESIDENT • ULAMA BOARD</p></div>
-<div class="leadership-card"><img src="assets/FB_IMG_1789891992819.jpg" alt="Maulana Amanullah Aman"><h3>Maulana Amanullah Aman</h3><p>DIRECTOR • ULAMA BOARD</p></div>
-<div class="leadership-card"><img src="assets/Screenshot_2026-09-18-03-21-02-19_320a9a695de7cdce83ed5281148d6f19.jpg" alt="Maulana Jamat Ali"><h3>Maulana Jamat Ali</h3><p>CHIEF DIRECTOR • ADVISOR COMMITTEE</p></div>
-<div class="leadership-card"><img src="assets/Screenshot_2026-09-20-13-45-39-25_a23b203fd3aafc6dcb84e438dda678b6.jpg" alt="Maulana Khairuzzaman"><h3>Maulana Khairuzzaman</h3><p>GENERAL SECRETARY • ULAMA BOARD</p></div>
-</div>
-</div>
-</section>
-
-<section class="section">
-<div class="wrap">
-<div class="section-head"><div class="eyebrow">About The Board</div><h2>ঐক্য • শিক্ষা • সমাজ সংস্কার</h2><p>একটি সংগঠিত, আধুনিক ও সেবামুখী ডিজিটাল প্ল্যাটফর্ম।</p></div>
-<div class="about-box">
-<div class="about-main"><h3>WAYEJIN E FURFURA SHARIF</h3><p>উলামায়ে কেরামের পারস্পরিক যোগাযোগ, শিক্ষা, দাওয়াহ এবং সমাজকল্যাণমূলক কার্যক্রমকে আরও সুসংগঠিত করার লক্ষ্যেই এই ডিজিটাল প্ল্যাটফর্ম।</p><p>এই ওয়েবসাইটের মাধ্যমে সদস্য নিবন্ধন, আবেদন অনুসন্ধান, অনুমোদিত সদস্য যাচাই এবং ডিজিটাল পরিচয় ব্যবস্থাপনা সহজ করা হচ্ছে।</p><a class="btn" href="about.html">পরিচিতি দেখুন →</a></div>
-<div class="quick-box"><h3>দ্রুত সেবা</h3><ul class="quick-list"><li><a href="registration.html">→ নতুন সদস্য নিবন্ধন</a></li><li><a href="status.html">→ আবেদন স্ট্যাটাস</a></li><li><a href="member.html">→ সদস্য এলাকা</a></li><li><a href="verification.html">→ Member ID যাচাই</a></li><li><a href="wazeens.html">→ ওয়েজিন তালিকা</a></li></ul></div>
-</div>
-</div>
-</section>
-
-<section class="cta">
-<div class="wrap"><h2>সদস্য হতে প্রস্তুত?</h2><p>অনলাইনে আবেদন করুন এবং আপনার Application Number সংরক্ষণ করুন।</p><a class="btn" href="registration.html">সদস্য নিবন্ধন শুরু করুন →</a></div>
-</section>
-
-<footer>
-<div class="wrap footer-grid">
-<div><b>WAYEJIN E FURFURA SHARIF</b><p>WEST BENGAL ULAMA BOARD</p><p>ঐক্য • শিক্ষা • সমাজ সংস্কার</p></div>
-<div><b class="gold">দ্রুত লিংক</b><p><a href="registration.html">নিবন্ধন</a></p><p><a href="status.html">স্ট্যাটাস</a></p><p><a href="verification.html">ভেরিফিকেশন</a></p></div>
-<div><b class="gold">প্ল্যাটফর্ম</b><p><a href="member.html">সদস্য এলাকা</a></p><p><a href="wazeens.html">ওয়েজিন</a></p><p><a href="contact.html">যোগাযোগ</a></p><p><a href="privacy.html">Privacy Policy</a></p><p><a href="terms.html">Terms of Use</a></p></div>
-</div>
-</footer>
+<header><div class="wrap nav"><a class="brand" href="index.html">وَيْجِنْ إِ فُرْفُرَة شَرِيفْ <small>WAYEJIN E FURFURA SHARIF</small></a><nav><a href="index.html">হোম</a><a href="about.html">পরিচিতি</a><a href="organization.html">সংগঠন</a><a href="leadership.html">নেতৃত্ব</a><a href="activities.html">কার্যক্রম</a><a href="wazeens.html">ওয়েজিন</a><a href="wazeen-id.html">ID Card</a><a href="verification.html">ভেরিফিকেশন</a><a href="registration.html">নিবন্ধন</a><a href="status.html">স্ট্যাটাস</a></nav></div></header>
+<section class="hero"><div class="wrap"><div class="hero-kicker">OFFICIAL DIGITAL PLATFORM</div><div class="arabic">وَايِجِنْ إِ فُرْفُرَة شَرِيفْ</div><h1>WAYEJIN E<br>FURFURA SHARIF</h1><div class="subtitle">WEST BENGAL ULAMA BOARD</div><p>উলামায়ে কেরামের ঐক্য, শিক্ষা ও সমাজ সংস্কারের লক্ষ্যে একটি আধুনিক ডিজিটাল প্ল্যাটফর্ম। সদস্য নিবন্ধন, আবেদন স্ট্যাটাস, অনুমোদিত Member ID এবং QR Verification—সবকিছু এখন এক জায়গায়।</p><div class="hero-actions"><a class="btn" href="registration.html">📝 সদস্য নিবন্ধন</a><a class="btn secondary" href="verification.html">✓ ID যাচাই</a></div><div class="hero-badge"><span>✦ Digital Membership</span><span>✦ Member ID</span><span>✦ QR Verification</span><span>✦ Online Status</span></div></div></section>
+<section class="section membership"><div class="wrap"><div class="membership-box"><div class="membership-main"><div class="section-head" style="text-align:left;margin:0"><div class="eyebrow">Membership</div><h2>ওয়েজিন সদস্যপদ</h2></div><p>পশ্চিমবঙ্গের উলামায়ে কেরামের একটি সুসংগঠিত ডিজিটাল নেটওয়ার্ক গড়ে তোলার উদ্দেশ্যে অনলাইন সদস্যপদ চালু রয়েছে। আবেদন সম্পন্ন করার পরে আপনার Application Number সংরক্ষণ করুন।</p><div class="points"><div class="point"><b>₹500</b>বার্ষিক সদস্যপদ</div><div class="point"><b>01</b>অনলাইন আবেদন</div><div class="point"><b>QR</b>ডিজিটাল যাচাই</div></div><a class="btn" href="registration.html">সদস্যপদ আবেদন করুন →</a></div><div class="fee-card"><small>ANNUAL MEMBERSHIP</small><div class="price">₹500 <span>/ Year</span></div><small>WAYEJIN E FURFURA SHARIF</small><a class="btn" href="registration.html">এখনই আবেদন</a></div></div></div></section>
+<section class="section leadership-home"><div class="wrap"><div class="section-head"><div class="eyebrow">Leadership</div><h2>নেতৃত্ব</h2><p>West Bengal Ulama Board</p></div><div class="leadership-grid"><div class="leadership-card"><img src="assets/FB_IMG_1789891917922.jpg" alt="Pirjada Mehrab Uddin Siddiqui Al Quraish"><h3>Pirjada Mehrab Uddin Siddiqui Al Quraish</h3><p>CONTROLLER • ULAMA BOARD</p></div><div class="leadership-card"><img src="assets/file_00000000df888211b75f11be6eacb18a.png" alt="Md Younus Ali Baidya"><h3>Md Younus Ali Baidya</h3><p>PRESIDENT • ULAMA BOARD</p></div><div class="leadership-card"><img src="assets/FB_IMG_1789891992819.jpg" alt="Maulana Amanullah Aman"><h3>Maulana Amanullah Aman</h3><p>DIRECTOR • ULAMA BOARD</p></div><div class="leadership-card"><img src="assets/Screenshot_2026-09-18-03-21-02-19_320a9a695de7cdce83ed5281148d6f19.jpg" alt="Maulana Jamat Ali"><h3>Maulana Jamat Ali</h3><p>CHIEF DIRECTOR • ADVISOR COMMITTEE</p></div><div class="leadership-card"><img src="assets/Screenshot_2026-09-20-13-45-39-25_a23b203fd3aafc6dcb84e438dda678b6.jpg" alt="Maulana Khairuzzaman"><h3>Maulana Khairuzzaman</h3><p>GENERAL SECRETARY • ULAMA BOARD</p></div></div></div></section>
+<section class="section"><div class="wrap"><div class="section-head"><div class="eyebrow">About The Board</div><h2>ঐক্য • শিক্ষা • সমাজ সংস্কার</h2><p>একটি সংগঠিত, আধুনিক ও সেবামুখী ডিজিটাল প্ল্যাটফর্ম।</p></div><div class="about-box"><div class="about-main"><h3>WAYEJIN E FURFURA SHARIF</h3><p>উলামায়ে কেরামের পারস্পরিক যোগাযোগ, শিক্ষা, দাওয়াহ এবং সমাজকল্যাণমূলক কার্যক্রমকে আরও সুসংগঠিত করার লক্ষ্যেই এই ডিজিটাল প্ল্যাটফর্ম।</p><p>এই ওয়েবসাইটের মাধ্যমে সদস্য নিবন্ধন, আবেদন অনুসন্ধান, অনুমোদিত সদস্য যাচাই এবং ডিজিটাল পরিচয় ব্যবস্থাপনা সহজ করা হচ্ছে।</p><a class="btn" href="about.html">পরিচিতি দেখুন →</a></div><div class="quick-box"><h3>দ্রুত সেবা</h3><ul class="quick-list"><li><a href="registration.html">→ নতুন সদস্য নিবন্ধন</a></li><li><a href="status.html">→ আবেদন স্ট্যাটাস</a></li><li><a href="member.html">→ সদস্য এলাকা</a></li><li><a href="verification.html">→ Member ID যাচাই</a></li><li><a href="wazeens.html">→ ওয়েজিন তালিকা</a></li></ul></div></div></div></section>
+<section class="cta"><div class="wrap"><h2>সদস্য হতে প্রস্তুত?</h2><p>অনলাইনে আবেদন করুন এবং আপনার Application Number সংরক্ষণ করুন।</p><a class="btn" href="registration.html">সদস্য নিবন্ধন শুরু করুন →</a></div></section>
+<footer><div class="wrap footer-grid"><div><b>WAYEJIN E FURFURA SHARIF</b><p>WEST BENGAL ULAMA BOARD</p><p>ঐক্য • শিক্ষা • সমাজ সংস্কার</p></div><div><b class="gold">দ্রুত লিংক</b><p><a href="registration.html">নিবন্ধন</a></p><p><a href="status.html">স্ট্যাটাস</a></p><p><a href="verification.html">ভেরিফিকেশন</a></p></div><div><b class="gold">প্ল্যাটফর্ম</b><p><a href="member.html">সদস্য এলাকা</a></p><p><a href="wazeens.html">ওয়েজিন</a></p><p><a href="contact.html">যোগাযোগ</a></p><p><a href="privacy.html">Privacy Policy</a></p><p><a href="terms.html">Terms of Use</a></p></div></div></footer>
 <script src="assets/site.js" defer></script>
 </body>
 </html>
