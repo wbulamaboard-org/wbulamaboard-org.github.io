@@ -77,7 +77,7 @@ button{width:100%;margin-top:16px;padding:14px;border:0;border-radius:9px;backgr
 </div>
 </div></section></main>
 
-<script src="assets/member-workflow.js"></script>
+<script src="assets/member-workflow.js?v=20260922-1"></script>
 <script src="assets/site.js" defer></script>
 <script>
 const f=document.getElementById("f"),msg=document.getElementById("msg"),dash=document.getElementById("dashboard"),b=document.getElementById("b");
@@ -88,8 +88,15 @@ f.addEventListener("submit",async e=>{
  if(!a||!WBUB_WORKFLOW.validMobile(m)){showError("সঠিক Application Number এবং ১০ সংখ্যার মোবাইল নম্বর দিন।");return}
  WBUB_WORKFLOW.setBusy(b,true,"সদস্য তথ্য যাচাই হচ্ছে…");
  try{
+  // Use the same verified Application Status endpoint that powers status.html.
+  // This keeps Member Area compatible with the live Applications sheet.
   let d=null;
-  try{d=await WBUB_WORKFLOW.lookupMember(a,m)}catch(_){}
+  try{
+   const mobile=WBUB_WORKFLOW.normalizeMobile(m);
+   d=await WBUB_WORKFLOW.request(
+    WBUB_WORKFLOW.API+"?action=application_status&application_no="+encodeURIComponent(a)+"&mobile="+encodeURIComponent(mobile)
+   );
+  }catch(_){}
   if(!d||d.found!==true||!d.record){
    d=await WBUB_WORKFLOW.lookupApplication(a,m);
   }
