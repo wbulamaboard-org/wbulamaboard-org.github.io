@@ -13,7 +13,25 @@
     async submitApplication(payload){return this.request(this.API,{method:"POST",body:JSON.stringify(payload)})},
     async publicVerify(id){return this.request(this.API+"?id="+encodeURIComponent(id))},
     async publicMemberVerify(id,mobile){const d=await this.publicVerify(id);if(d&&d.found===true&&d.record)return d;return d},
-    async lookupApplication(no,mobile){const n=this.normalizeMobile(mobile);try{const d=await this.request(this.API+"?action=application_status&application_no="+encodeURIComponent(no)+"&mobile="+encodeURIComponent(n));if(d&&d.found===true&&d.record)return d;}catch(_){}const d=await this.publicVerify(no);if(!d||d.found!==true||!d.record)return d;const rm=this.normalizeMobile(d.record.mobile||d.record.phone||"");if(rm&&rm!==n)return {found:false,record:null};return d;},
+    async lookupApplication(no,mobile){
+      const n=this.normalizeMobile(mobile);
+      const qs=[
+        "?action=application_status&application_no="+encodeURIComponent(no)+"&mobile="+encodeURIComponent(n),
+        "?action=status&application_no="+encodeURIComponent(no)+"&mobile="+encodeURIComponent(n),
+        "?application_no="+encodeURIComponent(no)+"&mobile="+encodeURIComponent(n),
+        "?id="+encodeURIComponent(no)
+      ];
+      for(const q of qs){
+        try{
+          const d=await this.request(this.API+q);
+          if(d&&d.found===true&&d.record){
+            const rm=this.normalizeMobile(d.record.mobile||d.record.phone||"");
+            if(!rm||rm===n)return d;
+          }
+        }catch(_){}
+      }
+      return {found:false,record:null};
+    },
     async lookupMember(no,mobile){return this.request(this.API+"?action=member_profile&application_no="+encodeURIComponent(no)+"&mobile="+encodeURIComponent(this.normalizeMobile(mobile)))}
   };
 })();
