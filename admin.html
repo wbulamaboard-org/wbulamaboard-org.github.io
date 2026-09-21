@@ -1,85 +1,34 @@
 <!doctype html>
 <html lang="bn">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Admin Approval | WAYEJIN E FURFURA SHARIF</title>
 <link rel="stylesheet" href="assets/site.css">
 <style>
 .admin{max-width:1050px;margin:auto}.panel{background:#fff;border:1px solid #dce6e0;border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-bottom:18px}
-input,select{width:100%;padding:13px;border:1px solid #cbd9d2;border-radius:9px;font:inherit;margin-top:7px}
+input{width:100%;padding:13px;border:1px solid #cbd9d2;border-radius:9px;font:inherit;margin-top:7px}
 button{border:0;border-radius:9px;padding:11px 15px;font-weight:900;cursor:pointer}.primary{background:#d7b45b;color:#17372d}.danger{background:#fff0f0;color:#8a2222}.secondary{background:#07513f;color:#fff}
-.toolbar{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end}.row{border:1px solid #dce6e0;border-radius:14px;padding:16px;margin:12px 0;background:#f8faf9}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;font-size:13px}.muted{color:#5d6e67}.status{font-weight:900}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.msg{padding:13px;border-radius:9px;margin-top:12px}.ok{background:#e8f7ef;color:#145b3d}.err{background:#fff0f0;color:#8a2222}.empty{text-align:center;padding:30px;color:#5d6e67}
-@media(max-width:700px){.toolbar{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.panel{padding:17px}}
-</style>
-</head>
+.row{border:1px solid #dce6e0;border-radius:14px;padding:16px;margin:12px 0;background:#f8faf9}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;font-size:13px}.muted{color:#5d6e67}.status{font-weight:900}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.msg{padding:13px;border-radius:9px;margin-top:12px}.ok{background:#e8f7ef;color:#145b3d}.err{background:#fff0f0;color:#8a2222}.empty{text-align:center;padding:30px;color:#5d6e67}
+@media(max-width:700px){.grid{grid-template-columns:1fr 1fr}.panel{padding:17px}}
+</style></head>
 <body>
-<header><div class="wrap nav">
-<a class="brand" href="index.html">وয়েজিন ফুরফুরা শরীফ<small>WAYEJIN E FURFURA SHARIF</small></a>
-<nav><a href="registration.html">নিবন্ধন</a><a href="status.html">স্ট্যাটাস</a><a href="verification.html">ভেরিফিকেশন</a></nav>
-</div></header>
-
+<header><div class="wrap nav"><a class="brand" href="index.html">ওয়েজিন ফুরফুরা শরীফ<small>WAYEJIN E FURFURA SHARIF</small></a><nav><a href="registration.html">নিবন্ধন</a><a href="status.html">স্ট্যাটাস</a><a href="verification.html">ভেরিফিকেশন</a></nav></div></header>
 <main><section><div class="wrap admin">
-<div class="head"><h1>Admin Approval Portal</h1><p class="muted">PENDING আবেদন যাচাই করে Approve বা Reject করুন।</p></div>
-
-<div class="panel">
-<h2>Admin Login</h2>
-<p class="muted">Server-side Admin Token দিন। Token এই browser-এ সংরক্ষণ করা হবে না।</p>
-<label>Admin Token</label>
-<input id="token" type="password" autocomplete="off" placeholder="Admin token">
-<div class="actions"><button class="primary" id="load">PENDING আবেদন দেখুন</button></div>
-<div id="msg" class="msg" hidden></div>
-</div>
-
-<div class="panel" id="listPanel" hidden>
-<div class="toolbar">
-<div><h2 style="margin:0">Applications</h2><p class="muted" style="margin:5px 0 0">Approve করলে Member ID সক্রিয় হবে।</p></div>
-<button class="secondary" id="refresh">↻ Refresh</button>
-</div>
-<div id="list"></div>
-</div>
+<div class="head"><h1>Member Approval Panel</h1><p class="muted">PENDING আবেদন যাচাই করে Approve বা Reject করুন।</p></div>
+<div class="panel"><h2>Admin Key</h2><label>Apps Script Admin Key</label><input id="key" type="password" autocomplete="off" placeholder="Admin Key লিখুন"><div class="actions"><button class="primary" id="load">Pending Applications দেখুন</button></div><div id="msg" class="msg" hidden></div></div>
+<div class="panel" id="listPanel" hidden><div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap"><div><h2 style="margin:0">Pending Applications</h2><p class="muted" style="margin:5px 0 0">Approve করলে আবেদন APPROVED হবে।</p></div><button class="secondary" id="refresh">↻ Refresh</button></div><div id="list"></div></div>
 </div></section></main>
-
-<script src="assets/member-workflow.js"></script>
-<script src="assets/site.js" defer></script>
 <script>
-const token=document.getElementById("token"),loadBtn=document.getElementById("load"),refresh=document.getElementById("refresh"),msg=document.getElementById("msg"),list=document.getElementById("list"),panel=document.getElementById("listPanel");
-function show(type,text){msg.className="msg "+type;msg.textContent=text;msg.hidden=false}
-async function api(action,extra={}){
- const r=await fetch(WBUB_WORKFLOW.API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action,admin_token:token.value.trim(),...extra}),cache:"no-store",credentials:"omit"});
- const t=await r.text();let d=null;try{d=JSON.parse(t)}catch(_){}
- if(!r.ok||!d)throw new Error("SERVER_ERROR");return d;
-}
-function esc(v){return WBUB_WORKFLOW.escapeHtml(v||"")}
-function render(items){
- if(!items||!items.length){list.innerHTML="<div class='empty'>কোনো PENDING আবেদন নেই।</div>";panel.hidden=false;return}
- list.innerHTML=items.map((r,i)=>`<div class="row">
- <h3 style="margin:0 0 10px">${esc(r.name||"Applicant")} <span class="status">[${esc(r.status||"")}]</span></h3>
- <div class="grid">
- <div><span class="muted">Application</span><br><strong>${esc(r.application_no)}</strong></div>
- <div><span class="muted">Mobile</span><br><strong>${esc(r.mobile)}</strong></div>
- <div><span class="muted">District</span><br><strong>${esc(r.district)}</strong></div>
- <div><span class="muted">Fee</span><br><strong>₹${esc(r.fee_amount||"500")} / ${esc(r.fee_period||"annual")}</strong></div>
- </div>
- <p class="muted" style="margin:10px 0 0">UTR: <strong>${esc(r.payment_ref||"—")}</strong> · Payment: <strong>${esc(r.payment_status||"PENDING")}</strong></p>
- <div class="actions">
- <button class="primary" data-i="${i}" data-action="approve">✓ Approve</button>
- <button class="danger" data-i="${i}" data-action="reject">✕ Reject</button>
- </div></div>`).join("");
- [...list.querySelectorAll("button[data-action]")].forEach(b=>b.onclick=async()=>{
-  const r=items[Number(b.dataset.i)], action=b.dataset.action;
-  if(!confirm(action==="approve"?"এই আবেদন Approve করবেন?":"এই আবেদন Reject করবেন?"))return;
-  b.disabled=true;b.textContent="Processing…";
-  try{const d=await api("admin_update",{application_no:r.application_no,status:action==="approve"?"APPROVED":"REJECTED"});if(d.ok!==true)throw new Error(d.error||"UPDATE_FAILED");show("ok",action==="approve"?"আবেদন অনুমোদিত হয়েছে। Member ID সক্রিয় হয়েছে।":"আবেদন Reject করা হয়েছে।");await loadList()}catch(e){show("err","Update করা যায়নি: "+e.message);b.disabled=false}
- });
- panel.hidden=false;
-}
-async function loadList(){
- const d=await api("admin_list");
- if(d.ok!==true)throw new Error(d.error||"LIST_FAILED");
- render(d.records||[]);
-}
-async function start(){if(!token.value.trim()){show("err","Admin Token দিন।");return}loadBtn.disabled=true;loadBtn.textContent="Loading…";try{await loadList();show("ok","Admin connection সফল।")}catch(e){show("err","Admin connection হচ্ছে না। Backend approval API এখনও চালু করা হয়নি বা Token ভুল।")}finally{loadBtn.disabled=false;loadBtn.textContent="PENDING আবেদন দেখুন"}}
+const API="https://script.google.com/macros/s/AKfycbyPeDxvvzwhGdIukIaQUEqZsPmXet4K-niN16XusC8z-G27PsA_pf1CzMLs9Cw6dTUqcg/exec";
+const key=document.getElementById("key"),loadBtn=document.getElementById("load"),refresh=document.getElementById("refresh"),msg=document.getElementById("msg"),list=document.getElementById("list"),panel=document.getElementById("listPanel");
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function show(type,t){msg.className="msg "+type;msg.textContent=t;msg.hidden=false}
+async function api(action,extra={}){const body=new URLSearchParams({action,admin_key:key.value.trim(),...extra});const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},body,cache:"no-store"});const t=await r.text();let d=null;try{d=JSON.parse(t)}catch(_){}if(!d)throw new Error("SERVER_ERROR");return d}
+function render(items){if(!items.length){list.innerHTML="<div class='empty'>কোনো PENDING আবেদন নেই।</div>";panel.hidden=false;return}
+list.innerHTML=items.map((r,i)=>`<div class="row"><h3 style="margin:0 0 10px">${esc(r.name||"Applicant")} <span class="status">[${esc(r.status||"PENDING")}]</span></h3><div class="grid"><div><span class="muted">Application</span><br><strong>${esc(r.application_no)}</strong></div><div><span class="muted">Mobile</span><br><strong>${esc(r.mobile)}</strong></div><div><span class="muted">District</span><br><strong>${esc(r.district)}</strong></div><div><span class="muted">Fee</span><br><strong>₹${esc(r.fee_amount||"500")}</strong></div></div><p class="muted" style="margin:10px 0 0">UTR: <strong>${esc(r.payment_ref||"—")}</strong></p><div class="actions"><button class="primary" data-i="${i}" data-action="approve">✓ Approve</button><button class="danger" data-i="${i}" data-action="reject">✕ Reject</button></div></div>`).join("");
+[...list.querySelectorAll("button[data-action]")].forEach(b=>b.onclick=async()=>{const r=items[Number(b.dataset.i)],action=b.dataset.action;if(!confirm(action==="approve"?"এই আবেদন Approve করবেন?":"এই আবেদন Reject করবেন?"))return;b.disabled=true;b.textContent="Processing…";try{const d=await api(action,{application_no:r.application_no});if(d.ok!==true)throw new Error(d.error||"UPDATE_FAILED");show("ok",action==="approve"?"আবেদন অনুমোদিত হয়েছে। Member ID তৈরি/সক্রিয় হয়েছে।":"আবেদন Reject করা হয়েছে।");await loadList()}catch(e){show("err","Update করা যায়নি: "+e.message);b.disabled=false}});
+panel.hidden=false}
+async function loadList(){const d=await api("pending");if(d.ok!==true)throw new Error(d.error||"LIST_FAILED");render(d.records||d.applications||[])}
+async function start(){if(!key.value.trim()){show("err","Admin Key দিন।");return}loadBtn.disabled=true;loadBtn.textContent="Loading…";try{await loadList();show("ok","Pending Applications পাওয়া গেছে।")}catch(e){show("err","Pending তালিকা আনা যায়নি। Admin Key ও Apps Script deployment access পরীক্ষা করুন।")}finally{loadBtn.disabled=false;loadBtn.textContent="Pending Applications দেখুন"}}
 loadBtn.onclick=start;refresh.onclick=async()=>{try{await loadList()}catch(e){show("err","Refresh করা যায়নি।")}};
-</script>
-</body></html>
+</script></body></html>
