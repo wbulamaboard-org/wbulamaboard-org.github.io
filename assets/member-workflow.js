@@ -1,7 +1,7 @@
 (() => {
   "use strict";
   window.WBUB_WORKFLOW = {
-    API: "https://script.google.com/macros/s/AKfycbw6IzUY7QJfKZ35R3KfIfX0PF8hibUviGvlFN2enHfhGiRJQXjf0yV3nTSaEbMHVNhfYg/exec",
+    API: "https://script.google.com/macros/s/AKfycbyPeDxvvzwhGdIukIaQUEqZsPmXet4K-niN16XusC8z-G27PsA_pf1CzMLs9Cw6dTUqcg/exec",
     normalizeMobile(v){return String(v||"").replace(/\D/g,"").replace(/^91/,"").slice(-10)},
     validMobile(v){return /^[6-9]\d{9}$/.test(this.normalizeMobile(v))},
     validEmail(v){return !v||/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v).trim())},
