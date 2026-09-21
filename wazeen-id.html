@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Digital Member ID | WAYEJIN E FURFURA SHARIF</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <link rel="stylesheet" href="assets/site.css">
 <style>
 :root{--green:#064d3b;--deep:#033a2d;--gold:#d9b44f;--cream:#f7f7f2;--ink:#10251f}
@@ -102,7 +103,7 @@
 <div class="meta"><b>VALID UNTIL</b><br><span id="valid"></span></div>
 </div>
 <div>
-<img id="qr" class="qr" alt="QR verification">
+<div id="qr" class="qr" aria-label="QR verification"></div>
 <div class="scan">SCAN TO VERIFY</div>
 </div>
 </div>
@@ -133,7 +134,7 @@
 <div><b>⌂</b> Furfura Sharif, Hooghly, West Bengal, India</div>
 <div><b>🌐</b> <span id="site-url"></span></div>
 </div>
-<img id="backqr" class="back-qr" alt="Verification QR">
+<div id="backqr" class="back-qr" aria-label="Verification QR"></div>
 </div>
 </section>
 </div>
@@ -145,8 +146,8 @@
 </div>
 </main>
 
-<script src="assets/member-workflow.js?v=20260920-2"></script>
-<script src="assets/site.js?v=20260920-2" defer></script>
+<script src="assets/member-workflow.js?v=20260921-3"></script>
+<script src="assets/site.js?v=20260921-3" defer></script>
 <script>
 const id=new URLSearchParams(location.search).get("id");
 const msg=document.getElementById("message"),cards=document.getElementById("cards"),actions=document.getElementById("actions");
@@ -191,22 +192,31 @@ async function load(){
   }else photo.classList.add("placeholder");
   const verify=origin+location.pathname.replace("wazeen-id.html","verification.html")+"?id="+encodeURIComponent(memberId);
   document.getElementById("verify").href=verify;
-  const qr="https://quickchart.io/qr?size=240&margin=1&text="+encodeURIComponent(verify)+"&v=20260920";
-  document.getElementById("qr").src=qr;
-  document.getElementById("backqr").src=qr;
+  const qrOptions={text:verify,width:220,height:220,colorDark:"#000000",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M};
+  document.getElementById("qr").innerHTML="";
+  document.getElementById("backqr").innerHTML="";
+  new QRCode(document.getElementById("qr"),qrOptions);
+  new QRCode(document.getElementById("backqr"),qrOptions);
   cards.hidden=false;actions.hidden=false;
   document.getElementById("download").onclick=async()=>{
+   await new Promise(r=>setTimeout(r,400));
    const canvas=document.createElement("canvas");
-   const scale=3,gap=35;
-   const frontCanvas=await html2canvas(document.getElementById("front"),{scale,useCORS:true,backgroundColor:null});
-   const backCanvas=await html2canvas(document.getElementById("back"),{scale,useCORS:true,backgroundColor:null});
+   const scale=2.5,gap=28;
+   const opts={scale,useCORS:true,allowTaint:false,backgroundColor:"#eef2ef",logging:false,imageTimeout:10000};
+   const frontCanvas=await html2canvas(document.getElementById("front"),opts);
+   const backCanvas=await html2canvas(document.getElementById("back"),opts);
    canvas.width=frontCanvas.width+backCanvas.width+gap*scale;
    canvas.height=Math.max(frontCanvas.height,backCanvas.height);
    const ctx=canvas.getContext("2d");
    ctx.fillStyle="#eef2ef";ctx.fillRect(0,0,canvas.width,canvas.height);
    ctx.drawImage(frontCanvas,0,0);
    ctx.drawImage(backCanvas,frontCanvas.width+gap*scale,0);
-   const a=document.createElement("a");a.download=(memberId||id)+"-ID-Card.png";a.href=canvas.toDataURL("image/png");a.click();
+   canvas.toBlob(blob=>{
+     if(!blob){alert("ID Card তৈরি করা যায়নি। Print / Save PDF ব্যবহার করুন।");return;}
+     const url=URL.createObjectURL(blob);
+     const a=document.createElement("a");a.href=url;a.download=(memberId||id)+"-ID-Card.png";document.body.appendChild(a);a.click();a.remove();
+     setTimeout(()=>URL.revokeObjectURL(url),2000);
+   },"image/png");
   };
  }catch(e){WBUB_WORKFLOW.showMessage(msg,"error","Member ID Not Found / Invalid")}
 }
