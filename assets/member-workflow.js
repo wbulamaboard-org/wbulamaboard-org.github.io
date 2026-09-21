@@ -11,7 +11,21 @@
     hideMessage(el){if(el)el.hidden=true},
     async request(url,options={}){const r=await fetch(url,{cache:"no-store",credentials:"omit",...options});const t=await r.text();let d=null;try{d=t?JSON.parse(t):null}catch(_){}if(!r.ok)throw new Error("NETWORK_HTTP_"+r.status);if(!d)throw new Error("INVALID_API_RESPONSE");return d},
     async submitApplication(payload){return this.request(this.API,{method:"POST",body:JSON.stringify(payload)})},
-    async publicVerify(id){return this.request(this.API+"?id="+encodeURIComponent(id))},
+    async publicVerify(id){
+      const value=encodeURIComponent(id);
+      const routes=[
+        this.API+"?action=verify&id="+value,
+        this.API+"?id="+value,
+        this.API+"?action=member_profile&id="+value
+      ];
+      for(const url of routes){
+        try{
+          const d=await this.request(url);
+          if(d&&d.found===true&&d.record)return d;
+        }catch(_){}
+      }
+      return {found:false,record:null};
+    },
     async publicMemberVerify(id,mobile){const d=await this.publicVerify(id);if(d&&d.found===true&&d.record)return d;return d},
     async lookupApplication(no,mobile){
       const n=this.normalizeMobile(mobile);
