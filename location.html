@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Live Location | WAYEJIN E FURFURA SHARIF</title>
+<link rel="stylesheet" href="assets/site.css">
+<style>
+body{background:#f5f8f6}.loc-wrap{max-width:760px;margin:auto;padding:28px 16px 60px}.loc-card{background:#fff;border:1px solid #dce7e1;border-radius:22px;padding:24px;box-shadow:0 15px 40px rgba(7,54,42,.08)}h1{color:#07382c;margin:0 0 8px}.sub{color:#718079;line-height:1.7}.notice{background:#fff8e7;border:1px solid #ead7a0;border-radius:14px;padding:13px;font-size:12px;line-height:1.7;color:#685522;margin:18px 0}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin:10px 0}.field label{display:block;font-size:12px;font-weight:800;color:#31584d;margin-bottom:6px}.field input{width:100%;padding:13px;border:1px solid #d5e1dc;border-radius:10px;font-size:14px}.btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.btn{border:0;border-radius:11px;padding:13px;font-weight:800;cursor:pointer}.start{background:#0a5b47;color:#fff}.stop{background:#eee;color:#444}.status{margin-top:15px;padding:13px;border-radius:12px;background:#f2f7f4;font-size:12px}.coords{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.stat{padding:12px;border-radius:12px;background:#f7faf8;border:1px solid #e2ebe7;text-align:center}.stat b{display:block;color:#07382c;font-size:13px}.stat span{font-size:10px;color:#7a8882}.map{margin-top:15px;border-radius:14px;overflow:hidden;border:1px solid #dce7e1;background:#eef4f1;min-height:180px;display:flex;align-items:center;justify-content:center}.map a{background:#0a5b47;color:#fff;text-decoration:none;padding:12px 16px;border-radius:10px;font-weight:800}.back{display:block;text-align:center;margin-top:18px;color:#0a5b47;text-decoration:none;font-weight:800}@media(max-width:560px){.row,.btns{grid-template-columns:1fr}.coords{grid-template-columns:1fr 1fr 1fr}.loc-card{padding:18px}}
+</style></head><body>
+<header><div class="wrap nav"><a class="brand" href="index.html">WAYEJIN E FURFURA SHARIF <small>WEST BENGAL ULAMA BOARD</small></a><nav><a href="index.html">হোম</a><a href="member.html">সদস্য এলাকা</a><a href="verification.html">ভেরিফিকেশন</a></nav></div></header>
+<main class="loc-wrap"><div class="loc-card">
+<div style="font-size:12px;color:#a17e30;font-weight:900;letter-spacing:1.5px">MEMBER LOCATION</div>
+<h1>📍 Live Location</h1><p class="sub">আপনার মোবাইলের GPS লোকেশন অনুমতি দিয়ে চালু করুন। চালু থাকা অবস্থায় এই পেজ খোলা থাকলে সর্বশেষ লোকেশন বোর্ডের Location API-তে পাঠানো হবে।</p>
+<div class="notice"><b>গোপনীয়তা:</b> লোকেশন শেয়ার করা সম্পূর্ণ আপনার সম্মতিতে হবে। <b>Stop Tracking</b> চাপলে এই পেজ আর লোকেশন পাঠাবে না। ব্রাউজার বন্ধ করলে লাইভ ট্র্যাকিংও বন্ধ হয়ে যাবে।</div>
+<div class="row"><div class="field"><label>Member ID</label><input id="memberId" placeholder="যেমন: WBUB/WF/00013/26"></div><div class="field"><label>মোবাইল নম্বর (ঐচ্ছিক)</label><input id="mobile" inputmode="numeric" placeholder="Mobile"></div></div>
+<div class="btns"><button class="btn start" id="start">📍 Start Tracking</button><button class="btn stop" id="stop" disabled>⛔ Stop Tracking</button></div>
+<div class="status" id="status">Tracking বন্ধ আছে। Start Tracking চাপুন।</div>
+<div class="coords"><div class="stat"><b id="lat">—</b><span>Latitude</span></div><div class="stat"><b id="lng">—</b><span>Longitude</span></div><div class="stat"><b id="acc">—</b><span>Accuracy</span></div></div>
+<div class="map"><a id="mapLink" href="#" target="_blank" rel="noopener" style="display:none">🗺️ Google Maps-এ দেখুন</a><span id="mapEmpty" style="color:#7a8882;font-size:12px">লোকেশন পাওয়ার পর Map খুলতে পারবেন</span></div>
+<a class="back" href="index.html">← ফ্রন্ট পেজে ফিরে যান</a>
+</div></main>
+<script>
+const API="https://script.google.com/macros/s/AKfycbwU4b_3e8r8dglJHcIqVAKk_fjWfdexUJEVKbCcv5tfkSInlOqgDwYoKwtwGSIiiJv5/exec";
+let watchId=null,lastSend=0;
+const $=id=>document.getElementById(id);
+function setStatus(t){$("status").textContent=t}
+async function sendLocation(p){
+ const member=($("memberId").value||"").trim(), mobile=($("mobile").value||"").trim();
+ if(!member){setStatus("Member ID লিখুন।");return}
+ const now=Date.now(); if(now-lastSend<10000)return; lastSend=now;
+ const q=new URLSearchParams({action:"update_location",member_id:member,mobile,lat:p.coords.latitude,lng:p.coords.longitude,accuracy:p.coords.accuracy,timestamp:new Date().toISOString()});
+ try{await fetch(API+"?"+q.toString(),{mode:"no-cors"});setStatus("✓ লোকেশন আপডেট পাঠানো হয়েছে • "+new Date().toLocaleTimeString("bn-IN"))}
+ catch(e){setStatus("লোকেশন পাওয়া গেছে, কিন্তু সার্ভারে পাঠানো যায়নি।")}
+}
+function success(p){
+ $("lat").textContent=p.coords.latitude.toFixed(6);$("lng").textContent=p.coords.longitude.toFixed(6);$("acc").textContent=Math.round(p.coords.accuracy)+"m";
+ const u="https://www.google.com/maps?q="+p.coords.latitude+","+p.coords.longitude;$("mapLink").href=u;$("mapLink").style.display="inline-block";$("mapEmpty").style.display="none";sendLocation(p)
+}
+function error(e){setStatus(e.code===1?"লোকেশন অনুমতি দেওয়া হয়নি। ব্রাউজার থেকে Location Allow করুন।":"লোকেশন পাওয়া যাচ্ছে না। GPS/Location চালু করুন।")}
+$("start").onclick=()=>{
+ if(!navigator.geolocation){setStatus("এই ব্রাউজারে GPS Location নেই।");return}
+ if(!($("memberId").value||"").trim()){setStatus("প্রথমে Member ID লিখুন।");$("memberId").focus();return}
+ watchId=navigator.geolocation.watchPosition(success,error,{enableHighAccuracy:true,maximumAge:15000,timeout:20000});
+ $("start").disabled=true;$("stop").disabled=false;setStatus("GPS Location-এর অনুমতি চাইছে…")
+};
+$("stop").onclick=()=>{if(watchId!==null)navigator.geolocation.clearWatch(watchId);watchId=null;$("start").disabled=false;$("stop").disabled=true;setStatus("⛔ Tracking বন্ধ হয়েছে।")};
+</script></body></html>
