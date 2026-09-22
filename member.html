@@ -40,7 +40,7 @@ button:disabled{opacity:.6;cursor:not-allowed}.workflow-message{margin-top:16px;
 
 <form id="loginForm">
 <div class="login-grid">
-<div><label>Official Member ID *</label><input id="memberIdInput" required autocomplete="off" placeholder="WBUB-0001"></div>
+<div><label>Official Member ID *</label><input id="memberIdInput" required autocomplete="off" placeholder="WBUB-0001 / WBUB/2026/00001"></div>
 <div><label>নিবন্ধিত মোবাইল নম্বর *</label><input id="mobileInput" required inputmode="numeric" maxlength="10" placeholder="১০ সংখ্যার মোবাইল নম্বর"></div>
 </div>
 <div id="msg91-captcha" style="margin:14px 0"></div>
@@ -50,8 +50,8 @@ button:disabled{opacity:.6;cursor:not-allowed}.workflow-message{margin-top:16px;
 <div id="otpBox" class="otp-box" hidden>
 <h3>OTP যাচাই করুন</h3>
 <p id="otpHint" class="muted">আপনার নিবন্ধিত মোবাইলে OTP পাঠানো হয়েছে।</p>
-<label>6-digit OTP *</label>
-<input id="otpInput" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="••••••">
+<label>4-digit OTP *</label>
+<input id="otpInput" inputmode="numeric" maxlength="4" autocomplete="one-time-code" placeholder="••••">
 <div class="otp-actions">
 <button id="verifyBtn" class="dark" type="button">✓ OTP Verify</button>
 <button id="resendBtn" class="secondary" type="button">↻ আবার OTP</button>
@@ -124,12 +124,22 @@ function waitForSdk(){
 }
 function profilePhone(r){return normalizeMobile(r.mobile||r.phone||"")}
 async function loadApprovedProfile(){
- const d=await WBUB_WORKFLOW.publicVerify(currentMemberId);
- if(!d||d.found!==true||!d.record)throw new Error("PROFILE_NOT_FOUND");
- const r=d.record;
+ let r=null;
+ try{
+   const d=await WBUB_WORKFLOW.publicVerify(currentMemberId);
+   if(d&&d.found===true&&d.record) r=d.record;
+ }catch(_){}
+ if(!r){
+   const response=await fetch("assets/member-directory-all.json?v=20260923-2",{cache:"no-store"});
+   if(response.ok){
+     const list=await response.json();
+     r=list.find(x=>normalizeId(x.member_id)===currentMemberId)||null;
+   }
+ }
+ if(!r)throw new Error("PROFILE_NOT_FOUND");
  const registeredPhone=profilePhone(r);
  if(!registeredPhone||registeredPhone!==currentMobile)throw new Error("MOBILE_MISMATCH");
- if(String(r.status||"").trim().toLowerCase()!=="approved")throw new Error("NOT_APPROVED");
+ if(r.status && String(r.status).trim().toLowerCase()!=="approved")throw new Error("NOT_APPROVED");
  const memberId=r.member_id||r.wazeen_id||currentMemberId;
  document.getElementById("name").textContent=r.name||"Approved Member";
  document.getElementById("mid").textContent=memberId;
@@ -146,7 +156,7 @@ async function loadApprovedProfile(){
 form.addEventListener("submit",function(e){
  e.preventDefault();clearMessage();dash.hidden=true;
  currentMemberId=normalizeId(memberIdEl.value);currentMobile=normalizeMobile(mobileEl.value);
- if(!/^WBUB-\d{4,}$/.test(currentMemberId)){message("error","সঠিক Official Member ID দিন, যেমন WBUB-0001।");return}
+ if(!(/^(WBUB-\d{4,}|WBUB\/\d{4}\/\d{5})$/.test(currentMemberId))){message("error","সঠিক Official Member ID দিন, যেমন WBUB-0001 অথবা WBUB/2026/00001।");return}
  if(!WBUB_WORKFLOW.validMobile(currentMobile)){message("error","সঠিক ১০ সংখ্যার নিবন্ধিত মোবাইল নম্বর দিন।");return}
  if(!waitForSdk())return;
  setButton(sendBtn,true,"OTP পাঠানো হচ্ছে…");
