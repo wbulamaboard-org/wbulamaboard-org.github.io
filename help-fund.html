@@ -27,7 +27,7 @@ footer{border-top:1px solid #eee;padding:28px 0;color:#687077;font-size:12px}
 <div class="card"><h2>আপনার ইচ্ছামতো অর্থ দিন</h2><p class="note">যে পরিমাণ দিতে চান তা লিখুন।</p>
 <div class="amount"><span>₹</span><input id="amount" type="number" min="1" step="1" placeholder="যেমন 500"></div>
 <a id="payBtn" class="btn" href="#">UPI দিয়ে সহায়তা করুন →</a>
-<p class="note" style="margin-top:12px">UPI ID: <b>ulama.board@ibl</b><br>আপনার UPI অ্যাপে পেমেন্ট সম্পন্ন করুন।</p></div>
+<p class="note" style="margin-top:12px">UPI ID: <b>ulama.board@ybl</b><br>আপনার UPI অ্যাপে পেমেন্ট সম্পন্ন করুন।</p></div>
 <div class="card"><h2>পেমেন্টের তথ্য জমা দিন</h2><p class="note">পেমেন্টের পরে UTR / Transaction ID জমা দিলে হিসাব যাচাই করে মোট সংগৃহীত অর্থে যোগ করা যাবে।</p>
 <label class="note">নাম</label><input id="donor" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:7px;margin:6px 0 12px" placeholder="আপনার নাম">
 <label class="note">UTR / Transaction ID</label><input id="utr" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:7px;margin:6px 0 12px" placeholder="পেমেন্টের UTR">
@@ -39,7 +39,7 @@ footer{border-top:1px solid #eee;padding:28px 0;color:#687077;font-size:12px}
 <footer><div class="wrap">© 2026 West Bengal Ulama Board • WAYEJIN E FURFURA SHARIF</div></footer>
 <script>
 const amount=document.getElementById('amount'),pay=document.getElementById('payBtn');
-function updatePay(){const a=Number(amount.value||0);pay.href=a>0?'upi://pay?pa=ulama.board@ibl&pn=WAYEJIN%20E%20FURFURA%20SHARIF&am='+encodeURIComponent(a.toFixed(2))+'&cu=INR&tn=Ulama%20Help%20Fund':'#';}
+function updatePay(){const a=Number(amount.value||0);pay.href=a>0?'upi://pay?pa=ulama.board@ybl&pn=WAYEJIN%20E%20FURFURA%20SHARIF&am='+encodeURIComponent(a.toFixed(2))+'&cu=INR&tn=Ulama%20Help%20Fund':'#';}
 amount.addEventListener('input',updatePay);
 document.getElementById('submitBtn').addEventListener('click',()=>{const s=document.getElementById('status');s.style.display='block';s.textContent='পেমেন্ট তথ্য গ্রহণের জন্য অনলাইন হিসাব সিস্টেম সংযুক্ত করা হবে। আপাতত UTR সংরক্ষণ/যাচাই ব্যবস্থা সক্রিয় নয়।';});
 </script>
