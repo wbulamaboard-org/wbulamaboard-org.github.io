@@ -15,7 +15,7 @@
 <main><section><div class="wrap workflow"><div class="workflow-card">
 <h1>অনলাইন সদস্য নিবন্ধন</h1>
 <p class="muted">West Bengal Ulama Board • WAYEJIN E FURFURA SHARIF</p>
-<div class="notice"><strong>সদস্যপদ ফি:</strong> <span style="font-size:20px;font-weight:900">₹500 / Year</span><br><small>আবেদন অনুমোদনের আগে প্রশাসনিকভাবে পেমেন্ট যাচাই করা হবে।</small></div><div class="payment-box"><h2 style="margin-top:0">₹500 সদস্যপদ ফি পেমেন্ট</h2><p>UPI ID: <strong>ulama.board@ibl</strong></p><a id="payBtn" class="btn" href="#" style="display:inline-block;text-decoration:none;padding:13px 18px;border-radius:9px;background:#07513f;color:#fff;font-weight:900">UPI App দিয়ে ₹500 Pay করুন</a><p class="muted" style="margin-bottom:0"><small>পেমেন্ট করার পর UTR / Transaction ID নিচের ঘরে দিন। UTR দেওয়া মানেই পেমেন্ট স্বয়ংক্রিয়ভাবে অনুমোদিত নয়; প্রশাসনিক যাচাইয়ের পর সদস্যপদ অনুমোদন হবে।</small></p></div><div class="notice"><strong>গুরুত্বপূর্ণ:</strong> আবেদন জমা দেওয়ার পর তা স্বয়ংক্রিয়ভাবে অনুমোদিত সদস্য হবে না। প্রশাসনিক যাচাই ও অনুমোদনের পরই Official Member ID তৈরি হবে।</div>
+<div class="notice"><strong>সদস্যপদ ফি:</strong> <span style="font-size:20px;font-weight:900">₹500 / Year</span><br><small>আবেদন অনুমোদনের আগে প্রশাসনিকভাবে পেমেন্ট যাচাই করা হবে।</small></div><div class="payment-box"><h2 style="margin-top:0">₹500 সদস্যপদ ফি পেমেন্ট</h2><p>UPI ID: <strong>ulama.board@ybl</strong></p><a id="payBtn" class="btn" href="#" style="display:inline-block;text-decoration:none;padding:13px 18px;border-radius:9px;background:#07513f;color:#fff;font-weight:900">UPI App দিয়ে ₹500 Pay করুন</a><p class="muted" style="margin-bottom:0"><small>পেমেন্ট করার পর UTR / Transaction ID নিচের ঘরে দিন। UTR দেওয়া মানেই পেমেন্ট স্বয়ংক্রিয়ভাবে অনুমোদিত নয়; প্রশাসনিক যাচাইয়ের পর সদস্যপদ অনুমোদন হবে।</small></p></div><div class="notice"><strong>গুরুত্বপূর্ণ:</strong> আবেদন জমা দেওয়ার পর তা স্বয়ংক্রিয়ভাবে অনুমোদিত সদস্য হবে না। প্রশাসনিক যাচাই ও অনুমোদনের পরই Official Member ID তৈরি হবে।</div>
 <div class="steps"><div id="s1" class="step active">১. তথ্য</div><div id="s2" class="step">২. পর্যালোচনা</div><div id="s3" class="step">৩. জমা</div></div>
 <form id="form">
 <div class="form-grid">
@@ -41,7 +41,7 @@
 </div></div></section></main>
 <script src="assets/member-workflow.js"></script><script src="assets/site.js" defer></script>
 <script>
-const payBtn=document.getElementById("payBtn");payBtn.href="upi://pay?pa="+encodeURIComponent("ulama.board@ibl")+"&pn="+encodeURIComponent("WAYEJIN E FURFURA SHARIF")+"&am=500&cu=INR&tn="+encodeURIComponent("Ulama Board Annual Membership Fee");
+const payBtn=document.getElementById("payBtn");payBtn.href="upi://pay?pa="+encodeURIComponent("ulama.board@ybl")+"&pn="+encodeURIComponent("WAYEJIN E FURFURA SHARIF")+"&am=500&cu=INR&tn="+encodeURIComponent("Ulama Board Annual Membership Fee");
 const form=document.getElementById("form"),reviewBox=document.getElementById("reviewBox"),review=document.getElementById("review"),msg=document.getElementById("message"),receipt=document.getElementById("receipt"),reviewBtn=document.getElementById("reviewBtn"),submitBtn=document.getElementById("submitBtn"),editBtn=document.getElementById("editBtn");let payload=null,submitted=false;
 function setStep(n){[1,2,3].forEach(i=>document.getElementById("s"+i).classList.toggle("active",i===n))}
 function field(name){return form.elements[name]?.value?.trim()||""}
