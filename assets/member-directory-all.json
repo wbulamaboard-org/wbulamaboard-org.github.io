@@ -2230,5 +2230,17 @@
     "validity": "2026-2027",
     "old_registration_id": "WBUB/15004/2026",
     "phone_key": "7679361011"
+  },
+  {
+    "member_id": "WBUB/2026/00001",
+    "serial": 187,
+    "source_page": 0,
+    "name": "Maulana Amanullah Aman",
+    "address": "Canning, South 24 Parganas",
+    "designation": "Director • Ulama Board",
+    "phone": "9732111888",
+    "validity": "08 Sep 2027",
+    "old_registration_id": "WBUB/2026/00001",
+    "phone_key": "9732111888"
   }
 ]
