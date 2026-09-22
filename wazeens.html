@@ -183,4 +183,17 @@
 <a class="wazeen-folder member-card" href="verification.html?id=WBUB-0183"><span class="folder-tab">WBUB-0183</span><div class="member-no">WBUB-0183</div><h3>Md Mostar Ahammed</h3><p>Member of Ulama Board</p><p>Sorseria</p><span class="open">আইডি দেখুন →</span></a>
 <a class="wazeen-folder member-card" href="verification.html?id=WBUB-0184"><span class="folder-tab">WBUB-0184</span><div class="member-no">WBUB-0184</div><h3>Md Matnudoin Sardar</h3><p>Member of Ulama Board</p><p>Kulpi</p><span class="open">আইডি দেখুন →</span></a>
 <a class="wazeen-folder member-card" href="verification.html?id=WBUB-0185"><span class="folder-tab">WBUB-0185</span><div class="member-no">WBUB-0185</div><h3>Md Abdul Hader</h3><p>Member of Ulama Board</p><p>Hatu(n)ganj</p><span class="open">আইডি দেখুন →</span></a>
-<a class="wazeen-folder member-card" href="verification.html?id=WBUB-0186"><span class="folder-tab">WBUB-0186</span><div class="member-no">WBUB-0186</div><h3>Rakibullah Paik</h3><p>Member of Ulama Board</p><p>Motilal</p><span class="open">আইডি দেখুন →</span></a></div></div></section></main><footer><div class="wrap"><b>WAYEJIN E FURFURA SHARIF</b><p>WEST BENGAL ULAMA BOARD</p><p>ঐক্য • শিক্ষা • সমাজ সংস্কার</p></div></footer><script src="assets/site.js" defer></script></body></html>
+<a class="wazeen-folder member-card" href="verification.html?id=WBUB-0186"><span class="folder-tab">WBUB-0186</span><div class="member-no">WBUB-0186</div><h3>Rakibullah Paik</h3><p>Member of Ulama Board</p><p>Motilal</p><span class="open">আইডি দেখুন →</span></a></div></div></section></main><footer><div class="wrap"><b>WAYEJIN E FURFURA SHARIF</b><p>WEST BENGAL ULAMA BOARD</p><p>ঐক্য • শিক্ষা • সমাজ সংস্কার</p></div></footer><script>
+const wazeenSearch=document.getElementById("wazeenSearch");
+const wazeenCards=[...document.querySelectorAll("#wazeenDirectory .member-card")];
+if(wazeenSearch){
+ wazeenSearch.addEventListener("input",()=>{
+  const q=wazeenSearch.value.trim().toLowerCase();
+  let shown=0;
+  wazeenCards.forEach(card=>{
+   const ok=card.textContent.toLowerCase().includes(q);
+   card.style.display=ok?"block":"none"; if(ok)shown++;
+  });
+ });
+}
+</script><script src="assets/site.js" defer></script></body></html>
