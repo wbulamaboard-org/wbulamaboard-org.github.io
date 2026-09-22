@@ -43,12 +43,12 @@ button:disabled{opacity:.6;cursor:not-allowed}.workflow-message{margin-top:16px;
 <div><label>Official Member ID *</label><input id="memberIdInput" required autocomplete="off" placeholder="WBUB-0001"></div>
 <div><label>নিবন্ধিত মোবাইল নম্বর *</label><input id="mobileInput" required inputmode="numeric" maxlength="10" placeholder="১০ সংখ্যার মোবাইল নম্বর"></div>
 </div>
+<div id="msg91-captcha" style="margin:14px 0"></div>
 <button id="sendBtn" type="submit">📲 OTP পাঠান</button>
 </form>
 
 <div id="otpBox" class="otp-box" hidden>
 <h3>OTP যাচাই করুন</h3>
-<div id="msg91-captcha" style="margin:12px 0"></div>
 <p id="otpHint" class="muted">আপনার নিবন্ধিত মোবাইলে OTP পাঠানো হয়েছে।</p>
 <label>6-digit OTP *</label>
 <input id="otpInput" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="••••••">
