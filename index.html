@@ -27,7 +27,22 @@
 @media(max-width:1050px){nav{gap:11px;font-size:11px}.brand{min-width:270px}.brand img{width:70px;height:70px}.brand-text strong{font-size:19px}.brand-text .sub{font-size:15px}.service-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:780px){.hero-quote{display:none}.topbar{display:none}.header,.header .wrap,.nav{max-width:100%;overflow:hidden}.brand{min-width:0;max-width:calc(100% - 50px)}.nav{height:82px}.brand img{width:58px;height:58px}.brand-text strong{font-size:15px}.brand-text .sub{font-size:12px}.brand-text small{font-size:8px}.nav nav{display:none}.hero-grid{grid-template-columns:1fr;max-width:100%;overflow:hidden}.hero-copy{padding:45px 0 25px}.hero h1{font-size:34px;line-height:1.12;letter-spacing:-.5px}.hero-art{min-height:300px}.hero-quote{right:2%;top:25px;font-size:13px;width:145px}.hero-collage{width:100%;height:95%;border-radius:8px}.mosque{width:100%;height:95%}.two-col{grid-template-columns:1fr}.stat-grid{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2n){border-right:0}.stat:nth-child(n+3){border-top:1px solid #eee}.lead-grid{grid-template-columns:repeat(2,1fr)}.membership-strip,.cta{display:block}.membership-actions{margin-top:14px}.footer-grid{grid-template-columns:1fr 1fr}.bottom .wrap{display:block;text-align:center}}
 @media(max-width:480px){.hero h1{font-size:30px;line-height:1.15;letter-spacing:0}.wrap{width:min(100% - 24px,1180px)}.hero h1{font-size:35px}.hero-actions{display:grid;grid-template-columns:1fr 1fr}.hero-actions .btn{padding:11px 8px;font-size:12px}.service-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:100%;overflow:hidden}.service{padding:14px 6px}.about-card{padding:25px 20px}.news-head{padding:20px 15px 10px}.news-list{padding:0 15px 10px}.lead-grid{gap:8px}.leader{padding:10px 5px}.leader img{width:72px;height:72px}.footer-grid{grid-template-columns:1fr}.bottom{font-size:10px}}
-</style>
+
+<style>
+/* Mobile-centered WBUB header */
+@media(max-width:780px){
+  .header .nav{display:block;text-align:center;padding-top:14px;padding-bottom:14px}
+  .header .brand{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px}
+  .header .brand img{width:88px!important;height:88px!important;object-fit:contain}
+  .header .brand-text{display:flex!important;flex-direction:column;align-items:center;text-align:center}
+  .header .brand-text strong{font-size:22px!important;line-height:1.15!important}
+  .header .brand-text .sub{font-size:17px!important;margin-top:4px}
+  .header .brand-text small{font-size:12px!important;margin-top:3px}
+  .header nav{margin-top:12px}
+  .header nav a{display:none}
+  .hero .eyebrow{font-size:17px!important;letter-spacing:0!important;word-spacing:4px!important;white-space:nowrap;text-align:center}
+}
+</style></style>
 <style>
 @media (max-width:700px){
   .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
