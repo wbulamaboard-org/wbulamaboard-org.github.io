@@ -12,7 +12,7 @@
 <header><div class="wrap nav"><a class="brand" href="index.html">ওয়েজিন ফুরফুরা শরীফ<small>WAYEJIN E FURFURA SHARIF</small></a><nav><a href="registration.html">নিবন্ধন</a><a href="status.html">স্ট্যাটাস</a><a href="verification.html">ভেরিফিকেশন</a><a href="member.html">সদস্য এলাকা</a></nav></div></header>
 <main><section><div class="wrap verify"><div class="head"><h1>Official Member Verification</h1><p class="muted">WEST BENGAL ULAMA BOARD • WAYEJIN E FURFURA SHARIF</p></div>
 <div class="search"><input id="q" placeholder="Member ID অথবা মোবাইল নম্বর দিন" autocomplete="off"><button id="btn">SEARCH</button></div>
-<div id="error" class="error" hidden></div><div id="result" class="result" hidden><div class="headx"><div id="status" class="status">VERIFIED</div><img id="photo" class="photo" hidden><div id="name" class="name"></div><div>WAYEJIN E FURFURA SHARIF</div></div><div class="info"><div class="row"><span>Member ID</span><strong id="mid"></strong></div><div class="row"><span>Organization</span><strong id="org"></strong></div><div class="row"><span>Designation / Category</span><strong id="des"></strong></div><div class="row"><span>Mobile Number</span><strong id="phone"></strong></div><div class="row"><span>District / Block</span><strong id="district"></strong></div><div class="row"><span>Validity</span><strong id="valid"></strong></div></div></div>
+<div id="error" class="error" hidden></div><div id="result" class="result" hidden><div class="headx"><div id="status" class="status">VERIFIED</div><img id="photo" class="photo" hidden><div id="name" class="name"></div><div>WAYEJIN E FURFURA SHARIF</div></div><div style="text-align:center;padding:18px 18px 4px;background:#fff"><div id="qrcode" style="display:inline-block"></div><div style="margin-top:8px;font-size:13px;color:#69756f">QR স্ক্যান করে এই সদস্যের অফিসিয়াল ভেরিফিকেশন খুলুন</div></div><div class="info"><div class="row"><span>Member ID</span><strong id="mid"></strong></div><div class="row"><span>Organization</span><strong id="org"></strong></div><div class="row"><span>Designation / Category</span><strong id="des"></strong></div><div class="row"><span>Mobile Number</span><strong id="phone"></strong></div><div class="row"><span>District / Block</span><strong id="district"></strong></div><div class="row"><span>Validity</span><strong id="valid"></strong></div></div></div>
 </div></section></main>
 <script>
 const q=document.getElementById("q"),btn=document.getElementById("btn"),err=document.getElementById("error"),box=document.getElementById("result");
@@ -20,6 +20,12 @@ let MEMBERS=[];
 function safe(v,f="-"){const s=String(v??"").trim();return s&&s!=="undefined"&&s!=="null"?s:f}
 function normPhone(v){return String(v||"").replace(/\D/g,"").slice(-10)}
 function esc(v){return String(v??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function generateQR(memberId){
+ const box=document.getElementById("qrcode"); if(!box)return;
+ box.innerHTML="";
+ const verifyUrl=new URL("verification.html?id="+encodeURIComponent(memberId),location.href).href;
+ if(window.QRCode){new QRCode(box,{text:verifyUrl,width:150,height:150,correctLevel:QRCode.CorrectLevel.M});}
+}
 async function loadMembers(){if(MEMBERS.length)return;const r=await fetch("assets/member-directory-all.json?v=20260922",{cache:"no-store"});MEMBERS=await r.json()}
 function showOne(r){
  document.getElementById("status").textContent="✓ MEMBER RECORD";
@@ -28,7 +34,7 @@ function showOne(r){
  document.getElementById("org").textContent="West Bengal Ulama Board";
  document.getElementById("des").textContent=safe(r.designation);document.getElementById("phone").textContent=safe(r.phone,"নম্বর দেওয়া নেই");
  document.getElementById("district").textContent=safe(r.address);
- document.getElementById("valid").textContent=safe(r.validity);
+ document.getElementById("valid").textContent=safe(r.validity);generateQR(memberId);
  document.getElementById("photo").hidden=true; box.hidden=false;
 }
 async function verify(){
@@ -56,5 +62,5 @@ async function verify(){
 }
 btn.addEventListener("click",verify);q.addEventListener("keydown",e=>{if(e.key==="Enter")verify()});
 const id=new URLSearchParams(location.search).get("id");if(id){q.value=id;verify()}
-</script><script src="assets/site.js" defer></script>
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="assets/site.js" defer></script>
 </body></html>
