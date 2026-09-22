@@ -7,22 +7,22 @@
 <link rel="stylesheet" href="assets/site.css">
 <style>
 :root{--green:#07513f;--deep:#033a2d;--gold:#d7b45b;--soft:#f4f8f6;--line:#dce6e0}
-.member-wrap{max-width:900px;margin:auto}
-.cardx{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow)}
+.member-wrap{max-width:900px;margin:auto}.cardx{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow)}
 .hero{text-align:center;margin-bottom:20px}.hero h1{margin:0;color:var(--deep);font-size:34px}.hero p{margin:8px 0 0;color:#66756e}
-.login-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-label{display:block;font-weight:800;margin:6px 0 7px}
+.login-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{display:block;font-weight:800;margin:6px 0 7px}
 input{width:100%;padding:13px;border:1px solid #cbd9d2;border-radius:9px;font-size:16px;box-sizing:border-box}
 button{width:100%;margin-top:16px;padding:14px;border:0;border-radius:9px;background:var(--gold);color:#17372d;font-weight:900;font-size:16px;cursor:pointer}
-.workflow-message{margin-top:16px;padding:13px;border-radius:9px}.workflow-message.error{background:#fff0f0;color:#8a2222}
+button.dark{background:var(--green);color:#fff}.secondary{background:#eef4f0;color:#24503f}
+button:disabled{opacity:.6;cursor:not-allowed}.workflow-message{margin-top:16px;padding:13px;border-radius:9px}.workflow-message.error{background:#fff0f0;color:#8a2222}.workflow-message.ok{background:#e8f7ef;color:#145b3d}
+.otp-box{margin-top:18px;padding:18px;border:1px dashed #b9cbc1;border-radius:14px;background:#f8fbf9}.otp-box h3{margin:0 0 8px;color:var(--deep)}
+.otp-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.otp-actions button{margin-top:10px}
 .dashboard{margin-top:20px}.member-head{background:linear-gradient(135deg,var(--deep),var(--green));color:#fff;border-radius:16px;padding:20px;display:flex;gap:16px;align-items:center}
 .avatar{width:76px;height:76px;border-radius:14px;object-fit:cover;background:#fff;border:2px solid var(--gold);display:none}.member-head h2{margin:0;font-size:24px}.verified{display:inline-block;margin-top:6px;background:#e4cc79;color:#294437;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:900}
 .member-id{margin-left:auto;text-align:right}.member-id small{display:block;color:#dbe9e3;font-size:11px}.member-id strong{font-size:18px;color:#f2dc91}
 .info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}.info{background:var(--soft);border-radius:12px;padding:13px}.info small{display:block;color:#687770;margin-bottom:4px}.info strong{display:block;color:#17372d}
 .actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}.actions a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:46px;border-radius:9px;background:var(--gold);color:#17372d;font-weight:900;text-decoration:none;padding:7px}.actions a.dark{background:var(--green);color:#fff}
-.note{margin-top:14px;font-size:13px;color:#52645c;background:#fffdf4;border:1px solid #eadcae;padding:12px;border-radius:10px}
-.security{margin-top:16px;padding:12px;border-radius:10px;background:#eef7f2;color:#285a48;font-size:13px}
-@media(max-width:650px){.cardx{padding:18px}.hero h1{font-size:28px}.login-grid{grid-template-columns:1fr}.member-head{align-items:flex-start}.avatar{width:62px;height:62px}.member-head h2{font-size:19px}.member-id{margin-left:0;text-align:left}.member-head{flex-wrap:wrap}.info-grid{grid-template-columns:1fr}.actions{grid-template-columns:1fr}}
+.note{margin-top:14px;font-size:13px;color:#52645c;background:#fffdf4;border:1px solid #eadcae;padding:12px;border-radius:10px}.security{margin-top:16px;padding:12px;border-radius:10px;background:#eef7f2;color:#285a48;font-size:13px}
+@media(max-width:650px){.cardx{padding:18px}.hero h1{font-size:28px}.login-grid{grid-template-columns:1fr}.member-head{align-items:flex-start;flex-wrap:wrap}.avatar{width:62px;height:62px}.member-head h2{font-size:19px}.member-id{margin-left:0;text-align:left}.info-grid,.actions,.otp-actions{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -35,91 +35,150 @@ button{width:100%;margin-top:16px;padding:14px;border:0;border-radius:9px;backgr
 <div class="hero"><h1>Member Area</h1><p>WAYEJIN E FURFURA SHARIF • WEST BENGAL ULAMA BOARD</p></div>
 
 <div class="cardx">
-<h2 style="margin-top:0">নিজের সদস্য তথ্য দেখুন</h2>
-<p class="muted">আপনার Application Number এবং নিবন্ধিত মোবাইল নম্বর দিয়ে শুধু নিজের approved membership profile খুলুন।</p>
+<h2 style="margin-top:0">🔐 নিরাপদ Member Login</h2>
+<p class="muted">Official Member ID এবং নিবন্ধিত মোবাইল নম্বর দিন। মোবাইলে OTP যাচাই হওয়ার পর আপনার approved membership profile খুলবে।</p>
 
-<form id="f">
+<form id="loginForm">
 <div class="login-grid">
-<div><label>Application Number *</label><input id="a" required autocomplete="off" placeholder="WEFS/APP/2026/00000006"></div>
-<div><label>নিবন্ধিত মোবাইল নম্বর *</label><input id="m" required inputmode="numeric" maxlength="10" placeholder="১০ সংখ্যার মোবাইল নম্বর"></div>
+<div><label>Official Member ID *</label><input id="memberIdInput" required autocomplete="off" placeholder="WBUB-0001"></div>
+<div><label>নিবন্ধিত মোবাইল নম্বর *</label><input id="mobileInput" required inputmode="numeric" maxlength="10" placeholder="১০ সংখ্যার মোবাইল নম্বর"></div>
 </div>
-<button id="b" type="submit">🔐 আমার Member Area খুলুন</button>
+<button id="sendBtn" type="submit">📲 OTP পাঠান</button>
 </form>
+
+<div id="otpBox" class="otp-box" hidden>
+<h3>OTP যাচাই করুন</h3>
+<p id="otpHint" class="muted">আপনার নিবন্ধিত মোবাইলে OTP পাঠানো হয়েছে।</p>
+<label>6-digit OTP *</label>
+<input id="otpInput" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="••••••">
+<div class="otp-actions">
+<button id="verifyBtn" class="dark" type="button">✓ OTP Verify</button>
+<button id="resendBtn" class="secondary" type="button">↻ আবার OTP</button>
+</div>
+</div>
 
 <div id="msg" hidden></div>
 
 <div id="dashboard" class="dashboard" hidden>
 <div class="member-head">
 <img id="avatar" class="avatar" alt="Member photo">
-<div>
-<h2 id="name">Approved Member</h2>
-<span class="verified">✓ APPROVED MEMBER</span>
-</div>
+<div><h2 id="name">Approved Member</h2><span class="verified">✓ OTP VERIFIED • APPROVED MEMBER</span></div>
 <div class="member-id"><small>OFFICIAL MEMBER ID</small><strong id="mid"></strong></div>
 </div>
-
 <div class="info-grid">
 <div class="info"><small>Designation / Category</small><strong id="des">-</strong></div>
 <div class="info"><small>District</small><strong id="district">-</strong></div>
 <div class="info"><small>Block / Area</small><strong id="block">-</strong></div>
 <div class="info"><small>Validity</small><strong id="valid">-</strong></div>
 </div>
-
 <div class="actions">
 <a class="dark" id="idCard" href="#">🪪 Digital ID Card</a>
 <a id="verify" href="#">✓ QR Verification</a>
-<a id="status" href="#">📋 Application Status</a>
+<a id="status" href="status.html">📋 Application Status</a>
 </div>
-
-<div class="note">আপনার Digital ID Card-এ Member ID, নাম, Designation, জেলা, Validity এবং QR Verification স্বয়ংক্রিয়ভাবে থাকবে।</div>
-<div class="security">🔒 এই Member Area-তে প্রবেশের জন্য Application Number ও নিবন্ধিত মোবাইল—দুটিই মিলতে হবে।</div>
+<div class="note">Member ID অপরিবর্তনীয়। ভবিষ্যৎ Profile Edit-এ পরিবর্তিত তথ্য সরাসরি প্রকাশ না হয়ে Admin Approval-এর জন্য Pending থাকবে।</div>
+<div class="security">🔒 OTP যাচাই সফল না হলে Member Area খোলা হবে না। OTP যাচাই MSG91-এর মাধ্যমে হয়।</div>
 </div>
 </div>
 </div></section></main>
 
-<script src="assets/member-workflow.js?v=20260922-2"></script>
-<script src="assets/site.js" defer></script>
+<script src="assets/msg91-otp-config.js?v=20260923-1"></script>
+<script src="assets/member-workflow.js?v=20260923-1"></script>
 <script>
-const f=document.getElementById("f"),msg=document.getElementById("msg"),dash=document.getElementById("dashboard"),b=document.getElementById("b");
-function showError(t){WBUB_WORKFLOW.showMessage(msg,"error",t)}
-f.addEventListener("submit",async e=>{
- e.preventDefault();msg.hidden=true;dash.hidden=true;
- const a=document.getElementById("a").value.trim(),m=document.getElementById("m").value.trim();
- if(!a||!WBUB_WORKFLOW.validMobile(m)){showError("সঠিক Application Number এবং ১০ সংখ্যার মোবাইল নম্বর দিন।");return}
- WBUB_WORKFLOW.setBusy(b,true,"সদস্য তথ্য যাচাই হচ্ছে…");
- try{
-  // Use the same verified Application Status endpoint that powers status.html.
-  // This keeps Member Area compatible with the live Applications sheet.
-  let d=null;
-  try{
-   const mobile=WBUB_WORKFLOW.normalizeMobile(m);
-   d=await WBUB_WORKFLOW.request(
-    WBUB_WORKFLOW.API+"?action=application_status&application_no="+encodeURIComponent(a)+"&mobile="+encodeURIComponent(mobile)
-   );
-  }catch(_){}
-  if(!d||d.found!==true||!d.record){
-   d=await WBUB_WORKFLOW.lookupApplication(a,m);
-  }
-  if(d.found!==true||!d.record)throw new Error("NOT_FOUND");
-  const r=d.record,status=String(r.status||"").trim().toLowerCase(),memberId=r.member_id||r.wazeen_id||"";
-  if(status!=="approved"||!memberId)throw new Error("NOT_APPROVED");
-  const mid=encodeURIComponent(memberId);
-  document.getElementById("name").textContent=r.name||"Approved Member";
-  document.getElementById("mid").textContent=memberId;
-  document.getElementById("des").textContent=r.designation||"Member";
-  document.getElementById("district").textContent=r.district||"-";
-  document.getElementById("block").textContent=r.block||"-";
-  document.getElementById("valid").textContent=r.valid_till||"-";
-  document.getElementById("idCard").href="wazeen-id.html?id="+mid;
-  document.getElementById("verify").href="verification.html?id="+mid;
-  document.getElementById("status").href="status.html";
-  const avatar=document.getElementById("avatar"),photo=r.photo_url||r.photo||"";
-  if(photo){avatar.src=photo;avatar.style.display="block";avatar.onerror=()=>avatar.style.display="none"}else avatar.style.display="none";
-  dash.hidden=false;
- }catch(err){
-  showError(err.message==="NOT_FOUND"?"এই Application Number ও মোবাইলের কোনো সদস্য রেকর্ড পাওয়া যায়নি।":err.message==="NOT_APPROVED"?"আপনার আবেদন এখনও অনুমোদিত হয়নি। Approved হওয়ার পর Member Area চালু হবে.":"Member Service-এ সংযোগ করা যাচ্ছে না। পরে আবার চেষ্টা করুন।");
- }finally{WBUB_WORKFLOW.setBusy(b,false)}
+(function(){
+"use strict";
+const form=document.getElementById("loginForm"),memberIdEl=document.getElementById("memberIdInput"),mobileEl=document.getElementById("mobileInput");
+const sendBtn=document.getElementById("sendBtn"),verifyBtn=document.getElementById("verifyBtn"),resendBtn=document.getElementById("resendBtn");
+const otpBox=document.getElementById("otpBox"),otpInput=document.getElementById("otpInput"),otpHint=document.getElementById("otpHint"),msg=document.getElementById("msg"),dash=document.getElementById("dashboard");
+let currentMobile="",currentMemberId="",requestId="",resendTimer=null,resendLeft=0,msg91Ready=false;
+
+function message(type,text){msg.className="workflow-message "+type;msg.textContent=text;msg.hidden=false}
+function clearMessage(){msg.hidden=true}
+function normalizeId(v){return String(v||"").trim().toUpperCase().replace(/\s/g,"")}
+function normalizeMobile(v){return WBUB_WORKFLOW.normalizeMobile(v)}
+function setButton(btn,busy,label){WBUB_WORKFLOW.setBusy(btn,busy,label)}
+function startResendTimer(){
+ clearInterval(resendTimer);resendLeft=30;resendBtn.disabled=true;resendBtn.textContent="↻ আবার OTP ("+resendLeft+"s)";
+ resendTimer=setInterval(()=>{resendLeft--;if(resendLeft<=0){clearInterval(resendTimer);resendBtn.disabled=false;resendBtn.textContent="↻ আবার OTP"}else resendBtn.textContent="↻ আবার OTP ("+resendLeft+"s)"},1000);
+}
+function initMsg91(){
+ if(!window.WBUB_MSG91||!window.WBUB_MSG91.widgetId||!window.WBUB_MSG91.tokenAuth||window.WBUB_MSG91.tokenAuth.indexOf("PASTE_")===0){
+   message("error","MSG91 OTP Token এখনো ওয়েবসাইটে বসানো হয়নি। GitHub-এর assets/msg91-otp-config.js ফাইলে আপনার OTP Widget Token বসাতে হবে।");return false;
+ }
+ if(typeof window.initSendOTP!=="function"){message("error","MSG91 OTP service load হয়নি। পেজটি Refresh করে আবার চেষ্টা করুন।");return false}
+ const configuration={
+   widgetId:window.WBUB_MSG91.widgetId,
+   tokenAuth:window.WBUB_MSG91.tokenAuth,
+   exposeMethods:true,
+   captchaRenderId:"",
+   success:function(){},
+   failure:function(){}
+ };
+ try{window.initSendOTP(configuration);msg91Ready=true;return true}catch(e){message("error","MSG91 OTP service initialize করা যায়নি।");return false}
+}
+function waitForSdk(){
+ if(msg91Ready)return true;
+ if(typeof window.initSendOTP==="function")return initMsg91();
+ return false;
+}
+function profilePhone(r){return normalizeMobile(r.mobile||r.phone||"")}
+async function loadApprovedProfile(){
+ const d=await WBUB_WORKFLOW.publicVerify(currentMemberId);
+ if(!d||d.found!==true||!d.record)throw new Error("PROFILE_NOT_FOUND");
+ const r=d.record;
+ const registeredPhone=profilePhone(r);
+ if(!registeredPhone||registeredPhone!==currentMobile)throw new Error("MOBILE_MISMATCH");
+ if(String(r.status||"").trim().toLowerCase()!=="approved")throw new Error("NOT_APPROVED");
+ const memberId=r.member_id||r.wazeen_id||currentMemberId;
+ document.getElementById("name").textContent=r.name||"Approved Member";
+ document.getElementById("mid").textContent=memberId;
+ document.getElementById("des").textContent=r.designation||"Member";
+ document.getElementById("district").textContent=r.district||"-";
+ document.getElementById("block").textContent=r.block||r.area||"-";
+ document.getElementById("valid").textContent=r.valid_till||r.validity||"-";
+ document.getElementById("idCard").href="wazeen-id.html?id="+encodeURIComponent(memberId);
+ document.getElementById("verify").href="verification.html?id="+encodeURIComponent(memberId);
+ const avatar=document.getElementById("avatar"),photo=r.photo_url||r.photo||"";
+ if(photo){avatar.src=photo;avatar.style.display="block";avatar.onerror=()=>avatar.style.display="none"}else avatar.style.display="none";
+ dash.hidden=false;form.hidden=true;otpBox.hidden=true;
+}
+form.addEventListener("submit",function(e){
+ e.preventDefault();clearMessage();dash.hidden=true;
+ currentMemberId=normalizeId(memberIdEl.value);currentMobile=normalizeMobile(mobileEl.value);
+ if(!/^WBUB-\d{4,}$/.test(currentMemberId)){message("error","সঠিক Official Member ID দিন, যেমন WBUB-0001।");return}
+ if(!WBUB_WORKFLOW.validMobile(currentMobile)){message("error","সঠিক ১০ সংখ্যার নিবন্ধিত মোবাইল নম্বর দিন।");return}
+ if(!waitForSdk())return;
+ setButton(sendBtn,true,"OTP পাঠানো হচ্ছে…");
+ window.sendOtp("91"+currentMobile,function(data){
+   requestId=(data&&data.reqId)||"";
+   otpBox.hidden=false;otpHint.textContent="OTP পাঠানো হয়েছে। মোবাইলের শেষ ৪ সংখ্যা: "+currentMobile.slice(-4);
+   message("ok","OTP পাঠানো হয়েছে। SMS-এ পাওয়া OTP লিখে Verify করুন।");startResendTimer();otpInput.focus();
+   setButton(sendBtn,false);
+ },function(error){
+   message("error","OTP পাঠানো যায়নি। মোবাইল নম্বর, MSG91 balance এবং OTP Widget settings পরীক্ষা করুন।");setButton(sendBtn,false);
+ });
 });
+verifyBtn.addEventListener("click",function(){
+ clearMessage();const otp=String(otpInput.value||"").replace(/\D/g,"");
+ if(!/^\d{4,8}$/.test(otp)){message("error","সঠিক OTP লিখুন।");return}
+ if(!waitForSdk())return;setButton(verifyBtn,true,"OTP যাচাই হচ্ছে…");
+ window.verifyOtp(otp,async function(data){
+   try{await loadApprovedProfile();message("ok","OTP সফলভাবে যাচাই হয়েছে। আপনার Member Area খোলা হয়েছে।")}
+   catch(e){dash.hidden=true;message("error",e.message==="MOBILE_MISMATCH"?"এই Member ID-এর সঙ্গে মোবাইল নম্বরটি মিলছে না।":e.message==="NOT_APPROVED"?"এই Member ID এখনও Approved নয়।":e.message==="PROFILE_NOT_FOUND"?"Member profile পাওয়া যায়নি।":"Profile যাচাই করা যায়নি। পরে আবার চেষ্টা করুন।")}
+   finally{setButton(verifyBtn,false)}
+ },function(error){message("error","OTP সঠিক নয় বা মেয়াদ শেষ হয়েছে। আবার চেষ্টা করুন।");setButton(verifyBtn,false)},requestId);
+});
+resendBtn.addEventListener("click",function(){
+ if(!currentMobile||!waitForSdk())return;clearMessage();resendBtn.disabled=true;
+ window.retryOtp(null,function(data){requestId=(data&&data.reqId)||requestId;message("ok","নতুন OTP পাঠানো হয়েছে।");startResendTimer()},function(){message("error","নতুন OTP পাঠানো যায়নি।");resendBtn.disabled=false;resendBtn.textContent="↻ আবার OTP"},requestId);
+});
+document.addEventListener("DOMContentLoaded",function(){
+ const s=document.createElement("script");s.src="https://verify.msg91.com/otp-provider.js";s.async=true;
+ s.onload=function(){initMsg91()};s.onerror=function(){message("error","MSG91 OTP provider লোড করা যায়নি।")}
+ document.head.appendChild(s);
+});
+})();
 </script>
+<script src="assets/site.js" defer></script>
 </body>
 </html>
