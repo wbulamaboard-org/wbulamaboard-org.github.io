@@ -161,7 +161,7 @@ form.addEventListener("submit",function(e){
  if(!waitForSdk())return;
  setButton(sendBtn,true,"OTP পাঠানো হচ্ছে…");
  window.sendOtp("91"+currentMobile,function(data){
-   requestId=(data&&data.reqId)||"";
+   requestId=(data&&(data.reqId||data.requestId||data.request_id))||"";
    otpBox.hidden=false;otpHint.textContent="OTP পাঠানো হয়েছে। মোবাইলের শেষ ৪ সংখ্যা: "+currentMobile.slice(-4);
    message("ok","OTP পাঠানো হয়েছে। SMS-এ পাওয়া OTP লিখে Verify করুন।");startResendTimer();otpInput.focus();
    setButton(sendBtn,false);
@@ -171,17 +171,23 @@ form.addEventListener("submit",function(e){
 });
 verifyBtn.addEventListener("click",function(){
  clearMessage();const otp=String(otpInput.value||"").replace(/\D/g,"");
- if(!/^\d{4,8}$/.test(otp)){message("error","সঠিক OTP লিখুন।");return}
- if(!waitForSdk())return;setButton(verifyBtn,true,"OTP যাচাই হচ্ছে…");
- window.verifyOtp(otp,async function(data){
+ if(!/^\d{4}$/.test(otp)){message("error","৪ সংখ্যার সঠিক OTP লিখুন।");return}
+ if(!waitForSdk())return;
+ if(!requestId){message("error","এই OTP অনুরোধের Request ID পাওয়া যায়নি। নতুন করে OTP পাঠান।");return}
+ setButton(verifyBtn,true,"OTP যাচাই হচ্ছে…");
+ window.verifyOtp(Number(otp),async function(data){
    try{await loadApprovedProfile();message("ok","OTP সফলভাবে যাচাই হয়েছে। আপনার Member Area খোলা হয়েছে।")}
    catch(e){dash.hidden=true;message("error",e.message==="MOBILE_MISMATCH"?"এই Member ID-এর সঙ্গে মোবাইল নম্বরটি মিলছে না।":e.message==="NOT_APPROVED"?"এই Member ID এখনও Approved নয়।":e.message==="PROFILE_NOT_FOUND"?"Member profile পাওয়া যায়নি।":"Profile যাচাই করা যায়নি। পরে আবার চেষ্টা করুন।")}
    finally{setButton(verifyBtn,false)}
- },function(error){message("error","OTP সঠিক নয় বা মেয়াদ শেষ হয়েছে। আবার চেষ্টা করুন।");setButton(verifyBtn,false)},requestId);
+ },function(error){
+   let detail=""; try{detail=typeof error==="string"?error:JSON.stringify(error)}catch(_){detail=String(error||"")}
+   message("error","OTP যাচাই ব্যর্থ। MSG91: "+(detail||"Invalid/Expired OTP")+" — নতুন OTP নিয়ে আবার চেষ্টা করুন।");
+   setButton(verifyBtn,false)
+ },requestId);
 });
 resendBtn.addEventListener("click",function(){
  if(!currentMobile||!waitForSdk())return;clearMessage();resendBtn.disabled=true;
- window.retryOtp(null,function(data){requestId=(data&&data.reqId)||requestId;message("ok","নতুন OTP পাঠানো হয়েছে।");startResendTimer()},function(){message("error","নতুন OTP পাঠানো যায়নি।");resendBtn.disabled=false;resendBtn.textContent="↻ আবার OTP"},requestId);
+ window.retryOtp(null,function(data){requestId=(data&&(data.reqId||data.requestId||data.request_id))||requestId;message("ok","নতুন OTP পাঠানো হয়েছে।");startResendTimer()},function(){message("error","নতুন OTP পাঠানো যায়নি।");resendBtn.disabled=false;resendBtn.textContent="↻ আবার OTP"},requestId);
 });
 document.addEventListener("DOMContentLoaded",function(){
  const s=document.createElement("script");s.src="https://verify.msg91.com/otp-provider.js";s.async=true;
