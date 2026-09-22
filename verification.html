@@ -26,7 +26,7 @@ function generateQR(memberId){
  const verifyUrl=new URL("verification.html?id="+encodeURIComponent(memberId),location.href).href;
  if(window.QRCode){new QRCode(box,{text:verifyUrl,width:150,height:150,correctLevel:QRCode.CorrectLevel.M});}
 }
-async function loadMembers(){if(MEMBERS.length)return;const r=await fetch("assets/member-directory-all.json?v=20260922",{cache:"no-store"});MEMBERS=await r.json()}
+async function loadMembers(){if(MEMBERS.length)return;const r=await fetch("assets/member-directory-all.json?v=20260923-2",{cache:"no-store"});MEMBERS=await r.json()}
 function showOne(r){
  document.getElementById("status").textContent="✓ MEMBER RECORD";
  document.getElementById("name").textContent=safe(r.name);
