@@ -51,7 +51,7 @@
   }
   function addLanguageSelector(){
     if(document.querySelector('.site-language')) return;
-    const box=document.createElement('div');
+    const style=document.createElement('style'); style.textContent='.site-language{display:flex;align-items:center;gap:5px;margin-left:auto;z-index:60}.site-language span{font-size:15px}.site-language select{border:1px solid #d8d8d8;border-radius:6px;background:#fff;color:#333;padding:7px 22px 7px 8px;font-size:12px;font-weight:600;cursor:pointer}.site-language select:focus{outline:2px solid #b52f37}@media(max-width:780px){.site-language{margin-left:6px}.site-language select{padding:6px 18px 6px 6px;font-size:11px}}'; document.head.appendChild(style);\n    const box=document.createElement('div');
     box.className='site-language';
     box.innerHTML='<span>🌐</span><select aria-label="Language"><option value="bn">বাংলা</option><option value="en">English</option><option value="ar">العربية</option><option value="hi">हिन्दी</option><option value="ur">اردو</option></select>';
     const header=document.querySelector('header .nav') || document.querySelector('header');
