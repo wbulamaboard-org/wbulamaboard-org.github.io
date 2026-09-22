@@ -2,5 +2,5 @@
 // Keep the OTP Widget token private. Do not place your MSG91 account AuthKey here.
 window.WBUB_MSG91 = {
   widgetId: "366976734c6b363830373035",
-  tokenAuth: "WayejinOTP2026"
+  tokenAuth: "574101TjmLy7cIV6ab2da60P1",
 };
