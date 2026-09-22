@@ -48,6 +48,7 @@ button:disabled{opacity:.6;cursor:not-allowed}.workflow-message{margin-top:16px;
 
 <div id="otpBox" class="otp-box" hidden>
 <h3>OTP যাচাই করুন</h3>
+<div id="msg91-captcha" style="margin:12px 0"></div>
 <p id="otpHint" class="muted">আপনার নিবন্ধিত মোবাইলে OTP পাঠানো হয়েছে।</p>
 <label>6-digit OTP *</label>
 <input id="otpInput" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="••••••">
@@ -110,7 +111,7 @@ function initMsg91(){
    widgetId:window.WBUB_MSG91.widgetId,
    tokenAuth:window.WBUB_MSG91.tokenAuth,
    exposeMethods:true,
-   captchaRenderId:"",
+   captchaRenderId:"msg91-captcha",
    success:function(){},
    failure:function(){}
  };
@@ -155,7 +156,7 @@ form.addEventListener("submit",function(e){
    message("ok","OTP পাঠানো হয়েছে। SMS-এ পাওয়া OTP লিখে Verify করুন।");startResendTimer();otpInput.focus();
    setButton(sendBtn,false);
  },function(error){
-   message("error","OTP পাঠানো যায়নি। মোবাইল নম্বর, MSG91 balance এবং OTP Widget settings পরীক্ষা করুন।");setButton(sendBtn,false);
+   let detail=""; try{detail=typeof error==="string"?error:JSON.stringify(error)}catch(_){detail=String(error||"")} message("error","OTP পাঠানো যায়নি। MSG91: "+(detail||"অজানা error"));setButton(sendBtn,false);
  });
 });
 verifyBtn.addEventListener("click",function(){
