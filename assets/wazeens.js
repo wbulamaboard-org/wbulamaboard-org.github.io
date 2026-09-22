@@ -8,7 +8,8 @@
   ];
   window.WBUB_WAZEENS=WAZEENS;
   const esc=v=>String(v??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-  const profileFiles={"mehrab-uddin":"wazeen-mehrab-uddin.html","yunus-ali":"wazeen-yunus-ali.html","amanullah-aman":"wazeen-amanullah-aman.html","jamat-ali":"wazeen-jamat-ali.html","khairuzzaman":"wazeen-khairuzzaman.html"};\n  const folder=w=>'<a class="wazeen-folder" href="'+(profileFiles[w.id]||"wazeen-profile.html?id="+encodeURIComponent(w.id))+'"><span class="folder-tab">📁 PROFILE</span><img src="'+esc(w.image)+'" alt="'+esc(w.name)+'"><h3>'+esc(w.bn||w.name)+'</h3><p>'+esc(w.roleBn||w.role)+'</p><span class="open">প্রোফাইল খুলুন →</span></a>';
+  const profileFiles={"mehrab-uddin":"wazeen-mehrab-uddin.html","yunus-ali":"wazeen-yunus-ali.html","amanullah-aman":"wazeen-amanullah-aman.html","jamat-ali":"wazeen-jamat-ali.html","khairuzzaman":"wazeen-khairuzzaman.html"};
+  const folder=w=>'<a class="wazeen-folder" href="'+(profileFiles[w.id]||"wazeen-profile.html?id="+encodeURIComponent(w.id))+'"><span class="folder-tab">📁 PROFILE</span><img src="'+esc(w.image)+'" alt="'+esc(w.name)+'"><h3>'+esc(w.bn||w.name)+'</h3><p>'+esc(w.roleBn||w.role)+'</p><span class="open">প্রোফাইল খুলুন →</span></a>';
   const home=document.getElementById("homeWazeens"); if(home) home.innerHTML=WAZEENS.map(folder).join("");
   const directory=document.getElementById("wazeenDirectory");
   const search=document.getElementById("wazeenSearch");
