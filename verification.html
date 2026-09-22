@@ -34,7 +34,7 @@ function showOne(r){
  document.getElementById("org").textContent="West Bengal Ulama Board";
  document.getElementById("des").textContent=safe(r.designation);document.getElementById("phone").textContent=safe(r.phone,"নম্বর দেওয়া নেই");
  document.getElementById("district").textContent=safe(r.address);
- document.getElementById("valid").textContent=safe(r.validity);generateQR(memberId);
+ document.getElementById("valid").textContent=safe(r.validity);generateQR(r.member_id);
  document.getElementById("photo").hidden=true; box.hidden=false;
 }
 async function verify(){
