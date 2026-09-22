@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>সহায়তা তহবিল | WEST BENGAL ULAMA BOARD</title>
+<meta name="description" content="West Bengal Ulama Board-এর সহায়তা তহবিলে স্বেচ্ছায় অনুদান দিন।">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+:root{--red:#b52f37;--ink:#18222b;--muted:#69737a;--line:#eee7e2}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;color:var(--ink);background:#fff}a{text-decoration:none;color:inherit}
+.wrap{width:min(980px,calc(100% - 28px));margin:auto}.top{background:#fafafa;border-bottom:1px solid #eee;padding:9px;text-align:center;font-size:12px;color:#626a70}
+header{background:#fff;border-bottom:1px solid #eee}.nav{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{font-weight:800;color:#20262b}.brand small{display:block;color:var(--red);font-size:9px;letter-spacing:.6px;margin-top:3px}
+.hero{background:linear-gradient(120deg,#fff7f5,#fff);padding:48px 0 35px;border-bottom:1px solid #f0e7e4}.hero h1{font-family:Georgia,serif;font-size:clamp(34px,6vw,52px);margin:12px 0;color:var(--red)}.hero p{max-width:680px;color:#555;line-height:1.8}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:28px 0}.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px;box-shadow:0 8px 26px #00000009}.card h2{font-family:Georgia,serif;margin:0 0 12px}.amount{display:flex;gap:10px;align-items:center;margin:18px 0}.amount span{font-size:25px;font-weight:800}.amount input{width:100%;padding:14px;border:1px solid #d9d4d0;border-radius:8px;font-size:20px}.btn{display:inline-flex;justify-content:center;align-items:center;width:100%;padding:14px 18px;background:var(--red);color:#fff;border-radius:8px;font-weight:800;border:0;cursor:pointer}.btn.alt{background:#fff;color:var(--red);border:1px solid var(--red);margin-top:10px}.note{font-size:12px;color:#747b80;line-height:1.7}.total{background:#fff8f3;border:1px solid #eedfd7;border-radius:12px;padding:24px;text-align:center;margin:4px 0 28px}.total small{display:block;color:#777}.total b{display:block;color:var(--red);font-size:36px;margin:5px}.status{margin-top:12px;padding:11px;border-radius:7px;background:#f5f7f7;font-size:12px;display:none}
+footer{border-top:1px solid #eee;padding:28px 0;color:#687077;font-size:12px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.nav{min-height:70px}.hero{padding-top:35px}}
+</style>
+</head>
+<body>
+<div class="top">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ • ঐক্য • শিক্ষা • সমাজ সংস্কার</div>
+<header><div class="wrap nav"><a class="brand" href="index.html">WEST BENGAL ULAMA BOARD<small>WAYEJIN E FURFURA SHARIF</small></a><a href="index.html">← হোম</a></div></header>
+<main>
+<section class="hero"><div class="wrap"><div style="font-weight:800;letter-spacing:2px;color:#555">ULAMA HELP FUND</div><h1>উলামা সহায়তা তহবিল</h1><p>মানবিক সহায়তা, শিক্ষা, চিকিৎসা ও সমাজকল্যাণমূলক কাজে আপনার সামর্থ্য অনুযায়ী স্বেচ্ছায় সহযোগিতা করুন। ছোট বা বড়—প্রতিটি সহায়তাই মূল্যবান।</p></div></section>
+<section class="wrap">
+<div class="total"><small>মোট সংগৃহীত সহায়তা</small><b id="totalAmount">₹ 0</b><span id="totalNote">হিসাব সংযুক্ত হওয়ার পর এখানে সরাসরি আপডেট হবে</span></div>
+<div class="grid">
+<div class="card"><h2>আপনার ইচ্ছামতো অর্থ দিন</h2><p class="note">যে পরিমাণ দিতে চান তা লিখুন।</p>
+<div class="amount"><span>₹</span><input id="amount" type="number" min="1" step="1" placeholder="যেমন 500"></div>
+<a id="payBtn" class="btn" href="#">UPI দিয়ে সহায়তা করুন →</a>
+<p class="note" style="margin-top:12px">UPI ID: <b>ulama.board@ibl</b><br>আপনার UPI অ্যাপে পেমেন্ট সম্পন্ন করুন।</p></div>
+<div class="card"><h2>পেমেন্টের তথ্য জমা দিন</h2><p class="note">পেমেন্টের পরে UTR / Transaction ID জমা দিলে হিসাব যাচাই করে মোট সংগৃহীত অর্থে যোগ করা যাবে।</p>
+<label class="note">নাম</label><input id="donor" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:7px;margin:6px 0 12px" placeholder="আপনার নাম">
+<label class="note">UTR / Transaction ID</label><input id="utr" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:7px;margin:6px 0 12px" placeholder="পেমেন্টের UTR">
+<button class="btn alt" id="submitBtn">তথ্য জমা দিন</button><div class="status" id="status"></div></div>
+</div>
+<p class="note" style="text-align:center;padding-bottom:28px">স্বচ্ছতার জন্য যাচাইকৃত অনুদানের হিসাব প্রকাশ করা যেতে পারে। ব্যক্তিগত তথ্য প্রকাশ করা হবে না।</p>
+</section>
+</main>
+<footer><div class="wrap">© 2026 West Bengal Ulama Board • WAYEJIN E FURFURA SHARIF</div></footer>
+<script>
+const amount=document.getElementById('amount'),pay=document.getElementById('payBtn');
+function updatePay(){const a=Number(amount.value||0);pay.href=a>0?'upi://pay?pa=ulama.board@ibl&pn=WAYEJIN%20E%20FURFURA%20SHARIF&am='+encodeURIComponent(a.toFixed(2))+'&cu=INR&tn=Ulama%20Help%20Fund':'#';}
+amount.addEventListener('input',updatePay);
+document.getElementById('submitBtn').addEventListener('click',()=>{const s=document.getElementById('status');s.style.display='block';s.textContent='পেমেন্ট তথ্য গ্রহণের জন্য অনলাইন হিসাব সিস্টেম সংযুক্ত করা হবে। আপাতত UTR সংরক্ষণ/যাচাই ব্যবস্থা সক্রিয় নয়।';});
+</script>
+<script src="assets/site.js" defer></script>
+</body></html>
