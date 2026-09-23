@@ -142,11 +142,11 @@ function show(n){
 fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"})
 .then(r=>r.json())
 .then(d=>{
-  files=(Array.isArray(d.files)?d.files:[]).slice(0,12);
+  files=(Array.isArray(d.files)?d.files:[]).slice(0,16);
   if(!files.length) throw new Error("no-drive-photos");
   drawDots();
   img.src=files[0].url;
-  timer=setInterval(()=>show(i+1),4000);
+  timer=setInterval(()=>show(i+1),3500);
 })
 .catch(()=>{
   files=[
@@ -159,7 +159,7 @@ fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"})
   drawDots();
   img.src=files[0].url;
   clearInterval(timer);
-  timer=setInterval(()=>show(i+1),2500);
+  timer=setInterval(()=>show(i+1),3500);
 });
 document.addEventListener("visibilitychange",()=>{
   if(document.hidden){clearInterval(timer);}
