@@ -1,40 +1,32 @@
 <!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Photo Archive | WAYEJIN E FURFURA SHARIF</title><link rel="stylesheet" href="assets/site.css"><style>
-.archive{padding:50px 0}.head{text-align:center;margin-bottom:25px}.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.photo{aspect-ratio:1/1;overflow:hidden;border-radius:12px;background:#eef3f0}.photo img{width:100%;height:100%;object-fit:cover}.empty{margin:25px 0;padding:25px;text-align:center;border:1px dashed #cbd9d2;border-radius:15px;background:#fff}.note{padding:16px;border-left:4px solid #d2ad4a;background:#fff8df;border-radius:8px;line-height:1.7;margin-top:22px}@media(max-width:700px){.photo-grid{grid-template-columns:repeat(2,1fr)}}
-</style></head><body><div class="top">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ • ঐক্য • শিক্ষা • সমাজ সংস্কার</div><header><div class="wrap nav"><a class="brand" href="index.html">ওয়েজিন ফুরফুরা শরীফ <small>WAYEJIN E FURFURA SHARIF</small></a><button class="menu-btn" type="button" onclick="document.querySelector('nav').classList.toggle('open')">☰ মেনু</button><nav><a href="index.html">হোম</a><a href="gallery.html">ফটো গ্যালারি</a><a href="wazeens.html">ওয়েজিন</a></nav></div></header>
-<main><section class="archive"><div class="wrap"><div class="head"><h1 id="title">📸 Photo Archive</h1><p class="muted">Album-এর ছবি</p></div><div id="status" class="empty">📡 Google Drive থেকে ছবি লোড হচ্ছে...</div><div id="photoGrid" class="photo-grid"></div><div id="more" class="archive-link"></div><div class="note">📁 <strong>Admin Upload System:</strong> Google Drive-এর <strong>WBUB PHOTO ARCHIVE</strong> ফোল্ডারে ছবি Upload করলেই Website Gallery-তে ছবি দেখা যাবে।</div></div></section></main><footer><div class="wrap"><b>WAYEJIN E FURFURA SHARIF</b><p>WEST BENGAL ULAMA BOARD</p></div></footer><script src="assets/site.js" defer></script><script>
+.archive{padding:42px 0}.head{text-align:center;margin-bottom:20px}.head h1{margin-bottom:7px}.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:18px 0 22px;padding:14px;background:#fff;border:1px solid #e5ece8;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.04)}.search{flex:1;min-width:210px;height:46px;border:1px solid #ccd8d2;border-radius:12px;padding:0 14px;font-size:15px;outline:none}.select{height:46px;border:1px solid #ccd8d2;border-radius:12px;padding:0 12px;background:#fff;font-size:15px;min-width:165px}.count{font-size:13px;color:#66736e;margin-left:auto;white-space:nowrap}.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.photo{display:block;aspect-ratio:1/1;overflow:hidden;border-radius:12px;background:#eef3f0}.photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s ease}.photo:hover img{transform:scale(1.04)}.empty{margin:25px 0;padding:25px;text-align:center;border:1px dashed #cbd9d2;border-radius:15px;background:#fff}.more{text-align:center;padding:24px 0}.more button{border:0;border-radius:12px;padding:12px 20px;background:#b52f38;color:#fff;font-weight:700;cursor:pointer}.note{padding:16px;border-left:4px solid #d2ad4a;background:#fff8df;border-radius:8px;line-height:1.7;margin-top:22px}@media(max-width:700px){.archive{padding:30px 0}.photo-grid{grid-template-columns:repeat(2,1fr);gap:8px}.tools{padding:12px}.search,.select{width:100%;min-width:0}.count{margin-left:0;width:100%}}
+</style></head><body><div class="top">বِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ • ঐক্য • শিক্ষা • সমাজ সংস্কার</div><header><div class="wrap nav"><a class="brand" href="index.html">ওয়েজিন ফুরফুরা শরীফ <small>WAYEJIN E FURFURA SHARIF</small></a><button class="menu-btn" type="button" onclick="document.querySelector('nav').classList.toggle('open')">☰ মেনু</button><nav><a href="index.html">হোম</a><a class="active" href="photo-archive.html">ফটো গ্যালারি</a><a href="wazeens.html">ওয়েজিন</a></nav></div></header>
+<main><section class="archive"><div class="wrap"><div class="head"><h1 id="title">📸 সকল ছবি</h1><p class="muted">Google Drive Photo Archive</p></div>
+<div class="tools"><input id="search" class="search" type="search" placeholder="🔎 ছবির নাম দিয়ে খুঁজুন..." autocomplete="off"><select id="album" class="select"><option value="all">📁 সকল Album</option><option value="conference">উলামা সম্মেলন</option><option value="events">মাহফিল ও অনুষ্ঠান</option><option value="social">সমাজসেবা</option><option value="board">উলামা বোর্ড</option><option value="2026">২০২৬</option></select><div id="count" class="count">ছবি লোড হচ্ছে...</div></div>
+<div id="status" class="empty">📡 Google Drive থেকে ছবি লোড হচ্ছে...</div><div id="photoGrid" class="photo-grid"></div><div id="more" class="more"></div><div class="note">📁 <strong>Admin Upload System:</strong> Google Drive-এর <strong>WBUB PHOTO ARCHIVE</strong> ফোল্ডারে ছবি Upload করলেই Website Gallery-তে ছবি দেখা যাবে। Album আলাদা করতে Drive-এর ভিতরে আলাদা Folder ব্যবহার করুন।</div></div></section></main><footer><div class="wrap"><b>WAYEJIN E FURFURA SHARIF</b><p>WEST BENGAL ULAMA BOARD</p></div></footer><script src="assets/site.js" defer></script><script>
 const API="https://script.google.com/macros/s/AKfycbzeuVRl-OYsiDU-Oc_YfDUKywTJ6bVTerzB0SvA0sjJO0iLpQ3XSyibbZ5pS1592hdHwA/exec";
-const a=new URLSearchParams(location.search).get("album")||"all";
-const n={all:"সকল ছবি",conference:"উলামা সম্মেলন",events:"মাহফিল ও অনুষ্ঠান",social:"সমাজসেবা",board:"উলামা বোর্ড",2026:"২০২৬"}[a]||"সকল ছবি";
-document.getElementById("title").textContent="📸 "+n;
-const grid=document.getElementById("photoGrid"),status=document.getElementById("status"),more=document.getElementById("more");
-let all=[],shown=0,STEP=24;
+const params=new URLSearchParams(location.search),initialAlbum=params.get("album")||"all";
+const grid=document.getElementById("photoGrid"),status=document.getElementById("status"),more=document.getElementById("more"),search=document.getElementById("search"),album=document.getElementById("album"),count=document.getElementById("count"),title=document.getElementById("title");
+let all=[],filtered=[],shown=0,STEP=24;
+album.value=[...album.options].some(o=>o.value===initialAlbum)?initialAlbum:"all";
 function render(){
-  const part=all.slice(0,shown);
-  grid.innerHTML=part.map((p,i)=>'<a class="photo" href="'+p.original+'" target="_blank" rel="noopener"><img loading="lazy" src="'+p.url+'" alt="'+(p.name||"Photo")+'" onerror="this.parentElement.style.display=\'none\'"></a>').join("");
-  more.innerHTML=shown<all.length?'<button class="btn-gallery" onclick="shown+=STEP;render()">আরও ছবি দেখুন →</button>':'';
-  status.style.display=all.length?'none':'block';
-}
-fetch(API+"?album="+encodeURIComponent(a)+"&v="+Date.now(),{cache:"no-store"})
-.then(r=>r.text())
-.then(raw=>{
-  let d;
-  try{ d=JSON.parse(raw); }catch(err){ throw new Error("Apps Script থেকে JSON response পাওয়া যায়নি"); }
-  if(!d.ok) throw new Error(d.error||"API error");
-  all=Array.isArray(d.files)?d.files:[];
-  shown=Math.min(STEP,all.length);
-  if(!all.length){status.innerHTML="📷 এই Album-এ এখনো কোনো ছবি নেই।";}
-  render();
-})
-.catch(e=>{
-  all=[
-    {url:"assets/help_home_collage-1.jpg",original:"assets/help_home_collage-1.jpg",name:"Photo Archive"},
-    {url:"assets/Screenshot_2026-09-20-13-45-39-25_a23b203fd3aafc6dcb84e438dda678b6.jpg",original:"assets/Screenshot_2026-09-20-13-45-39-25_a23b203fd3aafc6dcb84e438dda678b6.jpg",name:"Photo Archive"},
-    {url:"assets/FB_IMG_1789891917922.jpg",original:"assets/FB_IMG_1789891917922.jpg",name:"Photo Archive"},
-    {url:"assets/FB_IMG_1789891992819.jpg",original:"assets/FB_IMG_1789891992819.jpg",name:"Photo Archive"},
-    {url:"assets/PIRJADA MEHRABUDDIN SIDDIQUE.jpg",original:"assets/PIRJADA MEHRABUDDIN SIDDIQUE.jpg",name:"Photo Archive"}
-  ];
-  shown=all.length;
+  const q=search.value.trim().toLowerCase();
+  filtered=all.filter(p=>!q||(p.name||"").toLowerCase().includes(q));
+  shown=Math.min(Math.max(shown,STEP),filtered.length);
+  if(!filtered.length){grid.innerHTML="";more.innerHTML="";status.style.display="block";status.innerHTML=q?"🔎 কোনো ছবি পাওয়া যায়নি।":"📷 এই Album-এ এখনো কোনো ছবি নেই।";count.textContent="০টি ছবি";return;}
   status.style.display="none";
-  render();
-});
+  grid.innerHTML=filtered.slice(0,shown).map(p=>'<a class="photo" href="'+p.original+'" target="_blank" rel="noopener"><img loading="lazy" src="'+p.url+'" alt="'+escapeHtml(p.name||"Photo")+'" onerror="this.parentElement.style.display=\'none\'"></a>').join("");
+  more.innerHTML=shown<filtered.length?'<button type="button" onclick="shown=Math.min(shown+STEP,filtered.length);render()">আরও ছবি দেখুন →</button>':"";
+  count.textContent=filtered.length+"টি ছবি";
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));}
+function loadAlbum(v){
+  album.value=v; search.value=""; shown=0;
+  title.textContent=v==="all"?"📸 সকল ছবি":"📸 "+(album.options[album.selectedIndex]?.text||"Photo Album");
+  status.style.display="block";status.innerHTML="📡 Album থেকে ছবি লোড হচ্ছে...";grid.innerHTML="";more.innerHTML="";count.textContent="লোড হচ্ছে...";
+  fetch(API+"?album="+encodeURIComponent(v)+"&v="+Date.now(),{cache:"no-store"}).then(r=>r.text()).then(raw=>{let d;try{d=JSON.parse(raw)}catch(e){throw new Error("JSON response পাওয়া যায়নি")};if(!d.ok)throw new Error(d.error||"API error");all=Array.isArray(d.files)?d.files:[];shown=STEP;render()}).catch(e=>{all=[];shown=0;render();status.innerHTML="⚠️ Album লোড করা যায়নি।";count.textContent="0টি ছবি";});
+}
+album.addEventListener("change",()=>{const v=album.value;history.replaceState(null,"","photo-archive.html"+(v==="all"?"":"?album="+encodeURIComponent(v)));loadAlbum(v)});
+search.addEventListener("input",()=>{shown=STEP;render()});
+loadAlbum(album.value);
 </script></body></html>
