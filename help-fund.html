@@ -15,7 +15,7 @@ header{background:#fff;border-bottom:1px solid #eee}.nav{min-height:82px;display
 footer{border-top:1px solid #eee;padding:28px 0;color:#687077;font-size:12px}
 @media(max-width:700px){.grid{grid-template-columns:1fr}.nav{min-height:70px}.hero{padding-top:35px}}
 </style>
-</head>
+<style>.qr-wrap{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin-top:16px}.qr-box{background:#fff;border:1px solid #eedfd7;border-radius:12px;padding:12px;text-align:center}.qr-box #donationQr{width:180px;height:180px;margin:auto}.copy-upi{display:flex;gap:8px}.copy-upi input{flex:1;padding:11px;border:1px solid #ddd;border-radius:8px;font-weight:800}.copy-btn{padding:11px 14px;border:0;border-radius:8px;background:var(--red);color:#fff;font-weight:800}</style></head>
 <body>
 <div class="top">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ • ঐক্য • শিক্ষা • সমাজ সংস্কার</div>
 <header><div class="wrap nav"><a class="brand" href="index.html">WEST BENGAL ULAMA BOARD<small>WAYEJIN E FURFURA SHARIF</small></a><a href="index.html">← হোম</a></div></header>
@@ -26,8 +26,7 @@ footer{border-top:1px solid #eee;padding:28px 0;color:#687077;font-size:12px}
 <div class="grid">
 <div class="card"><h2>আপনার ইচ্ছামতো অর্থ দিন</h2><p class="note">যে পরিমাণ দিতে চান তা লিখুন।</p>
 <div class="amount"><span>₹</span><input id="amount" type="number" min="1" step="1" placeholder="যেমন 500"></div>
-<a id="payBtn" class="btn" href="#">UPI দিয়ে সহায়তা করুন →</a>
-<p class="note" style="margin-top:12px">UPI ID: <b>ulama.board@ybl</b><br>আপনার UPI অ্যাপে পেমেন্ট সম্পন্ন করুন।</p></div>
+<a id="payBtn" class="btn" href="#">UPI App দিয়ে সহায়তা করুন →</a><div class="copy-upi" style="margin-top:12px"><input id="donationUpiBox" value="ulama.board@ybl" readonly><button type="button" class="copy-btn" id="copyDonationUpi">UPI ID কপি</button></div><div class="qr-wrap"><div class="qr-box"><div id="donationQr"></div><strong>QR স্ক্যান করে অনুদান দিন</strong></div><div style="flex:1;min-width:220px"><strong>সহজ পেমেন্ট</strong><p class="note">Google Pay-তে নিরাপত্তাজনিত সমস্যা হলে QR Code স্ক্যান করুন অথবা UPI ID কপি করে যেকোনো UPI অ্যাপে পেমেন্ট করুন।</p></div></div><p class="note" style="margin-top:12px">UPI ID: <b>ulama.board@ybl</b><br>আপনার UPI অ্যাপে পেমেন্ট সম্পন্ন করুন।</p></div>
 <div class="card"><h2>পেমেন্টের তথ্য জমা দিন</h2><p class="note">পেমেন্টের পরে UTR / Transaction ID জমা দিলে হিসাব যাচাই করে মোট সংগৃহীত অর্থে যোগ করা যাবে।</p>
 <label class="note">নাম</label><input id="donor" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:7px;margin:6px 0 12px" placeholder="আপনার নাম">
 <label class="note">UTR / Transaction ID</label><input id="utr" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:7px;margin:6px 0 12px" placeholder="পেমেন্টের UTR">
@@ -37,10 +36,10 @@ footer{border-top:1px solid #eee;padding:28px 0;color:#687077;font-size:12px}
 </section>
 </main>
 <footer><div class="wrap">© 2026 West Bengal Ulama Board • WAYEJIN E FURFURA SHARIF</div></footer>
-<script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script>
 const amount=document.getElementById('amount'),pay=document.getElementById('payBtn');
-function updatePay(){const a=Number(amount.value||0);pay.href=a>0?'upi://pay?pa=ulama.board@ybl&pn=WAYEJIN%20E%20FURFURA%20SHARIF&am='+encodeURIComponent(a.toFixed(2))+'&cu=INR&tn=Ulama%20Help%20Fund':'#';}
-amount.addEventListener('input',updatePay);
+let qr;function updatePay(){const a=Number(amount.value||0);pay.href=a>0?'upi://pay?pa=ulama.board@ybl&pn=WAYEJIN%20E%20FURFURA%20SHARIF&am='+encodeURIComponent(a.toFixed(2))+'&cu=INR&tn=Ulama%20Help%20Fund':'#';}
+function updateQr(){const a=Number(amount.value||0);const box=document.getElementById('donationQr');box.innerHTML='';if(a>0)qr=new QRCode(box,{text:'upi://pay?pa=ulama.board@ybl&pn=WAYEJIN%20E%20FURFURA%20SHARIF&am='+encodeURIComponent(a.toFixed(2))+'&cu=INR&tn=Ulama%20Help%20Fund%20Donation',width:180,height:180});}amount.addEventListener('input',()=>{updatePay();updateQr()});document.getElementById('copyDonationUpi').addEventListener('click',async()=>{try{await navigator.clipboard.writeText('ulama.board@ybl')}catch(e){document.getElementById('donationUpiBox').select();document.execCommand('copy')}document.getElementById('copyDonationUpi').textContent='কপি হয়েছে ✓';setTimeout(()=>document.getElementById('copyDonationUpi').textContent='UPI ID কপি',1800)});
 document.getElementById('submitBtn').addEventListener('click',()=>{const s=document.getElementById('status');s.style.display='block';s.textContent='পেমেন্ট তথ্য গ্রহণের জন্য অনলাইন হিসাব সিস্টেম সংযুক্ত করা হবে। আপাতত UTR সংরক্ষণ/যাচাই ব্যবস্থা সক্রিয় নয়।';});
 </script>
 <script src="assets/site.js" defer></script>
