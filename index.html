@@ -67,6 +67,14 @@
 .home-gallery-item:hover img{transform:scale(1.04)}
 .gallery-loading{grid-column:1/-1;padding:28px;text-align:center;border:1px dashed #d7dfdb;border-radius:10px;color:#69737a;background:#fafcfc}
 @media(max-width:700px){.home-gallery{padding:5px 0 28px}.gallery-head{align-items:center}.gallery-head .section-title{font-size:23px}.gallery-head p{font-size:10px}.gallery-all{font-size:11px}.home-gallery-grid{grid-template-columns:repeat(2,1fr);gap:8px}.home-gallery-item{border-radius:8px}}
+</style><style>
+.hero-slideshow{display:block;position:relative;width:88%;height:86%;min-height:320px;margin-bottom:-5px;border-radius:18px;overflow:hidden;text-decoration:none;background:#eef2f0;box-shadow:0 15px 30px #334a4430}
+.hero-slideshow .hero-collage{width:100%;height:100%;margin:0;display:block;object-fit:cover;transition:opacity .45s ease,transform .6s ease}
+.hero-slide-label{position:absolute;left:18px;bottom:18px;background:rgba(7,56,44,.92);color:#fff;padding:12px 18px;border-radius:10px;font-weight:900;font-size:13px}
+.hero-slide-dots{position:absolute;right:16px;bottom:17px;display:flex;gap:5px}
+.hero-slide-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.55)}
+.hero-slide-dot.active{background:#fff;transform:scale(1.2)}
+@media(max-width:780px){.hero-slideshow{width:100%;height:300px;min-height:300px}.hero-slide-label{left:12px;bottom:12px;padding:9px 12px;font-size:11px}.hero-slide-dots{right:12px;bottom:13px}}
 </style></head>
 <body>
 <div class="topbar"><div class="wrap"><div class="top-left"><span>📍 West Bengal, India</span><span>✉ info@westbengalulamaboard.com</span><span>☎ +91 98765 43210</span></div><div class="top-right"><span>●</span><span>●</span><span>●</span><b>বাংলা</b> | English</div></div></div>
@@ -75,7 +83,7 @@
 <nav><a class="active" href="index.html">হোম</a><a href="about.html">আমাদের সম্পর্কে</a><a href="wazeens.html">ওয়ায়েজিন</a><a href="about.html">ইসলামী শিক্ষা</a><a href="gallery.html">মিডিয়া</a><a href="documents.html">প্রবন্ধ</a><a href="activities.html">সমাজসেবা</a><a href="news-events.html">অনুষ্ঠান</a><a href="verification.html">ভেরিফিকেশন</a><a href="contact.html">যোগাযোগ</a><a href="help-fund.html">সহায়তা তহবিল</a><a href="location.html">লাইভ লোকেশন</a></nav>
 </div></header>
 <main>
-<section class="hero"><div class="wrap hero-grid"><div class="hero-copy"><div class="eyebrow" style="text-align:center;letter-spacing:0!important;word-spacing:4px">ওলামা ঐক্য <span>•</span> শিক্ষা <span>•</span> সমাজ সংস্কার <span>•</span> সেবা</div><h1 class="hero-brand">WAYEJIN E - FURFURA SHARIF</h1><p>পশ্চিমবঙ্গ উলামা বোর্ড — ওয়ায়েজিন এ ফুরফুরা শরীফের একটি আধুনিক ডিজিটাল প্ল্যাটফর্ম। ইসলামি শিক্ষা, উলামা ঐক্য, সমাজকল্যাণ এবং সদস্যসেবাকে আরও সুসংগঠিত করার লক্ষ্যে আমরা কাজ করি।</p><div class="hero-actions"><a class="btn" href="registration.html">সদস্য হোন →</a><a class="btn outline" href="about.html">আরও জানুন</a></div></div><div class="hero-art"><a href="gallery.html" style="display:block;position:relative;border-radius:18px;overflow:hidden;text-decoration:none"><img class="hero-collage" src="assets/help_home_collage-1.jpg" alt="ফটো গ্যালারি"><span style="position:absolute;left:18px;bottom:18px;background:rgba(7,56,44,.92);color:#fff;padding:12px 18px;border-radius:10px;font-weight:900">📸 ফটো গ্যালারি • Photo Archive →</span></a></div></div></section>
+<section class="hero"><div class="wrap hero-grid"><div class="hero-copy"><div class="eyebrow" style="text-align:center;letter-spacing:0!important;word-spacing:4px">ওলামা ঐক্য <span>•</span> শিক্ষা <span>•</span> সমাজ সংস্কার <span>•</span> সেবা</div><h1 class="hero-brand">WAYEJIN E - FURFURA SHARIF</h1><p>পশ্চিমবঙ্গ উলামা বোর্ড — ওয়ায়েজিন এ ফুরফুরা শরীফের একটি আধুনিক ডিজিটাল প্ল্যাটফর্ম। ইসলামি শিক্ষা, উলামা ঐক্য, সমাজকল্যাণ এবং সদস্যসেবাকে আরও সুসংগঠিত করার লক্ষ্যে আমরা কাজ করি।</p><div class="hero-actions"><a class="btn" href="registration.html">সদস্য হোন →</a><a class="btn outline" href="about.html">আরও জানুন</a></div></div><div class="hero-art"><a class="hero-slideshow" href="photo-archive.html?album=all" aria-label="ফটো গ্যালারি"><img id="heroSlideImage" class="hero-collage" src="assets/help_home_collage-1.jpg" alt="ফটো গ্যালারি"><span class="hero-slide-label">📸 ফটো গ্যালারি • Photo Archive →</span><span class="hero-slide-dots" id="heroSlideDots"></span></a></div></div></section>
 <section class="services"><div class="wrap service-grid"><a class="service" href="wazeens.html"><div class="icon">🎙️</div><h3>ওয়ায়েজিন</h3><p>ওয়ায়েজিন পরিচিতি ও প্রোফাইল</p></a><a class="service" href="about.html"><div class="icon">📖</div><h3>ইসলামী শিক্ষা</h3><p>কুরআন, হাদিস ও শিক্ষা কার্যক্রম</p></a><a class="service" href="gallery.html"><div class="icon">🎧</div><h3>বয়ান ও মিডিয়া</h3><p>বয়ান, ভিডিও, অডিও ও ফটো</p></a><a class="service" href="help-fund.html"><div class="icon">🤝</div><h3>সমাজসেবা</h3><p>মানবিক সহায়তা ও জনকল্যাণ</p></a><a class="service" href="verification.html"><div class="icon">🪪</div><h3>ভেরিফিকেশন</h3><p>Member ID ও QR Verification</p></a><a class="service" href="news-events.html"><div class="icon">📅</div><h3>অনুষ্ঠানসমূহ</h3><p>মাহফিল, সম্মেলন ও সভা</p></a></div></section>
 <section class="content"><div class="wrap two-col"><div class="about-card"><h2 class="section-title">পশ্চিমবঙ্গ উলামা বোর্ড সম্পর্কে</h2><p>West Bengal Ulama Board (WBUB) — Waye­jin E Furfura Sharif is a platform of Ulama, scholars and well-wishers dedicated to Islamic unity, education, social reform and community welfare.</p><p>এই ওয়েবসাইটে সদস্য নিবন্ধন, আবেদন স্ট্যাটাস, Official Member ID, QR Verification এবং অনলাইন সদস্য সেবা এক জায়গায় পাওয়া যায়।</p><a class="btn" href="about.html">আরও পড়ুন →</a></div><div class="news-card"><div class="news-head"><h2 class="section-title" style="margin:0;font-size:23px">সর্বশেষ সংবাদ ও অনুষ্ঠান</h2><a class="view" href="news-events.html">সব দেখুন →</a></div><div class="news-list">
 <a class="news-item" href="news-events.html"><span class="date"><b>01</b>FEB</span><span><strong>ঐতিহাসিক উলামা সম্মেলন – ২০২৬</strong><small>ফুরফুরা দরবার শরীফে অনুষ্ঠিত হবে</small></span><span class="arrow">›</span></a>
@@ -114,6 +122,32 @@ fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"})
  grid.innerHTML=items.map(p=>'<a class="home-gallery-item" href="photo-archive.html?album=all"><img loading="lazy" src="'+p.url+'" alt="'+(p.name||"Photo")+'"></a>').join("");
 })
 .catch(()=>{grid.innerHTML='<div class="gallery-loading">📡 ফটো গ্যালারি সাময়িকভাবে লোড হচ্ছে।</div>';});
+})();
+</script><script>
+(function(){
+const API="https://script.google.com/macros/s/AKfycbzeuVRl-OYsiDU-Oc_YfDUKywTJ6bVTerzB0SvA0sjJO0iLpQ3XSyibbZ5pS1592hdHwA/exec";
+const img=document.getElementById("heroSlideImage"),dots=document.getElementById("heroSlideDots");
+if(!img||!dots)return;
+let files=[],i=0,timer=null;
+function drawDots(){
+  dots.innerHTML=files.slice(0,8).map((_,n)=>'<span class="hero-slide-dot '+(n===i?'active':'')+'"></span>').join("");
+}
+function show(n){
+  if(!files.length)return;
+  i=n%files.length;
+  img.style.opacity="0";
+  setTimeout(()=>{img.src=files[i].url;img.alt=files[i].name||"Photo Archive";img.style.opacity="1";drawDots();},220);
+}
+fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"})
+.then(r=>r.json())
+.then(d=>{
+  files=(Array.isArray(d.files)?d.files:[]).slice(0,12);
+  if(!files.length)return;
+  drawDots();
+  img.src=files[0].url;
+  timer=setInterval(()=>show(i+1),4000);
+})
+.catch(()=>{});
 })();
 </script></body>
 </html>
