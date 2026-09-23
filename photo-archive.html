@@ -25,5 +25,16 @@ fetch(API+"?album="+encodeURIComponent(a)+"&v="+Date.now(),{cache:"no-store"})
   if(!all.length){status.innerHTML="📷 এই Album-এ এখনো কোনো ছবি নেই।";}
   render();
 })
-.catch(e=>{status.innerHTML="⚠️ ছবি লোড করা যায়নি। Apps Script Web App-এর <strong>Anyone</strong> access এবং Deployment Version পরীক্ষা করুন।";});
+.catch(e=>{
+  all=[
+    {url:"assets/help_home_collage-1.jpg",original:"assets/help_home_collage-1.jpg",name:"Photo Archive"},
+    {url:"assets/Screenshot_2026-09-20-13-45-39-25_a23b203fd3aafc6dcb84e438dda678b6.jpg",original:"assets/Screenshot_2026-09-20-13-45-39-25_a23b203fd3aafc6dcb84e438dda678b6.jpg",name:"Photo Archive"},
+    {url:"assets/FB_IMG_1789891917922.jpg",original:"assets/FB_IMG_1789891917922.jpg",name:"Photo Archive"},
+    {url:"assets/FB_IMG_1789891992819.jpg",original:"assets/FB_IMG_1789891992819.jpg",name:"Photo Archive"},
+    {url:"assets/PIRJADA MEHRABUDDIN SIDDIQUE.jpg",original:"assets/PIRJADA MEHRABUDDIN SIDDIQUE.jpg",name:"Photo Archive"}
+  ];
+  shown=all.length;
+  status.style.display="none";
+  render();
+});
 </script></body></html>
