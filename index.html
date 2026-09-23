@@ -54,7 +54,20 @@
 
 .member-login-home{padding:0 0 32px}.member-login-card{position:relative;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 30px;border:1px solid #ead8d3;border-radius:12px;background:linear-gradient(105deg,#fff8f5 0%,#f8f2ed 58%,#eef4f2 100%);box-shadow:0 8px 25px #00000009;overflow:hidden}.member-login-card:before{content:"";position:absolute;right:-55px;top:-75px;width:210px;height:210px;border:28px solid #b52f3715;border-radius:50%}.member-login-copy{position:relative}.member-login-badge{display:inline-block;font-size:11px;font-weight:800;color:#b52f37;background:#fff;border:1px solid #ead8d3;border-radius:20px;padding:6px 11px;margin-bottom:8px}.member-login-card h2{font-family:Georgia,serif;font-size:25px;margin:0 0 7px}.member-login-card h2 span{color:#b52f37}.member-login-card p{margin:0;color:#626a6e;font-size:13px;line-height:1.7}.member-login-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:190px;padding:14px 22px;border-radius:8px;background:#315f59;color:#fff;font-weight:800;font-size:14px;box-shadow:0 8px 18px #315f5930}.member-login-btn:hover{background:#264e49}
 @media(max-width:700px){.member-login-card{display:block;padding:22px 18px}.member-login-card h2{font-size:22px}.member-login-card p{font-size:12px}.member-login-btn{width:100%;margin-top:16px}}
-</style><style>.hero-brand{color:#b52f38!important;white-space:nowrap;font-size:clamp(25px,4.2vw,56px)!important;letter-spacing:-1px!important;line-height:1.15!important}@media(max-width:480px){.hero-brand{font-size:24px!important;letter-spacing:-.6px!important}}</style></head>
+</style><style>.hero-brand{color:#b52f38!important;white-space:nowrap;font-size:clamp(25px,4.2vw,56px)!important;letter-spacing:-1px!important;line-height:1.15!important}@media(max-width:480px){.hero-brand{font-size:24px!important;letter-spacing:-.6px!important}}</style><style>
+.home-gallery{padding:8px 0 38px;background:#fff}
+.gallery-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:16px}
+.gallery-kicker{font-size:10px;font-weight:800;color:var(--red);letter-spacing:1.5px}
+.gallery-head .section-title{margin:5px 0 3px;font-size:27px}
+.gallery-head p{margin:0;color:#747b80;font-size:11px}
+.gallery-all{font-size:12px;font-weight:800;color:var(--red);white-space:nowrap}
+.home-gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.home-gallery-item{display:block;aspect-ratio:4/3;overflow:hidden;border-radius:9px;background:#eef2f0;border:1px solid #eee}
+.home-gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+.home-gallery-item:hover img{transform:scale(1.04)}
+.gallery-loading{grid-column:1/-1;padding:28px;text-align:center;border:1px dashed #d7dfdb;border-radius:10px;color:#69737a;background:#fafcfc}
+@media(max-width:700px){.home-gallery{padding:5px 0 28px}.gallery-head{align-items:center}.gallery-head .section-title{font-size:23px}.gallery-head p{font-size:10px}.gallery-all{font-size:11px}.home-gallery-grid{grid-template-columns:repeat(2,1fr);gap:8px}.home-gallery-item{border-radius:8px}}
+</style></head>
 <body>
 <div class="topbar"><div class="wrap"><div class="top-left"><span>📍 West Bengal, India</span><span>✉ info@westbengalulamaboard.com</span><span>☎ +91 98765 43210</span></div><div class="top-right"><span>●</span><span>●</span><span>●</span><b>বাংলা</b> | English</div></div></div>
 <header class="header"><div class="wrap nav" style="justify-content:center;text-align:center">
@@ -70,6 +83,7 @@
 <a class="news-item" href="news-events.html"><span class="date"><b>09</b>NOV</span><span><strong>উত্তর ২৪ পরগনা পরিকল্পনা সম্মেলন</strong><small>জেলা পরিকল্পনা ও সমন্বয়</small></span><span class="arrow">›</span></a>
 <a class="news-item" href="registration.html"><span class="date"><b>₹500</b>YEAR</span><span><strong>ওয়েবসাইট সদস্য নিবন্ধন</strong><small>অনলাইন সদস্য নিবন্ধন চালু রয়েছে</small></span><span class="arrow">›</span></a>
 </div></div></div></section>
+<section class="home-gallery"><div class="wrap"><div class="gallery-head"><div><span class="gallery-kicker">PHOTO ARCHIVE</span><h2 class="section-title">ফটো গ্যালারি</h2><p>Google Drive Photo Archive থেকে সর্বশেষ ছবি</p></div><a class="gallery-all" href="photo-archive.html?album=all">সব ছবি দেখুন →</a></div><div id="homeGalleryGrid" class="home-gallery-grid"><div class="gallery-loading">📡 ছবি লোড হচ্ছে...</div></div></div></section>
 <section class="member-login-home"><div class="wrap"><div class="member-login-card"><div class="member-login-copy"><span class="member-login-badge">🔐 MEMBER SERVICE</span><h2><span>সদস্য লগইন</span> • OTP Login</h2><p>Official Member ID ও নিবন্ধিত মোবাইল নম্বর দিয়ে OTP-এর মাধ্যমে নিরাপদে আপনার সদস্য প্রোফাইলে প্রবেশ করুন।</p></div><a class="member-login-btn" href="member.html">🔐 Member Login / OTP</a></div></div></section>
 <section class="stats"><div class="wrap stat-grid"><div class="stat"><b>01</b><span>ডিজিটাল সদস্যপদ প্ল্যাটফর্ম</span></div><div class="stat"><b>24</b><span>জেলা নেটওয়ার্ক</span></div><div class="stat"><b>100+</b><span>সামাজিক কার্যক্রম</span></div><div class="stat"><b>1,000+</b><span>শিক্ষা ও কল্যাণ কার্যক্রম</span></div><div class="stat"><b>∞</b><span>উন্নত আগামীর পথে</span></div></div></section>
 <section class="wrap membership-strip"><div><h2><span>উলামা সম্প্রদায়ে</span> যোগ দিন</h2><p>বার্ষিক সদস্যপদ • অনলাইন নিবন্ধন • Member ID • QR Verification</p></div><div class="membership-actions"><div class="price">₹500 / Year</div><a class="btn" href="registration.html">এখনই যোগ দিন →</a></div></section>
@@ -86,5 +100,20 @@
 <footer class="footer"><div class="wrap footer-grid"><div><div class="footer-brand"><img src="assets/WBUB_Logo_Transparent_Final.png" alt="WBUB Logo"><div><strong>WEST BENGAL ULAMA BOARD</strong><p>WAYEJIN E FURFURA SHARIF</p><p>ঐক্য • শিক্ষা • সমাজ সংস্কার</p></div></div></div><div><h3>দ্রুত লিংক</h3><p><a href="index.html">Home</a></p><p><a href="about.html">About Us</a></p><p><a href="registration.html">Membership</a></p><p><a href="activities.html">Projects</a></p></div><div><h3>সদস্য সেবা</h3><p><a href="news-events.html">News & Events</a></p><p><a href="wazeens.html">ওয়ায়েজিন ডিরেক্টরি</a></p><p><a href="verification.html">Verification</a></p><p><a href="contact.html">Contact</a></p></div><div><h3>যোগাযোগ</h3><p>প্রধান কার্যালয় – ফুরফুরা শরীফ</p><p>শাখা কার্যালয় – শিমুলতলা হাসপাতাল মোড়, বাসন্তী</p><p>দক্ষিণ ২৪ পরগনা, পশ্চিমবঙ্গ</p><p>info@westbengalulamaboard.com</p></div></div></footer>
 <div class="bottom"><div class="wrap"><span>© 2026 West Bengal Ulama Board. All Rights Reserved.</span><span>দীনের জন্য। মানুষের জন্য।</span></div></div>
 <script src="assets/wazeens.js"></script><script src="assets/site.js" defer></script>
-</body>
+<script>
+(function(){
+const API="https://script.google.com/macros/s/AKfycbzeuVRl-OYsiDU-Oc_YfDUKywTJ6bVTerzB0SvA0sjJO0iLpQ3XSyibbZ5pS1592hdHwA/exec";
+const grid=document.getElementById("homeGalleryGrid");
+if(!grid)return;
+fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"})
+.then(r=>r.json())
+.then(d=>{
+ const files=Array.isArray(d.files)?d.files:[];
+ const items=files.slice(0,8);
+ if(!items.length){grid.innerHTML='<div class="gallery-loading">📷 এখনো কোনো ছবি আপলোড করা হয়নি।</div>';return;}
+ grid.innerHTML=items.map(p=>'<a class="home-gallery-item" href="photo-archive.html?album=all"><img loading="lazy" src="'+p.url+'" alt="'+(p.name||"Photo")+'"></a>').join("");
+})
+.catch(()=>{grid.innerHTML='<div class="gallery-loading">📡 ফটো গ্যালারি সাময়িকভাবে লোড হচ্ছে।</div>';});
+})();
+</script></body>
 </html>
