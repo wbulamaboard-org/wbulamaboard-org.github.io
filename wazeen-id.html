@@ -158,7 +158,12 @@ async function load(){
  try{
   const d=await WBUB_WORKFLOW.publicVerify(id);
   if(d.found!==true||!d.record)throw 0;
-  const r=d.record;
+  let r=d.record;
+  try{
+   const key="wbub_profile_edit_"+String(id||"").trim().toUpperCase().replace(/\\s/g,"");
+   const local=JSON.parse(localStorage.getItem(key)||"null");
+   if(local)r=Object.assign({},r,local);
+  }catch(_){}
   if(!["verified","approved","active"].includes(String(r.status||"").toLowerCase()))throw 0;
   const memberId=r.member_id||r.wazeen_id||id;
   document.getElementById("name").textContent=r.name||"Approved Member";
