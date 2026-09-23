@@ -21,7 +21,7 @@ button:disabled{opacity:.6;cursor:not-allowed}.workflow-message{margin-top:16px;
 .member-id{margin-left:auto;text-align:right}.member-id small{display:block;color:#dbe9e3;font-size:11px}.member-id strong{font-size:18px;color:#f2dc91}
 .info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}.info{background:var(--soft);border-radius:12px;padding:13px}.info small{display:block;color:#687770;margin-bottom:4px}.info strong{display:block;color:#17372d}
 .actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}.actions a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:46px;border-radius:9px;background:var(--gold);color:#17372d;font-weight:900;text-decoration:none;padding:7px}.actions a.dark{background:var(--green);color:#fff}
-.note{margin-top:14px;font-size:13px;color:#52645c;background:#fffdf4;border:1px solid #eadcae;padding:12px;border-radius:10px}.security{margin-top:16px;padding:12px;border-radius:10px;background:#eef7f2;color:#285a48;font-size:13px}
+.note{margin-top:14px;font-size:13px;color:#52645c;background:#fffdf4;border:1px solid #eadcae;padding:12px;border-radius:10px}.security{margin-top:16px;padding:12px;border-radius:10px;background:#eef7f2;color:#285a48;font-size:13px}.edit-panel{margin-top:18px;padding:18px;border:1px solid #dce6e0;border-radius:14px;background:#fbfdfc}.edit-panel h3{margin-top:0;color:var(--deep)}.edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.edit-field label{font-weight:800;display:block;margin:5px 0}.edit-field input,.edit-field textarea{width:100%;box-sizing:border-box;padding:12px;border:1px solid #cbd9d2;border-radius:9px;font:inherit}.edit-field.full{grid-column:1/-1}.edit-photo{display:flex;gap:14px;align-items:center}.edit-photo img{width:76px;height:92px;object-fit:cover;border-radius:10px;border:2px solid var(--gold);display:none}.edit-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.edit-actions button{margin-top:0}.edit-note{margin-top:10px;font-size:12px;color:#52645c;background:#fffdf4;padding:10px;border-radius:9px}@media(max-width:650px){.edit-grid{grid-template-columns:1fr}.edit-field.full{grid-column:auto}.edit-actions{grid-template-columns:1fr}}
 @media(max-width:650px){.cardx{padding:18px}.hero h1{font-size:28px}.login-grid{grid-template-columns:1fr}.member-head{align-items:flex-start;flex-wrap:wrap}.avatar{width:62px;height:62px}.member-head h2{font-size:19px}.member-id{margin-left:0;text-align:left}.info-grid,.actions,.otp-actions{grid-template-columns:1fr}}
 </style>
 </head>
@@ -75,7 +75,7 @@ button:disabled{opacity:.6;cursor:not-allowed}.workflow-message{margin-top:16px;
 <div class="actions">
 <a class="dark" id="idCard" href="#">🪪 Digital ID Card</a>
 <a id="verify" href="#">✓ QR Verification</a>
-<a id="status" href="status.html">📋 Application Status</a>
+<a id="status" href="status.html">📋 Application Status</a>\n<a id="editProfileBtn" class="dark" href="#edit-profile">✏️ Edit Profile</a>
 </div>
 <div class="note">Member ID অপরিবর্তনীয়। ভবিষ্যৎ Profile Edit-এ পরিবর্তিত তথ্য সরাসরি প্রকাশ না হয়ে Admin Approval-এর জন্য Pending থাকবে।</div>
 <div class="security">🔒 OTP যাচাই সফল না হলে Member Area খোলা হবে না। OTP যাচাই MSG91-এর মাধ্যমে হয়।</div>
@@ -143,6 +143,12 @@ function waitForSdk(){
  return false;
 }
 function profilePhone(r){return normalizeMobile(r.mobile||r.phone||"")}
+function editKey(id){return "wbub_profile_edit_"+normalizeId(id)}
+function getLocalEdit(id){try{return JSON.parse(localStorage.getItem(editKey(id))||"null")}catch(_){return null}}
+function applyLocalEdit(r){const o=getLocalEdit(currentMemberId);return o?Object.assign({},r,o):r}
+function fillEditor(r){document.getElementById("editName").value=r.name||"";document.getElementById("editDes").value=r.designation||"";document.getElementById("editDistrict").value=r.district||"";document.getElementById("editBlock").value=r.block||r.area||"";document.getElementById("editValid").value=r.valid_till||r.validity||"";document.getElementById("editAddress").value=r.address||"";const p=document.getElementById("editPhotoPreview");if(r.photo_url||r.photo){p.src=r.photo_url||r.photo;p.style.display="block"}else p.style.display="none"}
+function renderProfile(r){r=applyLocalEdit(r);document.getElementById("name").textContent=r.name||"Approved Member";document.getElementById("des").textContent=r.designation||"Member";document.getElementById("district").textContent=r.district||"-";document.getElementById("block").textContent=r.block||r.area||"-";document.getElementById("valid").textContent=r.valid_till||r.validity||"-";const avatar=document.getElementById("avatar"),photo=r.photo_url||r.photo||"";if(photo){avatar.src=photo;avatar.style.display="block";avatar.onerror=()=>avatar.style.display="none"}else avatar.style.display="none";fillEditor(r)}
+async function resizePhoto(file){const bitmap=await createImageBitmap(file),max=600,scale=Math.min(1,max/Math.max(bitmap.width,bitmap.height)),canvas=document.createElement("canvas");canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));const ctx=canvas.getContext("2d");ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);return await new Promise((resolve,reject)=>canvas.toBlob(async b=>{if(!b)return reject(0);const fr=new FileReader();fr.onload=()=>resolve(fr.result);fr.onerror=reject;fr.readAsDataURL(b)},"image/jpeg",.78))}
 async function loadApprovedProfile(){
  let r=null;
  try{
@@ -171,7 +177,7 @@ async function loadApprovedProfile(){
  document.getElementById("verify").href="verification.html?id="+encodeURIComponent(memberId);
  const avatar=document.getElementById("avatar"),photo=r.photo_url||r.photo||"";
  if(photo){avatar.src=photo;avatar.style.display="block";avatar.onerror=()=>avatar.style.display="none"}else avatar.style.display="none";
- dash.hidden=false;form.hidden=true;otpBox.hidden=true;
+ renderProfile(r);dash.hidden=false;form.hidden=true;otpBox.hidden=true;
 }
 form.addEventListener("submit",function(e){
  e.preventDefault();clearMessage();dash.hidden=true;
@@ -209,6 +215,10 @@ resendBtn.addEventListener("click",function(){
  if(!currentMobile||!waitForSdk())return;clearMessage();resendBtn.disabled=true;
  window.retryOtp(null,function(data){requestId=extractRequestId(data)||requestId;message("ok","নতুন OTP পাঠানো হয়েছে।");startResendTimer()},function(){message("error","নতুন OTP পাঠানো যায়নি।");resendBtn.disabled=false;resendBtn.textContent="↻ আবার OTP"},requestId);
 });
+document.getElementById("editProfileBtn").addEventListener("click",function(e){e.preventDefault();document.getElementById("editProfile").hidden=false;document.getElementById("editProfile").scrollIntoView({behavior:"smooth",block:"start"});});
+document.getElementById("cancelEditBtn").addEventListener("click",function(){document.getElementById("editProfile").hidden=true;});
+document.getElementById("editPhoto").addEventListener("change",async function(){const f=this.files&&this.files[0],p=document.getElementById("editPhotoPreview");if(!f){p.style.display="none";return}try{p.src=await resizePhoto(f);p.style.display="block"}catch(_){message("error","ছবি প্রক্রিয়া করা যায়নি। JPG/PNG/WebP ছবি দিন।")}});
+document.getElementById("saveProfileBtn").addEventListener("click",async function(){try{const current=JSON.parse(localStorage.getItem(editKey(currentMemberId))||"{}");const photoInput=document.getElementById("editPhoto");let photo=current.photo||"";if(photoInput.files&&photoInput.files[0])photo=await resizePhoto(photoInput.files[0]);const edit={name:document.getElementById("editName").value.trim(),designation:document.getElementById("editDes").value.trim(),district:document.getElementById("editDistrict").value.trim(),block:document.getElementById("editBlock").value.trim(),validity:document.getElementById("editValid").value.trim(),address:document.getElementById("editAddress").value.trim(),photo:photo};localStorage.setItem(editKey(currentMemberId),JSON.stringify(edit));const base={name:document.getElementById("name").textContent,designation:edit.designation,district:edit.district,block:edit.block,validity:edit.validity,photo:edit.photo};renderProfile(base);document.getElementById("editProfile").hidden=true;message("ok","Profile পরিবর্তন এই ডিভাইসে সংরক্ষণ হয়েছে। Official server record এখনো পরিবর্তন হয়নি।")}catch(_){message("error","Profile save করা যায়নি। আবার চেষ্টা করুন।")}});
 document.addEventListener("DOMContentLoaded",function(){
  const s=document.createElement("script");s.src="https://verify.msg91.com/otp-provider.js";s.async=true;
  s.onload=function(){initMsg91()};s.onerror=function(){message("error","MSG91 OTP provider লোড করা যায়নি।")}
