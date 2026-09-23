@@ -149,15 +149,20 @@ fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"})
 })
 .catch(()=>{
   files=[
-    {url:"assets/help_home_collage-1.jpg",name:"Photo Archive"},
     {url:"assets/Screenshot_2026-09-20-13-45-39-25_a23b203fd3aafc6dcb84e438dda678b6.jpg",name:"Photo Archive"},
     {url:"assets/FB_IMG_1789891917922.jpg",name:"Photo Archive"},
     {url:"assets/FB_IMG_1789891992819.jpg",name:"Photo Archive"},
-    {url:"assets/PIRJADA MEHRABUDDIN SIDDIQUE.jpg",name:"Photo Archive"}
+    {url:"assets/PIRJADA MEHRABUDDIN SIDDIQUE.jpg",name:"Photo Archive"},
+    {url:"assets/controller_mehrab_uddin_siddiqui.jpg",name:"Photo Archive"}
   ];
   drawDots();
   img.src=files[0].url;
-  timer=setInterval(()=>show(i+1),4000);
+  clearInterval(timer);
+  timer=setInterval(()=>show(i+1),2500);
+});
+document.addEventListener("visibilitychange",()=>{
+  if(document.hidden){clearInterval(timer);}
+  else if(files.length){clearInterval(timer);timer=setInterval(()=>show(i+1),2500);}
 });
 })();
 </script></body>
