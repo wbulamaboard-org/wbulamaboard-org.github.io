@@ -92,6 +92,26 @@ const form=document.getElementById("loginForm"),memberIdEl=document.getElementBy
 const sendBtn=document.getElementById("sendBtn"),verifyBtn=document.getElementById("verifyBtn"),resendBtn=document.getElementById("resendBtn");
 const otpBox=document.getElementById("otpBox"),otpInput=document.getElementById("otpInput"),otpHint=document.getElementById("otpHint"),msg=document.getElementById("msg"),dash=document.getElementById("dashboard");
 let currentMobile="",currentMemberId="",requestId="",resendTimer=null,resendLeft=0,msg91Ready=false;
+function extractRequestId(data){
+  try{
+    if(data==null)return "";
+    if(typeof data==="string"){
+      const s=data.trim();
+      if(!s)return "";
+      try{return extractRequestId(JSON.parse(s))}catch(_){return s.length>8?s:""}
+    }
+    if(typeof data==="object"){
+      const keys=["reqId","requestId","request_id","req_id","message"];
+      for(const k of keys){
+        const v=data[k];
+        if(typeof v==="string"&&v.trim().length>8&&k!=="message")return v.trim();
+        if(k==="message"&&v){const nested=extractRequestId(v);if(nested)return nested;}
+      }
+      for(const k of Object.keys(data)){const nested=extractRequestId(data[k]);if(nested)return nested;}
+    }
+  }catch(_){}
+  return "";
+}
 
 function message(type,text){msg.className="workflow-message "+type;msg.textContent=text;msg.hidden=false}
 function clearMessage(){msg.hidden=true}
@@ -161,7 +181,7 @@ form.addEventListener("submit",function(e){
  if(!waitForSdk())return;
  setButton(sendBtn,true,"OTP পাঠানো হচ্ছে…");
  window.sendOtp("91"+currentMobile,function(data){
-   requestId=(data&&(data.reqId||data.requestId||data.request_id))||"";
+   requestId=extractRequestId(data);
    otpBox.hidden=false;otpHint.textContent="OTP পাঠানো হয়েছে। মোবাইলের শেষ ৪ সংখ্যা: "+currentMobile.slice(-4);
    message("ok","OTP পাঠানো হয়েছে। SMS-এ পাওয়া OTP লিখে Verify করুন।");startResendTimer();otpInput.focus();
    setButton(sendBtn,false);
@@ -187,7 +207,7 @@ verifyBtn.addEventListener("click",function(){
 });
 resendBtn.addEventListener("click",function(){
  if(!currentMobile||!waitForSdk())return;clearMessage();resendBtn.disabled=true;
- window.retryOtp(null,function(data){requestId=(data&&(data.reqId||data.requestId||data.request_id))||requestId;message("ok","নতুন OTP পাঠানো হয়েছে।");startResendTimer()},function(){message("error","নতুন OTP পাঠানো যায়নি।");resendBtn.disabled=false;resendBtn.textContent="↻ আবার OTP"},requestId);
+ window.retryOtp(null,function(data){requestId=extractRequestId(data)||requestId;message("ok","নতুন OTP পাঠানো হয়েছে।");startResendTimer()},function(){message("error","নতুন OTP পাঠানো যায়নি।");resendBtn.disabled=false;resendBtn.textContent="↻ আবার OTP"},requestId);
 });
 document.addEventListener("DOMContentLoaded",function(){
  const s=document.createElement("script");s.src="https://verify.msg91.com/otp-provider.js";s.async=true;
