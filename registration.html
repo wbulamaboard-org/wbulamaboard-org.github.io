@@ -15,7 +15,13 @@
 <main><section><div class="wrap workflow"><div class="workflow-card">
 <h1>অনলাইন সদস্য নিবন্ধন</h1>
 <p class="muted">West Bengal Ulama Board • WAYEJIN E FURFURA SHARIF</p>
-<div class="notice"><strong>সদস্যপদ ফি:</strong> <span style="font-size:20px;font-weight:900">₹500 / Year</span><br><small>আবেদন অনুমোদনের আগে প্রশাসনিকভাবে পেমেন্ট যাচাই করা হবে।</small></div><div class="payment-box"><h2 style="margin-top:0">₹500 সদস্যপদ ফি পেমেন্ট</h2><p>UPI ID: <strong>ulama.board@ybl</strong></p><div class="copy-upi" style="margin-top:12px"><input id="upiIdBox" value="ulama.board@ybl" readonly><button type="button" class="copy-btn" id="copyUpi">UPI ID কপি</button></div><div class="qr-wrap"><div class="qr-box"><div id="memberQr"></div><strong>QR স্ক্যান করে ₹500 দিন</strong></div><div style="flex:1;min-width:220px"><strong>পেমেন্টের সহজ পদ্ধতি</strong><p class="muted"><small>Google Pay-তে নিরাপত্তাজনিত সমস্যা হলে QR Code স্ক্যান করুন অথবা UPI ID কপি করে আপনার UPI অ্যাপে পেমেন্ট করুন।</small></p></div></div><p class="muted" style="margin-bottom:0"><small>পেমেন্ট করার পর UTR / Transaction ID নিচের ঘরে দিন। UTR দেওয়া মানেই পেমেন্ট স্বয়ংক্রিয়ভাবে অনুমোদিত নয়; প্রশাসনিক যাচাইয়ের পর সদস্যপদ অনুমোদন হবে।</small></p></div><div class="notice"><strong>গুরুত্বপূর্ণ:</strong> আবেদন জমা দেওয়ার পর তা স্বয়ংক্রিয়ভাবে অনুমোদিত সদস্য হবে না। প্রশাসনিক যাচাই ও অনুমোদনের পরই Official Member ID তৈরি হবে।</div>
+<div class="notice"><strong>সদস্যপদ ফি:</strong> <span style="font-size:20px;font-weight:900">₹500 / Year</span><br><small>আবেদন অনুমোদনের আগে প্রশাসনিকভাবে পেমেন্ট যাচাই করা হবে।</small></div><div class="payment-box" id="razorpayPaymentBox">
+<h2 style="margin-top:0">💳 ₹500 সদস্যপদ ফি — Razorpay</h2>
+<p>ফর্মের তথ্য জমা দেওয়ার পর এখানে <strong>Secure Razorpay Checkout</strong> খুলবে। UPI, Card, Net Banking ইত্যাদি উপলব্ধ payment method থেকে পেমেন্ট করতে পারবেন।</p>
+<div id="paymentStatus" class="workflow-message" hidden></div>
+<button type="button" class="primary" id="payNowBtn" hidden style="width:100%;padding:15px;border:0;border-radius:9px;font-weight:900;font-size:16px">💳 ₹500 এখনই পেমেন্ট করুন</button>
+<p class="muted" style="margin-bottom:0"><small>পেমেন্ট সফল হলে Razorpay transaction server-side যাচাই করা হবে। সফল যাচাইয়ের পর payment status PAID এবং Official Member ID স্বয়ংক্রিয়ভাবে তৈরি হবে।</small></p>
+</div><div class="notice"><strong>গুরুত্বপূর্ণ:</strong> আবেদন জমা দেওয়ার পর তা স্বয়ংক্রিয়ভাবে অনুমোদিত সদস্য হবে না। প্রশাসনিক যাচাই ও অনুমোদনের পরই Official Member ID তৈরি হবে।</div>
 <div class="steps"><div id="s1" class="step active">১. তথ্য</div><div id="s2" class="step">২. পর্যালোচনা</div><div id="s3" class="step">৩. জমা</div></div>
 <form id="form">
 <div class="form-grid">
@@ -39,16 +45,108 @@
 <div id="message" hidden></div>
 <div id="receipt" class="receipt" hidden></div>
 </div></div></section></main>
-<script src="assets/member-workflow.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="assets/site.js" defer></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script><script src="assets/member-workflow.js?v=20260925-10"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="assets/site.js" defer></script>
 <script>
+const form=document.getElementById("form"),reviewBox=document.getElementById("reviewBox"),review=document.getElementById("review"),msg=document.getElementById("message"),receipt=document.getElementById("receipt"),reviewBtn=document.getElementById("reviewBtn"),submitBtn=document.getElementById("submitBtn"),editBtn=document.getElementById("editBtn"),payNowBtn=document.getElementById("payNowBtn"),paymentStatus=document.getElementById("paymentStatus");
+let payload=null,submitted=false,currentApplicationNo="",currentOrderId="",paymentBusy=false;
 
-new QRCode(document.getElementById("memberQr"),{text:"upi://pay?pa=ulama.board@ybl&pn=WAYEJIN%20E%20FURFURA%20SHARIF&am=500&cu=INR&tn=Ulama%20Board%20Annual%20Membership%20Fee",width:180,height:180});document.getElementById("copyUpi").addEventListener("click",async()=>{try{await navigator.clipboard.writeText("ulama.board@ybl");document.getElementById("copyUpi").textContent="কপি হয়েছে ✓"}catch(e){document.getElementById("upiIdBox").select();document.execCommand("copy");document.getElementById("copyUpi").textContent="কপি হয়েছে ✓"}setTimeout(()=>document.getElementById("copyUpi").textContent="UPI ID কপি",1800});const form=document.getElementById("form"),reviewBox=document.getElementById("reviewBox"),review=document.getElementById("review"),msg=document.getElementById("message"),receipt=document.getElementById("receipt"),reviewBtn=document.getElementById("reviewBtn"),submitBtn=document.getElementById("submitBtn"),editBtn=document.getElementById("editBtn");let payload=null,submitted=false;
 function setStep(n){[1,2,3].forEach(i=>document.getElementById("s"+i).classList.toggle("active",i===n))}
 function field(name){return form.elements[name]?.value?.trim()||""}
-async function preparePhoto(){const input=document.getElementById("photo"),file=input?.files?.[0];if(!file)throw new Error("PHOTO_REQUIRED");if(file.size>2*1024*1024)throw new Error("PHOTO_TOO_LARGE");if(!/^image\/(jpeg|png|webp)$/.test(file.type))throw new Error("PHOTO_TYPE");const bitmap=await createImageBitmap(file);const max=700;const scale=Math.min(1,max/Math.max(bitmap.width,bitmap.height));const canvas=document.createElement("canvas");canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));const ctx=canvas.getContext("2d");ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/jpeg",.78));if(!blob)throw new Error("PHOTO_PROCESS");const dataUrl=await new Promise((resolve,reject)=>{const fr=new FileReader();fr.onload=()=>resolve(fr.result);fr.onerror=reject;fr.readAsDataURL(blob)});return {data:dataUrl,name:(file.name||"member-photo").replace(/[^a-zA-Z0-9._-]/g,"_"),type:"image/jpeg"}}
-document.getElementById("photo").addEventListener("change",e=>{const file=e.target.files?.[0],img=document.getElementById("photoPreview");if(file){img.src=URL.createObjectURL(file);img.style.display="block"}else{img.style.display="none"}});
-form.addEventListener("submit",async e=>{e.preventDefault();WBUB_WORKFLOW.hideMessage(msg);if(!WBUB_WORKFLOW.validMobile(field("mobile"))){WBUB_WORKFLOW.showMessage(msg,"error","সঠিক ১০ সংখ্যার ভারতীয় মোবাইল নম্বর দিন।");return}if(!WBUB_WORKFLOW.validEmail(field("email"))){WBUB_WORKFLOW.showMessage(msg,"error","সঠিক ইমেইল ঠিকানা দিন।");return}payload=Object.fromEntries(new FormData(form).entries());delete payload.consent;delete payload.photo;try{payload.photo_upload=await preparePhoto()}catch(err){submitted=false;WBUB_WORKFLOW.showMessage(msg,"error",err.message==="PHOTO_REQUIRED"?"সদস্যের ছবি দিন।":err.message==="PHOTO_TOO_LARGE"?"ছবির আকার 2 MB-এর মধ্যে রাখুন।":"সঠিক JPG/PNG/WebP ছবি দিন।");return}payload.fee_amount=500;payload.currency="INR";payload.fee_period="annual";review.innerHTML=Object.entries(payload).map(([k,v])=>"<div class='review-row'><span>"+WBUB_WORKFLOW.escapeHtml(k)+"</span><strong>"+WBUB_WORKFLOW.escapeHtml(v||"—")+"</strong></div>").join("");form.hidden=true;reviewBox.hidden=false;setStep(2)});
+function paymentMsg(type,text){paymentStatus.className="workflow-message "+type;paymentStatus.textContent=text;paymentStatus.hidden=false}
+async function preparePhoto(){
+ const input=document.getElementById("photo"),file=input?.files?.[0];
+ if(!file)throw new Error("PHOTO_REQUIRED");
+ if(file.size>2*1024*1024)throw new Error("PHOTO_TOO_LARGE");
+ if(!/^image\/(jpeg|png|webp)$/.test(file.type))throw new Error("PHOTO_TYPE");
+ const bitmap=await createImageBitmap(file),max=700,scale=Math.min(1,max/Math.max(bitmap.width,bitmap.height)),canvas=document.createElement("canvas");
+ canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+ const ctx=canvas.getContext("2d");ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);
+ const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/jpeg",.78));if(!blob)throw new Error("PHOTO_PROCESS");
+ return await new Promise((resolve,reject)=>{const fr=new FileReader();fr.onload=()=>resolve({data:fr.result,name:(file.name||"member-photo").replace(/[^a-zA-Z0-9._-]/g,"_"),type:"image/jpeg"});fr.onerror=reject;fr.readAsDataURL(blob)});
+}
+document.getElementById("photo").addEventListener("change",e=>{const file=e.target.files?.[0],img=document.getElementById("photoPreview");if(file){img.src=URL.createObjectURL(file);img.style.display="block"}else img.style.display="none"});
+
+form.addEventListener("submit",async e=>{
+ e.preventDefault();WBUB_WORKFLOW.hideMessage(msg);
+ if(!WBUB_WORKFLOW.validMobile(field("mobile"))){WBUB_WORKFLOW.showMessage(msg,"error","সঠিক ১০ সংখ্যার ভারতীয় মোবাইল নম্বর দিন।");return}
+ if(!WBUB_WORKFLOW.validEmail(field("email"))){WBUB_WORKFLOW.showMessage(msg,"error","সঠিক ইমেইল ঠিকানা দিন।");return}
+ payload=Object.fromEntries(new FormData(form).entries());delete payload.consent;delete payload.photo;
+ try{payload.photo_upload=await preparePhoto()}catch(err){submitted=false;WBUB_WORKFLOW.showMessage(msg,"error",err.message==="PHOTO_REQUIRED"?"সদস্যের ছবি দিন।":err.message==="PHOTO_TOO_LARGE"?"ছবির আকার 2 MB-এর মধ্যে রাখুন।":"সঠিক JPG/PNG/WebP ছবি দিন।");return}
+ payload.fee_amount=500;payload.currency="INR";payload.fee_period="annual";payload.payment_ref="";
+ const safePayload=Object.fromEntries(Object.entries(payload).filter(([k])=>k!=="photo_upload"));
+ review.innerHTML=Object.entries(safePayload).map(([k,v])=>"<div class='review-row'><span>"+WBUB_WORKFLOW.escapeHtml(k)+"</span><strong>"+WBUB_WORKFLOW.escapeHtml(v||"—")+"</strong></div>").join("")+"<div class='review-row'><span>Payment</span><strong>Razorpay • ₹500</strong></div>";
+ form.hidden=true;reviewBox.hidden=false;setStep(2);
+});
+
 editBtn.addEventListener("click",()=>{reviewBox.hidden=true;form.hidden=false;setStep(1)});
-submitBtn.addEventListener("click",async()=>{if(submitted||!payload)return;submitted=true;WBUB_WORKFLOW.setBusy(submitBtn,true,"আবেদন জমা হচ্ছে…");try{const data={...payload,client_idempotency_key:crypto.randomUUID?crypto.randomUUID():Date.now()+"-"+Math.random()};const result=await WBUB_WORKFLOW.submitApplication(data);if(result&&result.ok!==true){submitted=false;WBUB_WORKFLOW.showMessage(msg,"error",result.error||"আবেদন গ্রহণ করা যায়নি।");return}if(!result||!result.application_no)throw new Error("SUBMIT_FAILED");localStorage.setItem("last_application_no",result.application_no);setStep(3);reviewBox.hidden=true;receipt.hidden=false;receipt.innerHTML="<h2>আবেদন সফলভাবে জমা হয়েছে</h2><p>আপনার Application Number:</p><p style='font-size:22px;font-weight:900'>"+WBUB_WORKFLOW.escapeHtml(result.application_no)+"</p><p>Status: <strong>"+WBUB_WORKFLOW.escapeHtml(result.status||"Application Received")+"</strong></p><p>এই নম্বরটি সংরক্ষণ করুন। অনুমোদনের আগে এটি Official Member ID নয়।</p><div class='actions no-print'><button class='secondary' onclick='window.print()'>রসিদ Print / PDF</button><a class='btn' href='status.html'>আবেদনের অবস্থা দেখুন</a></div>"}catch(err){submitted=false;WBUB_WORKFLOW.showMessage(msg,"error","আবেদন জমা দেওয়া যায়নি। নেটওয়ার্ক/সার্ভার সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।")}finally{WBUB_WORKFLOW.setBusy(submitBtn,false)}});
+payNowBtn.addEventListener("click",()=>openRazorpay());
+
+async function submitAndPay(){
+ if(submitted||!payload)return;
+ submitted=true;WBUB_WORKFLOW.setBusy(submitBtn,true,"আবেদন সংরক্ষণ হচ্ছে…");
+ try{
+  const data={...payload,client_idempotency_key:crypto.randomUUID?crypto.randomUUID():Date.now()+"-"+Math.random()};
+  const result=await WBUB_WORKFLOW.submitApplication(data);
+  if(result&&result.ok!==true)throw new Error(result.error||result.message||"APPLICATION_FAILED");
+  if(!result||!result.application_no)throw new Error("SUBMIT_FAILED");
+  currentApplicationNo=result.application_no;
+  localStorage.setItem("last_application_no",currentApplicationNo);
+  paymentMsg("ok","Application "+currentApplicationNo+" তৈরি হয়েছে। এখন নিরাপদ Razorpay Checkout খুলুন।");
+  submitBtn.hidden=true;payNowBtn.hidden=false;
+  setStep(3);
+  await openRazorpay();
+ }catch(err){
+  submitted=false;WBUB_WORKFLOW.showMessage(msg,"error","আবেদন সংরক্ষণ করা যায়নি: "+(err.message||"SERVER_ERROR"));
+ }finally{WBUB_WORKFLOW.setBusy(submitBtn,false)}
+}
+submitBtn.addEventListener("click",submitAndPay);
+
+async function openRazorpay(){
+ if(paymentBusy||!currentApplicationNo)return;
+ paymentBusy=true;payNowBtn.disabled=true;payNowBtn.textContent="পেমেন্ট প্রস্তুত হচ্ছে…";
+ try{
+  if(typeof Razorpay!=="function")throw new Error("RAZORPAY_SDK_NOT_LOADED");
+  paymentMsg("ok","Razorpay order তৈরি হচ্ছে…");
+  const order=await WBUB_WORKFLOW.createPaymentOrder({application_no:currentApplicationNo,mobile:field("mobile")});
+  if(!order||order.ok!==true||!order.order_id)throw new Error(order&&order.error||"ORDER_CREATE_FAILED");
+  currentOrderId=order.order_id;
+  const options={
+   key:order.key_id,amount:order.amount,currency:order.currency||"INR",name:"WEST BENGAL ULAMA BOARD",
+   description:"Annual Membership Fee • ₹500",order_id:order.order_id,
+   prefill:{name:field("name"),email:field("email"),contact:"+91"+WBUB_WORKFLOW.normalizeMobile(field("mobile"))},
+   notes:{application_no:currentApplicationNo},
+   theme:{color:"#07513f"},
+   handler:async function(response){
+    paymentBusy=true;payNowBtn.textContent="পেমেন্ট যাচাই হচ্ছে…";
+    try{
+     const verified=await WBUB_WORKFLOW.verifyRazorpayPayment({
+      application_no:currentApplicationNo,
+      razorpay_order_id:response.razorpay_order_id,
+      razorpay_payment_id:response.razorpay_payment_id,
+      razorpay_signature:response.razorpay_signature
+     });
+     if(!verified||verified.ok!==true)throw new Error(verified&&verified.error||"PAYMENT_VERIFY_FAILED");
+     showPaidReceipt(verified);
+    }catch(err){
+     paymentMsg("error","পেমেন্ট হয়েছে, কিন্তু server-side verification সম্পূর্ণ হয়নি। কিছুক্ষণ পরে Status থেকে আবার যাচাই করুন। Payment ID: "+response.razorpay_payment_id);
+    }finally{paymentBusy=false;payNowBtn.disabled=false;payNowBtn.textContent="💳 ₹500 আবার পেমেন্ট / যাচাই করুন"}
+   }
+  };
+  const rzp=new Razorpay(options);
+  rzp.on("payment.failed",function(r){paymentMsg("error","পেমেন্ট সম্পূর্ণ হয়নি। "+(r.error?.description||"আবার চেষ্টা করুন।"));paymentBusy=false;payNowBtn.disabled=false;payNowBtn.textContent="💳 ₹500 আবার পেমেন্ট করুন"});
+  rzp.open();
+ }catch(err){
+  paymentMsg("error","Razorpay শুরু করা যায়নি: "+(err.message||"UNKNOWN_ERROR"));
+  paymentBusy=false;payNowBtn.disabled=false;payNowBtn.textContent="💳 ₹500 পেমেন্ট করুন";
+ }
+}
+
+function showPaidReceipt(data){
+ receipt.hidden=false;reviewBox.hidden=true;setStep(3);
+ const mid=data.member_id||"—";
+ receipt.innerHTML="<h2>✅ পেমেন্ট সফল</h2><p>₹500 Razorpay payment server-side যাচাই হয়েছে।</p><p>Application Number: <strong>"+WBUB_WORKFLOW.escapeHtml(data.application_no||currentApplicationNo)+"</strong></p><p>Official Member ID: <strong style='font-size:22px'>"+WBUB_WORKFLOW.escapeHtml(mid)+"</strong></p><p>Payment ID: <strong>"+WBUB_WORKFLOW.escapeHtml(data.payment_id||"—")+"</strong></p><div class='actions no-print'><a class='btn' href='wazeen-id.html?id="+encodeURIComponent(mid)+"'>🪪 Digital ID Card খুলুন</a><a class='btn' href='member.html'>🔐 Member Area</a><button class='secondary' onclick='window.print()'>🖨 Print / PDF</button></div>";
+ payNowBtn.hidden=true;
+ paymentMsg("ok","Payment PAID এবং Official Member ID সক্রিয় হয়েছে। Digital ID Card এখন খুলতে পারবেন।");
+}
 </script>
 </body></html>
