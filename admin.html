@@ -16,6 +16,26 @@ button{border:0;border-radius:9px;padding:11px 15px;font-weight:900;cursor:point
 <main><section><div class="wrap admin">
 <div class="head"><h1>Member Approval Panel</h1><p class="muted">PENDING আবেদন যাচাই করে Approve বা Reject করুন।</p></div>
 <div class="panel"><h2>Admin Key</h2><label>Apps Script Admin Key</label><input id="key" type="password" autocomplete="off" placeholder="Admin Key লিখুন"><div class="actions"><button class="primary" id="load">Pending Applications দেখুন</button><a href="admin-location.html" style="text-decoration:none"><button type="button" class="secondary">📍 Live Location</button></a></div><div id="msg" class="msg" hidden></div></div>
+<div class="panel" id="noticePanel">
+<h2>📢 Notice & News Management</h2>
+<p class="muted">এখান থেকে নোটিশের খসড়া তৈরি করা যাবে। Publish চালু করতে বিদ্যমান Google Apps Script-এ Notice API যোগ করতে হবে।</p>
+<div class="grid" style="grid-template-columns:1fr 1fr">
+<div><label>ধরন</label><select id="noticeType" style="width:100%;padding:13px;border:1px solid #cbd9d2;border-radius:9px;font:inherit;margin-top:7px"><option>নোটিশ</option><option>সংবাদ</option><option>ঘোষণা</option><option>প্রেস রিলিজ</option></select></div>
+<div><label>তারিখ</label><input id="noticeDate" type="date"></div>
+</div>
+<label style="display:block;margin-top:12px">শিরোনাম</label>
+<input id="noticeTitle" placeholder="নোটিশের শিরোনাম">
+<label style="display:block;margin-top:12px">বিস্তারিত</label>
+<textarea id="noticeBody" rows="6" style="width:100%;padding:13px;border:1px solid #cbd9d2;border-radius:9px;font:inherit;margin-top:7px;resize:vertical" placeholder="নোটিশের বিস্তারিত লিখুন..."></textarea>
+<div class="actions">
+<button class="primary" id="noticePreview">👁️ Preview</button>
+<button class="secondary" id="noticeClear">Clear</button>
+</div>
+<div id="noticePreviewBox" class="row" hidden></div>
+<div class="msg" style="background:#fff8df;color:#5d4a16;margin-top:12px">
+<strong>Publish-এর জন্য পরবর্তী ধাপ:</strong> এই সাইটের বিদ্যমান Apps Script endpoint-এ authenticated Notice Create/List/Update/Delete API যোগ করতে হবে। Repository-তে সেই Apps Script source নেই; তাই নিরাপদভাবে অনুমান করে backend action তৈরি করা হয়নি।
+</div>
+</div>
 <div class="panel" id="listPanel" hidden><div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap"><div><h2 style="margin:0">Pending Applications</h2><p class="muted" style="margin:5px 0 0">Approve করলে আবেদন APPROVED হবে।</p></div><button class="secondary" id="refresh">↻ Refresh</button><a href="wazeen-admin.html" style="text-decoration:none"><button type="button" class="primary">🎙️ Leadership Management</button></a></div><div id="list"></div></div>
 </div></section></main>
 <script>
@@ -31,4 +51,5 @@ panel.hidden=false}
 async function loadList(){const d=await api("pending");if(d.ok!==true)throw new Error(d.error||"LIST_FAILED");render(d.records||d.applications||[])}
 async function start(){if(!key.value.trim()){show("err","Admin Key দিন।");return}loadBtn.disabled=true;loadBtn.textContent="Loading…";try{await loadList();show("ok","Pending Applications পাওয়া গেছে।")}catch(e){show("err","Pending তালিকা আনা যায়নি। Admin Key ও Apps Script deployment access পরীক্ষা করুন।")}finally{loadBtn.disabled=false;loadBtn.textContent="Pending Applications দেখুন"}}
 loadBtn.onclick=start;refresh.onclick=async()=>{try{await loadList()}catch(e){show("err","Refresh করা যায়নি।")}};
+document.getElementById("noticePreview").onclick=()=>{const t=document.getElementById("noticeTitle").value.trim(),b=document.getElementById("noticeBody").value.trim(),type=document.getElementById("noticeType").value,d=document.getElementById("noticeDate").value||new Date().toISOString().slice(0,10);const box=document.getElementById("noticePreviewBox");if(!t||!b){box.hidden=false;box.textContent="শিরোনাম ও বিস্তারিত লিখুন।";return}box.hidden=false;box.innerHTML="<span class='muted'>"+esc(type)+" • "+esc(d)+"</span><h3 style='margin:7px 0'>"+esc(t)+"</h3><p style='white-space:pre-wrap;margin:0'>"+esc(b)+"</p>"};document.getElementById("noticeClear").onclick=()=>{["noticeTitle","noticeBody"].forEach(id=>document.getElementById(id).value="");document.getElementById("noticePreviewBox").hidden=true};
 </script></body></html>
