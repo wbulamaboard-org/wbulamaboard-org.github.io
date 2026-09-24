@@ -84,7 +84,7 @@ button:disabled{opacity:.6;cursor:not-allowed}.workflow-message{margin-top:16px;
 </div></section></main>
 
 <script src="assets/msg91-otp-config.js?v=20260925-1"></script>
-<script src="assets/member-workflow.js?v=20260925-1"></script>
+<script src="assets/member-workflow.js?v=20260925-6"></script>
 <script>
 (function(){
 "use strict";
@@ -184,7 +184,7 @@ function profilePhone(r){return normalizeMobile(r.mobile||r.phone||"")}
 function editKey(id){return "wbub_profile_edit_"+normalizeId(id)}
 function getLocalEdit(id){try{return JSON.parse(localStorage.getItem(editKey(id))||"null")}catch(_){return null}}
 function applyLocalEdit(r){const o=getLocalEdit(currentMemberId);return o?Object.assign({},r,o):r}
-function fillEditor(r){document.getElementById("editName").value=r.name||"";document.getElementById("editDes").value=r.designation||"";document.getElementById("editDistrict").value=r.district||"";document.getElementById("editBlock").value=r.block||r.area||"";document.getElementById("editValid").value=r.valid_till||r.validity||"";document.getElementById("editAddress").value=r.address||"";const p=document.getElementById("editPhotoPreview");if(r.photo_url||r.photo){p.src=r.photo_url||r.photo;p.style.display="block"}else p.style.display="none"}
+function fillEditor(r){const name=document.getElementById("editName"),des=document.getElementById("editDes"),district=document.getElementById("editDistrict"),block=document.getElementById("editBlock"),valid=document.getElementById("editValid"),address=document.getElementById("editAddress"),p=document.getElementById("editPhotoPreview");if(name)name.value=r.name||"";if(des)des.value=r.designation||"";if(district)district.value=r.district||"";if(block)block.value=r.block||r.area||"";if(valid)valid.value=r.valid_till||r.validity||"";if(address)address.value=r.address||"";if(p){if(r.photo_url||r.photo){p.src=r.photo_url||r.photo;p.style.display="block"}else p.style.display="none"}}
 function renderProfile(r){r=applyLocalEdit(r);document.getElementById("name").textContent=r.name||"Approved Member";document.getElementById("des").textContent=r.designation||"Member";document.getElementById("district").textContent=r.district||"-";document.getElementById("block").textContent=r.block||r.area||"-";document.getElementById("valid").textContent=r.valid_till||r.validity||"-";const avatar=document.getElementById("avatar"),photo=r.photo_url||r.photo||"";if(photo){avatar.src=photo;avatar.style.display="block";avatar.onerror=()=>avatar.style.display="none"}else avatar.style.display="none";fillEditor(r)}
 async function resizePhoto(file){const bitmap=await createImageBitmap(file),max=600,scale=Math.min(1,max/Math.max(bitmap.width,bitmap.height)),canvas=document.createElement("canvas");canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));const ctx=canvas.getContext("2d");ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);return await new Promise((resolve,reject)=>canvas.toBlob(async b=>{if(!b)return reject(0);const fr=new FileReader();fr.onload=()=>resolve(fr.result);fr.onerror=reject;fr.readAsDataURL(b)},"image/jpeg",.78))}
 async function loadApprovedProfile(){
