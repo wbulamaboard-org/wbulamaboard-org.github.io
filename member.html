@@ -223,13 +223,7 @@ form.addEventListener("submit",function(e){
  if(!(/^(WBUB-\d{4,}|WBUB\/\d{4}\/\d{5})$/.test(currentMemberId))){message("error","সঠিক Official Member ID দিন, যেমন WBUB-0001 অথবা WBUB/2026/00001।");return}
  if(!WBUB_WORKFLOW.validMobile(currentMobile)){message("error","সঠিক ১০ সংখ্যার নিবন্ধিত মোবাইল নম্বর দিন।");return}
  if(!waitForSdk())return;
- try{
-   if(typeof window.isCaptchaVerified==="function" && !window.isCaptchaVerified()){
-     message("error","আগে CAPTCHA verification সম্পূর্ণ করুন। CAPTCHA দেখা না গেলে MSG91 Widget-এর Captcha Validation setting পরীক্ষা করতে হবে।");
-     widgetStatus("CAPTCHA এখনো verified নয়। নিচের/উপরের CAPTCHA সম্পূর্ণ করুন।",true);
-     return;
-   }
- }catch(_){}
+ /* MSG91 Widget handles CAPTCHA when it is enabled in the widget settings. */
  setButton(sendBtn,true,"OTP পাঠানো হচ্ছে…");
  window.sendOtp("91"+currentMobile,function(data){
    requestId=extractRequestId(data);
