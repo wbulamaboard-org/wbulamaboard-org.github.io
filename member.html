@@ -43,7 +43,7 @@ button:disabled{opacity:.6;cursor:not-allowed}.workflow-message{margin-top:16px;
 <div><label>Official Member ID *</label><input id="memberIdInput" required autocomplete="off" placeholder="WBUB-0001 / WBUB/2026/00001"></div>
 <div><label>নিবন্ধিত মোবাইল নম্বর *</label><input id="mobileInput" required inputmode="numeric" maxlength="10" placeholder="১০ সংখ্যার মোবাইল নম্বর"></div>
 </div>
-<div id="msg91-captcha" style="margin:14px 0"></div>
+<div id="msg91-captcha" style="margin:14px 0"></div><div id="otpWidgetStatus" class="edit-note" hidden></div>
 <button id="sendBtn" type="submit">📲 OTP পাঠান</button>
 </form>
 
@@ -83,8 +83,8 @@ button:disabled{opacity:.6;cursor:not-allowed}.workflow-message{margin-top:16px;
 </div>
 </div></section></main>
 
-<script src="assets/msg91-otp-config.js?v=20260923-1"></script>
-<script src="assets/member-workflow.js?v=20260923-1"></script>
+<script src="assets/msg91-otp-config.js?v=20260925-1"></script>
+<script src="assets/member-workflow.js?v=20260925-1"></script>
 <script>
 (function(){
 "use strict";
@@ -114,6 +114,7 @@ function extractRequestId(data){
 }
 
 function message(type,text){msg.className="workflow-message "+type;msg.textContent=text;msg.hidden=false}
+function widgetStatus(text,show=true){const el=document.getElementById("otpWidgetStatus");if(!el)return;el.textContent=text;el.hidden=!show;}
 function clearMessage(){msg.hidden=true}
 function normalizeId(v){return String(v||"").trim().toUpperCase().replace(/\s/g,"")}
 function normalizeMobile(v){return WBUB_WORKFLOW.normalizeMobile(v)}
@@ -135,7 +136,17 @@ function initMsg91(){
    success:function(){},
    failure:function(){}
  };
- try{window.initSendOTP(configuration);msg91Ready=true;return true}catch(e){message("error","MSG91 OTP service initialize করা যায়নি।");return false}
+ try{
+   window.initSendOTP(configuration);
+   msg91Ready=true;
+   widgetStatus("MSG91 OTP service প্রস্তুত।",true);
+   return true;
+ }catch(e){
+   let detail="";try{detail=e&&e.message?e.message:String(e||"")}catch(_){}
+   message("error","MSG91 OTP service initialize করা যায়নি।"+(detail?" "+detail:""));
+   widgetStatus("MSG91 Widget initialize হয়নি। MSG91 Dashboard-এর Widget ID/Token ও Web SDK settings পরীক্ষা করুন।",true);
+   return false
+ }
 }
 function syncOtpLength(){
   try{
@@ -212,6 +223,13 @@ form.addEventListener("submit",function(e){
  if(!(/^(WBUB-\d{4,}|WBUB\/\d{4}\/\d{5})$/.test(currentMemberId))){message("error","সঠিক Official Member ID দিন, যেমন WBUB-0001 অথবা WBUB/2026/00001।");return}
  if(!WBUB_WORKFLOW.validMobile(currentMobile)){message("error","সঠিক ১০ সংখ্যার নিবন্ধিত মোবাইল নম্বর দিন।");return}
  if(!waitForSdk())return;
+ try{
+   if(typeof window.isCaptchaVerified==="function" && !window.isCaptchaVerified()){
+     message("error","আগে CAPTCHA verification সম্পূর্ণ করুন। CAPTCHA দেখা না গেলে MSG91 Widget-এর Captcha Validation setting পরীক্ষা করতে হবে।");
+     widgetStatus("CAPTCHA এখনো verified নয়। নিচের/উপরের CAPTCHA সম্পূর্ণ করুন।",true);
+     return;
+   }
+ }catch(_){}
  setButton(sendBtn,true,"OTP পাঠানো হচ্ছে…");
  window.sendOtp("91"+currentMobile,function(data){
    requestId=extractRequestId(data);
@@ -219,7 +237,7 @@ form.addEventListener("submit",function(e){
    message("ok","OTP পাঠানো হয়েছে। SMS-এ পাওয়া OTP লিখে Verify করুন।");startResendTimer();otpInput.focus();
    setButton(sendBtn,false);
  },function(error){
-   let detail=""; try{detail=typeof error==="string"?error:JSON.stringify(error)}catch(_){detail=String(error||"")} message("error","OTP পাঠানো যায়নি। MSG91: "+(detail||"অজানা error"));setButton(sendBtn,false);
+   let detail=""; try{detail=typeof error==="string"?error:(error&&error.message?error.message:JSON.stringify(error))}catch(_){detail=String(error||"")} message("error","OTP পাঠানো যায়নি। MSG91: "+(detail||"অজানা error"));widgetStatus("MSG91 response: "+(detail||"অজানা error"),true);setButton(sendBtn,false);
  });
 });
 verifyBtn.addEventListener("click",function(){
