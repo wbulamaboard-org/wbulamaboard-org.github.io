@@ -12,6 +12,20 @@
     async request(url,options={}){const r=await fetch(url,{cache:"no-store",credentials:"omit",...options});const t=await r.text();let d=null;try{d=t?JSON.parse(t):null}catch(_){}if(!r.ok)throw new Error("NETWORK_HTTP_"+r.status);if(!d)throw new Error("INVALID_API_RESPONSE");return d},
     async submitApplication(payload){return this.request(this.API,{method:"POST",body:JSON.stringify(payload)})},
     async publicVerify(id){
+      const normalized=String(id||"").trim().toUpperCase().replace(/\s/g,"");
+      /* Use the approved static directory first. This keeps Member Area login
+         responsive when the Apps Script endpoint is slow or unavailable. */
+      try{
+        const controller=new AbortController();
+        const timer=setTimeout(()=>controller.abort(),2500);
+        const response=await fetch("assets/member-directory-all.json?v=20260925-5",{cache:"no-store",signal:controller.signal});
+        clearTimeout(timer);
+        if(response.ok){
+          const list=await response.json();
+          const record=list.find(x=>String(x&&x.member_id||"").trim().toUpperCase().replace(/\s/g,"")===normalized);
+          if(record)return {found:true,record:record};
+        }
+      }catch(_){}
       const value=encodeURIComponent(id);
       const routes=[
         this.API+"?action=verify&id="+value,
@@ -21,7 +35,7 @@
       for(const url of routes){
         try{
           const controller=new AbortController();
-          const timer=setTimeout(()=>controller.abort(),4500);
+          const timer=setTimeout(()=>controller.abort(),2500);
           const d=await this.request(url,{signal:controller.signal});
           clearTimeout(timer);
           if(d&&d.found===true&&d.record)return d;
