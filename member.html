@@ -77,6 +77,30 @@ button:disabled{opacity:.6;cursor:not-allowed}.workflow-message{margin-top:16px;
 <a id="verify" href="#">✓ QR Verification</a>
 <a id="status" href="status.html">📋 Application Status</a>\n<a id="editProfileBtn" class="dark" href="#edit-profile">✏️ Edit Profile</a>
 </div>
+<div id="editProfile" class="edit-panel" hidden>
+<h3>✏️ Profile Edit Request</h3>
+<p class="muted">আপনার তথ্য পরিবর্তনের অনুরোধ এখানে লিখুন। Member ID পরিবর্তন করা যাবে না।</p>
+<div class="edit-grid">
+<div class="edit-field"><label>নাম</label><input id="editName" autocomplete="name"></div>
+<div class="edit-field"><label>Designation / Category</label><input id="editDes"></div>
+<div class="edit-field"><label>District</label><input id="editDistrict"></div>
+<div class="edit-field"><label>Block / Area</label><input id="editBlock"></div>
+<div class="edit-field"><label>Validity</label><input id="editValid"></div>
+<div class="edit-field full"><label>Address</label><textarea id="editAddress" rows="3"></textarea></div>
+<div class="edit-field full">
+<label>Profile Photo</label>
+<div class="edit-photo">
+<img id="editPhotoPreview" alt="Preview">
+<input id="editPhoto" type="file" accept="image/jpeg,image/png,image/webp">
+</div>
+</div>
+</div>
+<div class="edit-actions">
+<button id="saveProfileBtn" class="dark" type="button">📤 পরিবর্তনের অনুরোধ সংরক্ষণ</button>
+<button id="cancelEditBtn" class="secondary" type="button">বন্ধ করুন</button>
+</div>
+<div class="edit-note">নোট: এই ধাপে পরিবর্তনের খসড়া এই ডিভাইসে সংরক্ষিত হবে। Official server record পরিবর্তন করতে Admin Approval backend সংযোগ আলাদাভাবে প্রয়োজন।</div>
+</div>
 <div class="note">Member ID অপরিবর্তনীয়। ভবিষ্যৎ Profile Edit-এ পরিবর্তিত তথ্য সরাসরি প্রকাশ না হয়ে Admin Approval-এর জন্য Pending থাকবে।</div>
 <div class="security">🔒 OTP যাচাই সফল না হলে Member Area খোলা হবে না। OTP যাচাই MSG91-এর মাধ্যমে হয়।</div>
 </div>
@@ -84,7 +108,7 @@ button:disabled{opacity:.6;cursor:not-allowed}.workflow-message{margin-top:16px;
 </div></section></main>
 
 <script src="assets/msg91-otp-config.js?v=20260925-1"></script>
-<script src="assets/member-workflow.js?v=20260925-6"></script>
+<script src="assets/member-workflow.js?v=20260925-7"></script>
 <script>
 (function(){
 "use strict";
