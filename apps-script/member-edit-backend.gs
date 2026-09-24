@@ -85,7 +85,7 @@ function wbubSetIfColumn_(sheet, map, row, key, value) {
 
 function wbubUploadEditPhoto_(photoUpload, memberId) {
   if (!photoUpload || !photoUpload.data) return '';
-  const match = String(photoUpload.data).match(/^data:(image\\/(?:jpeg|png|webp));base64,(.+)$/);
+  const match = String(photoUpload.data).match(/^data:(image\/(?:jpeg|png|webp));base64,(.+)$/);
   if (!match) throw new Error('PHOTO_DATA_INVALID');
 
   const bytes = Utilities.base64Decode(match[2]);
@@ -138,15 +138,15 @@ function wbubEnsureEditSheet_() {
 
 function wbubMemberEditRequest_(data) {
   const memberId = String(data.member_id || '').trim();
-  const mobile = String(data.mobile || '').replace(/\\D/g, '').slice(-10);
-  if (!memberId || !/^[6-9]\\d{9}$/.test(mobile)) throw new Error('INVALID_MEMBER_OR_MOBILE');
+  const mobile = String(data.mobile || '').replace(/\D/g, '').slice(-10);
+  if (!memberId || !/^[6-9]\d{9}$/.test(mobile)) throw new Error('INVALID_MEMBER_OR_MOBILE');
 
   const apps = wbubEditSheet_();
   const found = wbubFindMemberRow_(apps, memberId);
   const row = found.row;
   const map = found.map;
 
-  const storedMobile = map.mobile ? String(apps.getRange(row, map.mobile).getDisplayValue() || '').replace(/\\D/g,'').slice(-10) : '';
+  const storedMobile = map.mobile ? String(apps.getRange(row, map.mobile).getDisplayValue() || '').replace(/\D/g,'').slice(-10) : '';
   if (storedMobile && storedMobile !== mobile) throw new Error('MOBILE_MISMATCH');
 
   const status = map.status ? String(apps.getRange(row, map.status).getDisplayValue() || '').trim().toUpperCase() : '';
