@@ -50,8 +50,8 @@ button:disabled{opacity:.6;cursor:not-allowed}.workflow-message{margin-top:16px;
 <div id="otpBox" class="otp-box" hidden>
 <h3>OTP যাচাই করুন</h3>
 <p id="otpHint" class="muted">আপনার নিবন্ধিত মোবাইলে OTP পাঠানো হয়েছে।</p>
-<label>4-digit OTP *</label>
-<input id="otpInput" inputmode="numeric" maxlength="4" autocomplete="one-time-code" placeholder="••••">
+<label id="otpLabel">OTP *</label>
+<input id="otpInput" inputmode="numeric" maxlength="9" autocomplete="one-time-code" placeholder="••••••">
 <div class="otp-actions">
 <button id="verifyBtn" class="dark" type="button">✓ OTP Verify</button>
 <button id="resendBtn" class="secondary" type="button">↻ আবার OTP</button>
@@ -91,7 +91,7 @@ button:disabled{opacity:.6;cursor:not-allowed}.workflow-message{margin-top:16px;
 const form=document.getElementById("loginForm"),memberIdEl=document.getElementById("memberIdInput"),mobileEl=document.getElementById("mobileInput");
 const sendBtn=document.getElementById("sendBtn"),verifyBtn=document.getElementById("verifyBtn"),resendBtn=document.getElementById("resendBtn");
 const otpBox=document.getElementById("otpBox"),otpInput=document.getElementById("otpInput"),otpHint=document.getElementById("otpHint"),msg=document.getElementById("msg"),dash=document.getElementById("dashboard");
-let currentMobile="",currentMemberId="",requestId="",resendTimer=null,resendLeft=0,msg91Ready=false;
+let currentMobile="",currentMemberId="",requestId="",resendTimer=null,resendLeft=0,msg91Ready=false,otpLength=4;
 function extractRequestId(data){
   try{
     if(data==null)return "";
@@ -137,9 +137,36 @@ function initMsg91(){
  };
  try{window.initSendOTP(configuration);msg91Ready=true;return true}catch(e){message("error","MSG91 OTP service initialize করা যায়নি।");return false}
 }
+function syncOtpLength(){
+  try{
+    if(typeof window.getWidgetData!=="function")return;
+    let data=window.getWidgetData();
+    if(typeof data==="string"){try{data=JSON.parse(data)}catch(_){}}
+    const findLength=(v)=>{
+      if(v==null)return 0;
+      if(typeof v==="object"){
+        for(const k of Object.keys(v)){
+          if(/^(otpLength|otp_length|otpDigits|otp_digits)$/i.test(k)){
+            const n=parseInt(v[k],10); if(n>=4&&n<=9)return n;
+          }
+          const nested=findLength(v[k]); if(nested)return nested;
+        }
+      }
+      return 0;
+    };
+    const n=findLength(data); if(n)otpLength=n;
+    const label=document.getElementById("otpLabel"),input=document.getElementById("otpInput");
+    if(label)label.textContent=otpLength+"-digit OTP *";
+    if(input){input.maxLength=otpLength;input.placeholder="•".repeat(otpLength)}
+  }catch(_){}
+}
 function waitForSdk(){
- if(msg91Ready)return true;
- if(typeof window.initSendOTP==="function")return initMsg91();
+ if(msg91Ready){syncOtpLength();return true}
+ if(typeof window.initSendOTP==="function"){
+   const ok=initMsg91();
+   if(ok)setTimeout(syncOtpLength,100);
+   return ok;
+ }
  return false;
 }
 function profilePhone(r){return normalizeMobile(r.mobile||r.phone||"")}
@@ -188,7 +215,7 @@ form.addEventListener("submit",function(e){
  setButton(sendBtn,true,"OTP পাঠানো হচ্ছে…");
  window.sendOtp("91"+currentMobile,function(data){
    requestId=extractRequestId(data);
-   otpBox.hidden=false;otpHint.textContent="OTP পাঠানো হয়েছে। মোবাইলের শেষ ৪ সংখ্যা: "+currentMobile.slice(-4);
+   otpBox.hidden=false;syncOtpLength();otpHint.textContent="OTP পাঠানো হয়েছে। মোবাইলের শেষ ৪ সংখ্যা: "+currentMobile.slice(-4);
    message("ok","OTP পাঠানো হয়েছে। SMS-এ পাওয়া OTP লিখে Verify করুন।");startResendTimer();otpInput.focus();
    setButton(sendBtn,false);
  },function(error){
@@ -197,7 +224,7 @@ form.addEventListener("submit",function(e){
 });
 verifyBtn.addEventListener("click",function(){
  clearMessage();const otp=String(otpInput.value||"").replace(/\D/g,"");
- if(!/^\d{4}$/.test(otp)){message("error","৪ সংখ্যার সঠিক OTP লিখুন।");return}
+ if(!new RegExp("^\\d{"+otpLength+"}$").test(otp)){message("error",otpLength+" সংখ্যার সঠিক OTP লিখুন।");return}
  if(!waitForSdk())return;
  if(!requestId){message("error","এই OTP অনুরোধের Request ID পাওয়া যায়নি। নতুন করে OTP পাঠান।");return}
  setButton(verifyBtn,true,"OTP যাচাই হচ্ছে…");
@@ -222,7 +249,7 @@ document.getElementById("saveProfileBtn").addEventListener("click",async functio
 document.addEventListener("DOMContentLoaded",function(){
  const s=document.createElement("script");s.src="https://verify.msg91.com/otp-provider.js?v=20260923-4";s.async=true;
  s.onload=function(){
-  setTimeout(function(){initMsg91()},150);
+  setTimeout(function(){initMsg91();syncOtpLength()},150);
 };
 s.onerror=function(){
   message("error","MSG91 OTP provider লোড করা যায়নি। পেজ Refresh করে আবার চেষ্টা করুন।");
