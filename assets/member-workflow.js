@@ -20,7 +20,10 @@
       ];
       for(const url of routes){
         try{
-          const d=await this.request(url);
+          const controller=new AbortController();
+          const timer=setTimeout(()=>controller.abort(),4500);
+          const d=await this.request(url,{signal:controller.signal});
+          clearTimeout(timer);
           if(d&&d.found===true&&d.record)return d;
         }catch(_){}
       }
