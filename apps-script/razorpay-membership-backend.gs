@@ -218,10 +218,11 @@ function wbubRazorpayFinalizeApplication_(sh,map,row,applicationNo,payment,order
     wbubRazorpaySet_(sh,map,row,'fee_amount',500);
     wbubRazorpaySet_(sh,map,row,'currency','INR');
     wbubRazorpaySet_(sh,map,row,'fee_period','annual');
-    if(!map.valid_till) {
-      var c=wbubRazorpayEnsureCol_(sh,map,'valid_till');
+    var validCol=wbubRazorpayEnsureCol_(sh,map,'valid_till');
+    var existingValid=String(sh.getRange(row,validCol).getDisplayValue()||'').trim();
+    if(!existingValid) {
       var d=new Date();d.setFullYear(d.getFullYear()+1);
-      sh.getRange(row,c).setValue(Utilities.formatDate(d,Session.getScriptTimeZone()||'Asia/Kolkata','dd MMM yyyy'));
+      sh.getRange(row,validCol).setValue(Utilities.formatDate(d,Session.getScriptTimeZone()||'Asia/Kolkata','dd MMM yyyy'));
     }
     if(map.updated_at) sh.getRange(row,map.updated_at).setValue(new Date());
     return {ok:true,application_no:applicationNo,member_id:memberId,payment_id:String(payment.id||''),status:'APPROVED',payment_status:'PAID'};
