@@ -13,19 +13,8 @@
     async submitApplication(payload){return this.request(this.API,{method:"POST",body:JSON.stringify(payload)})},
     async publicVerify(id){
       const normalized=String(id||"").trim().toUpperCase().replace(/\s/g,"");
-      /* Use the approved static directory first. This keeps Member Area login
-         responsive when the Apps Script endpoint is slow or unavailable. */
-      try{
-        const controller=new AbortController();
-        const timer=setTimeout(()=>controller.abort(),2500);
-        const response=await fetch("assets/member-directory-all.json?v=20260925-5",{cache:"no-store",signal:controller.signal});
-        clearTimeout(timer);
-        if(response.ok){
-          const list=await response.json();
-          const record=list.find(x=>String(x&&x.member_id||"").trim().toUpperCase().replace(/\s/g,"")===normalized);
-          if(record)return {found:true,record:record};
-        }
-      }catch(_){}
+      /* Server first: approved Profile Edit changes must be visible immediately
+         after Admin Approval. Static directory remains the fallback. */
       const value=encodeURIComponent(id);
       const routes=[
         this.API+"?action=verify&id="+value,
@@ -41,6 +30,17 @@
           if(d&&d.found===true&&d.record)return d;
         }catch(_){}
       }
+      try{
+        const controller=new AbortController();
+        const timer=setTimeout(()=>controller.abort(),2500);
+        const response=await fetch("assets/member-directory-all.json?v=20260925-6",{cache:"no-store",signal:controller.signal});
+        clearTimeout(timer);
+        if(response.ok){
+          const list=await response.json();
+          const record=list.find(x=>String(x&&x.member_id||"").trim().toUpperCase().replace(/\s/g,"")===normalized);
+          if(record)return {found:true,record:record};
+        }
+      }catch(_){}
       return {found:false,record:null};
     },
     async publicMemberVerify(id,mobile){const d=await this.publicVerify(id);if(d&&d.found===true&&d.record)return d;return d},
