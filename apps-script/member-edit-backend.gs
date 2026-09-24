@@ -38,6 +38,9 @@ function wbubEditSheet_() {
   try {
     if (typeof getSheet_ === 'function') return getSheet_();
   } catch (_) {}
+  try {
+    if (typeof sheet_ === 'function') return sheet_();
+  } catch (_) {}
 
   const props = PropertiesService.getScriptProperties();
   const id = props.getProperty('DATABASE_SHEET_ID');
