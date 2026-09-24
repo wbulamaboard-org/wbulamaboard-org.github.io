@@ -75,13 +75,28 @@
 .hero-slide-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.55)}
 .hero-slide-dot.active{background:#fff;transform:scale(1.2)}
 @media(max-width:780px){.hero-slideshow{width:100%;height:300px;min-height:300px}.hero-slide-label{left:12px;bottom:12px;padding:9px 12px;font-size:11px}.hero-slide-dots{right:12px;bottom:13px}}
+</style><style>
+.mobile-menu-btn{display:none}
+.mobile-menu{display:none}
+@media(max-width:780px){
+ .header .nav{position:relative}
+ .mobile-menu-btn{display:flex;position:absolute;right:14px;top:22px;width:42px;height:38px;border:1px solid #eadede;border-radius:8px;background:#fff;color:#b52f37;font-size:23px;align-items:center;justify-content:center;z-index:20;cursor:pointer}
+ .mobile-menu{position:fixed;top:0;right:-100%;width:min(82vw,330px);height:100vh;background:#fff;z-index:9999;display:block;box-shadow:-10px 0 30px #0002;transition:right .25s ease;overflow:auto}
+ .mobile-menu.open{right:0}
+ .mobile-menu-inner{padding:78px 18px 24px;display:flex;flex-direction:column;gap:3px}
+ .mobile-menu-inner a{padding:13px 14px;border-bottom:1px solid #eee;color:#273036;font-size:14px;font-weight:700;border-radius:7px}
+ .mobile-menu-inner a:hover{background:#faf1ef;color:#b52f37}
+ .mobile-menu-inner .mobile-join{margin-top:10px;text-align:center;background:#b52f37;color:#fff;border:0}
+ .mobile-menu:before{content:"WEST BENGAL ULAMA BOARD";position:absolute;top:25px;left:18px;color:#b52f37;font-size:12px;font-weight:900}
+}
 </style></head>
 <body>
 <div class="topbar"><div class="wrap"><div class="top-left"><span>📍 West Bengal, India</span><span>✉ info@westbengalulamaboard.com</span><span>☎ +91 98765 43210</span></div><div class="top-right"><span>●</span><span>●</span><span>●</span><b>বাংলা</b> | English</div></div></div>
-<header class="header"><div class="wrap nav" style="justify-content:center;text-align:center">
+<header class="header"><div class="wrap nav" style="justify-content:center;text-align:center"><button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="মেনু খুলুন" aria-expanded="false">☰</button>
 <a class="brand" href="index.html" style="justify-content:center;text-align:center"><img src="assets/WBUB_Logo_Transparent_Final.png" alt="West Bengal Ulama Board Logo"><span class="brand-text" style="text-align:center;align-items:center"><strong>WEST BENGAL <span>ULAMA BOARD</span></strong><span class="sub">WAYEJIN E FURFURA SHARIF</span><small>A BRANCH OF JAMIYATE ULAMA BANGLA-ASAM</small></span></a>
 <nav><a class="active" href="index.html">হোম</a><a href="about.html">আমাদের সম্পর্কে</a><a href="wazeens.html">ওয়ায়েজিন</a><a href="about.html">ইসলামী শিক্ষা</a><a href="gallery.html">মিডিয়া</a><a href="documents.html">প্রবন্ধ</a><a href="activities.html">সমাজসেবা</a><a href="news-events.html">অনুষ্ঠান</a><a href="verification.html">ভেরিফিকেশন</a><a href="contact.html">যোগাযোগ</a><a href="help-fund.html">সহায়তা তহবিল</a><a href="location.html">লাইভ লোকেশন</a></nav>
 </div></header>
+<div class="mobile-menu" id="mobileMenu"><div class="mobile-menu-inner"><a href="index.html">হোম</a><a href="about.html">আমাদের সম্পর্কে</a><a href="wazeens.html">ওয়ায়েজিন</a><a href="about.html">ইসলামী শিক্ষা</a><a href="gallery.html">মিডিয়া</a><a href="documents.html">প্রবন্ধ</a><a href="activities.html">সমাজসেবা</a><a href="news-events.html">অনুষ্ঠান</a><a href="verification.html">ভেরিফিকেশন</a><a href="contact.html">যোগাযোগ</a><a href="help-fund.html">সহায়তা তহবিল</a><a href="location.html">লাইভ লোকেশন</a><a class="mobile-join" href="registration.html">এখনই সদস্য হোন →</a></div></div>
 <main>
 <section class="hero"><div class="wrap hero-grid"><div class="hero-copy"><div class="eyebrow" style="text-align:center;letter-spacing:0!important;word-spacing:4px">ওলামা ঐক্য <span>•</span> শিক্ষা <span>•</span> সমাজ সংস্কার <span>•</span> সেবা</div><h1 class="hero-brand">WAYEJIN E - FURFURA SHARIF</h1><p>পশ্চিমবঙ্গ উলামা বোর্ড — ওয়ায়েজিন এ ফুরফুরা শরীফের একটি আধুনিক ডিজিটাল প্ল্যাটফর্ম। ইসলামি শিক্ষা, উলামা ঐক্য, সমাজকল্যাণ এবং সদস্যসেবাকে আরও সুসংগঠিত করার লক্ষ্যে আমরা কাজ করি।</p><div class="hero-actions"><a class="btn" href="registration.html">সদস্য হোন →</a><a class="btn outline" href="about.html">আরও জানুন</a></div></div><div class="hero-art"><a class="hero-slideshow" href="photo-archive.html?album=all" aria-label="ফটো গ্যালারি"><img id="heroSlideImage" class="hero-collage" src="assets/help_home_collage-1.jpg" alt="ফটো গ্যালারি"><span class="hero-slide-label">📸 ফটো গ্যালারি • Photo Archive →</span><span class="hero-slide-dots" id="heroSlideDots"></span></a></div></div></section>
 <section class="services"><div class="wrap service-grid"><a class="service" href="wazeens.html"><div class="icon">🎙️</div><h3>ওয়ায়েজিন</h3><p>ওয়ায়েজিন পরিচিতি ও প্রোফাইল</p></a><a class="service" href="about.html"><div class="icon">📖</div><h3>ইসলামী শিক্ষা</h3><p>কুরআন, হাদিস ও শিক্ষা কার্যক্রম</p></a><a class="service" href="gallery.html"><div class="icon">🎧</div><h3>বয়ান ও মিডিয়া</h3><p>বয়ান, ভিডিও, অডিও ও ফটো</p></a><a class="service" href="help-fund.html"><div class="icon">🤝</div><h3>সমাজসেবা</h3><p>মানবিক সহায়তা ও জনকল্যাণ</p></a><a class="service" href="verification.html"><div class="icon">🪪</div><h3>ভেরিফিকেশন</h3><p>Member ID ও QR Verification</p></a><a class="service" href="news-events.html"><div class="icon">📅</div><h3>অনুষ্ঠানসমূহ</h3><p>মাহফিল, সম্মেলন ও সভা</p></a></div></section>
@@ -165,6 +180,13 @@ document.addEventListener("visibilitychange",()=>{
   if(document.hidden){clearInterval(timer);}
   else if(files.length){clearInterval(timer);timer=setInterval(()=>show(i+1),2500);}
 });
+})();
+</script><script>
+(function(){
+ const b=document.getElementById("mobileMenuBtn"),m=document.getElementById("mobileMenu");
+ if(!b||!m)return;
+ b.addEventListener("click",()=>{const o=m.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");b.textContent=o?"✕":"☰";});
+ m.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{m.classList.remove("open");b.textContent="☰";b.setAttribute("aria-expanded","false");}));
 })();
 </script></body>
 </html>
