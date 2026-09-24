@@ -10,13 +10,23 @@ input{width:100%;padding:13px;border:1px solid #cbd9d2;border-radius:9px;font:in
 button{border:0;border-radius:9px;padding:11px 15px;font-weight:900;cursor:pointer}.primary{background:#d7b45b;color:#17372d}.danger{background:#fff0f0;color:#8a2222}.secondary{background:#07513f;color:#fff}
 .row{border:1px solid #dce6e0;border-radius:14px;padding:16px;margin:12px 0;background:#f8faf9}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;font-size:13px}.muted{color:#5d6e67}.status{font-weight:900}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.msg{padding:13px;border-radius:9px;margin-top:12px}.ok{background:#e8f7ef;color:#145b3d}.err{background:#fff0f0;color:#8a2222}.empty{text-align:center;padding:30px;color:#5d6e67}
 @media(max-width:700px){.grid{grid-template-columns:1fr 1fr}.panel{padding:17px}}
+@media(max-width:600px){#editRequestsList .row>div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}.actions{display:flex;flex-wrap:wrap}.actions button{flex:1 1 180px}}
 </style></head>
 <body>
 <header><div class="wrap nav"><a class="brand" href="index.html">ওয়েজিন ফুরফুরা শরীফ<small>WAYEJIN E FURFURA SHARIF</small></a><nav><a href="registration.html">নিবন্ধন</a><a href="status.html">স্ট্যাটাস</a><a href="verification.html">ভেরিফিকেশন</a></nav></div></header>
 <main><section><div class="wrap admin">
 <div class="head"><h1>Member Approval Panel</h1><p class="muted">PENDING আবেদন যাচাই করে Approve বা Reject করুন।</p></div>
 <div class="panel"><h2>Admin Key</h2><label>Apps Script Admin Key</label><input id="key" type="password" autocomplete="off" placeholder="Admin Key লিখুন"><div class="actions"><button class="primary" id="load">Pending Applications দেখুন</button><a href="admin-location.html" style="text-decoration:none"><button type="button" class="secondary">📍 Live Location</button></a></div><div id="msg" class="msg" hidden></div></div>
-<div class="panel" id="noticePanel">
+<div class="panel" id="editRequestsPanel">
+<h2>📝 Member Profile Edit Requests</h2>
+<p class="muted">সদস্যের Edit Profile থেকে পাঠানো পরিবর্তনের অনুরোধ এখানে Pending থাকবে। Approve করলে Official Member Database আপডেট হবে।</p>
+<div class="actions">
+<button class="primary" id="loadEditRequests">Pending Edit Requests দেখুন</button>
+<button class="secondary" id="refreshEditRequests">↻ Refresh</button>
+</div>
+<div id="editRequestsMsg" class="msg" hidden></div>
+<div id="editRequestsList"></div>
+</div><div class="panel" id="noticePanel">
 <h2>📢 Notice & News Management</h2>
 <p class="muted">এখান থেকে নোটিশের খসড়া তৈরি করা যাবে। Publish চালু করতে বিদ্যমান Google Apps Script-এ Notice API যোগ করতে হবে।</p>
 <div class="grid" style="grid-template-columns:1fr 1fr">
@@ -51,5 +61,32 @@ panel.hidden=false}
 async function loadList(){const d=await api("pending");if(d.ok!==true)throw new Error(d.error||"LIST_FAILED");render(d.records||d.applications||[])}
 async function start(){if(!key.value.trim()){show("err","Admin Key দিন।");return}loadBtn.disabled=true;loadBtn.textContent="Loading…";try{await loadList();show("ok","Pending Applications পাওয়া গেছে।")}catch(e){show("err","Pending তালিকা আনা যায়নি। Admin Key ও Apps Script deployment access পরীক্ষা করুন।")}finally{loadBtn.disabled=false;loadBtn.textContent="Pending Applications দেখুন"}}
 loadBtn.onclick=start;refresh.onclick=async()=>{try{await loadList()}catch(e){show("err","Refresh করা যায়নি।")}};
+const editMsg=document.getElementById("editRequestsMsg"),editList=document.getElementById("editRequestsList");
+function showEditMsg(type,t){editMsg.className="msg "+type;editMsg.textContent=t;editMsg.hidden=false}
+function editEsc(v){return esc(v)}
+async function editApi(action,extra={}){const body=new URLSearchParams({action,admin_key:key.value.trim(),...extra});const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},body,cache:"no-store"});const t=await r.text();let d=null;try{d=JSON.parse(t)}catch(_){}if(!d)throw new Error("SERVER_ERROR");return d}
+function renderEditRequests(items){
+ if(!items.length){editList.innerHTML="<div class='empty'>কোনো Pending Profile Edit Request নেই।</div>";return}
+ editList.innerHTML=items.map((r,i)=>`<div class="row">
+ <h3 style="margin:0 0 10px">${editEsc(r.name||"Member")} <span class="status">[${editEsc(r.status||"PENDING")}]</span></h3>
+ <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+ <div><span class="muted">Member ID</span><br><strong>${editEsc(r.member_id)}</strong></div>
+ <div><span class="muted">Mobile</span><br><strong>${editEsc(r.mobile)}</strong></div>
+ <div><span class="muted">Request</span><br><strong>${editEsc(r.request_id||"—")}</strong></div>
+ </div>
+ <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+ <div class="panel" style="margin:0;padding:12px;background:#fff"><strong>বর্তমান তথ্য</strong><pre style="white-space:pre-wrap;font:inherit;margin:8px 0 0">${editEsc(r.current_summary||"—")}</pre></div>
+ <div class="panel" style="margin:0;padding:12px;background:#fffdf4"><strong>পরিবর্তনের অনুরোধ</strong><pre style="white-space:pre-wrap;font:inherit;margin:8px 0 0">${editEsc(r.request_summary||"—")}</pre></div>
+ </div>
+ ${r.photo_url?'<p style="margin:10px 0"><a href="'+editEsc(r.photo_url)+'" target="_blank" rel="noopener">📷 নতুন ছবি দেখুন</a></p>':""}
+ <div class="actions">
+ <button class="primary" data-edit-i="${i}" data-edit-action="approve">✓ Approve & Update</button>
+ <button class="danger" data-edit-i="${i}" data-edit-action="reject">✕ Reject</button>
+ </div></div>`).join("");
+ [...editList.querySelectorAll("button[data-edit-action]")].forEach(b=>b.onclick=async()=>{const r=items[Number(b.dataset.editI)],action=b.dataset.editAction;if(!confirm(action==="approve"?"এই পরিবর্তনগুলো Official Member Profile-এ প্রয়োগ করবেন?":"এই Profile Edit Request Reject করবেন?"))return;b.disabled=true;b.textContent="Processing…";try{const extra={request_id:r.request_id};if(action==="reject"){const reason=prompt("Reject করার কারণ লিখুন:","তথ্য যাচাই করা যায়নি।");if(reason===null){b.disabled=false;b.textContent=action==="approve"?"✓ Approve & Update":"✕ Reject";return}extra.reason=reason}const d=await editApi(action==="approve"?"member_edit_approve":"member_edit_reject",extra);if(d.ok!==true)throw new Error(d.error||"UPDATE_FAILED");showEditMsg("ok",action==="approve"?"Profile পরিবর্তন Approved এবং Database-এ Update হয়েছে।":"Profile Edit Request Reject হয়েছে।");await loadEditRequests()}catch(e){showEditMsg("err","Update করা যায়নি: "+e.message);b.disabled=false;b.textContent=action==="approve"?"✓ Approve & Update":"✕ Reject"}});
+}
+async function loadEditRequests(){if(!key.value.trim()){showEditMsg("err","Admin Key দিন।");return}try{const d=await editApi("member_edit_pending");if(d.ok!==true)throw new Error(d.error||"LIST_FAILED");renderEditRequests(d.records||[]);showEditMsg("ok","Pending Edit Requests লোড হয়েছে।")}catch(e){showEditMsg("err","Edit Requests আনা যায়নি: "+e.message)}}
+document.getElementById("loadEditRequests").onclick=loadEditRequests;
+document.getElementById("refreshEditRequests").onclick=loadEditRequests;
 document.getElementById("noticePreview").onclick=()=>{const t=document.getElementById("noticeTitle").value.trim(),b=document.getElementById("noticeBody").value.trim(),type=document.getElementById("noticeType").value,d=document.getElementById("noticeDate").value||new Date().toISOString().slice(0,10);const box=document.getElementById("noticePreviewBox");if(!t||!b){box.hidden=false;box.textContent="শিরোনাম ও বিস্তারিত লিখুন।";return}box.hidden=false;box.innerHTML="<span class='muted'>"+esc(type)+" • "+esc(d)+"</span><h3 style='margin:7px 0'>"+esc(t)+"</h3><p style='white-space:pre-wrap;margin:0'>"+esc(b)+"</p>"};document.getElementById("noticeClear").onclick=()=>{["noticeTitle","noticeBody"].forEach(id=>document.getElementById(id).value="");document.getElementById("noticePreviewBox").hidden=true};
 </script></body></html>
