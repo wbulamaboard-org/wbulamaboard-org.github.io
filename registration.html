@@ -37,7 +37,7 @@
 <div class="field"><label>শিক্ষাগত যোগ্যতা</label><input name="education" maxlength="150"></div>
 <div class="field"><label>প্রতিষ্ঠান / মাদ্রাসা</label><input name="institution" maxlength="150"></div>
 <div class="field full"><label>ওয়াজ / দাওয়াতের অভিজ্ঞতা</label><textarea name="experience" maxlength="1000"></textarea></div><div class="field"><label>Membership Fee</label><input value="₹500 / Year" readonly></div><div class="field"><label>Payment Reference / UTR (যদি পেমেন্ট করা হয়ে থাকে)</label><input name="payment_ref" maxlength="80" placeholder="UTR / Transaction ID"></div>
-<div class="field full"><label><input id="consent" type="checkbox" required style="width:auto;min-height:0"> আমি তথ্যের সত্যতা নিশ্চিত করছি এবং privacy notice মেনে তথ্য সংরক্ষণে সম্মতি দিচ্ছি। *</label></div>
+<div class="field"><label>Member Password *</label><input name="password" type="password" required minlength="6" maxlength="50" autocomplete="new-password" placeholder="কমপক্ষে 6 অক্ষর"></div><div class="field"><label>Password নিশ্চিত করুন *</label><input id="passwordConfirm" type="password" required minlength="6" maxlength="50" autocomplete="new-password" placeholder="আবার লিখুন"></div><div class="field full"><label><input id="consent" type="checkbox" required style="width:auto;min-height:0"> আমি তথ্যের সত্যতা নিশ্চিত করছি এবং privacy notice মেনে তথ্য সংরক্ষণে সম্মতি দিচ্ছি। *</label></div>
 </div>
 <div class="actions"><button class="primary" id="reviewBtn" type="submit">তথ্য পর্যালোচনা করুন</button></div>
 </form>
@@ -67,10 +67,10 @@ async function preparePhoto(){
 document.getElementById("photo").addEventListener("change",e=>{const file=e.target.files?.[0],img=document.getElementById("photoPreview");if(file){img.src=URL.createObjectURL(file);img.style.display="block"}else img.style.display="none"});
 
 form.addEventListener("submit",async e=>{
- e.preventDefault();WBUB_WORKFLOW.hideMessage(msg);
+ e.preventDefault();WBUB_WORKFLOW.hideMessage(msg);\n if(field("password").length<6){WBUB_WORKFLOW.showMessage(msg,"error","Password কমপক্ষে 6 অক্ষরের হতে হবে।");return}\n if(field("password")!==document.getElementById("passwordConfirm").value){WBUB_WORKFLOW.showMessage(msg,"error","Password এবং Confirm Password মিলছে না।");return}
  if(!WBUB_WORKFLOW.validMobile(field("mobile"))){WBUB_WORKFLOW.showMessage(msg,"error","সঠিক ১০ সংখ্যার ভারতীয় মোবাইল নম্বর দিন।");return}
  if(!WBUB_WORKFLOW.validEmail(field("email"))){WBUB_WORKFLOW.showMessage(msg,"error","সঠিক ইমেইল ঠিকানা দিন।");return}
- payload=Object.fromEntries(new FormData(form).entries());delete payload.consent;delete payload.photo;payload.area=String(payload.block||"").trim();
+ payload=Object.fromEntries(new FormData(form).entries());delete payload.consent;delete payload.photo;delete payload.passwordConfirm;payload.area=String(payload.block||"").trim();
  try{payload.photo_upload=await preparePhoto()}catch(err){submitted=false;WBUB_WORKFLOW.showMessage(msg,"error",err.message==="PHOTO_REQUIRED"?"সদস্যের ছবি দিন।":err.message==="PHOTO_TOO_LARGE"?"ছবির আকার 2 MB-এর মধ্যে রাখুন।":"সঠিক JPG/PNG/WebP ছবি দিন।");return}
  payload.fee_amount=500;payload.currency="INR";payload.fee_period="annual";payload.payment_ref="";
  const safePayload=Object.fromEntries(Object.entries(payload).filter(([k])=>k!=="photo_upload"));
