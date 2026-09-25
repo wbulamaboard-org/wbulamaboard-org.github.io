@@ -23,13 +23,14 @@
         this.API+"?id="+value,
         this.API+"?action=member_profile&id="+value
       ];
+      let serverRecord=null;
       for(const url of routes){
         try{
           const controller=new AbortController();
           const timer=setTimeout(()=>controller.abort(),2500);
           const d=await this.request(url,{signal:controller.signal});
           clearTimeout(timer);
-          if(d&&d.found===true&&d.record)return d;
+          if(d&&d.found===true&&d.record){serverRecord=d.record;break;}
         }catch(_){}
       }
       try{
@@ -39,8 +40,18 @@
         clearTimeout(timer);
         if(response.ok){
           const list=await response.json();
-          const record=list.find(x=>String(x&&x.member_id||"").trim().toUpperCase().replace(/\s/g,"")===normalized);
-          if(record)return {found:true,record:record};
+          const staticRecord=list.find(x=>String(x&&x.member_id||"").trim().toUpperCase().replace(/\s/g,"")===normalized);
+          if(serverRecord&&staticRecord){
+            /* Keep approved server edits authoritative, but fill fields omitted by
+               an older API response from the verified static directory. */
+            const merged={...staticRecord,...serverRecord};
+            ["district","block","area","designation","valid_till","validity","address","photo_url","photo"].forEach(k=>{
+              if((merged[k]==null||String(merged[k]).trim()==="")&&staticRecord[k]!=null)merged[k]=staticRecord[k];
+            });
+            return {found:true,record:merged};
+          }
+          if(serverRecord)return {found:true,record:serverRecord};
+          if(staticRecord)return {found:true,record:staticRecord};
         }
       }catch(_){}
       return {found:false,record:null};
