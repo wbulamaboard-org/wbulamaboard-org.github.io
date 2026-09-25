@@ -74,6 +74,7 @@ form.addEventListener("submit",async e=>{
  try{payload.photo_upload=await preparePhoto()}catch(err){submitted=false;WBUB_WORKFLOW.showMessage(msg,"error",err.message==="PHOTO_REQUIRED"?"সদস্যের ছবি দিন।":err.message==="PHOTO_TOO_LARGE"?"ছবির আকার 2 MB-এর মধ্যে রাখুন।":"সঠিক JPG/PNG/WebP ছবি দিন।");return}
  payload.fee_amount=500;payload.currency="INR";payload.fee_period="annual";payload.payment_ref="";
  const safePayload=Object.fromEntries(Object.entries(payload).filter(([k])=>k!=="photo_upload"));
+ paymentMsg("ok","Review সম্পূর্ণ। “আবেদন জমা দিন” চাপলে আবেদন তৈরি হবে, তারপর Razorpay Checkout খুলবে।");
  review.innerHTML=Object.entries(safePayload).map(([k,v])=>"<div class='review-row'><span>"+WBUB_WORKFLOW.escapeHtml(k)+"</span><strong>"+WBUB_WORKFLOW.escapeHtml(v||"—")+"</strong></div>").join("")+"<div class='review-row'><span>Payment</span><strong>Razorpay • ₹500</strong></div>";
  form.hidden=true;reviewBox.hidden=false;setStep(2);
 });
@@ -96,7 +97,11 @@ async function submitAndPay(){
   setStep(3);
   await openRazorpay();
  }catch(err){
-  submitted=false;WBUB_WORKFLOW.showMessage(msg,"error","আবেদন সংরক্ষণ করা যায়নি: "+(err.message||"SERVER_ERROR"));
+  submitted=false;
+  const detail=String(err&&err.message||"SERVER_ERROR");
+  WBUB_WORKFLOW.showMessage(msg,"error","আবেদন সংরক্ষণ করা যায়নি: "+detail);
+  paymentMsg("error","পেমেন্ট শুরু হয়নি: "+detail+" — উপরের/এই Payment অংশে আবার চেষ্টা করুন।");
+  paymentStatus.scrollIntoView({behavior:"smooth",block:"center"});
  }finally{WBUB_WORKFLOW.setBusy(submitBtn,false)}
 }
 submitBtn.addEventListener("click",submitAndPay);
@@ -138,6 +143,7 @@ async function openRazorpay(){
  }catch(err){
   const detail=String(err&&err.message||"UNKNOWN_ERROR");
   paymentMsg("error","Razorpay শুরু করা যায়নি: "+detail);
+  paymentStatus.scrollIntoView({behavior:"smooth",block:"center"});
   if(currentApplicationNo){
    payNowBtn.hidden=false;
    payNowBtn.disabled=false;
