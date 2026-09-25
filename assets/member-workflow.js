@@ -10,7 +10,7 @@
     showMessage(el,type,msg){if(!el)return;el.className="workflow-message "+type;el.textContent=msg;el.hidden=false},
     hideMessage(el){if(el)el.hidden=true},
     async request(url,options={}){const r=await fetch(url,{cache:"no-store",credentials:"omit",...options});const t=await r.text();let d=null;try{d=t?JSON.parse(t):null}catch(_){}if(!r.ok)throw new Error("NETWORK_HTTP_"+r.status);if(!d)throw new Error("INVALID_API_RESPONSE");return d},
-    async submitApplication(payload){return this.request(this.API,{method:"POST",body:JSON.stringify(payload)})},
+    async submitApplication(payload){return this.request(this.API,{method:"POST",body:JSON.stringify({action:"register",...payload})})},
     async createPaymentOrder(data){return this.request(this.API,{method:"POST",body:JSON.stringify({action:"razorpay_create_order",...data})})},
     async verifyRazorpayPayment(data){return this.request(this.API,{method:"POST",body:JSON.stringify({action:"razorpay_verify_payment",...data})})},
     async publicVerify(id){
