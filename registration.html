@@ -70,7 +70,7 @@ form.addEventListener("submit",async e=>{
  e.preventDefault();WBUB_WORKFLOW.hideMessage(msg);
  if(!WBUB_WORKFLOW.validMobile(field("mobile"))){WBUB_WORKFLOW.showMessage(msg,"error","সঠিক ১০ সংখ্যার ভারতীয় মোবাইল নম্বর দিন।");return}
  if(!WBUB_WORKFLOW.validEmail(field("email"))){WBUB_WORKFLOW.showMessage(msg,"error","সঠিক ইমেইল ঠিকানা দিন।");return}
- payload=Object.fromEntries(new FormData(form).entries());delete payload.consent;delete payload.photo;
+ payload=Object.fromEntries(new FormData(form).entries());delete payload.consent;delete payload.photo;payload.area=String(payload.block||"").trim();
  try{payload.photo_upload=await preparePhoto()}catch(err){submitted=false;WBUB_WORKFLOW.showMessage(msg,"error",err.message==="PHOTO_REQUIRED"?"সদস্যের ছবি দিন।":err.message==="PHOTO_TOO_LARGE"?"ছবির আকার 2 MB-এর মধ্যে রাখুন।":"সঠিক JPG/PNG/WebP ছবি দিন।");return}
  payload.fee_amount=500;payload.currency="INR";payload.fee_period="annual";payload.payment_ref="";
  const safePayload=Object.fromEntries(Object.entries(payload).filter(([k])=>k!=="photo_upload"));
