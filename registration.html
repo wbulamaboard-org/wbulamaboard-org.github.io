@@ -18,7 +18,6 @@
 <div class="notice"><strong>সদস্যপদ ফি:</strong> <span style="font-size:20px;font-weight:900">₹500 / Year</span><br><small>আবেদন অনুমোদনের আগে প্রশাসনিকভাবে পেমেন্ট যাচাই করা হবে।</small></div><div class="payment-box" id="razorpayPaymentBox">
 <h2 style="margin-top:0">💳 ₹500 সদস্যপদ ফি — Razorpay</h2>
 <p>ফর্মের তথ্য জমা দেওয়ার পর এখানে <strong>Secure Razorpay Checkout</strong> খুলবে। UPI, Card, Net Banking ইত্যাদি উপলব্ধ payment method থেকে পেমেন্ট করতে পারবেন।</p>
-<div id="paymentStatus" class="workflow-message" hidden></div>
 <button type="button" class="primary" id="payNowBtn" hidden style="width:100%;padding:15px;border:0;border-radius:9px;font-weight:900;font-size:16px">💳 ₹500 এখনই পেমেন্ট করুন</button>
 <p class="muted" style="margin-bottom:0"><small>পেমেন্ট সফল হলে Razorpay transaction server-side যাচাই করা হবে। সফল যাচাইয়ের পর payment status PAID এবং Official Member ID স্বয়ংক্রিয়ভাবে তৈরি হবে।</small></p>
 </div><div class="notice"><strong>গুরুত্বপূর্ণ:</strong> আবেদন ও ₹500 Razorpay payment সফলভাবে যাচাই হলে Official Member ID স্বয়ংক্রিয়ভাবে তৈরি ও সক্রিয় হবে। ভুল/অসম্পূর্ণ তথ্য থাকলে প্রশাসনিকভাবে আবেদন স্থগিত বা বাতিল করা হতে পারে।</div>
@@ -101,7 +100,7 @@ async function submitAndPay(){
   const detail=String(err&&err.message||"SERVER_ERROR");
   WBUB_WORKFLOW.showMessage(msg,"error","আবেদন সংরক্ষণ করা যায়নি: "+detail);
   paymentMsg("error","পেমেন্ট শুরু হয়নি: "+detail+" — উপরের/এই Payment অংশে আবার চেষ্টা করুন।");
-  paymentStatus.scrollIntoView({behavior:"smooth",block:"center"});
+  
  }finally{WBUB_WORKFLOW.setBusy(submitBtn,false)}
 }
 submitBtn.addEventListener("click",submitAndPay);
