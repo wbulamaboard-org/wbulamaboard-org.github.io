@@ -108,7 +108,7 @@ async function openRazorpay(){
   if(typeof Razorpay!=="function")throw new Error("RAZORPAY_SDK_NOT_LOADED");
   paymentMsg("ok","Razorpay order তৈরি হচ্ছে…");
   const order=await WBUB_WORKFLOW.createPaymentOrder({application_no:currentApplicationNo,mobile:field("mobile")});
-  if(!order||order.ok!==true||!order.order_id)throw new Error(order&&order.error||"ORDER_CREATE_FAILED");
+  if(!order||order.ok!==true||!order.order_id)throw new Error((order&&(order.error||order.message))||"ORDER_CREATE_FAILED");
   currentOrderId=order.order_id;
   const options={
    key:order.key_id,amount:order.amount,currency:order.currency||"INR",name:"WEST BENGAL ULAMA BOARD",
@@ -125,7 +125,7 @@ async function openRazorpay(){
       razorpay_payment_id:response.razorpay_payment_id,
       razorpay_signature:response.razorpay_signature
      });
-     if(!verified||verified.ok!==true)throw new Error(verified&&verified.error||"PAYMENT_VERIFY_FAILED");
+     if(!verified||verified.ok!==true)throw new Error((verified&&(verified.error||verified.message))||"PAYMENT_VERIFY_FAILED");
      showPaidReceipt(verified);
     }catch(err){
      paymentMsg("error","পেমেন্ট হয়েছে, কিন্তু server-side verification সম্পূর্ণ হয়নি। কিছুক্ষণ পরে Status থেকে আবার যাচাই করুন। Payment ID: "+response.razorpay_payment_id);
