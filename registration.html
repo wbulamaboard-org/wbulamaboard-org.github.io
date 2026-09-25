@@ -27,7 +27,7 @@
 <div class="field"><label>জেলা *</label><input name="district" required maxlength="80"></div>
 <div class="field"><label>ব্লক / এলাকা *</label><input name="block" required maxlength="100"></div>
 <div class="field"><label>Designation / Category</label><select name="designation"><option>Wazeen</option><option>Member</option><option>Other</option></select></div>
-<div class="field full"><div class="photo-box"><label>সদস্যের ছবি *</label><input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" required><small class="muted">সাম্প্রতিক পরিষ্কার ছবি দিন। JPG/PNG/WebP, সর্বোচ্চ 2 MB।</small><img id="photoPreview" class="photo-preview" alt="ছবির preview"></div></div><div class="field full"><label>বর্তমান ঠিকানা</label><textarea name="address" maxlength="500"></textarea></div>
+<div class="field full"><div class="photo-box"><label>সদস্যের ছবি</label><input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp"><small class="muted">ছবি থাকলে দিন। না থাকলেও আবেদন জমা দিতে পারবেন। JPG/PNG/WebP, সর্বোচ্চ 2 MB।</small><img id="photoPreview" class="photo-preview" alt="ছবির preview"></div></div><div class="field full"><label>বর্তমান ঠিকানা</label><textarea name="address" maxlength="500"></textarea></div>
 <div class="field"><label>শিক্ষাগত যোগ্যতা</label><input name="education" maxlength="150"></div>
 <div class="field"><label>প্রতিষ্ঠান / মাদ্রাসা</label><input name="institution" maxlength="150"></div>
 <div class="field full"><label>ওয়াজ / দাওয়াতের অভিজ্ঞতা</label><textarea name="experience" maxlength="1000"></textarea></div>
@@ -39,7 +39,7 @@
 <div id="message" hidden></div>
 <div id="receipt" class="receipt" hidden></div>
 </div></div></section></main>
-<script src="assets/member-workflow.js?v=20260925-11"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="assets/site.js" defer></script>
+<script src="assets/member-workflow.js?v=20260925-12"></script><script src="assets/site.js" defer></script>
 <script>
 const form=document.getElementById("form"),reviewBox=document.getElementById("reviewBox"),review=document.getElementById("review"),msg=document.getElementById("message"),receipt=document.getElementById("receipt"),reviewBtn=document.getElementById("reviewBtn"),submitBtn=document.getElementById("submitBtn"),editBtn=document.getElementById("editBtn");
 let payload=null,submitted=false;
@@ -52,17 +52,16 @@ function field(name){return form.elements[name]?.value?.trim()||""}
 
 async function preparePhoto(){
  const input=document.getElementById("photo"),file=input?.files?.[0];
- if(!file)throw new Error("PHOTO_REQUIRED");
+ if(!file)return null;
  if(file.size>2*1024*1024)throw new Error("PHOTO_TOO_LARGE");
  if(!/^image\/(jpeg|png|webp)$/.test(file.type))throw new Error("PHOTO_TYPE");
- const bitmap=await createImageBitmap(file),max=700,scale=Math.min(1,max/Math.max(bitmap.width,bitmap.height)),canvas=document.createElement("canvas");
- canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));
- const ctx=canvas.getContext("2d");ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);
- const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/jpeg",.78));
- if(!blob)throw new Error("PHOTO_PROCESS");
- return await new Promise((resolve,reject)=>{const fr=new FileReader();fr.onload=()=>resolve({data:fr.result,name:(file.name||"member-photo").replace(/[^a-zA-Z0-9._-]/g,"_"),type:"image/jpeg"});fr.onerror=reject;fr.readAsDataURL(blob)});
+ return await new Promise((resolve,reject)=>{
+   const fr=new FileReader();
+   fr.onload=()=>resolve({data:fr.result,name:(file.name||"member-photo").replace(/[^a-zA-Z0-9._-]/g,"_"),type:file.type});
+   fr.onerror=reject;
+   fr.readAsDataURL(file);
+ });
 }
-
 document.getElementById("photo").addEventListener("change",e=>{
  const file=e.target.files?.[0],img=document.getElementById("photoPreview");
  if(file){img.src=URL.createObjectURL(file);img.style.display="block"}else img.style.display="none";
@@ -80,10 +79,10 @@ form.addEventListener("submit",async e=>{
  delete payload.consent; delete payload.photo; delete payload.passwordConfirm;
 
  try{
-   payload.photo_upload=await preparePhoto();
+   const photoData=await preparePhoto();
+   if(photoData)payload.photo_upload=photoData;
  }catch(err){
    WBUB_WORKFLOW.showMessage(msg,"error",
-     err.message==="PHOTO_REQUIRED"?"সদস্যের ছবি দিন।":
      err.message==="PHOTO_TOO_LARGE"?"ছবির আকার 2 MB-এর মধ্যে রাখুন।":"সঠিক JPG/PNG/WebP ছবি দিন।");
    return;
  }
@@ -111,7 +110,9 @@ submitBtn.addEventListener("click",async()=>{
 
    receipt.hidden=false;
    reviewBox.hidden=true;
-   receipt.innerHTML="<h2>✅ আবেদন সফলভাবে জমা হয়েছে</h2><p>আপনার আবেদন নম্বর:</p><p style='font-size:24px;font-weight:900'>"+WBUB_WORKFLOW.escapeHtml(result.application_no)+"</p><p>বর্তমান অবস্থা: <strong>"+WBUB_WORKFLOW.escapeHtml(result.status||"PENDING")+"</strong></p><p>এই নম্বরটি সংরক্ষণ করে রাখুন। পরে Status / Member Area থেকে আবেদনটির অবস্থা দেখুন।</p>";
+   const appNo=String(result.application_no||"");
+   receipt.innerHTML="<h2>✅ আবেদন সফলভাবে জমা হয়েছে</h2><p>আপনার আবেদন নম্বর:</p><p style='font-size:24px;font-weight:900;word-break:break-all'>"+WBUB_WORKFLOW.escapeHtml(appNo)+"</p><button type='button' class='secondary no-print' id='copyAppNo'>📋 আবেদন নম্বর কপি করুন</button><p>বর্তমান অবস্থা: <strong>"+WBUB_WORKFLOW.escapeHtml(result.status||"PENDING")+"</strong></p><p>এই নম্বরটি সংরক্ষণ করে রাখুন। পরে Status / Member Area থেকে আবেদনটির অবস্থা দেখুন।</p>";
+   setTimeout(()=>{const b=document.getElementById("copyAppNo");if(b)b.onclick=async()=>{try{await navigator.clipboard.writeText(appNo);b.textContent="✅ কপি হয়েছে";}catch(_){b.textContent="আবেদন নম্বর: "+appNo;}}},0);
    localStorage.setItem("last_application_no",result.application_no);
    WBUB_WORKFLOW.showMessage(msg,"success","আবেদন সফলভাবে জমা হয়েছে।");
    setStep(2);
