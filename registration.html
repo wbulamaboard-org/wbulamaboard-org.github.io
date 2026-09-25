@@ -67,7 +67,9 @@ async function preparePhoto(){
 document.getElementById("photo").addEventListener("change",e=>{const file=e.target.files?.[0],img=document.getElementById("photoPreview");if(file){img.src=URL.createObjectURL(file);img.style.display="block"}else img.style.display="none"});
 
 form.addEventListener("submit",async e=>{
- e.preventDefault();WBUB_WORKFLOW.hideMessage(msg);\n if(field("password").length<6){WBUB_WORKFLOW.showMessage(msg,"error","Password কমপক্ষে 6 অক্ষরের হতে হবে।");return}\n if(field("password")!==document.getElementById("passwordConfirm").value){WBUB_WORKFLOW.showMessage(msg,"error","Password এবং Confirm Password মিলছে না।");return}
+ e.preventDefault();WBUB_WORKFLOW.hideMessage(msg);
+ if(field("password").length<6){WBUB_WORKFLOW.showMessage(msg,"error","Password কমপক্ষে 6 অক্ষরের হতে হবে।");return}
+ if(field("password")!==document.getElementById("passwordConfirm").value){WBUB_WORKFLOW.showMessage(msg,"error","Password এবং Confirm Password মিলছে না।");return}
  if(!WBUB_WORKFLOW.validMobile(field("mobile"))){WBUB_WORKFLOW.showMessage(msg,"error","সঠিক ১০ সংখ্যার ভারতীয় মোবাইল নম্বর দিন।");return}
  if(!WBUB_WORKFLOW.validEmail(field("email"))){WBUB_WORKFLOW.showMessage(msg,"error","সঠিক ইমেইল ঠিকানা দিন।");return}
  payload=Object.fromEntries(new FormData(form).entries());delete payload.consent;delete payload.photo;delete payload.passwordConfirm;payload.area=String(payload.block||"").trim();
