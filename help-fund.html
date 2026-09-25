@@ -15,7 +15,7 @@ header{background:#fff;border-bottom:1px solid #eee}.nav{min-height:82px;display
 footer{border-top:1px solid #eee;padding:28px 0;color:#687077;font-size:12px}
 @media(max-width:700px){.grid{grid-template-columns:1fr}.nav{min-height:70px}.hero{padding-top:35px}}
 </style>
-<style>.qr-wrap{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin-top:16px}.qr-box{background:#fff;border:1px solid #eedfd7;border-radius:12px;padding:12px;text-align:center}.qr-box #donationQr{width:180px;height:180px;margin:auto}.copy-upi{display:flex;gap:8px}.copy-upi input{flex:1;padding:11px;border:1px solid #ddd;border-radius:8px;font-weight:800}.copy-btn{padding:11px 14px;border:0;border-radius:8px;background:var(--red);color:#fff;font-weight:800}</style>
+<style>.qr-wrap{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin-top:16px}.qr-box{background:#fff;border:1px solid #eedfd7;border-radius:12px;padding:12px;text-align:center}.qr-box #donationQrImg{width:220px;height:220px;margin:auto;display:block}.copy-upi{display:flex;gap:8px}.copy-upi input{flex:1;padding:11px;border:1px solid #ddd;border-radius:8px;font-weight:800}.copy-btn{padding:11px 14px;border:0;border-radius:8px;background:var(--red);color:#fff;font-weight:800}</style>
 <style>
 .fund-intro{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;margin-top:24px}.purpose{background:#fff;border:1px solid #eee2dd;border-radius:16px;padding:24px;box-shadow:0 8px 24px #00000008}.purpose h2{margin:0 0 10px;font-family:Georgia,serif}.purpose p{color:#626a70;line-height:1.8;margin:0}.purpose-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.purpose-item{padding:12px;border-radius:10px;background:#fff8f5;border:1px solid #f0dfda;font-size:12px;font-weight:700}.impact{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.impact-card{padding:20px;text-align:center;border:1px solid #eee5e1;border-radius:14px;background:#fff}.impact-card b{display:block;font-size:27px;color:var(--red);margin-bottom:5px}.impact-card span{font-size:11px;color:#69737a}.projects{padding:8px 0 30px}.projects h2,.reports h2,..gallery-fund h2{font-family:Georgia,serif;margin-bottom:15px}.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.project{border:1px solid #eee5e1;border-radius:14px;padding:20px;background:#fff;box-shadow:0 7px 20px #00000006}.project .ico{font-size:30px}.project h3{font-size:15px;margin:9px 0 6px}.project p{font-size:12px;color:#687178;line-height:1.7;margin:0}.project .tag{display:inline-block;margin-top:12px;padding:5px 9px;border-radius:20px;background:#f7ece8;color:var(--red);font-size:10px;font-weight:800}.reports{padding:12px 0 30px}.report-box{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px;border:1px solid #e9e3df;border-radius:14px;background:#fafafa}.report-box p{margin:5px 0 0;color:#69737a;font-size:12px;line-height:1.6}.report-btn{display:inline-flex;white-space:nowrap;padding:11px 16px;border-radius:8px;background:var(--red);color:#fff;font-weight:800;font-size:12px}.gallery-fund{padding:5px 0 35px}.gallery-link{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.gallery-link a{display:block;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:#eee}.gallery-link img{width:100%;height:100%;object-fit:cover}.transparency{margin:0 0 35px;padding:22px;border-radius:14px;background:#f5faf8;border:1px solid #dcebe5}.transparency h2{margin:0 0 7px;font-family:Georgia,serif}.transparency p{margin:0;color:#64706d;font-size:12px;line-height:1.8}@media(max-width:700px){.fund-intro{grid-template-columns:1fr}.purpose-list{grid-template-columns:1fr}.impact{grid-template-columns:1fr 1fr}.project-grid{grid-template-columns:1fr}.report-box{display:block}.report-btn{margin-top:14px}.gallery-link{grid-template-columns:repeat(2,1fr)}}
 </style></head>
@@ -29,7 +29,7 @@ footer{border-top:1px solid #eee;padding:28px 0;color:#687077;font-size:12px}
 <div class="grid">
 <div class="card"><h2>আপনার ইচ্ছামতো অর্থ দিন</h2><p class="note">যে পরিমাণ দিতে চান তা লিখুন।</p>
 <div class="amount"><span>₹</span><input id="amount" type="number" min="1" step="1" placeholder="যেমন 500"></div>
-<div class="copy-upi" style="margin-top:12px"><input id="donationUpiBox" value="ulama.board@ybl" readonly><button type="button" class="copy-btn" id="copyDonationUpi">UPI ID কপি</button></div><div class="qr-wrap"><div class="qr-box"><div id="donationQr"></div><strong>QR স্ক্যান করে অনুদান দিন</strong></div><div style="flex:1;min-width:220px"><strong>সহজ পেমেন্ট</strong><p class="note">Google Pay-তে নিরাপত্তাজনিত সমস্যা হলে QR Code স্ক্যান করুন অথবা UPI ID কপি করে যেকোনো UPI অ্যাপে পেমেন্ট করুন।</p></div></div><p class="note" style="margin-top:12px">UPI ID: <b>ulama.board@ybl</b><br>আপনার UPI অ্যাপে পেমেন্ট সম্পন্ন করুন।</p></div>
+<div class="copy-upi" style="margin-top:12px"><input id="donationUpiBox" value="ulama.board@ybl" readonly><button type="button" class="copy-btn" id="copyDonationUpi">UPI ID কপি</button></div><div class="qr-wrap"><div class="qr-box"><img id="donationQrImg" alt="অনুদানের UPI QR Code" width="220" height="220" style="display:block;width:220px;height:220px;object-fit:contain;margin:auto" loading="eager"><strong>QR স্ক্যান করে অনুদান দিন</strong></div><div style="flex:1;min-width:220px"><strong>সহজ পেমেন্ট</strong><p class="note">Google Pay-তে নিরাপত্তাজনিত সমস্যা হলে QR Code স্ক্যান করুন অথবা UPI ID কপি করে যেকোনো UPI অ্যাপে পেমেন্ট করুন।</p></div></div><p class="note" style="margin-top:12px">UPI ID: <b>ulama.board@ybl</b><br>আপনার UPI অ্যাপে পেমেন্ট সম্পন্ন করুন।</p></div>
 <div class="card"><h2>পেমেন্টের তথ্য জমা দিন</h2><p class="note">পেমেন্টের পরে UTR / Transaction ID জমা দিলে হিসাব যাচাই করে মোট সংগৃহীত অর্থে যোগ করা যাবে।</p>
 <label class="note">নাম</label><input id="donor" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:7px;margin:6px 0 12px" placeholder="আপনার নাম">
 <label class="note">UTR / Transaction ID</label><input id="utr" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:7px;margin:6px 0 12px" placeholder="পেমেন্টের UTR">
@@ -39,11 +39,37 @@ footer{border-top:1px solid #eee;padding:28px 0;color:#687077;font-size:12px}
 </section>
 </main>
 <footer><div class="wrap">© 2026 West Bengal Ulama Board • WAYEJIN E FURFURA SHARIF</div></footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script>
+<script>
 const amount=document.getElementById('amount');
-let qr;
-function updateQr(){const a=Number(amount.value||0);const box=document.getElementById('donationQr');box.innerHTML='';if(a>0)qr=new QRCode(box,{text:'upi://pay?pa=ulama.board@ybl&pn=WAYEJIN%20E%20FURFURA%20SHARIF&am='+encodeURIComponent(a.toFixed(2))+'&cu=INR&tn=Ulama%20Help%20Fund%20Donation',width:180,height:180});}amount.addEventListener('input',updateQr);document.getElementById('copyDonationUpi').addEventListener('click',async()=>{try{await navigator.clipboard.writeText('ulama.board@ybl')}catch(e){document.getElementById('donationUpiBox').select();document.execCommand('copy')}document.getElementById('copyDonationUpi').textContent='কপি হয়েছে ✓';setTimeout(()=>document.getElementById('copyDonationUpi').textContent='UPI ID কপি',1800)});
-document.getElementById('submitBtn').addEventListener('click',()=>{const s=document.getElementById('status');s.style.display='block';s.textContent='পেমেন্ট তথ্য গ্রহণের জন্য অনলাইন হিসাব সিস্টেম সংযুক্ত করা হবে। আপাতত UTR সংরক্ষণ/যাচাই ব্যবস্থা সক্রিয় নয়।';});
+const qrImg=document.getElementById('donationQrImg');
+const upiId='ulama.board@ybl';
+const payee='WAYEJIN E FURFURA SHARIF';
+
+function qrUrl(){
+  const a=Number(amount.value||0);
+  const params='pa='+encodeURIComponent(upiId)+'&pn='+encodeURIComponent(payee)+'&cu=INR'+(a>0?'&am='+encodeURIComponent(a.toFixed(2)):'')+'&tn='+encodeURIComponent('Ulama Help Fund Donation');
+  return 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=8&data='+encodeURIComponent('upi://pay?'+params);
+}
+function updateQr(){ qrImg.src=qrUrl(); }
+amount.addEventListener('input',updateQr);
+updateQr();
+
+document.getElementById('copyDonationUpi').addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(upiId);}
+  catch(e){document.getElementById('donationUpiBox').select();document.execCommand('copy');}
+  const b=document.getElementById('copyDonationUpi');b.textContent='কপি হয়েছে ✓';
+  setTimeout(()=>b.textContent='UPI ID কপি',1800);
+});
+
+document.getElementById('submitBtn').addEventListener('click',()=>{
+  const s=document.getElementById('status');
+  const donor=document.getElementById('donor').value.trim();
+  const utr=document.getElementById('utr').value.trim();
+  s.style.display='block';
+  s.textContent=donor&&utr
+    ? 'আপনার তথ্য গ্রহণ করা হয়েছে। UTR যাচাই ব্যবস্থা বর্তমানে অনলাইন সংযুক্ত নয়; অনুগ্রহ করে প্রমাণটি সংরক্ষণ করুন।'
+    : 'নাম ও UTR / Transaction ID লিখে তারপর তথ্য জমা দিন।';
+});
 </script>
 <script src="assets/site.js" defer></script>
 </body></html>
