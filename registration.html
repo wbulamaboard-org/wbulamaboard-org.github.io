@@ -45,7 +45,7 @@
 <div id="message" hidden></div>
 <div id="receipt" class="receipt" hidden></div>
 </div></div></section></main>
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script><script src="assets/member-workflow.js?v=20260925-10"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="assets/site.js" defer></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script><script src="assets/member-workflow.js?v=20260925-11"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="assets/site.js" defer></script>
 <script>
 const form=document.getElementById("form"),reviewBox=document.getElementById("reviewBox"),review=document.getElementById("review"),msg=document.getElementById("message"),receipt=document.getElementById("receipt"),reviewBtn=document.getElementById("reviewBtn"),submitBtn=document.getElementById("submitBtn"),editBtn=document.getElementById("editBtn"),payNowBtn=document.getElementById("payNowBtn"),paymentStatus=document.getElementById("paymentStatus");
 let payload=null,submitted=false,currentApplicationNo="",currentOrderId="",paymentBusy=false;
@@ -136,8 +136,14 @@ async function openRazorpay(){
   rzp.on("payment.failed",function(r){paymentMsg("error","পেমেন্ট সম্পূর্ণ হয়নি। "+(r.error?.description||"আবার চেষ্টা করুন।"));paymentBusy=false;payNowBtn.disabled=false;payNowBtn.textContent="💳 ₹500 আবার পেমেন্ট করুন"});
   rzp.open();
  }catch(err){
-  paymentMsg("error","Razorpay শুরু করা যায়নি: "+(err.message||"UNKNOWN_ERROR"));
-  paymentBusy=false;payNowBtn.disabled=false;payNowBtn.textContent="💳 ₹500 পেমেন্ট করুন";
+  const detail=String(err&&err.message||"UNKNOWN_ERROR");
+  paymentMsg("error","Razorpay শুরু করা যায়নি: "+detail);
+  if(currentApplicationNo){
+   payNowBtn.hidden=false;
+   payNowBtn.disabled=false;
+   payNowBtn.textContent="💳 ₹500 আবার পেমেন্ট করুন";
+  }
+  paymentBusy=false;
  }
 }
 
