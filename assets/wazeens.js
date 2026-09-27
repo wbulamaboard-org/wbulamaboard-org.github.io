@@ -17,8 +17,29 @@
   if(search) search.addEventListener("input",render); render();
   const root=document.getElementById("wazeenProfile");
   if(root){
-    const id=new URLSearchParams(location.search).get("id"),w=WAZEENS.find(x=>x.id===id)||WAZEENS[0];
-    document.title=w.name+" | WAYEJIN E FURFURA SHARIF";
-    root.innerHTML='<div class="profile-card"><div class="profile-cover"></div><div class="profile-body"><img class="profile-photo" src="'+esc(w.image)+'" alt="'+esc(w.name)+'"><div class="profile-role">'+esc(w.role)+'</div><h1>'+esc(w.bn||w.name)+'</h1><div class="profile-en">'+esc(w.name)+'</div>'+(w.phone?'<div class="member-phone">📱 '+esc(w.phone)+'</div>':'')+'<div class="profile-grid"><div><small>পদ</small><b>'+esc(w.roleBn||w.role)+'</b></div><div><small>জেলা / এলাকা</small><b>'+esc(w.district)+'</b></div><div><small>শিক্ষাগত যোগ্যতা</small><b>'+esc(w.education)+'</b></div><div><small>অভিজ্ঞতা</small><b>'+esc(w.experience)+'</b></div></div><div class="profile-bio"><h2>পরিচিতি</h2><p>'+esc(w.bio)+'</p></div><div class="profile-actions"><a class="btn" href="wazeens.html">← সব ওয়েজিন</a><a class="btn" href="verification.html">Member ID যাচাই</a></div></div></div>';
+    const id=new URLSearchParams(location.search).get("id")||"";
+    const staticW=WAZEENS.find(x=>x.id===id);
+    const safeUrl=v=>{try{const u=new URL(String(v||"").trim());return /^https?:$/.test(u.protocol)?u.href:""}catch(_){return ""}};
+    const phoneNorm=v=>String(v||"").replace(/\D/g,"").slice(-10);
+    function renderProfile(w){
+      document.title=(w.name||"Wazeen")+" | WAYEJIN E FURFURA SHARIF";
+      const social=[["facebook","🔵 Facebook"],["youtube","▶️ YouTube"],["instagram","🟣 Instagram"],["website","🌐 Website"]].map(([k,label])=>{
+        const u=safeUrl(w[k]||w[k+"_url"]); return u?'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+label+'</a>':'';
+      }).filter(Boolean).join("");
+      const vids=(Array.isArray(w.video_links)?w.video_links:[]).filter(v=>v&&safeUrl(v.url)).map(v=>'<a class="video-link" href="'+esc(safeUrl(v.url))+'" target="_blank" rel="noopener"><b>'+(String(v.platform).toLowerCase()==="facebook"?"🔵":"▶️")+'</b><span>'+esc(v.title||"ভিডিও")+'</span><em>দেখুন →</em></a>').join("");
+      const phone=phoneNorm(w.phone);
+      const yt=safeUrl(w.youtube||w.youtube_url)||("https://www.youtube.com/results?search_query="+encodeURIComponent(w.name||""));
+      const fb=safeUrl(w.facebook||w.facebook_url)||("https://www.facebook.com/search/videos/?q="+encodeURIComponent(w.name||""));
+      root.innerHTML='<div class="profile-card"><div class="profile-cover"></div><div class="profile-body"><img class="profile-photo" src="'+esc(w.image||w.photo_url||"")+'" alt="'+esc(w.name||"Wazeen")+'"><div class="profile-role">'+esc(w.role||w.designation||"WAYEJIN • ULAMA BOARD")+'</div><h1>'+esc(w.bn||w.name||"")+'</h1><div class="profile-en">'+esc(w.name||"")+'</div>'+(w.phone?'<div class="member-phone">📱 '+esc(w.phone)+'</div>':'')+'<div class="profile-grid"><div><small>পদ</small><b>'+esc(w.roleBn||w.designation||w.role||"—")+'</b></div><div><small>জেলা / এলাকা</small><b>'+esc(w.district||w.address||"—")+'</b></div><div><small>শিক্ষাগত যোগ্যতা</small><b>'+esc(w.education||"—")+'</b></div><div><small>অভিজ্ঞতা</small><b>'+esc(w.experience||"—")+'</b></div></div><div class="profile-bio"><h2>পরিচিতি</h2><p>'+esc(w.bio||"WAYEJIN E FURFURA SHARIF-এর সঙ্গে যুক্ত ওয়েজিন।")+'</p></div>'+(phone?'<div class="profile-contact"><a href="tel:+91'+phone+'">📞 কল করুন</a><a href="https://wa.me/91'+phone+'" target="_blank" rel="noopener">💬 WhatsApp</a></div>':'')+'<section class="profile-media"><h2>সামাজিক যোগাযোগ ও মিডিয়া</h2><div class="profile-social">'+(social||'<span>সামাজিক লিংক এখনো যোগ করা হয়নি</span>')+'</div><div class="media-search"><a href="'+esc(yt)+'" target="_blank" rel="noopener">▶️ YouTube ভিডিও খুঁজুন</a><a href="'+esc(fb)+'" target="_blank" rel="noopener">🔵 Facebook ভিডিও খুঁজুন</a></div>'+(vids?'<div class="video-links">'+vids+'</div>':'')+'</section><div class="profile-actions"><a class="btn" href="wazeens.html">← সব ওয়েজিন</a><a class="btn" href="verification.html?id='+encodeURIComponent(w.member_id||id)+'">Member ID যাচাই</a></div></div></div>';
+    }
+    if(staticW){
+      renderProfile(staticW);
+    }else{
+      fetch("assets/master-member-database.json?v=20260928-4",{cache:"no-store"}).then(r=>r.json()).then(list=>{
+        const w=list.find(x=>String(x.member_id||"").toUpperCase()===id.toUpperCase() || String(x.id||"")===id);
+        if(!w){root.innerHTML='<div class="profile-card"><div class="profile-body"><h1>ওয়েজিনের প্রোফাইল পাওয়া যায়নি</h1><a class="btn" href="wazeens.html">← ওয়েজিন ডিরেক্টরি</a></div></div>';return;}
+        w.bn=w.name; w.role=w.designation||"WAYEJIN • ULAMA BOARD"; w.roleBn=w.designation||w.role; w.image=w.photo_url||((String(w.member_id||"").match(/^WBUB-(\d{4})$/))?("assets/member-photos/"+w.member_id+(RegExp.$1==="0185"?".jpg":".png")):""); w.district=w.address||[w.district,w.block].filter(Boolean).join(" • "); renderProfile(w);
+      }).catch(()=>{root.innerHTML='<div class="profile-card"><div class="profile-body"><h1>প্রোফাইল লোড করা যাচ্ছে না</h1><a class="btn" href="wazeens.html">← ফিরে যান</a></div></div>'});
+    }
   }
 })();
