@@ -235,6 +235,25 @@
  .premium-member-head{padding:11px 12px}
  .premium-member-head strong{font-size:15px}
 }
+</style><style>
+.home-wazeen-search{padding:18px 0 24px;background:#fff}
+.home-wazeen-search .search-shell{background:linear-gradient(135deg,#fffaf6,#f7f1eb);border:1px solid #ead8d3;border-radius:18px;padding:18px;box-shadow:0 8px 24px #00000008}
+.home-wazeen-search .search-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.home-wazeen-search .search-icon{width:42px;height:42px;border-radius:11px;background:#8b4a22;color:#fff;display:grid;place-items:center;font-size:20px}
+.home-wazeen-search h2{margin:0;color:#713916;font-size:20px}.home-wazeen-search .hint{margin:3px 0 0;color:#777;font-size:10px}
+.home-wazeen-search .search-row{display:flex;gap:8px}
+.home-wazeen-search input{flex:1;min-width:0;border:1px solid #d9c8bb;background:#fff;border-radius:10px;padding:13px 14px;font-size:15px;outline:none}
+.home-wazeen-search input:focus{border-color:#b8794b;box-shadow:0 0 0 3px #8b4a2212}
+.home-wazeen-search button{border:0;border-radius:10px;background:#8b4a22;color:#fff;font-weight:900;padding:0 20px;cursor:pointer}
+.home-wazeen-results{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}
+.home-wazeen-result{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid #e7ddd5;border-radius:11px;background:#fff}
+.home-wazeen-result img{width:54px;height:54px;border-radius:7px;object-fit:cover;border:2px solid #d2ad4a;padding:1px;background:#fff;flex:0 0 54px}
+.home-wazeen-result .no-photo{width:54px;height:54px;border-radius:7px;background:#f4eee8;display:grid;place-items:center;color:#8b4a22;font-weight:900;flex:0 0 54px}
+.home-wazeen-result strong{display:block;font-size:11px;line-height:1.35;color:#253038}.home-wazeen-result small{display:block;color:#7b8588;font-size:9px;margin-top:3px;line-height:1.35}
+.home-wazeen-result a{display:inline-block;margin-top:6px;color:#b52f37;font-size:9px;font-weight:900}
+.home-wazeen-empty{padding:13px;text-align:center;color:#777;font-size:10px;border:1px dashed #d9c8bb;border-radius:10px;background:#fff}
+@media(max-width:700px){.home-wazeen-search{padding:12px 0 18px}.home-wazeen-search .search-shell{padding:14px;border-radius:15px}.home-wazeen-search h2{font-size:17px}.home-wazeen-search .search-row{display:grid;grid-template-columns:1fr 72px}.home-wazeen-search button{padding:0 8px}.home-wazeen-results{grid-template-columns:1fr 1fr;gap:7px}.home-wazeen-result{display:block;text-align:center;padding:9px 5px}.home-wazeen-result img,.home-wazeen-result .no-photo{margin:auto}.home-wazeen-result strong{margin-top:5px}.home-wazeen-result small{font-size:8px}.home-wazeen-result a{font-size:8px}}
+@media(max-width:390px){.home-wazeen-results{grid-template-columns:1fr}}
 </style></head>
 <body>
 <div class="topbar"><div class="wrap"><div class="top-left"><span>📍 West Bengal, India</span><span>✉ info@westbengalulamaboard.com</span><span>☎ +91 98765 43210</span></div><div class="top-right"><span>●</span><span>●</span><span>●</span><b>বাংলা</b> | English</div></div></div>
@@ -259,7 +278,11 @@
     </div>
   </div>
 </section>
-<section class="premium-member-services">
+<section class="home-wazeen-search"><div class="wrap"><div class="search-shell">
+<div class="search-head"><div class="search-icon">🎙️</div><div><h2>ওয়ায়েজিন খুঁজুন</h2><div class="hint">নাম, মোবাইল নম্বর, পদ বা জেলা দিয়ে খুঁজে প্রোফাইল, ভিডিও ও যোগাযোগের তথ্য দেখুন</div></div></div>
+<div class="search-row"><input id="homeWazeenSearch" type="search" placeholder="নাম / মোবাইল নম্বর লিখুন" autocomplete="off"><button id="homeWazeenSearchBtn">খুঁজুন</button></div>
+<div id="homeWazeenResults" class="home-wazeen-results" aria-live="polite"></div>
+</div></div></section><section class="premium-member-services">
   <div class="wrap">
     <a href="member-services.html" aria-label="সদস্য সেবা খুলুন" style="display:flex;align-items:center;gap:18px;min-height:108px;padding:18px 24px;border-radius:22px;background:linear-gradient(135deg,#8b4a22,#6f3417);color:#fff;text-decoration:none;box-shadow:0 10px 25px rgba(111,52,23,.22)">
       <span style="font-size:42px;line-height:1">▦</span>
@@ -353,6 +376,19 @@ document.addEventListener("visibilitychange",()=>{
  if(!b||!m)return;
  b.addEventListener("click",()=>{const o=m.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");b.textContent=o?"✕":"☰";});
  m.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{m.classList.remove("open");b.textContent="☰";b.setAttribute("aria-expanded","false");}));
+})();
+</script><script>
+(function(){
+ const input=document.getElementById("homeWazeenSearch"),btn=document.getElementById("homeWazeenSearchBtn"),out=document.getElementById("homeWazeenResults");if(!input||!btn||!out)return;
+ let members=[];
+ const norm=v=>String(v||"").replace(/\D/g,"").slice(-10);
+ const photo=r=>{if(r.photo_url)return r.photo_url;const id=String(r.member_id||"");const m=id.match(/^WBUB-(\d{4})$/);return m?"assets/member-photos/"+id+(m[1]==="0185"?".jpg":".png"):""};
+ const esc=v=>String(v??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+ function render(list){if(!list.length){out.innerHTML='<div class="home-wazeen-empty">কোনো ওয়ায়েজিন পাওয়া যায়নি। নাম বা ১০ সংখ্যার মোবাইল নম্বর দিয়ে আবার চেষ্টা করুন।</div>';return}
+ out.innerHTML=list.slice(0,8).map(r=>{const p=photo(r),img=p?'<img loading="lazy" src="'+p+'" alt="'+esc(r.name||"Wazeen")+'">':'<div class="no-photo">و</div>';return '<div class="home-wazeen-result">'+img+'<div><strong>'+esc(r.name||"-")+'</strong><small>'+esc(r.designation||"Member")+(r.address?" • "+esc(r.address):"")+'</small><a href="wazeen-profile.html?id='+encodeURIComponent(r.member_id||"")+'">প্রোফাইল, ভিডিও ও যোগাযোগ →</a></div></div>'}).join("")}
+ function filter(){const raw=input.value.trim(),q=raw.toLowerCase(),phone=norm(raw);if(!raw){out.innerHTML='<div class="home-wazeen-empty">উপরের ঘরে ওয়ায়েজিনের নাম বা মোবাইল নম্বর লিখুন।</div>';return}render(members.filter(r=>{const text=[r.member_id,r.name,r.name_en,r.designation,r.address,r.district,r.block,r.phone].join(" ").toLowerCase();return text.includes(q)||(phone.length>=10&&norm(r.phone)===phone)}))}
+ async function load(){try{const r=await fetch("assets/master-member-database.json?v=20260928-3",{cache:"no-store"});members=(await r.json()).filter(x=>x&&x.active!==false);out.innerHTML='<div class="home-wazeen-empty">নাম বা মোবাইল নম্বর দিয়ে খুঁজুন।</div>'}catch(_){out.innerHTML='<div class="home-wazeen-empty">সদস্য তথ্য লোড করা যায়নি।</div>'}}
+ input.addEventListener("input",filter);btn.addEventListener("click",filter);input.addEventListener("keydown",e=>{if(e.key==="Enter")filter()});load();
 })();
 </script></body>
 </html>
