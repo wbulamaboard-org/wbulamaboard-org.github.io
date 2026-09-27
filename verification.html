@@ -52,7 +52,7 @@ async function verify(){
   let matches=MEMBERS.filter(r=>String(r.member_id).toUpperCase()===id);
   if(!matches.length && /^\d{10,}$/.test(phone)) matches=MEMBERS.filter(r=>r.phone_key===phone);
   if(!matches.length) throw new Error("NOT_FOUND");
-  if(matches.length===1){showOne(matches[0]);}
+  if(matches.length===1){try{const server=await WBUB_WORKFLOW.publicVerify(matches[0].member_id);if(server&&server.found&&server.record)matches[0]={...matches[0],...server.record};}catch(_){}showOne(matches[0]);}
   else{
     box.hidden=false;document.getElementById("status").textContent="✓ MULTIPLE RECORDS";
     document.getElementById("name").textContent="একাধিক সদস্য পাওয়া গেছে";
