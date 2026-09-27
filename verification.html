@@ -36,7 +36,9 @@ function showOne(r){
  document.getElementById("des").textContent=safe(r.designation);document.getElementById("phone").textContent=safe(r.phone,"নম্বর দেওয়া নেই");
  document.getElementById("district").textContent=safe(r.address);
  document.getElementById("valid").textContent=safe(r.validity);generateQR(r.member_id);
- document.getElementById("photo").hidden=true; box.hidden=false;
+ const photo=document.getElementById("photo"),photoUrl=r.photo_url||r.photo||memberPhotoUrl(r);
+ if(photoUrl){photo.src=photoUrl;photo.hidden=false;photo.onerror=()=>photo.hidden=true}else photo.hidden=true;
+ box.hidden=false;
 }
 async function verify(){
  err.hidden=true;box.hidden=true;const raw=q.value.trim();if(!raw){err.textContent="Member ID অথবা মোবাইল নম্বর দিন।";err.hidden=false;return}
