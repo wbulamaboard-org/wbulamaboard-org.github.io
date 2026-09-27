@@ -36,7 +36,7 @@
       try{
         const controller=new AbortController();
         const timer=setTimeout(()=>controller.abort(),2500);
-        const response=await fetch("assets/member-directory-all.json?v=20260925-6",{cache:"no-store",signal:controller.signal});
+        const response=await fetch("assets/master-member-database.json?v=20260927-1",{cache:"no-store",signal:controller.signal});
         clearTimeout(timer);
         if(response.ok){
           const list=await response.json();
