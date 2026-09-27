@@ -209,4 +209,18 @@ if(wazeenSearch){
   });
  });
 }
+</script><script>
+(function(){
+ const cards=[...document.querySelectorAll("#wazeenDirectory .member-card")];
+ cards.forEach(card=>{
+   const id=(card.querySelector(".folder-tab")?.textContent||"").trim().toUpperCase();
+   const m=id.match(/^WBUB-(\d{4})$/);
+   const img=card.querySelector("img");
+   if(!m||!img)return;
+   const file="assets/member-photos/"+id+(m[1]==="0185"?".jpg":".png");
+   img.src=file;
+   img.loading="lazy";
+   img.onerror=function(){this.style.visibility="hidden"};
+ });
+})();
 </script><script src="assets/site.js" defer></script></body></html>
