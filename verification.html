@@ -17,6 +17,7 @@
 <script>
 const q=document.getElementById("q"),btn=document.getElementById("btn"),err=document.getElementById("error"),box=document.getElementById("result");
 let MEMBERS=[];
+function memberPhotoUrl(r){const id=String((r&&r.member_id)||"").trim().toUpperCase();const m=id.match(/^WBUB-(\\d{4})$/);if(!m)return "";return "assets/member-photos/"+id+(m[1]==="0185"?".jpg":".png");}
 function safe(v,f="-"){const s=String(v??"").trim();return s&&s!=="undefined"&&s!=="null"?s:f}
 function normPhone(v){return String(v||"").replace(/\D/g,"").slice(-10)}
 function esc(v){return String(v??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
