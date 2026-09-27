@@ -305,7 +305,16 @@
  .today-notice-arrow b{font-size:21px}
 }
 </style>
-</head>
+<style>
+.upcoming-events{padding:18px 0 34px;background:#fff}
+.upcoming-events-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:12px}
+.upcoming-events-head .section-title{margin:4px 0 0;font-size:26px}
+.upcoming-event-card{display:flex;align-items:center;gap:16px;border:1px solid #ead8d4;border-radius:12px;padding:15px 17px;background:linear-gradient(105deg,#fff8f5,#fff);box-shadow:0 7px 20px #00000008}
+.upcoming-event-date{width:66px;min-width:66px;text-align:center;background:#b52f37;color:#fff;border-radius:9px;padding:9px 5px}
+.upcoming-event-date b{display:block;font-size:25px;line-height:1}.upcoming-event-date span{display:block;font-size:9px;line-height:1.35;margin-top:4px}
+.upcoming-event-info{display:flex;flex-direction:column;gap:4px;flex:1}.upcoming-event-info strong{font-size:14px;color:#273036}.upcoming-event-info span{font-size:10px;color:#626a6e}.upcoming-event-info small{font-size:9px;color:#9a681f;font-weight:700;margin-top:2px}.upcoming-arrow{color:#b52f37;font-size:22px}
+@media(max-width:600px){.upcoming-events{padding:12px 0 25px}.upcoming-events-head .section-title{font-size:22px}.upcoming-event-card{gap:10px;padding:12px}.upcoming-event-date{width:55px;min-width:55px}.upcoming-event-date b{font-size:21px}.upcoming-event-info strong{font-size:11px;line-height:1.4}.upcoming-event-info span{font-size:8px}.upcoming-event-info small{font-size:8px}.upcoming-arrow{font-size:18px}}
+</style><style>.homepage-activities{padding-top:0}.homepage-activities .about-card{width:100%}</style></head>
 <body>
 <div class="topbar"><div class="wrap"><div class="top-left"><span>📍 West Bengal, India</span><span>✉ info@westbengalulamaboard.com</span><span>☎ +91 98765 43210</span></div><div class="top-right"><span>●</span><span>●</span><span>●</span><b>বাংলা</b> | English</div></div></div>
 <header class="header"><div class="wrap nav" style="justify-content:center;text-align:center"><button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="মেনু খুলুন" aria-expanded="false">☰</button>
@@ -329,7 +338,6 @@
     </div>
   </div>
 </section>
-
 <section class="featured-news">
   <div class="wrap">
     <div class="featured-news-badge">🔴 বিশেষ সংবাদ • এখন প্রচারে</div>
@@ -374,20 +382,6 @@
 </div>
 <div id="homeWazeenResults" class="home-wazeen-results" aria-live="polite"><div class="home-wazeen-empty">👤 নাম অথবা 📱 মোবাইল নম্বর দিয়ে খুঁজুন।</div></div>
 </div></div></section>
-<style>
-.home-wazeen-search{padding:14px 0 24px}
-.home-wazeen-search .search-shell{border:1px solid #eadbd0;border-radius:18px;background:linear-gradient(135deg,#fffdf9,#f8f1eb);padding:18px;box-shadow:0 9px 24px rgba(111,52,23,.09)}
-.wazeen-search-tools{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-.wazeen-filter,.wazeen-clear{border:1px solid #e1d5cc;background:#fff;border-radius:999px;padding:7px 11px;font-size:10px;font-weight:800;color:#5c6468;cursor:pointer}
-.wazeen-filter.active{background:#8b4a22;color:#fff;border-color:#8b4a22}
-.wazeen-clear{margin-left:auto;color:#b52f38}
-.home-wazeen-result{position:relative}
-.home-wazeen-result .result-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
-.home-wazeen-result .result-actions a{margin:0!important;padding:5px 7px;border-radius:6px;background:#f5ece5;text-decoration:none}
-.home-wazeen-result .result-actions a.primary{background:#8b4a22;color:#fff}
-.home-wazeen-result .result-meta{display:block;color:#777;font-size:8px;margin-top:3px;line-height:1.4}
-@media(max-width:700px){.wazeen-search-tools{gap:5px}.wazeen-filter,.wazeen-clear{padding:6px 8px;font-size:9px}.wazeen-clear{margin-left:0}.home-wazeen-result .result-actions{justify-content:center}}
-</style>
 <section class="premium-member-services">
   <div class="wrap">
     <a href="member-services.html" aria-label="সদস্য সেবা খুলুন" style="display:flex;align-items:center;gap:18px;min-height:108px;padding:18px 24px;border-radius:22px;background:linear-gradient(135deg,#8b4a22,#6f3417);color:#fff;text-decoration:none;box-shadow:0 10px 25px rgba(111,52,23,.22)">
@@ -401,52 +395,35 @@
 <a class="news-item" href="news-events.html"><span class="date"><b>01</b>FEB</span><span><strong>ঐতিহাসিক উলামা সম্মেলন – ২০২৬</strong><small>ফুরফুরা দরবার শরীফে অনুষ্ঠিত হবে</small></span><span class="arrow">›</span></a>
 <a class="news-item" href="news-events.html"><span class="date"><b>29</b>DEC</span><span><strong>দক্ষিণ ২৪ পরগনা জেলা পরিকল্পনা সম্মেলন</strong><small>জেলা পরিকল্পনা ও সমন্বয়</small></span><span class="arrow">›</span></a>
 <a class="news-item" href="news-events.html"><span class="date"><b>09</b>NOV</span><span><strong>উত্তর ২৪ পরগনা পরিকল্পনা সম্মেলন</strong><small>জেলা পরিকল্পনা ও সমন্বয়</small></span><span class="arrow">›</span></a>
-</div></div></div></section><section class="services">
-<div class="wrap">
-  <div class="services-switch">
-    <button id="servicesSwitchBtn" class="services-switch-btn" type="button" aria-expanded="false" aria-controls="servicesPanel">
-      <span class="services-switch-icon">☰</span>
-      <span><strong>সকল সেবা</strong><small>ওয়ায়েজিন • শিক্ষা • মিডিয়া • সমাজসেবা • নথিপত্র • অনুষ্ঠান</small></span>
-      <b class="services-switch-arrow">⌄</b>
-    </button>
-    <div id="servicesPanel" class="services-panel" hidden>
-      <div class="services-panel-grid">
-        <a class="service" href="services.html#wazeens"><div class="icon">🎙️</div><h3>ওয়ায়েজিন</h3><p>ওয়ায়েজিন পরিচিতি ও প্রোফাইল</p></a>
-        <a class="service" href="services.html#education"><div class="icon">📖</div><h3>ইসলামী শিক্ষা</h3><p>কুরআন, হাদিস ও শিক্ষা কার্যক্রম</p></a>
-        <a class="service" href="services.html#media"><div class="icon">🎧</div><h3>বয়ান ও মিডিয়া</h3><p>বয়ান, ভিডিও, অডিও ও ফটো</p></a>
-        <a class="service" href="services.html#social"><div class="icon">🤝</div><h3>সমাজসেবা</h3><p>মানবিক সহায়তা ও জনকল্যাণ</p></a>
-        <a class="service" href="services.html#documents"><div class="icon">📄</div><h3>নথিপত্র</h3><p>প্রয়োজনীয় তথ্য ও নথি</p></a>
-        <a class="service" href="services.html#events"><div class="icon">📅</div><h3>অনুষ্ঠানসমূহ</h3><p>মাহফিল, সম্মেলন ও সভা</p></a>
-      </div>
-    </div>
+</div></div></div></section>
+<section class="premium-member-services">
+  <div class="wrap">
+    <a href="member-services.html" aria-label="সদস্য সেবা খুলুন" style="display:flex;align-items:center;gap:18px;min-height:108px;padding:18px 24px;border-radius:22px;background:linear-gradient(135deg,#8b4a22,#6f3417);color:#fff;text-decoration:none;box-shadow:0 10px 25px rgba(111,52,23,.22)">
+      <span style="font-size:42px;line-height:1">▦</span>
+      <span style="flex:1;text-align:left"><strong style="display:block;font-size:26px;line-height:1.2">সদস্য সেবা খুলুন</strong><small style="display:block;margin-top:7px;font-size:14px;color:#fff;opacity:.9">সদস্য সংক্রান্ত সব কাজ এক জায়গায়</small></span>
+      <b style="width:48px;height:48px;border-radius:50%;background:#ffd65a;color:#9b161f;display:grid;place-items:center;font-size:30px">→</b>
+    </a>
   </div>
-</div>
 </section>
-<style>
-.services-switch{padding:10px 0 22px}
-.services-switch-btn{width:100%;display:flex;align-items:center;gap:14px;border:1px solid #e2d3c4;border-radius:16px;padding:14px 17px;background:linear-gradient(135deg,#fffdf8,#f8f0e9);color:#253038;cursor:pointer;text-align:left;box-shadow:0 7px 20px rgba(111,52,23,.10)}
-.services-switch-btn:hover{border-color:#c99b43}
-.services-switch-icon{width:42px;height:42px;border-radius:12px;background:#8b4a22;color:#fff;display:grid;place-items:center;font-size:21px;flex:0 0 42px}
-.services-switch-btn strong{display:block;font-size:20px;line-height:1.25}.services-switch-btn small{display:block;margin-top:4px;color:#777;font-size:10px;line-height:1.4}
-.services-switch-arrow{margin-left:auto;font-size:26px;color:#8b4a22;transition:.2s}.services-switch-btn[aria-expanded="true"] .services-switch-arrow{transform:rotate(180deg)}
-.services-panel{padding-top:11px}.services-panel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.services-panel .service{min-height:150px}
-@media(max-width:700px){.services-switch{padding:8px 0 17px}.services-switch-btn{padding:12px 12px;gap:10px}.services-switch-icon{width:38px;height:38px;flex-basis:38px;font-size:18px}.services-switch-btn strong{font-size:17px}.services-switch-btn small{font-size:8px}.services-panel-grid{grid-template-columns:repeat(2,1fr);gap:8px}.services-panel .service{min-height:145px;padding:18px 7px 14px}.services-panel .service h3{font-size:16px}.services-panel .service p{font-size:9px}}
-</style>
-<script>
-(function(){
- const b=document.getElementById("servicesSwitchBtn"),p=document.getElementById("servicesPanel");
- if(!b||!p)return;
- b.addEventListener("click",function(){
-   const open=b.getAttribute("aria-expanded")==="true";
-   b.setAttribute("aria-expanded",open?"false":"true");
-   p.hidden=open;
- });
-})();
-</script>
+<section class="upcoming-events">
+  <div class="wrap">
+    <div class="upcoming-events-head">
+      <div><span class="gallery-kicker">UPCOMING EVENT</span><h2 class="section-title">আসন্ন অনুষ্ঠান</h2></div>
+      <a class="gallery-all" href="news-events.html">সব অনুষ্ঠান →</a>
+    </div>
+    <a class="upcoming-event-card" href="news-events.html">
+      <div class="upcoming-event-date"><b>01</b><span>অক্টোবর<br>২০২৬</span></div>
+      <div class="upcoming-event-info">
+        <strong>পবিত্র ঈদে মিলাদুন্নবী ﷺ উপলক্ষে জিকির ও ওয়াজ মাহফিল</strong>
+        <span>📍 খেড়িয়া, শিমুলতলা হাসপাতাল মোড় (দরবার শরীফ)</span>
+        <span>🕘 বেলা ৯টা থেকে রাত ১টা পর্যন্ত</span>
+        <small>পশ্চিমবঙ্গ উলামা বোর্ড ও ওয়ায়েজিন এ ফুরফুরা শরীফ</small>
+      </div>
+      <b class="upcoming-arrow">→</b>
+    </a>
+  </div>
 </section>
 <section class="home-gallery"><div class="wrap"><div class="gallery-head"><div><span class="gallery-kicker">PHOTO ARCHIVE</span><h2 class="section-title">ফটো গ্যালারি</h2><p>Google Drive Photo Archive থেকে সর্বশেষ ছবি</p></div><a class="gallery-all" href="photo-archive.html?album=all">সব ছবি দেখুন →</a></div><div id="homeGalleryGrid" class="home-gallery-grid"><div class="gallery-loading">📡 ছবি লোড হচ্ছে...</div></div></div></section>
-<section class="stats"><div class="wrap stat-grid"><div class="stat"><b>01</b><span>ডিজিটাল সদস্যপদ প্ল্যাটফর্ম</span></div><div class="stat"><b>24</b><span>জেলা নেটওয়ার্ক</span></div><div class="stat"><b>100+</b><span>সামাজিক কার্যক্রম</span></div><div class="stat"><b>1,000+</b><span>শিক্ষা ও কল্যাণ কার্যক্রম</span></div><div class="stat"><b>∞</b><span>উন্নত আগামীর পথে</span></div></div></section>
 <section class="leadership"><div class="wrap"><h2 class="section-title">নেতৃত্ব</h2><div class="lead-grid">
 <div class="leader"><img src="assets/FB_IMG_1789891917922.jpg" alt="Controller"><h3>Pirjada Mehrab Uddin Siddiqui Al Quraish</h3><p>কন্ট্রোলার • উলামা বোর্ড</p></div>
 <div class="leader"><img src="assets/file_00000000df888211b75f11be6eacb18a.png" alt="President"><h3>Md Younus Ali Baidya</h3><p>সভাপতি • উলামা বোর্ড</p></div>
@@ -456,8 +433,14 @@
 <div class="leader"><img src="assets/moyarrekhin-siddiqui.jpg" alt="State Vice President"><h3>পিরজাদা মোয়াররেখীন সিদ্দিকী</h3><p>রাজ্য সহ-সভাপতি • উলামা বোর্ড</p></div>
 <div class="leader"><div style="width:90px;height:90px;border-radius:50%;border:3px solid #d5b15e;margin:auto;display:flex;align-items:center;justify-content:center;font-size:28px;color:#b52f37;background:#fff8f5">HS</div><h3>হাফেজ সাইফুল্লাহ</h3><p>রাজ্য সহ-সভাপতি • বাসন্তী</p></div>
 <div class="leader"><div style="width:90px;height:90px;border-radius:50%;border:3px solid #d5b15e;margin:auto;display:flex;align-items:center;justify-content:center;font-size:28px;color:#b52f37;background:#fff8f5">AR</div><h3>মাওলানা আলিমুর রহমান</h3><p>রাজ্য সহ-সভাপতি • কচুয়া</p></div>
-</div></div></section><section class="wrap cta"><div><h2>চলুন গড়ি <span>শক্তিশালী উম্মাহ</span></h2><p>আপনার সদস্যপদ, সেবা ও অংশগ্রহণের মাধ্যমে একটি সুসংগঠিত উলামা প্ল্যাটফর্ম গড়ে তুলুন।</p></div><a class="btn" href="help-fund.html">উম্মাহর জন্য সহায়তা করুন →</a></section>
-<section class="wrap" style="padding-bottom:40px"><div class="two-col"><div class="about-card" style="min-height:210px"><h2 class="section-title">আমাদের কার্যক্রম</h2><p>ইসলামী শিক্ষা, উলামা ঐক্য, সমাজ সংস্কার, সমাজসেবা ও জনকল্যাণমূলক কার্যক্রম সম্পর্কে বিস্তারিত তথ্য এক জায়গায় দেখুন।</p><a class="btn" href="activities.html">কার্যক্রম দেখুন →</a></div><div class="news-card"><div class="news-head"><h2 class="section-title" style="margin:0;font-size:22px">ওয়ায়েজিন ডিরেক্টরি</h2><a class="view" href="wazeens.html">সব দেখুন →</a></div><div id="homeWazeens" style="padding:8px 20px 20px;min-height:100px"></div></div></div></section></main>
+</div></div></section>
+<section class="wrap homepage-activities" style="padding-bottom:40px">
+  <div class="about-card" style="min-height:210px">
+    <h2 class="section-title">আমাদের কার্যক্রম</h2>
+    <p>ইসলামী শিক্ষা, উলামা ঐক্য, সমাজ সংস্কার, সমাজসেবা ও জনকল্যাণমূলক কার্যক্রম সম্পর্কে বিস্তারিত তথ্য এক জায়গায় দেখুন।</p>
+    <a class="btn" href="activities.html">কার্যক্রম দেখুন →</a>
+  </div>
+</section>
 <footer class="footer"><div class="wrap footer-grid"><div><div class="footer-brand"><img src="assets/WBUB_Logo_Transparent_Final.png" alt="WBUB Logo"><div><strong>WEST BENGAL ULAMA BOARD</strong><p>WAYEJIN E FURFURA SHARIF</p><p>ঐক্য • শিক্ষা • সমাজ সংস্কার</p></div></div></div><div><h3>দ্রুত লিংক</h3><p><a href="index.html">Home</a></p><p><a href="about.html">About Us</a></p><p><a href="registration.html">Membership</a></p><p><a href="activities.html">Projects</a></p></div><div><h3>সদস্য সেবা</h3><p><a href="news-events.html">News & Events</a></p><p><a href="wazeens.html">ওয়ায়েজিন ডিরেক্টরি</a></p><p><a href="verification.html">Verification</a></p><p><a href="contact.html">Contact</a></p></div><div><h3>যোগাযোগ</h3><p>প্রধান কার্যালয় – ফুরফুরা শরীফ</p><p>শাখা কার্যালয় – শিমুলতলা হাসপাতাল মোড়, বাসন্তী</p><p>দক্ষিণ ২৪ পরগনা, পশ্চিমবঙ্গ</p><p>info@westbengalulamaboard.com</p></div></div></footer>
 <div class="bottom"><div class="wrap"><span>© 2026 West Bengal Ulama Board. All Rights Reserved.</span><span>দীনের জন্য। মানুষের জন্য।</span></div></div>
 <script src="assets/wazeens.js?v=20260928-7"></script><script src="assets/site.js" defer></script>
