@@ -246,7 +246,7 @@ async function loadApprovedProfile(){
    if(d&&d.found===true&&d.record) r=d.record;
  }catch(_){}
  if(!r){
-   const response=await fetch("assets/member-directory-all.json?v=20260923-2",{cache:"no-store"});
+   const response=await fetch("assets/master-member-database.json?v=20260927-1",{cache:"no-store"});
    if(response.ok){
      const list=await response.json();
      r=list.find(x=>normalizeId(x.member_id)===currentMemberId)||null;
