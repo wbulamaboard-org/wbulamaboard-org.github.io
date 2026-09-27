@@ -215,8 +215,16 @@ if(wazeenSearch){
  cards.forEach(card=>{
    const id=(card.querySelector(".folder-tab")?.textContent||"").trim().toUpperCase();
    const m=id.match(/^WBUB-(\d{4})$/);
-   const img=card.querySelector("img");
-   if(!m||!img)return;
+   if(!m)return;
+   let img=card.querySelector("img.member-photo");
+   if(!img){
+     img=document.createElement("img");
+     img.className="member-photo";
+     img.alt="Member Photo";
+     const no=card.querySelector(".member-no");
+     if(no) no.insertAdjacentElement("afterend",img);
+     else card.insertBefore(img,card.firstChild);
+   }
    const file="assets/member-photos/"+id+(m[1]==="0185"?".jpg":".png");
    img.src=file;
    img.loading="lazy";
