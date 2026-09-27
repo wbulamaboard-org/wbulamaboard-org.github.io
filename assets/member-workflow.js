@@ -45,7 +45,7 @@
             /* Keep approved server edits authoritative, but fill fields omitted by
                an older API response from the verified static directory. */
             const merged={...staticRecord,...serverRecord};
-            ["district","block","area","designation","valid_till","validity","address","photo_url","photo"].forEach(k=>{
+            ["district","block","area","designation","valid_till","validity","address","photo_url","photo","facebook","youtube","instagram","website","facebook_url","youtube_url","instagram_url","website_url"].forEach(k=>{
               if((merged[k]==null||String(merged[k]).trim()==="")&&staticRecord[k]!=null)merged[k]=staticRecord[k];
             });
             return {found:true,record:merged};
