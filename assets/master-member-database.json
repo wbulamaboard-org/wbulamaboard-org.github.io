@@ -2605,5 +2605,21 @@
     "photo_url": "assets/amanullah-9732111888-square-1.jpg",
     "profile_url": "wazeen-amanullah-aman.html",
     "active": true
+  },
+  {
+    "member_id": "WBUB/2026/00002",
+    "serial": 188,
+    "source_page": 0,
+    "name": "Hafez Maulana Omar Faruk Aliyabi",
+    "address": "Atpur, Haroa, North 24 Parganas",
+    "district": "North 24 Parganas",
+    "block": "Haroa",
+    "designation": "Imam, Uttar Bihari Jame Masjid",
+    "phone": "8145045787",
+    "validity": "",
+    "old_registration_id": "",
+    "phone_key": "8145045787",
+    "photo_url": "assets/member-photos/WBUB-0187.jpg",
+    "active": true
   }
 ]
