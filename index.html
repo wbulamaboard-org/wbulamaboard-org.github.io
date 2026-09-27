@@ -336,17 +336,14 @@
   </div>
 </section>
 <section class="home-wazeen-search"><div class="wrap"><div class="search-shell">
-<div class="search-head"><div class="search-icon">🎙️</div><div><h2>ওয়ায়েজিন খুঁজুন</h2><div class="hint">নাম, মোবাইল নম্বর, পদ, জেলা বা এলাকা দিয়ে খুঁজুন — প্রোফাইল, ফোন, সোশ্যাল লিংক ও ভিডিওতে সরাসরি যান</div></div></div>
-<div class="search-row"><input id="homeWazeenSearch" type="search" placeholder="নাম / মোবাইল / জেলা / পদ লিখুন" autocomplete="off"><button id="homeWazeenSearchBtn" type="button">খুঁজুন</button></div>
+<div class="search-head"><div class="search-icon">🎙️</div><div><h2>ওয়ায়েজিন খুঁজুন</h2><div class="hint">ওয়ায়েজিনের নাম অথবা মোবাইল নম্বর দিয়ে সহজে খুঁজুন</div></div></div>
+<div class="search-row"><input id="homeWazeenSearch" type="search" placeholder="ওয়ায়েজিনের নাম বা মোবাইল নম্বর লিখুন" autocomplete="off" inputmode="search"><button id="homeWazeenSearchBtn" type="button">খুঁজুন</button></div>
 <div class="wazeen-search-tools">
-<button type="button" class="wazeen-filter active" data-filter="all">সব</button>
-<button type="button" class="wazeen-filter" data-filter="name">নাম</button>
-<button type="button" class="wazeen-filter" data-filter="phone">মোবাইল</button>
-<button type="button" class="wazeen-filter" data-filter="area">জেলা/এলাকা</button>
-<button type="button" class="wazeen-filter" data-filter="designation">পদ</button>
+<button type="button" class="wazeen-filter active" data-filter="name">👤 নাম দিয়ে</button>
+<button type="button" class="wazeen-filter" data-filter="phone">📱 মোবাইল দিয়ে</button>
 <button type="button" id="homeWazeenClear" class="wazeen-clear" type="button">মুছুন</button>
 </div>
-<div id="homeWazeenResults" class="home-wazeen-results" aria-live="polite"><div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div></div>
+<div id="homeWazeenResults" class="home-wazeen-results" aria-live="polite"><div class="home-wazeen-empty">👤 নাম অথবা 📱 মোবাইল নম্বর দিয়ে খুঁজুন।</div></div>
 </div></div></section>
 <style>
 .home-wazeen-search{padding:14px 0 24px}
@@ -513,12 +510,11 @@ document.addEventListener("visibilitychange",()=>{
    const name=[r.name,r.name_en].join(" ").toLowerCase();
    const area=[r.address,r.district,r.block].join(" ").toLowerCase();
    const des=String(r.designation||"").toLowerCase();
-   const all=[r.member_id,r.name,r.name_en,r.designation,r.address,r.district,r.block,r.phone].join(" ").toLowerCase();
+   const all=[r.name,r.name_en,r.phone].join(" ").toLowerCase();
    if(activeFilter==="name") return name.includes(q);
    if(activeFilter==="phone") return phone.length>=4 && norm(r.phone).includes(phone);
-   if(activeFilter==="area") return area.includes(q);
-   if(activeFilter==="designation") return des.includes(q);
-   return all.includes(q)||(phone.length>=4&&norm(r.phone).includes(phone));
+   
+   return name.includes(q)||(phone.length>=4&&norm(r.phone).includes(phone));
  }
  function render(list,raw){
    if(!raw){out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>';return}
