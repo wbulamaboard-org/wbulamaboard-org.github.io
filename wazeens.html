@@ -25,7 +25,7 @@
       const card=document.createElement("a");
       card.className="wazeen-folder member-card";
       card.dataset.phone=norm(r.phone);
-      card.href=r.profile_url || ("verification.html?id="+encodeURIComponent(r.member_id||""));
+      card.href="wazeen-profile.html?id="+encodeURIComponent(r.member_id||"");
       if(r.member_id==="WBUB/2026/00001"){
         card.style.borderColor="#d2ad4a";
         card.style.boxShadow="0 12px 32px rgba(161,126,48,.16)";
@@ -45,7 +45,7 @@
       if(r.validity && r.member_id==="WBUB/2026/00001"){
         const pv=document.createElement("p"); pv.style.cssText="color:#07513f;font-weight:800;font-size:10px"; pv.textContent="VALID UNTIL: "+r.validity; card.appendChild(pv);
       }
-      const open=document.createElement("span"); open.className="open"; open.textContent=r.profile_url ? "প্রোফাইল দেখুন →" : "আইডি দেখুন →"; card.appendChild(open);
+      const open=document.createElement("span"); open.className="open"; open.textContent="প্রোফাইল, ভিডিও ও যোগাযোগ →"; card.appendChild(open);
       directory.appendChild(card);
     });
   }
