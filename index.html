@@ -285,7 +285,27 @@
  .featured-news-ticker{height:32px}
  .featured-news-ticker span{font-size:10px;animation-duration:16s}
 }
-</style></head>
+</style><style>
+.today-notice{padding:10px 0 6px;background:#fff}
+.today-notice-box{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1px solid #ead7b8;border-radius:12px;background:linear-gradient(100deg,#fffaf0,#fff);box-shadow:0 6px 18px rgba(126,82,25,.08);transition:.2s}
+.today-notice-box:hover{transform:translateY(-1px);border-color:#c99b43;box-shadow:0 9px 22px rgba(126,82,25,.12)}
+.today-notice-icon{width:42px;height:42px;flex:0 0 42px;border-radius:11px;background:#fff0d1;display:grid;place-items:center;font-size:22px}
+.today-notice-text{flex:1;min-width:0}
+.today-notice-text strong{display:block;color:#6f3417;font-size:16px}
+.today-notice-text small{display:block;margin-top:4px;color:#747474;font-size:10px}
+.today-notice-arrow{color:#9a681f;font-size:11px;font-weight:700;white-space:nowrap}
+.today-notice-arrow b{font-size:17px;margin-left:4px}
+@media(max-width:600px){
+ .today-notice{padding:8px 0 4px}
+ .today-notice-box{gap:10px;padding:11px 12px}
+ .today-notice-icon{width:36px;height:36px;flex-basis:36px;font-size:19px;border-radius:9px}
+ .today-notice-text strong{font-size:13px}
+ .today-notice-text small{font-size:8px;line-height:1.4}
+ .today-notice-arrow{font-size:0}
+ .today-notice-arrow b{font-size:21px}
+}
+</style>
+</head>
 <body>
 <div class="topbar"><div class="wrap"><div class="top-left"><span>📍 West Bengal, India</span><span>✉ info@westbengalulamaboard.com</span><span>☎ +91 98765 43210</span></div><div class="top-right"><span>●</span><span>●</span><span>●</span><b>বাংলা</b> | English</div></div></div>
 <header class="header"><div class="wrap nav" style="justify-content:center;text-align:center"><button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="মেনু খুলুন" aria-expanded="false">☰</button>
@@ -333,6 +353,15 @@
     <div class="featured-news-ticker" aria-label="বিশেষ সংবাদ চলমান ঘোষণা">
       <span>🔔 বিশেষ প্রচার: পবিত্র ঈদে মিলাদুন্নবী ﷺ উপলক্ষে জিকির ও ওয়াজ মাহফিল • ১লা অক্টোবর ২০২৬ • খেড়িয়া, শিমুলতলা হাসপাতাল মোড় (দরবার শরীফ) • পশ্চিমবঙ্গ উলামা বোর্ড ও ওয়ায়েজিন এ ফুরফুরা শরীফ</span>
     </div>
+  </div>
+</section>
+<section class="today-notice" aria-label="আজকের গুরুত্বপূর্ণ ঘোষণা">
+  <div class="wrap">
+    <a class="today-notice-box" href="news-events.html">
+      <span class="today-notice-icon">📢</span>
+      <span class="today-notice-text"><strong>আজকের গুরুত্বপূর্ণ ঘোষণা</strong><small>বিশেষ কোনো ঘোষণা, সংবাদ বা জরুরি তথ্য এখানে দেখুন</small></span>
+      <span class="today-notice-arrow">বিস্তারিত দেখতে এখানে ক্লিক করুন <b>→</b></span>
+    </a>
   </div>
 </section>
 <section class="home-wazeen-search"><div class="wrap"><div class="search-shell">
