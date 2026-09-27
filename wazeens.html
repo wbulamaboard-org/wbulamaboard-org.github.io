@@ -70,43 +70,4 @@
   if(search) search.addEventListener("input",filter);
   load();
 })();
-</script></div></div></section></main><footer><div class="wrap"><b>WAYEJIN E FURFURA SHARIF</b><p>WEST BENGAL ULAMA BOARD</p><p>ঐক্য • শিক্ষা • সমাজ সংস্কার</p></div></footer><script>
-const wazeenSearch=document.getElementById("wazeenSearch");
-const wazeenCards=[...document.querySelectorAll("#wazeenDirectory .member-card")];
-function normalizePhone(v){return String(v||"").replace(/\D/g,"").slice(-10)}
-if(wazeenSearch){
- wazeenSearch.addEventListener("input",()=>{
-  const raw=wazeenSearch.value.trim();
-  const q=raw.toLowerCase();
-  const phone=normalizePhone(raw);
-  wazeenCards.forEach(card=>{
-   const text=card.textContent.toLowerCase();
-   const cardPhone=card.dataset.phone||"";
-   const ok=!raw || text.includes(q) || (phone.length>=10 && cardPhone===phone);
-   card.style.display=ok?"block":"none";
-  });
- });
-}
-</script><script>
-(function(){
- const cards=[...document.querySelectorAll("#wazeenDirectory .member-card")];
- cards.forEach(card=>{
-   const id=(card.querySelector(".folder-tab")?.textContent||"").trim().toUpperCase();
-   const m=id.match(/^WBUB-(\d{4})$/);
-   if(!m)return;
-   let img=card.querySelector("img.member-photo");
-   if(!img){
-     img=document.createElement("img");
-     img.className="member-photo";
-     img.alt="Member Photo";
-     const no=card.querySelector(".member-no");
-     if(no) no.insertAdjacentElement("afterend",img);
-     else card.insertBefore(img,card.firstChild);
-   }
-   const file="assets/member-photos/"+id+(m[1]==="0185"?".jpg":".png");
-   img.src=file;
-   img.loading="lazy";
-   img.onerror=function(){this.style.visibility="hidden"};
- });
-})();
-</script><script src="assets/site.js" defer></script></body></html>
+</script><footer><div class="wrap"><b>WAYEJIN E FURFURA SHARIF</b><p>WEST BENGAL ULAMA BOARD</p><p>ঐক্য • শিক্ষা • সমাজ সংস্কার</p></div></footer><script src="assets/site.js" defer></script></body></html>
