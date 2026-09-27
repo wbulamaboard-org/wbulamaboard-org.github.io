@@ -336,10 +336,33 @@
   </div>
 </section>
 <section class="home-wazeen-search"><div class="wrap"><div class="search-shell">
-<div class="search-head"><div class="search-icon">🎙️</div><div><h2>ওয়ায়েজিন খুঁজুন</h2><div class="hint">নাম, মোবাইল নম্বর, পদ বা জেলা দিয়ে খুঁজে প্রোফাইল, ভিডিও ও যোগাযোগের তথ্য দেখুন</div></div></div>
-<div class="search-row"><input id="homeWazeenSearch" type="search" placeholder="নাম / মোবাইল নম্বর লিখুন" autocomplete="off"><button id="homeWazeenSearchBtn">খুঁজুন</button></div>
-<div id="homeWazeenResults" class="home-wazeen-results" aria-live="polite"></div>
-</div></div></section><section class="premium-member-services">
+<div class="search-head"><div class="search-icon">🎙️</div><div><h2>ওয়ায়েজিন খুঁজুন</h2><div class="hint">নাম, মোবাইল নম্বর, পদ, জেলা বা এলাকা দিয়ে খুঁজুন — প্রোফাইল, ফোন, সোশ্যাল লিংক ও ভিডিওতে সরাসরি যান</div></div></div>
+<div class="search-row"><input id="homeWazeenSearch" type="search" placeholder="নাম / মোবাইল / জেলা / পদ লিখুন" autocomplete="off"><button id="homeWazeenSearchBtn" type="button">খুঁজুন</button></div>
+<div class="wazeen-search-tools">
+<button type="button" class="wazeen-filter active" data-filter="all">সব</button>
+<button type="button" class="wazeen-filter" data-filter="name">নাম</button>
+<button type="button" class="wazeen-filter" data-filter="phone">মোবাইল</button>
+<button type="button" class="wazeen-filter" data-filter="area">জেলা/এলাকা</button>
+<button type="button" class="wazeen-filter" data-filter="designation">পদ</button>
+<button type="button" id="homeWazeenClear" class="wazeen-clear" type="button">মুছুন</button>
+</div>
+<div id="homeWazeenResults" class="home-wazeen-results" aria-live="polite"><div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div></div>
+</div></div></section>
+<style>
+.home-wazeen-search{padding:14px 0 24px}
+.home-wazeen-search .search-shell{border:1px solid #eadbd0;border-radius:18px;background:linear-gradient(135deg,#fffdf9,#f8f1eb);padding:18px;box-shadow:0 9px 24px rgba(111,52,23,.09)}
+.wazeen-search-tools{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.wazeen-filter,.wazeen-clear{border:1px solid #e1d5cc;background:#fff;border-radius:999px;padding:7px 11px;font-size:10px;font-weight:800;color:#5c6468;cursor:pointer}
+.wazeen-filter.active{background:#8b4a22;color:#fff;border-color:#8b4a22}
+.wazeen-clear{margin-left:auto;color:#b52f38}
+.home-wazeen-result{position:relative}
+.home-wazeen-result .result-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.home-wazeen-result .result-actions a{margin:0!important;padding:5px 7px;border-radius:6px;background:#f5ece5;text-decoration:none}
+.home-wazeen-result .result-actions a.primary{background:#8b4a22;color:#fff}
+.home-wazeen-result .result-meta{display:block;color:#777;font-size:8px;margin-top:3px;line-height:1.4}
+@media(max-width:700px){.wazeen-search-tools{gap:5px}.wazeen-filter,.wazeen-clear{padding:6px 8px;font-size:9px}.wazeen-clear{margin-left:0}.home-wazeen-result .result-actions{justify-content:center}}
+</style>
+<section class="premium-member-services">
   <div class="wrap">
     <a href="member-services.html" aria-label="সদস্য সেবা খুলুন" style="display:flex;align-items:center;gap:18px;min-height:108px;padding:18px 24px;border-radius:22px;background:linear-gradient(135deg,#8b4a22,#6f3417);color:#fff;text-decoration:none;box-shadow:0 10px 25px rgba(111,52,23,.22)">
       <span style="font-size:42px;line-height:1">▦</span>
@@ -478,16 +501,45 @@ document.addEventListener("visibilitychange",()=>{
 })();
 </script><script>
 (function(){
- const input=document.getElementById("homeWazeenSearch"),btn=document.getElementById("homeWazeenSearchBtn"),out=document.getElementById("homeWazeenResults");if(!input||!btn||!out)return;
- let members=[];
- const norm=v=>String(v||"").replace(/\D/g,"").slice(-10);
- const photo=r=>{if(r.photo_url)return r.photo_url;const id=String(r.member_id||"");const m=id.match(/^WBUB-(\d{4})$/);return m?"assets/member-photos/"+id+(m[1]==="0185"?".jpg":".png"):""};
+ const input=document.getElementById("homeWazeenSearch"),btn=document.getElementById("homeWazeenSearchBtn"),out=document.getElementById("homeWazeenResults"),clear=document.getElementById("homeWazeenClear");
+ if(!input||!btn||!out)return;
+ let members=[],activeFilter="all";
+ const norm=v=>String(v||"").replace(/\\D/g,"").slice(-10);
  const esc=v=>String(v??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
- function render(list){if(!list.length){out.innerHTML='<div class="home-wazeen-empty">কোনো ওয়ায়েজিন পাওয়া যায়নি। নাম বা ১০ সংখ্যার মোবাইল নম্বর দিয়ে আবার চেষ্টা করুন।</div>';return}
- out.innerHTML=list.slice(0,8).map(r=>{const p=photo(r),img=p?'<img loading="lazy" src="'+p+'" alt="'+esc(r.name||"Wazeen")+'">':'<div class="no-photo">و</div>';return '<div class="home-wazeen-result">'+img+'<div><strong>'+esc(r.name||"-")+'</strong><small>'+esc(r.designation||"Member")+(r.address?" • "+esc(r.address):"")+'</small><a href="wazeen-profile.html?id='+encodeURIComponent(r.member_id||"")+'">প্রোফাইল, ভিডিও ও যোগাযোগ →</a></div></div>'}).join("")}
- function filter(){const raw=input.value.trim(),q=raw.toLowerCase(),phone=norm(raw);if(!raw){out.innerHTML='<div class="home-wazeen-empty">উপরের ঘরে ওয়ায়েজিনের নাম বা মোবাইল নম্বর লিখুন।</div>';return}render(members.filter(r=>{const text=[r.member_id,r.name,r.name_en,r.designation,r.address,r.district,r.block,r.phone].join(" ").toLowerCase();return text.includes(q)||(phone.length>=10&&norm(r.phone)===phone)}))}
- async function load(){try{const r=await fetch("assets/master-member-database.json?v=20260928-3",{cache:"no-store"});members=(await r.json()).filter(x=>x&&x.active!==false);out.innerHTML='<div class="home-wazeen-empty">নাম বা মোবাইল নম্বর দিয়ে খুঁজুন।</div>'}catch(_){out.innerHTML='<div class="home-wazeen-empty">সদস্য তথ্য লোড করা যায়নি।</div>'}}
- input.addEventListener("input",filter);btn.addEventListener("click",filter);input.addEventListener("keydown",e=>{if(e.key==="Enter")filter()});load();
+ const photo=r=>String(r.photo_url||r.photo||"").trim();
+ const safe=v=>{try{const u=new URL(String(v||"").trim());return /^https?:$/.test(u.protocol)?u.href:""}catch(_){return""}};
+ function matches(r,raw){
+   const q=raw.toLowerCase(), phone=norm(raw);
+   const name=[r.name,r.name_en].join(" ").toLowerCase();
+   const area=[r.address,r.district,r.block].join(" ").toLowerCase();
+   const des=String(r.designation||"").toLowerCase();
+   const all=[r.member_id,r.name,r.name_en,r.designation,r.address,r.district,r.block,r.phone].join(" ").toLowerCase();
+   if(activeFilter==="name") return name.includes(q);
+   if(activeFilter==="phone") return phone.length>=4 && norm(r.phone).includes(phone);
+   if(activeFilter==="area") return area.includes(q);
+   if(activeFilter==="designation") return des.includes(q);
+   return all.includes(q)||(phone.length>=4&&norm(r.phone).includes(phone));
+ }
+ function render(list,raw){
+   if(!raw){out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>';return}
+   if(!list.length){out.innerHTML='<div class="home-wazeen-empty">“'+esc(raw)+'” — কোনো ওয়ায়েজিন পাওয়া যায়নি। নামের অংশ, জেলা বা মোবাইল নম্বর দিয়ে আবার চেষ্টা করুন।</div>';return}
+   out.innerHTML='<div class="home-wazeen-count">পাওয়া গেছে: <b>'+list.length+'</b> জন</div>'+list.slice(0,12).map(r=>{
+     const p=photo(r), image=p?'<img loading="lazy" src="'+esc(p)+'" alt="'+esc(r.name||"Wazeen")+'">':'<div class="no-photo">و</div>';
+     const phone=norm(r.phone), area=[r.district,r.block].filter(Boolean).join(" • ");
+     const fb=safe(r.facebook||r.facebook_url), yt=safe(r.youtube||r.youtube_url), ig=safe(r.instagram||r.instagram_url);
+     const links='<a class="primary" href="wazeen-profile.html?id='+encodeURIComponent(r.member_id||"")+'">প্রোফাইল →</a>'+
+       (phone?'<a href="tel:+91'+phone+'">📞 কল</a>':'')+
+       (fb?'<a href="'+esc(fb)+'" target="_blank" rel="noopener">🔵 FB</a>':'')+
+       (yt?'<a href="'+esc(yt)+'" target="_blank" rel="noopener">▶️ YouTube</a>':'');
+     return '<div class="home-wazeen-result">'+image+'<div><strong>'+esc(r.name||"—")+'</strong><small>'+esc(r.designation||"WAYEJIN")+'</small><span class="result-meta">'+esc(area||r.address||"")+(r.member_id?" • "+esc(r.member_id):"")+'</span><div class="result-actions">'+links+'</div></div></div>';
+   }).join("");
+ }
+ function search(){const raw=input.value.trim();render(members.filter(r=>matches(r,raw)),raw)}
+ async function load(){try{const r=await fetch("assets/master-member-database.json?v=20260928-8",{cache:"no-store"});if(!r.ok)throw 0;members=(await r.json()).filter(x=>x&&x.active!==false);out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>'}catch(_){out.innerHTML='<div class="home-wazeen-empty">ওয়ায়েজিন তথ্য লোড করা যায়নি।</div>'}}
+ document.querySelectorAll(".wazeen-filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".wazeen-filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");activeFilter=b.dataset.filter;search()}));
+ btn.addEventListener("click",search);input.addEventListener("input",()=>{if(input.value.trim().length>=2)search()});input.addEventListener("keydown",e=>{if(e.key==="Enter")search()});
+ clear.addEventListener("click",()=>{input.value="";activeFilter="all";document.querySelectorAll(".wazeen-filter").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>';input.focus()});
+ load();
 })();
 </script></body>
 </html>
