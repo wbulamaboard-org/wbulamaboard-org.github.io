@@ -188,7 +188,54 @@
  .premium-service-panel .wbub-service-card strong{font-size:11px}
  .premium-service-panel .wbub-service-card small{font-size:8px}
 }
-</style></style></head>
+</style></style>
+<style>
+/* Premium homepage hero v2 */
+.premium-hero-v2{position:relative;min-height:540px;overflow:hidden;background:#083d34}
+.premium-hero-v2 .premium-hero-bg{position:absolute;inset:0;background-image:url('https://images.pexels.com/photos/36065203/pexels-photo-36065203.jpeg?auto=compress&cs=tinysrgb&w=1800');background-size:cover;background-position:center 48%;transform:scale(1.02)}
+.premium-hero-v2 .premium-hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,44,37,.40) 0%,rgba(5,54,44,.54) 48%,rgba(8,35,31,.78) 100%)}
+.premium-hero-v2:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:54px;background:#fff;clip-path:ellipse(64% 100% at 50% 100%)}
+.premium-hero-v2 .premium-hero-content{position:relative;z-index:2;text-align:center;color:#fff;padding:55px 16px 82px;max-width:900px}
+.premium-kicker{font-size:16px;font-weight:800;letter-spacing:.3px;text-shadow:0 2px 8px #0008}
+.premium-ornament{font-size:28px;color:#e4bd58;margin:10px 0 2px;text-shadow:0 2px 10px #0008}
+.premium-hero-v2 h1{font-family:"Noto Serif Bengali","Noto Sans Bengali",serif;font-size:clamp(43px,7vw,72px);line-height:1.06;margin:0 0 12px;font-weight:900;letter-spacing:-1px;text-shadow:0 3px 12px #0009}
+.premium-hero-v2 h1 span{color:#fff3d4}
+.premium-en{display:inline-block;border:1px solid #e2bc57;background:rgba(5,70,57,.88);padding:8px 20px;border-radius:24px;font-size:14px;font-weight:900;letter-spacing:1px;box-shadow:0 7px 18px #0005}
+.premium-board{font-size:20px;font-weight:900;margin-top:13px;letter-spacing:.4px;text-shadow:0 2px 8px #0009}
+.premium-sub{margin:3px 0 0!important;font-size:10px!important;color:#f8eee9!important;text-shadow:0 2px 6px #0008}
+.premium-actions{display:flex;justify-content:center;gap:10px;margin-top:23px}
+.premium-btn{display:inline-flex;align-items:center;justify-content:center;min-width:150px;padding:11px 18px;border-radius:8px;font-size:13px;font-weight:900;box-shadow:0 7px 18px #0004}
+.premium-btn.primary{background:#b52f37;color:#fff;border:1px solid #d55b61}
+.premium-btn.light{background:#fff;color:#315f59;border:1px solid #fff}
+.premium-member-services{position:relative;z-index:5;background:#fff;padding:0 0 25px;margin-top:-2px}
+.premium-member-services .wrap{max-width:900px}
+.premium-member-head{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #eadfd9;border-radius:12px 12px 0 0;padding:13px 16px;box-shadow:0 3px 12px #00000008}
+.premium-member-icon{width:40px;height:40px;border-radius:10px;background:#b52f37;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}
+.premium-member-head strong{display:block;color:#9f2931;font-size:16px}
+.premium-member-head small{display:block;color:#777;font-size:10px;margin-top:2px}
+.premium-member-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;padding:9px;border:1px solid #eadfd9;border-top:0;border-radius:0 0 12px 12px;background:#faf8f6}
+.premium-member-grid a{min-height:100px;background:#fff;border:1px solid #e8e2dd;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px 5px;box-shadow:0 3px 10px #00000008}
+.premium-member-grid a>span{width:34px;height:34px;border-radius:50%;background:#fff1ef;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:6px}
+.premium-member-grid strong{font-size:11px;color:#263238}
+.premium-member-grid small{font-size:8px;color:#777;margin-top:3px}
+@media(max-width:700px){
+ .premium-hero-v2{min-height:455px}
+ .premium-hero-v2 .premium-hero-content{padding:42px 12px 72px}
+ .premium-kicker{font-size:13px}
+ .premium-ornament{font-size:24px;margin:7px 0 0}
+ .premium-hero-v2 h1{font-size:42px;line-height:1.08;margin-bottom:11px}
+ .premium-en{font-size:11px;padding:7px 13px}
+ .premium-hero-v2 .premium-board{font-size:16px;margin-top:11px}
+ .premium-hero-v2 .premium-sub{font-size:8px!important}
+ .premium-actions{margin-top:18px;gap:8px}
+ .premium-btn{min-width:135px;padding:10px 11px;font-size:11px}
+ .premium-member-services{padding-bottom:18px}
+ .premium-member-grid{grid-template-columns:repeat(2,1fr);gap:8px;padding:8px}
+ .premium-member-grid a{min-height:94px}
+ .premium-member-head{padding:11px 12px}
+ .premium-member-head strong{font-size:15px}
+}
+</style></head>
 <body>
 <div class="topbar"><div class="wrap"><div class="top-left"><span>📍 West Bengal, India</span><span>✉ info@westbengalulamaboard.com</span><span>☎ +91 98765 43210</span></div><div class="top-right"><span>●</span><span>●</span><span>●</span><b>বাংলা</b> | English</div></div></div>
 <header class="header"><div class="wrap nav" style="justify-content:center;text-align:center"><button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="মেনু খুলুন" aria-expanded="false">☰</button>
@@ -196,23 +243,33 @@
 <nav><a class="active" href="index.html">হোম</a><a href="about.html">আমাদের সম্পর্কে</a><a href="organization.html">সাংগঠনিক কাঠামো</a><a href="wazeens.html">ওয়ায়েজিন</a><a href="about.html">ইসলামী শিক্ষা</a><a href="gallery.html">মিডিয়া</a><a href="documents.html">প্রবন্ধ</a><a href="activities.html">সমাজসেবা</a><a href="news-events.html">অনুষ্ঠান</a><a href="verification.html">ভেরিফিকেশন</a><a href="contact.html">যোগাযোগ</a><a href="help-fund.html">সহায়তা তহবিল</a><a href="location.html">লাইভ লোকেশন</a><a href="admin.html">🔐 Admin Panel</a></nav>
 </div></header>
 <div class="mobile-menu" id="mobileMenu"><div class="mobile-menu-inner"><a href="index.html">হোম</a><a href="about.html">আমাদের সম্পর্কে</a><a href="organization.html">সাংগঠনিক কাঠামো</a><a href="wazeens.html">ওয়ায়েজিন</a><a href="about.html">ইসলামী শিক্ষা</a><a href="gallery.html">মিডিয়া</a><a href="documents.html">প্রবন্ধ</a><a href="activities.html">সমাজসেবা</a><a href="news-events.html">অনুষ্ঠান</a><a href="verification.html">ভেরিফিকেশন</a><a href="contact.html">যোগাযোগ</a><a href="help-fund.html">সহায়তা তহবিল</a><a href="location.html">লাইভ লোকেশন</a><a href="admin.html">🔐 Admin Panel</a></div></div><main>
-<section class="hero premium-hero">
+<section class="hero premium-hero premium-hero-v2">
   <div class="premium-hero-bg" aria-hidden="true"></div>
+  <div class="premium-hero-overlay" aria-hidden="true"></div>
   <div class="wrap premium-hero-content">
-    <div class="premium-eyebrow">ঐক্য <span>◆</span> শিক্ষা <span>◆</span> সমাজ সংস্কার <span>◆</span> সেবা</div>
+    <div class="premium-kicker">ঐক্য • শিক্ষা • সমাজ সংস্কার • সেবা</div>
     <div class="premium-ornament">✦</div>
     <h1>ওয়ায়েজিন এ<br><span>ফুরফুরা শরীফ</span></h1>
-    <div class="premium-ribbon">WAYEJIN E FURFURA SHARIF</div>
+    <div class="premium-en">WAYEJIN E FURFURA SHARIF</div>
     <div class="premium-board">WEST BENGAL ULAMA BOARD</div>
     <p class="premium-sub">A BRANCH OF JAMIYATE ULAMA BANGLA-ASAM</p>
-    <p class="premium-description">পশ্চিমবঙ্গ উলামা বোর্ড — ওয়ায়েজিন এ ফুরফুরা শরীফের একটি আধুনিক ডিজিটাল প্ল্যাটফর্ম। ইসলামি শিক্ষা, উলামা ঐক্য, সমাজকল্যাণ এবং সদস্যসেবাকে আরও সুসংগঠিত করার লক্ষ্যে আমরা কাজ করি।</p>
-
-    <div id="member-services" class="wbub-service-panel premium-service-panel" aria-label="প্রধান সদস্য সেবা">
-      <div class="member-service-heading"><span>👤</span><div><strong>সদস্য সেবা</strong><small>সদস্য সংক্রান্ত সব কাজ এক জায়গায়</small></div></div>
-      <a class="wbub-service-card" href="registration.html"><span class="ico">📝</span><span><strong>সদস্য নিবন্ধন</strong><small>নতুন সদস্য আবেদন</small></span></a>
-      <a class="wbub-service-card" href="status.html"><span class="ico">📋</span><span><strong>Member Status</strong><small>আবেদনের অবস্থা দেখুন</small></span></a>
-      <a class="wbub-service-card" href="verification.html"><span class="ico">✓</span><span><strong>Member Verification</strong><small>ID / QR যাচাই</small></span></a>
-      <a class="wbub-service-card" href="member.html"><span class="ico">🔐</span><span><strong>Member Login</strong><small>OTP দিয়ে প্রবেশ</small></span></a>
+    <div class="premium-actions">
+      <a href="registration.html" class="premium-btn primary">সদস্য নিবন্ধন</a>
+      <a href="wazeens.html" class="premium-btn light">ওয়ায়েজিন পরিচিতি</a>
+    </div>
+  </div>
+</section>
+<section class="premium-member-services">
+  <div class="wrap">
+    <div class="premium-member-head">
+      <div class="premium-member-icon">👤</div>
+      <div><strong>সদস্য সেবা</strong><small>সদস্য সংক্রান্ত সব কাজ এক জায়গায়</small></div>
+    </div>
+    <div class="premium-member-grid">
+      <a href="registration.html"><span>📝</span><strong>সদস্য নিবন্ধন</strong><small>নতুন সদস্য আবেদন</small></a>
+      <a href="status.html"><span>📋</span><strong>Member Status</strong><small>আবেদনের অবস্থা দেখুন</small></a>
+      <a href="verification.html"><span>✓</span><strong>Member Verification</strong><small>ID / QR যাচাই</small></a>
+      <a href="member.html"><span>🔐</span><strong>Member Login</strong><small>OTP দিয়ে প্রবেশ</small></a>
     </div>
   </div>
 </section>
