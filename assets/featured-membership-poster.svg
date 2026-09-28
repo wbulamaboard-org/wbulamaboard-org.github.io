@@ -24,9 +24,8 @@
 </g>
 <circle cx="450" cy="255" r="72" fill="#1a9d6f" stroke="#b88928" stroke-width="7"/>
 <path d="M390 265 Q450 190 510 265Z" fill="#0a6b50"/>
-<text x="450" y="200" text-anchor="middle" font-family="Noto Sans Bengali, sans-serif" font-size="62" font-weight="900" fill="#fff">নতুন সদস্য</text>
 <rect x="235" y="220" width="430" height="86" rx="22" fill="#c90d18" filter="url(#shadow)"/>
-<text x="450" y="282" text-anchor="middle" font-family="Noto Sans Bengali, sans-serif" font-size="56" font-weight="900" fill="#fff">নতুন সদস্য পদ গ্রহণ করুন</text>
+<text x="450" y="278" text-anchor="middle" font-family="Noto Sans Bengali, sans-serif" font-size="48" font-weight="900" fill="#fff">নতুন সদস্য পদ গ্রহণ করুন</text>
 <rect x="315" y="405" width="270" height="64" rx="32" fill="#c90d18" stroke="#fff" stroke-width="5"/>
 <text x="450" y="447" text-anchor="middle" font-family="Noto Sans Bengali, sans-serif" font-size="30" font-weight="900" fill="#fff">এখনই সদস্য হন →</text>
 <text x="450" y="505" text-anchor="middle" font-family="Noto Sans Bengali, sans-serif" font-size="22" font-weight="700" fill="#07533f">ঐক্য • শিক্ষা • সমাজ সংস্কার</text>
