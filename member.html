@@ -118,7 +118,8 @@ button:disabled{opacity:.6;cursor:not-allowed}.workflow-message{margin-top:16px;
 <script>
 (function(){
 "use strict";
-const form=document.getElementById("loginForm"),memberIdEl=document.getElementById("memberIdInput"),mobileEl=document.getElementById("mobileInput");\nconst prefillMemberId=new URLSearchParams(location.search).get("id")||""; if(prefillMemberId) memberIdEl.value=prefillMemberId;
+const form=document.getElementById("loginForm"),memberIdEl=document.getElementById("memberIdInput"),mobileEl=document.getElementById("mobileInput");
+const prefillMemberId=new URLSearchParams(location.search).get("id")||""; if(prefillMemberId) memberIdEl.value=prefillMemberId;
 const sendBtn=document.getElementById("sendBtn"),verifyBtn=document.getElementById("verifyBtn"),resendBtn=document.getElementById("resendBtn");
 const otpBox=document.getElementById("otpBox"),otpInput=document.getElementById("otpInput"),otpHint=document.getElementById("otpHint"),msg=document.getElementById("msg"),dash=document.getElementById("dashboard");
 let currentMobile="",currentMemberId="",requestId="",resendTimer=null,resendLeft=0,msg91Ready=false,otpLength=4;
