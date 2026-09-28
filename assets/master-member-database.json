@@ -2671,5 +2671,22 @@
     "photo_url": "",
     "id_card_url": "",
     "active": true
+  },
+  {
+    "member_id": "WBUB-0187",
+    "serial": 192,
+    "source_page": 0,
+    "name": "SK Al Amin Fatehi",
+    "name_en": "SK Al Amin Fatehi",
+    "address": "Nandigram",
+    "district": "Purba Medinipur",
+    "block": "Nandigram",
+    "designation": "Secretary of Nandigram Block - I",
+    "phone": "+91 85913 32895",
+    "validity": "2026-2027",
+    "old_registration_id": "WBUB/1384/26",
+    "phone_key": "8591332895",
+    "photo_url": "",
+    "active": true
   }
 ]
