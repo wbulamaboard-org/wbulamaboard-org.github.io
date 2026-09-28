@@ -45,7 +45,7 @@
       if(r.validity && r.member_id==="WBUB/2026/00001"){
         const pv=document.createElement("p"); pv.style.cssText="color:#07513f;font-weight:800;font-size:10px"; pv.textContent="VALID UNTIL: "+r.validity; card.appendChild(pv);
       }
-      const open=document.createElement("span"); open.className="open"; open.textContent="প্রোফাইল, ভিডিও ও যোগাযোগ →"; card.appendChild(open);
+      const open=document.createElement("span"); open.className="open"; open.textContent="প্রোফাইল, ভিডিও ও যোগাযোগ →"; card.appendChild(open); const idBtn=document.createElement("button"); idBtn.type="button"; idBtn.className="id-download-btn"; idBtn.textContent="🪪 ID Card Download"; idBtn.style.cssText="display:block;width:100%;margin-top:8px;border:0;border-radius:9px;padding:9px 6px;background:#a17e30;color:#fff;font-weight:900;font-size:10px;cursor:pointer"; idBtn.onclick=(e)=>{e.preventDefault();e.stopPropagation();location.href="wazeen-id-card.html?id="+encodeURIComponent(r.member_id||"")}; card.appendChild(idBtn);
       directory.appendChild(card);
     });
   }
