@@ -68,7 +68,7 @@
       '<div class="media-search"><a href="'+esc(youtube)+'" target="_blank" rel="noopener">▶️ YouTube ভিডিও খুঁজুন</a><a href="'+esc(facebook)+'" target="_blank" rel="noopener">🔵 Facebook ভিডিও খুঁজুন</a></div>'+
       (videos ? '<div class="video-links">'+videos+'</div>' : '')+
       '</section>'+
-      '<div class="profile-actions"><a class="btn" href="wazeens.html">← সব ওয়েজিন</a><a class="btn" href="verification.html?id='+encodeURIComponent(w.member_id||id)+'">Member ID যাচাই</a><a class="btn" href="wazeen-car-board.html?id='+encodeURIComponent(w.member_id||id)+'">🚗 Car Board Download</a><a class="btn" href="wazeen-id-card.html?id='+encodeURIComponent(w.member_id||id)+'">🪪 ID Card Download</a>'+(w.card_url ? '<a class="btn" href="'+esc(w.card_url)+'" target="_blank" rel="noopener">🪪 ID Card দেখুন</a>' : "")+'<a class="btn profile-edit-link" href="member.html?id='+encodeURIComponent(w.member_id||id)+'">✏️ নিজের প্রোফাইল এডিট</a></div>'+
+      '<div class="profile-actions"><a class="btn" href="wazeens.html">← সব ওয়েজিন</a><a class="btn" href="verification.html?id='+encodeURIComponent(w.member_id||id)+'">Member ID যাচাই</a><a class="btn" href="wazeen-car-board.html?id='+encodeURIComponent(w.member_id||id)+'">🚗 Car Board Download</a><a class="btn id-card-download" href="wazeen-id-card.html?id='+encodeURIComponent(w.member_id||id)+'">🪪 Download ID Card</a>'+(w.card_url ? '<a class="btn" href="'+esc(w.card_url)+'" target="_blank" rel="noopener">🪪 ID Card দেখুন</a>' : "")+'<a class="btn profile-edit-link" href="member.html?id='+encodeURIComponent(w.member_id||id)+'">✏️ নিজের প্রোফাইল এডিট</a></div>'+
       '</div></div>';
   }
 
