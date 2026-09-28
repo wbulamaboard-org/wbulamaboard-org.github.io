@@ -2688,5 +2688,20 @@
     "phone_key": "8591332895",
     "photo_url": "",
     "active": true
+  },
+  {
+    "member_id": "WBUB/15003/2026",
+    "serial": 15003,
+    "source_page": "new card",
+    "name": "Md Sk Sanjur Ali",
+    "address": "Basudevpur",
+    "designation": "Holdia Secretary",
+    "phone": "9002254484",
+    "validity": "2026-2027",
+    "old_registration_id": "WBUB/15003/2026",
+    "phone_key": "9002254484",
+    "photo_url": "",
+    "card_url": "assets/member-cards/WBUB-15003-2026.jpg",
+    "active": true
   }
 ]
