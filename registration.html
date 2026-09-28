@@ -21,15 +21,19 @@
 <div class="form-grid">
 <div class="field"><label>পূর্ণ নাম *</label><input name="name" required maxlength="100"></div>
 <div class="field"><label>পিতার/অভিভাবকের নাম</label><input name="father" maxlength="100"></div>
+<div class="field"><label>মাতার নাম</label><input name="mother" maxlength="100"></div>
 <div class="field"><label>মোবাইল নম্বর *</label><input name="mobile" required inputmode="numeric" maxlength="10" placeholder="10 সংখ্যার নম্বর"></div>
 <div class="field"><label>ইমেইল</label><input name="email" type="email" maxlength="120"></div>
 <div class="field"><label>জন্মতারিখ</label><input name="dob" type="date"></div>
 <div class="field"><label>জেলা *</label><input name="district" required maxlength="80"></div>
 <div class="field"><label>ব্লক / এলাকা *</label><input name="block" required maxlength="100"></div>
+<div class="field"><label>পিন কোড *</label><input name="pin" required inputmode="numeric" maxlength="6" placeholder="৬ সংখ্যার পিন"></div>
 <div class="field"><label>Designation / Category</label><select name="designation"><option>Wazeen</option><option>Member</option><option>Other</option></select></div>
-<div class="field full"><div class="photo-box"><label>সদস্যের ছবি</label><input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp"><small class="muted">ছবি থাকলে দিন। না থাকলেও আবেদন জমা দিতে পারবেন। JPG/PNG/WebP, সর্বোচ্চ 2 MB।</small><img id="photoPreview" class="photo-preview" alt="ছবির preview"></div></div><div class="field full"><label>বর্তমান ঠিকানা</label><textarea name="address" maxlength="500"></textarea></div>
+<div class="field full"><div class="photo-box"><label>সদস্যের ছবি</label><input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp"><small class="muted">ছবি থাকলে দিন। না থাকলেও আবেদন জমা দিতে পারবেন। JPG/PNG/WebP, সর্বোচ্চ 2 MB।</small><img id="photoPreview" class="photo-preview" alt="ছবির preview"></div></div><div class="field full"><label>বর্তমান ঠিকানা *</label><textarea name="address" required maxlength="500"></textarea></div>
+<div class="field full"><label>স্থায়ী ঠিকানা</label><textarea name="permanent_address" maxlength="500"></textarea></div>
 <div class="field"><label>শিক্ষাগত যোগ্যতা</label><input name="education" maxlength="150"></div>
 <div class="field"><label>প্রতিষ্ঠান / মাদ্রাসা</label><input name="institution" maxlength="150"></div>
+<div class="field"><label>বর্তমান পেশা</label><input name="profession" maxlength="150"></div>
 <div class="field full"><label>ওয়াজ / দাওয়াতের অভিজ্ঞতা</label><textarea name="experience" maxlength="1000"></textarea></div>
 <div class="field"><label>Member Password *</label><input name="password" type="password" required minlength="6" maxlength="50" autocomplete="new-password" placeholder="কমপক্ষে 6 অক্ষর"></div><div class="field"><label>Password নিশ্চিত করুন *</label><input id="passwordConfirm" type="password" required minlength="6" maxlength="50" autocomplete="new-password" placeholder="আবার লিখুন"></div><div class="field full"><label><input id="consent" type="checkbox" required style="width:auto;min-height:0"> আমি তথ্যের সত্যতা নিশ্চিত করছি এবং privacy notice মেনে তথ্য সংরক্ষণে সম্মতি দিচ্ছি। *</label></div>
 </div>
@@ -72,6 +76,7 @@ form.addEventListener("submit",async e=>{
  WBUB_WORKFLOW.hideMessage(msg);
  if(field("password").length<6){WBUB_WORKFLOW.showMessage(msg,"error","Password কমপক্ষে 6 অক্ষরের হতে হবে।");return}
  if(field("password")!==document.getElementById("passwordConfirm").value){WBUB_WORKFLOW.showMessage(msg,"error","Password এবং Confirm Password মিলছে না।");return}
+ if(!/^\d{6}$/.test(field("pin"))){WBUB_WORKFLOW.showMessage(msg,"error","সঠিক ৬ সংখ্যার পিন কোড দিন।");return}
  if(!WBUB_WORKFLOW.validMobile(field("mobile"))){WBUB_WORKFLOW.showMessage(msg,"error","সঠিক ১০ সংখ্যার ভারতীয় মোবাইল নম্বর দিন।");return}
  if(!WBUB_WORKFLOW.validEmail(field("email"))){WBUB_WORKFLOW.showMessage(msg,"error","সঠিক ইমেইল ঠিকানা দিন।");return}
 
