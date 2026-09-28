@@ -24,14 +24,14 @@
     const area = String(r.area || r.block || r.address || "").trim();
     return '<a class="wazeen-folder" href="wazeen-profile.html?id='+encodeURIComponent(r.member_id || '')+'">'+
       '<span class="folder-tab">'+esc(r.member_id || "")+'</span>'+img+
-      '<h3>'+esc(r.name || "—")+'</h3>'+
+      '<h3>'+esc(String(r.name || "—").toUpperCase())+'</h3>'+
       '<p>'+esc(r.designation || "WAYEJIN")+'</p>'+
       ((district || area) ? '<p>'+esc((district?"জেলা: "+district:"")+(district&&area?" • ":"")+(area?"এলাকা: "+area:""))+'</p>' : '')+
       '<span class="open">প্রোফাইল, ভিডিও ও যোগাযোগ →</span></a>';
   }
 
   function renderProfile(root, w, id){
-    const name = w.name || "Wazeen";
+    const name = String(w.name || "Wazeen").toUpperCase();
     const social = [
       ["facebook","🔵 Facebook"],["youtube","▶️ YouTube"],["instagram","🟣 Instagram"],["website","🌐 Website"]
     ].map(([k,label]) => {
