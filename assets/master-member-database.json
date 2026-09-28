@@ -2652,5 +2652,23 @@
     "phone_key": "7797450937",
     "photo_url": "assets/member-photos/WBUB-0191.svg",
     "active": true
+  },
+  {
+    "member_id": "WBUB/2026/00003",
+    "serial": 189,
+    "source_page": 0,
+    "name": "SK Shahadat",
+    "name_en": "SK Shahadat",
+    "address": "Dankuni",
+    "district": "Hooghly",
+    "block": "Dankuni",
+    "designation": "Member of Ulama Board",
+    "phone": "+91 82404 66606",
+    "validity": "2026-2027",
+    "old_registration_id": "WBUB/15004/2016",
+    "phone_key": "8240466606",
+    "photo_url": "",
+    "id_card_url": "",
+    "active": true
   }
 ]
