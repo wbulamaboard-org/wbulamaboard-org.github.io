@@ -607,7 +607,13 @@ fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"})
 .then(r=>r.json())
 .then(d=>{
  const files=Array.isArray(d.files)?d.files:[];
- const items=files.slice(0,8);
+ const seen=new Set();
+const items=files.filter(p=>{
+  if(!p||!p.url)return false;
+  const key=String(p.url||"").split("?")[0]+"|"+String(p.name||"").trim().toLowerCase();
+  if(seen.has(key))return false;
+  seen.add(key); return true;
+}).slice(0,8);
  if(!items.length){grid.innerHTML='<div class="gallery-loading">📷 এখনো কোনো ছবি আপলোড করা হয়নি।</div>';return;}
  grid.innerHTML=items.map(p=>'<a class="home-gallery-item" href="photo-archive.html?album=all"><img loading="lazy" src="'+p.url+'" alt="'+(p.name||"Photo")+'"></a>').join("");
 })
@@ -697,7 +703,7 @@ document.addEventListener("visibilitychange",()=>{
    }).join("");
  }
  function search(){const raw=input.value.trim();render(members.filter(r=>matches(r,raw)),raw)}
- async function load(){try{const r=await fetch("assets/master-member-database.json?v=20260928-15",{cache:"no-store"});if(!r.ok)throw 0;members=(await r.json()).filter(x=>x&&x.active!==false);out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>'}catch(_){out.innerHTML='<div class="home-wazeen-empty">ওয়ায়েজিন তথ্য লোড করা যায়নি।</div>'}}
+ async function load(){try{const r=await fetch("assets/master-member-database.json?v=20260928-16",{cache:"no-store"});if(!r.ok)throw 0;members=(await r.json()).filter(x=>x&&x.active!==false);out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>'}catch(_){out.innerHTML='<div class="home-wazeen-empty">ওয়ায়েজিন তথ্য লোড করা যায়নি।</div>'}}
  document.querySelectorAll(".wazeen-filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".wazeen-filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");activeFilter=b.dataset.filter;search()}));
  btn.addEventListener("click",search);input.addEventListener("input",()=>{if(input.value.trim().length>=2)search()});input.addEventListener("keydown",e=>{if(e.key==="Enter")search()});
  clear.addEventListener("click",()=>{input.value="";activeFilter="all";document.querySelectorAll(".wazeen-filter").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>';input.focus()});
@@ -725,167 +731,16 @@ function render(){
  start();
 }
 fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{
- photos=(Array.isArray(d.files)?d.files:[]).filter(p=>p&&p.url).slice(0,8);
+ const raw=(Array.isArray(d.files)?d.files:[]).filter(p=>p&&p.url);
+const seen=new Set();
+photos=raw.filter(p=>{
+  const key=String(p.url||"").split("?")[0]+"|"+String(p.name||"").trim().toLowerCase();
+  if(seen.has(key))return false;
+  seen.add(key); return true;
+});
  if(!photos.length)throw new Error("no photos");
  render();
 }).catch(()=>{box.innerHTML='<div class="home-photo-loading">📸 ফটো গ্যালারি থেকে ছবি শিগগিরই এখানে দেখা যাবে।</div>';dots.innerHTML=""});
-})();
-</script></body>
-</html<style id="home-photo-slideshow-style">
-.home-activity-slideshow{padding:24px 0 28px;background:#fff}
-.home-photo-slider{position:relative;width:100%;max-width:1120px;margin:auto;border-radius:18px;overflow:hidden;background:#f1f5f3;box-shadow:0 12px 32px rgba(0,0,0,.10)}
-.home-photo-stage{position:relative;width:100%;aspect-ratio:16/8.2;min-height:240px;display:grid;place-items:center}
-.home-photo-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .55s ease}
-.home-photo-stage img.active{opacity:1}
-.home-photo-loading{padding:30px;color:#68736f;font-size:14px}
-.home-photo-prev,.home-photo-next{position:absolute;z-index:3;top:50%;transform:translateY(-50%);width:42px;height:42px;border:0;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;font-size:34px;line-height:38px;cursor:pointer;display:grid;place-items:center}
-.home-photo-prev{left:14px}.home-photo-next{right:14px}
-.home-photo-prev:hover,.home-photo-next:hover{background:rgba(181,47,56,.88)}
-.home-photo-dots{position:absolute;z-index:4;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:6px;pointer-events:none}
-.home-photo-dots button{width:7px;height:7px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.55)}
-.home-photo-dots button.active{width:20px;border-radius:8px;background:#fff}
-@media(max-width:780px){
- .home-activity-slideshow{padding:14px 0 20px}
- .home-photo-slider{border-radius:12px}
- .home-photo-stage{aspect-ratio:4/3;min-height:220px}
- .home-photo-prev,.home-photo-next{width:36px;height:36px;font-size:28px}
- .home-photo-prev{left:8px}.home-photo-next{right:8px}
-}
-</style>
-<script>
-(function(){
-const API="https://script.google.com/macros/s/AKfycbzeuVRl-OYsiDU-Oc_YfDUKywTJ6bVTerzB0SvA0sjJO0iLpQ3XSyibbZ5pS1592hdHwA/exec";
-const stage=document.getElementById("homePhotoStage"),dots=document.getElementById("homePhotoDots");
-const prev=document.getElementById("homePhotoPrev"),next=document.getElementById("homePhotoNext");
-if(!stage)return;
-let photos=[],index=0,timer=null;
-function show(n){
- if(!photos.length)return;
- index=(n+photos.length)%photos.length;
- [...stage.querySelectorAll("img")].forEach((im,i)=>im.classList.toggle("active",i===index));
- [...dots.children].forEach((d,i)=>d.classList.toggle("active",i===index));
-}
-function restart(){clearInterval(timer);timer=setInterval(()=>show(index+1),5000)}
-function render(){
- if(!photos.length){stage.innerHTML='<div class="home-photo-loading">📷 এখনো কোনো কার্যক্রমের ছবি পাওয়া যায়নি।</div>';return;}
- stage.innerHTML=photos.map((p,i)=>'<img loading="'+(i===0?'eager':'lazy')+'" src="'+p.url+'" alt="West Bengal Ulama Board কার্যক্রমের ছবি" class="'+(i===0?'active':'')+'">').join("");
- dots.innerHTML=photos.map((_,i)=>'<button type="button" class="'+(i===0?'active':'')+'" aria-label="ছবি '+(i+1)+'"></button>').join("");
- show(0);restart();
-}
-prev.addEventListener("click",()=>{show(index-1);restart()});
-next.addEventListener("click",()=>{show(index+1);restart()});
-fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"})
-.then(r=>r.text()).then(raw=>{const d=JSON.parse(raw);if(!d.ok)throw new Error("API error");photos=Array.isArray(d.files)?d.files.filter(p=>p&&p.url):[];render()})
-.catch(()=>{stage.innerHTML='<div class="home-photo-loading">⚠️ ছবি লোড করা যাচ্ছে না। Photo Archive-এ ছবিগুলো দেখা যাবে।</div>';});
-})();
-</script>
-
-<div class="bottom"><div class="wrap"><span>© 2026 West Bengal Ulama Board. All Rights Reserved.</span><span>দীনের জন্য। মানুষের জন্য।</span></div></div>
-<script src="assets/wazeens.js?v=20260928-10"></script><script src="assets/site.js" defer></script>
-<script>
-(function(){
-const API="https://script.google.com/macros/s/AKfycbzeuVRl-OYsiDU-Oc_YfDUKywTJ6bVTerzB0SvA0sjJO0iLpQ3XSyibbZ5pS1592hdHwA/exec";
-const grid=document.getElementById("homeGalleryGrid");
-if(!grid)return;
-fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"})
-.then(r=>r.json())
-.then(d=>{
- const files=Array.isArray(d.files)?d.files:[];
- const items=files.slice(0,8);
- if(!items.length){grid.innerHTML='<div class="gallery-loading">📷 এখনো কোনো ছবি আপলোড করা হয়নি।</div>';return;}
- grid.innerHTML=items.map(p=>'<a class="home-gallery-item" href="photo-archive.html?album=all"><img loading="lazy" src="'+p.url+'" alt="'+(p.name||"Photo")+'"></a>').join("");
-})
-.catch(()=>{grid.innerHTML='<div class="gallery-loading">📡 ফটো গ্যালারি সাময়িকভাবে লোড হচ্ছে।</div>';});
-})();
-</script><script>
-(function(){
-const API="https://script.google.com/macros/s/AKfycbzeuVRl-OYsiDU-Oc_YfDUKywTJ6bVTerzB0SvA0sjJO0iLpQ3XSyibbZ5pS1592hdHwA/exec";
-const img=document.getElementById("heroSlideImage"),dots=document.getElementById("heroSlideDots");
-if(!img||!dots)return;
-let files=[],i=0,timer=null;
-function drawDots(){
-  dots.innerHTML=files.slice(0,8).map((_,n)=>'<span class="hero-slide-dot '+(n===i?'active':'')+'"></span>').join("");
-}
-function show(n){
-  if(!files.length)return;
-  i=n%files.length;
-  img.style.opacity="0";
-  setTimeout(()=>{img.src=files[i].url;img.alt=files[i].name||"Photo Archive";img.style.opacity="1";drawDots();},220);
-}
-fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"})
-.then(r=>r.json())
-.then(d=>{
-  files=(Array.isArray(d.files)?d.files:[]).slice(0,16);
-  if(!files.length) throw new Error("no-drive-photos");
-  drawDots();
-  img.src=files[0].url;
-  timer=setInterval(()=>show(i+1),3500);
-})
-.catch(()=>{
-  files=[
-    {url:"assets/Screenshot_2026-09-20-13-45-39-25_a23b203fd3aafc6dcb84e438dda678b6.jpg",name:"Photo Archive"},
-    {url:"assets/FB_IMG_1789891917922.jpg",name:"Photo Archive"},
-    {url:"assets/FB_IMG_1789891992819.jpg",name:"Photo Archive"},
-    {url:"assets/PIRJADA MEHRABUDDIN SIDDIQUE.jpg",name:"Photo Archive"},
-    {url:"assets/controller_mehrab_uddin_siddiqui.jpg",name:"Photo Archive"}
-  ];
-  drawDots();
-  img.src=files[0].url;
-  clearInterval(timer);
-  timer=setInterval(()=>show(i+1),3500);
-});
-document.addEventListener("visibilitychange",()=>{
-  if(document.hidden){clearInterval(timer);}
-  else if(files.length){clearInterval(timer);timer=setInterval(()=>show(i+1),2500);}
-});
-})();
-</script><script>
-(function(){
- const b=document.getElementById("mobileMenuBtn"),m=document.getElementById("mobileMenu");
- if(!b||!m)return;
- b.addEventListener("click",()=>{const o=m.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");b.textContent=o?"✕":"☰";});
- m.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{m.classList.remove("open");b.textContent="☰";b.setAttribute("aria-expanded","false");}));
-})();
-</script><script>
-(function(){
- const input=document.getElementById("homeWazeenSearch"),btn=document.getElementById("homeWazeenSearchBtn"),out=document.getElementById("homeWazeenResults"),clear=document.getElementById("homeWazeenClear");
- if(!input||!btn||!out)return;
- let members=[],activeFilter="all";
- const norm=v=>String(v||"").replace(/\\D/g,"").slice(-10);
- const esc=v=>String(v??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
- const photo=r=>String(r.photo_url||r.photo||"").trim();
- const safe=v=>{try{const u=new URL(String(v||"").trim());return /^https?:$/.test(u.protocol)?u.href:""}catch(_){return""}};
- function matches(r,raw){
-   const q=raw.toLowerCase(), phone=norm(raw);
-   const name=[r.name,r.name_en].join(" ").toLowerCase();
-   const area=[r.address,r.district,r.block].join(" ").toLowerCase();
-   const des=String(r.designation||"").toLowerCase();
-   const all=[r.name,r.name_en,r.phone].join(" ").toLowerCase();
-   if(activeFilter==="name") return name.includes(q);
-   if(activeFilter==="phone") return phone.length>=4 && norm(r.phone).includes(phone);
-   
-   return name.includes(q)||(phone.length>=4&&norm(r.phone).includes(phone));
- }
- function render(list,raw){
-   if(!raw){out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>';return}
-   if(!list.length){out.innerHTML='<div class="home-wazeen-empty">“'+esc(raw)+'” — কোনো ওয়ায়েজিন পাওয়া যায়নি। নামের অংশ, জেলা বা মোবাইল নম্বর দিয়ে আবার চেষ্টা করুন।</div>';return}
-   out.innerHTML='<div class="home-wazeen-count">পাওয়া গেছে: <b>'+list.length+'</b> জন</div>'+list.slice(0,12).map(r=>{
-     const p=photo(r), image=p?'<img loading="lazy" src="'+esc(p)+'" alt="'+esc(r.name||"Wazeen")+'">':'<div class="no-photo">و</div>';
-     const phone=norm(r.phone), area=[r.district,r.block].filter(Boolean).join(" • ");
-     const fb=safe(r.facebook||r.facebook_url), yt=safe(r.youtube||r.youtube_url), ig=safe(r.instagram||r.instagram_url);
-     const links='<a class="primary" href="wazeen-profile.html?id='+encodeURIComponent(r.member_id||"")+'">প্রোফাইল →</a>'+
-       (phone?'<a href="tel:+91'+phone+'">📞 কল</a>':'')+
-       (fb?'<a href="'+esc(fb)+'" target="_blank" rel="noopener">🔵 FB</a>':'')+
-       (yt?'<a href="'+esc(yt)+'" target="_blank" rel="noopener">▶️ YouTube</a>':'');
-     return '<div class="home-wazeen-result">'+image+'<div><strong>'+esc(r.name||"—")+'</strong><small>'+esc(r.designation||"WAYEJIN")+'</small><span class="result-meta">'+esc(area||r.address||"")+(r.member_id?" • "+esc(r.member_id):"")+'</span><div class="result-actions">'+links+'</div></div></div>';
-   }).join("");
- }
- function search(){const raw=input.value.trim();render(members.filter(r=>matches(r,raw)),raw)}
- async function load(){try{const r=await fetch("assets/master-member-database.json?v=20260928-15",{cache:"no-store"});if(!r.ok)throw 0;members=(await r.json()).filter(x=>x&&x.active!==false);out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>'}catch(_){out.innerHTML='<div class="home-wazeen-empty">ওয়ায়েজিন তথ্য লোড করা যায়নি।</div>'}}
- document.querySelectorAll(".wazeen-filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".wazeen-filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");activeFilter=b.dataset.filter;search()}));
- btn.addEventListener("click",search);input.addEventListener("input",()=>{if(input.value.trim().length>=2)search()});input.addEventListener("keydown",e=>{if(e.key==="Enter")search()});
- clear.addEventListener("click",()=>{input.value="";activeFilter="all";document.querySelectorAll(".wazeen-filter").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>';input.focus()});
- load();
 })();
 </script></body>
 </html>
