@@ -1,0 +1,74 @@
+[
+  {
+    "id":"membership-form",
+    "title":"Membership Form",
+    "bn":"সদস্যপদ আবেদন ফর্ম",
+    "icon":"📄",
+    "file":"",
+    "description":"সদস্যপদের জন্য প্রয়োজনীয় তথ্য ও আবেদন ফর্ম।"
+  },
+  {
+    "id":"wazeen-guidelines",
+    "title":"Wazeen Guidelines",
+    "bn":"ওয়ায়েজিন নির্দেশিকা",
+    "icon":"📜",
+    "file":"",
+    "description":"ওয়ায়েজিনদের বক্তব্য, অনুষ্ঠান ও সামাজিক যোগাযোগমাধ্যম ব্যবহারের নির্দেশিকা।"
+  },
+  {
+    "id":"membership-rules",
+    "title":"Membership Rules",
+    "bn":"সদস্যপদের নিয়মাবলি",
+    "icon":"📋",
+    "file":"",
+    "description":"সদস্যপদ, অনুমোদন, নবায়ন, দায়িত্ব ও শৃঙ্খলা সংক্রান্ত নিয়ম।"
+  },
+  {
+    "id":"organizational-charter",
+    "title":"Organizational Charter",
+    "bn":"সংগঠনের গঠনতন্ত্র",
+    "icon":"🏛️",
+    "file":"",
+    "description":"সংগঠনের উদ্দেশ্য, কাঠামো, দায়িত্ব, সভা, অর্থ ও সংশোধন সংক্রান্ত কাঠামো।"
+  },
+  {
+    "id":"official-notices",
+    "title":"Official Notices",
+    "bn":"অফিসিয়াল নোটিশ",
+    "icon":"📢",
+    "file":"",
+    "description":"অনুমোদিত অফিসিয়াল নোটিশ ও বিজ্ঞপ্তি।"
+  },
+  {
+    "id":"application-forms",
+    "title":"Application Forms",
+    "bn":"বিভিন্ন আবেদনপত্র",
+    "icon":"📝",
+    "file":"",
+    "description":"বিভিন্ন সাংগঠনিক আবেদনপত্র ও ফর্ম।"
+  },
+  {
+    "id":"id-verification",
+    "title":"ID & Verification",
+    "bn":"পরিচয় ও যাচাইকরণ",
+    "icon":"🪪",
+    "file":"",
+    "description":"Member ID, QR এবং সদস্য যাচাই সংক্রান্ত নথি।"
+  },
+  {
+    "id":"official-letters",
+    "title":"Official Letters",
+    "bn":"অফিসিয়াল চিঠিপত্র",
+    "icon":"✉️",
+    "file":"",
+    "description":"অনুমতিপত্র, সুপারিশপত্র, দায়িত্বপত্র ও অন্যান্য অফিসিয়াল চিঠির নমুনা।"
+  },
+  {
+    "id":"official-publications",
+    "title":"Official Publications",
+    "bn":"অফিসিয়াল প্রকাশনা",
+    "icon":"📚",
+    "file":"",
+    "description":"উলামা কণ্ঠ, বার্ষিক প্রতিবেদন, স্মারক ও অনুমোদিত প্রকাশনা।"
+  }
+]
