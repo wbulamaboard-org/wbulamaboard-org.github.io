@@ -67,6 +67,8 @@
       const res=await fetch("assets/master-member-database.json?v=20260928-12",{cache:"no-store"});
       if(!res.ok) throw new Error("database");
       members=(await res.json()).filter(r=>r && r.active!==false);
+      const count=document.getElementById("memberCount");
+      if(count) count.textContent=members.length;
       render(members);
     }catch(e){
       directory.innerHTML='<div class="empty">সদস্যদের তথ্য লোড করা যাচ্ছে না। কিছুক্ষণ পরে আবার চেষ্টা করুন।</div>';
