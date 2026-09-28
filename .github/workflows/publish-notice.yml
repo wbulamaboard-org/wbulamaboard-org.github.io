@@ -1,0 +1,77 @@
+name: Publish Official Notice
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  publish:
+    if: github.event.label.name == 'notice-publish' && (github.event.issue.author_association == 'OWNER' || github.event.issue.author_association == 'MEMBER' || github.event.issue.author_association == 'COLLABORATOR')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish notice to website
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issue = context.payload.issue;
+            const body = issue.body || "";
+            function read(label) {
+              const marker = "### " + label;
+              const start = body.indexOf(marker);
+              if (start < 0) return "";
+              const from = body.slice(start + marker.length).replace(/^\s*\n/, "");
+              const next = from.indexOf("\n### ");
+              return (next >= 0 ? from.slice(0, next) : from).trim();
+            }
+
+            const type = read("Type") || "নোটিশ";
+            const date = read("Date") || new Date().toISOString().slice(0,10);
+            const title = read("Title");
+            const text = read("Body");
+            const author = read("Author") || "West Bengal Ulama Board";
+
+            if (!title || !text) core.setFailed("Notice Title অথবা Body পাওয়া যায়নি।");
+            if (title.length > 300 || text.length > 10000) core.setFailed("Notice content size limit exceeded.");
+
+            const path = "assets/notices.json";
+            let current = [];
+            let sha;
+            try {
+              const file = await github.rest.repos.getContent({owner: context.repo.owner, repo: context.repo.repo, path, ref: "main"});
+              sha = file.data.sha;
+              current = JSON.parse(Buffer.from(file.data.content, "base64").toString("utf8"));
+              if (!Array.isArray(current)) current = [];
+            } catch (e) {
+              if (e.status !== 404) throw e;
+            }
+
+            const id = "issue-" + issue.number;
+            const record = {
+              id, type, date, title, body: text, author,
+              published: true, source_issue: issue.number,
+              published_at: new Date().toISOString()
+            };
+
+            const index = current.findIndex(x => x && x.id === id);
+            if (index >= 0) current[index] = record;
+            else current.unshift(record);
+
+            const content = Buffer.from(JSON.stringify(current, null, 2) + "\n").toString("base64");
+            const params = {
+              owner: context.repo.owner, repo: context.repo.repo, path,
+              message: "Publish official notice #" + issue.number,
+              content, branch: "main"
+            };
+            if (sha) params.sha = sha;
+            await github.rest.repos.createOrUpdateFileContents(params);
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: issue.number,
+              body: "✅ এই নোটিশটি ওয়েবসাইটের Official Notice Board-এ প্রকাশ করা হয়েছে।"
+            });
