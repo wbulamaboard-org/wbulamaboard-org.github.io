@@ -1151,15 +1151,16 @@
     "member_id": "WBUB-0084",
     "serial": 84,
     "source_page": 84,
-    "name": "Ch Asif",
+    "name": "Sk Asif",
     "address": "Tehatta",
     "designation": "Member of Ulama Board",
-    "phone": "+91 8912349915",
+    "phone": "8972349975",
     "validity": "2025-2027",
     "old_registration_id": "WBUB/1116/25",
-    "phone_key": "8912349915",
+    "phone_key": "8972349975",
     "photo_url": "assets/member-photos/WBUB-0084.png",
-    "active": true
+    "active": true,
+    "name_en": "Sk Asif"
   },
   {
     "member_id": "WBUB-0085",
