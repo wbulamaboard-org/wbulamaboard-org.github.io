@@ -314,7 +314,27 @@
 .upcoming-event-date b{display:block;font-size:25px;line-height:1}.upcoming-event-date span{display:block;font-size:9px;line-height:1.35;margin-top:4px}
 .upcoming-event-info{display:flex;flex-direction:column;gap:4px;flex:1}.upcoming-event-info strong{font-size:14px;color:#273036}.upcoming-event-info span{font-size:10px;color:#626a6e}.upcoming-event-info small{font-size:9px;color:#9a681f;font-weight:700;margin-top:2px}.upcoming-arrow{color:#b52f37;font-size:22px}
 @media(max-width:600px){.upcoming-events{padding:12px 0 25px}.upcoming-events-head .section-title{font-size:22px}.upcoming-event-card{gap:10px;padding:12px}.upcoming-event-date{width:55px;min-width:55px}.upcoming-event-date b{font-size:21px}.upcoming-event-info strong{font-size:11px;line-height:1.4}.upcoming-event-info span{font-size:8px}.upcoming-event-info small{font-size:8px}.upcoming-arrow{font-size:18px}}
-</style><style>.homepage-activities{padding-top:0}.homepage-activities .about-card{width:100%}</style></head>
+</style><style>.homepage-activities{padding-top:0}.homepage-activities .about-card{width:100%}</style><style>
+/* Compact homepage member-service banner */
+.premium-member-services .wrap{display:flex;justify-content:center}
+.premium-member-services .wrap>a{
+  width:min(50%,620px)!important;
+  min-height:54px!important;
+  padding:9px 14px!important;
+  border-radius:13px!important;
+  gap:10px!important;
+}
+.premium-member-services .wrap>a>span:first-child{font-size:24px!important}
+.premium-member-services .wrap>a>span:nth-child(2) strong{font-size:15px!important}
+.premium-member-services .wrap>a>span:nth-child(2) small{font-size:9px!important;margin-top:3px!important}
+.premium-member-services .wrap>a>b{width:30px!important;height:30px!important;font-size:20px!important}
+@media(max-width:700px){
+  .premium-member-services .wrap>a{width:92%!important;min-height:50px!important;padding:8px 11px!important}
+  .premium-member-services .wrap>a>span:first-child{font-size:21px!important}
+  .premium-member-services .wrap>a>span:nth-child(2) strong{font-size:13px!important}
+  .premium-member-services .wrap>a>span:nth-child(2) small{font-size:8px!important}
+}
+</style></head>
 <body>
 <div class="topbar"><div class="wrap"><div class="top-left"><span>📍 West Bengal, India</span><span>✉ info@westbengalulamaboard.com</span><span>☎ +91 98765 43210</span></div><div class="top-right"><span>●</span><span>●</span><span>●</span><b>বাংলা</b> | English</div></div></div>
 <header class="header"><div class="wrap nav" style="justify-content:center;text-align:center"><button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="মেনু খুলুন" aria-expanded="false">☰</button>
