@@ -2,7 +2,7 @@ name: Publish Official Notice
 
 on:
   issues:
-    types: [labeled]
+    types: [opened, edited]
 
 permissions:
   contents: write
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   publish:
-    if: github.event.label.name == 'notice-publish' && (github.event.issue.author_association == 'OWNER' || github.event.issue.author_association == 'MEMBER' || github.event.issue.author_association == 'COLLABORATOR')
+    if: (github.event.issue.author_association == 'OWNER' || github.event.issue.author_association == 'MEMBER' || github.event.issue.author_association == 'COLLABORATOR') && contains(github.event.issue.body, 'PUBLISH: YES')
     runs-on: ubuntu-latest
     steps:
       - name: Publish notice to website
