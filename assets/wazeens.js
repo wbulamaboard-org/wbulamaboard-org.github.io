@@ -9,7 +9,7 @@
   const photoUrl = r => String(r?.photo_url || r?.photo || "").trim();
 
   async function loadMembers(){
-    const res = await fetch("assets/master-member-database.json?v=20260928-6", {cache:"no-store"});
+    const res = await fetch("assets/master-member-database.json?v=20260928-10", {cache:"no-store"});
     if(!res.ok) throw new Error("member-db");
     const data = await res.json();
     return Array.isArray(data) ? data.filter(x => x && x.active !== false) : [];
