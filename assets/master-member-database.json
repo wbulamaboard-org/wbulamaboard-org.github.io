@@ -2636,5 +2636,21 @@
     "phone_key": "9609932504",
     "photo_url": "assets/member-photos/WBUB-0189.jpg",
     "active": true
+  },
+  {
+    "member_id": "WBUB/2026/00005",
+    "serial": 191,
+    "source_page": 0,
+    "name": "Abul Hasan Gazi",
+    "address": "",
+    "district": "",
+    "block": "",
+    "designation": "Member of Board",
+    "phone": "+91 77974 50937",
+    "validity": "30/12/2027",
+    "old_registration_id": "WB.UB/1005/2025",
+    "phone_key": "7797450937",
+    "photo_url": "assets/member-photos/WBUB-0191.jpg",
+    "active": true
   }
 ]
