@@ -52,8 +52,8 @@
   document.getElementById("name").textContent=t(m.name);
   document.getElementById("designation").textContent=t(m.designation||"OFFICIAL MEMBER");
   document.getElementById("memberid").textContent=t(m.member_id);
-  document.getElementById("district").textContent=t(m.district||m.address);
-  document.getElementById("area").textContent=t(m.block||m.area);
+  document.getElementById("district").textContent=t(m.district);
+  document.getElementById("area").textContent=t(m.area||m.block);
   document.getElementById("phone").textContent=t(m.phone);
   document.getElementById("valid").textContent=t(m.valid_till||m.validity);
   const photo=m.photo_url||m.photo||"";
