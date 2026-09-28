@@ -18,7 +18,9 @@
     </div>
     <div class="organizer">আয়োজনে: পশ্চিমবঙ্গ উলামা বোর্ড ও ওয়ায়েজিন এ ফুরফুরা শরীফ • সহযোগিতায়: দরবার শরীফ কমিটি</div>
   </div>
-</div><div class="notice-tabs"><span class="tab active">সব</span><span class="tab">📌 নোটিশ</span><span class="tab">📰 সংবাদ</span><span class="tab">📣 ঘোষণা</span><span class="tab">📄 প্রেস রিলিজ</span></div><h2 class="title">গুরুত্বপূর্ণ নোটিশ</h2><div class="notice-list"><div class="notice-row"><div class="notice-icon">📌</div><div><h3>অফিসিয়াল নোটিশ ও ঘোষণা</h3><p>বোর্ডের অনুমোদিত নতুন নোটিশ, নির্দেশনা ও গুরুত্বপূর্ণ ঘোষণা এখানে প্রকাশ করা হবে।</p></div><span class="tag">অফিসিয়াল</span></div><div class="notice-row"><div class="notice-icon">📄</div><div><h3>ডকুমেন্ট ও বিজ্ঞপ্তি</h3><p>প্রয়োজনীয় PDF, আবেদনপত্র ও অফিসিয়াল বিজ্ঞপ্তি পর্যায়ক্রমে যুক্ত করা হবে।</p></div><span class="tag">ডকুমেন্ট</span></div></div><h2 class="title">সাম্প্রতিক সংবাদ</h2><div class="grid">
+</div><div class="notice-tabs"><span class="tab active">সব</span><span class="tab">📌 নোটিশ</span><span class="tab">📰 সংবাদ</span><span class="tab">📣 ঘোষণা</span><span class="tab">📄 প্রেস রিলিজ</span></div><h2 class="title">প্রকাশিত অফিসিয়াল নোটিশ</h2>
+<div id="publishedNoticeList" class="notice-list"><div class="notice-row"><div class="notice-icon">⏳</div><div><h3>নোটিশ লোড হচ্ছে…</h3><p>অনুমোদিত অফিসিয়াল নোটিশ খোঁজা হচ্ছে।</p></div></div></div>
+<h2 class="title">গুরুত্বপূর্ণ নোটিশ</h2><div class="notice-list"><div class="notice-row"><div class="notice-icon">📌</div><div><h3>অফিসিয়াল নোটিশ ও ঘোষণা</h3><p>বোর্ডের অনুমোদিত নতুন নোটিশ, নির্দেশনা ও গুরুত্বপূর্ণ ঘোষণা এখানে প্রকাশ করা হবে।</p></div><span class="tag">অফিসিয়াল</span></div><div class="notice-row"><div class="notice-icon">📄</div><div><h3>ডকুমেন্ট ও বিজ্ঞপ্তি</h3><p>প্রয়োজনীয় PDF, আবেদনপত্র ও অফিসিয়াল বিজ্ঞপ্তি পর্যায়ক্রমে যুক্ত করা হবে।</p></div><span class="tag">ডকুমেন্ট</span></div></div><h2 class="title">সাম্প্রতিক সংবাদ</h2><div class="grid">
 <div class="card"><span class="badge">সংগঠন</span><h3>ডিজিটাল সদস্যসেবা</h3><p>সদস্য নিবন্ধন, Member ID, আবেদন স্ট্যাটাস ও QR Verification-এর অনলাইন ব্যবস্থা।</p><div class="date">অফিসিয়াল আপডেট</div></div>
 <div class="card"><span class="badge">মিডিয়া</span><h3>ফটো আর্কাইভ</h3><p>অনুষ্ঠান ও কার্যক্রমের ছবি Google Drive ভিত্তিক Photo Archive-এ সংরক্ষণ ও প্রদর্শন।</p><div class="date">ডিজিটাল আর্কাইভ</div></div>
 <div class="card"><span class="badge">সেবা</span><h3>Ulama Help Fund</h3><p>মানবিক সহায়তা, শিক্ষা ও সমাজকল্যাণমূলক প্রকল্পের তথ্য ও রিপোর্ট প্রকাশের উদ্যোগ।</p><div class="date">সামাজিক কার্যক্রম</div></div>
@@ -29,4 +31,23 @@
 <div class="card event"><span class="badge">সমাজসেবা</span><h3>মানবিক সহায়তা কার্যক্রম</h3><p>প্রয়োজনভিত্তিক মানবিক সহায়তা ও সমাজকল্যাণমূলক উদ্যোগ।</p></div>
 </div>
 <div class="official-box"><strong>স্বচ্ছ ও অফিসিয়াল তথ্য</strong><span>শুধুমাত্র অনুমোদিত নোটিশ, সংবাদ, ঘোষণা ও প্রেস রিলিজ এই Notice Board-এ প্রকাশ করা হবে।</span></div><div class="more">নতুন নোটিশ প্রকাশ হলে এখানে তারিখ, বিষয়, বিস্তারিত তথ্য এবং প্রয়োজনে PDF ডাউনলোড লিংক যুক্ত করা যাবে।</div>
-</main><script src="assets/site.js" defer></script></body></html>
+</main><script src="assets/site.js" defer></script><script>
+(async function(){
+ const box=document.getElementById("publishedNoticeList");
+ if(!box)return;
+ const esc=v=>String(v??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+ try{
+  const r=await fetch("assets/notices.json?v=20260928-1",{cache:"no-store"});
+  if(!r.ok)throw new Error("load");
+  const items=(await r.json()).filter(x=>x&&x.published!==false).sort((a,b)=>String(b.date||"").localeCompare(String(a.date||"")));
+  if(!items.length){box.innerHTML='<div class="notice-row"><div class="notice-icon">📭</div><div><h3>কোনো নতুন অফিসিয়াল নোটিশ নেই</h3><p>নতুন নোটিশ প্রকাশ হলে এখানে দেখা যাবে।</p></div></div>';return;}
+  box.innerHTML=items.map(x=>{
+    const d=x.date?new Date(x.date+"T00:00:00"):null;
+    const date=d&&!isNaN(d)?d.toLocaleDateString("bn-BD",{year:"numeric",month:"long",day:"numeric"}):(x.date||"");
+    return '<article class="notice-row"><div class="notice-icon">📢</div><div><h3>'+esc(x.title||"অফিসিয়াল নোটিশ")+'</h3><p>'+esc(x.body||"")+'</p><p class="date">'+esc(date)+(x.author?" • "+esc(x.author):"")+'</p></div><span class="tag">'+esc(x.type||"নোটিশ")+'</span></article>';
+  }).join("");
+ }catch(e){
+  box.innerHTML='<div class="notice-row"><div class="notice-icon">📌</div><div><h3>অফিসিয়াল নোটিশ</h3><p>নতুন নোটিশ প্রকাশ হলে এখানে স্বয়ংক্রিয়ভাবে দেখা যাবে।</p></div></div>';
+ }
+})();
+</script></body></html>
