@@ -43,7 +43,7 @@
         const img=document.createElement("img"); img.className="member-photo"; img.src=src; img.alt=r.name||"Member Photo"; img.loading="lazy";
         img.onerror=function(){this.style.visibility="hidden"}; card.appendChild(img);
       }
-      const h=document.createElement("h3"); h.textContent=r.name||"-"; card.appendChild(h);
+      const h=document.createElement("h3"); h.textContent=String(r.name||"-").toUpperCase(); card.appendChild(h);
       const p1=document.createElement("p"); p1.textContent=r.designation||"Member of Ulama Board"; card.appendChild(p1);
       const area=displayArea(r); if(area){const p2=document.createElement("p");p2.textContent=area;card.appendChild(p2);}
       const ph=document.createElement("p"); ph.className="member-phone"; ph.textContent=r.phone ? "📱 "+r.phone : "📱 নম্বর দেওয়া নেই"; card.appendChild(ph);
