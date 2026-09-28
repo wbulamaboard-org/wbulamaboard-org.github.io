@@ -20,12 +20,13 @@
     const img = src
       ? '<img src="'+esc(src)+'" alt="'+esc(r.name || "Wazeen")+'" loading="lazy">'
       : '<div class="no-photo">و</div>';
-    const area = r.address || [r.district, r.block].filter(Boolean).join(" • ") || "";
+    const district = String(r.district || "").trim();
+    const area = String(r.area || r.block || r.address || "").trim();
     return '<a class="wazeen-folder" href="wazeen-profile.html?id='+encodeURIComponent(r.member_id || '')+'">'+
       '<span class="folder-tab">'+esc(r.member_id || "")+'</span>'+img+
       '<h3>'+esc(r.name || "—")+'</h3>'+
       '<p>'+esc(r.designation || "WAYEJIN")+'</p>'+
-      (area ? '<p>'+esc(area)+'</p>' : '')+
+      ((district || area) ? '<p>'+esc((district?"জেলা: "+district:"")+(district&&area?" • ":"")+(area?"এলাকা: "+area:""))+'</p>' : '')+
       '<span class="open">প্রোফাইল, ভিডিও ও যোগাযোগ →</span></a>';
   }
 
@@ -46,7 +47,8 @@
     const youtube = safeUrl(w.youtube || w.youtube_url) || ("https://www.youtube.com/results?search_query="+encodeURIComponent(name));
     const facebook = safeUrl(w.facebook || w.facebook_url) || ("https://www.facebook.com/search/videos/?q="+encodeURIComponent(name));
     const image = photoUrl(w);
-    const area = w.address || [w.district,w.block].filter(Boolean).join(" • ") || "—";
+    const district = String(w.district || "").trim() || "—";
+    const area = String(w.area || w.block || w.address || "").trim() || "—";
 
     root.innerHTML =
       '<div class="profile-card"><div class="profile-cover"></div><div class="profile-body">'+
@@ -58,7 +60,7 @@
       '<div class="profile-grid">'+
       '<div><small>সদস্য আইডি</small><b>'+esc(w.member_id||"—")+'</b></div>'+
       '<div><small>পদ</small><b>'+esc(w.designation||"—")+'</b></div>'+
-      '<div><small>জেলা / এলাকা</small><b>'+esc(area)+'</b></div>'+
+      '<div><small>জেলা</small><b>'+esc(district)+'</b></div><div><small>এলাকা</small><b>'+esc(area)+'</b></div>'+
       '<div><small>বৈধতা</small><b>'+esc(w.valid_till||w.validity||"—")+'</b></div>'+
       '</div>'+
       '<div class="profile-bio"><h2>পরিচিতি</h2><p>'+esc(w.bio || "WAYEJIN E FURFURA SHARIF-এর সঙ্গে যুক্ত ওয়েজিন।")+'</p></div>'+
