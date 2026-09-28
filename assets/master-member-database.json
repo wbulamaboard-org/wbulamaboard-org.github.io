@@ -2619,7 +2619,7 @@
     "validity": "",
     "old_registration_id": "",
     "phone_key": "8145045787",
-    "photo_url": "assets/member-photos/WBUB-0187.jpg",
+    "photo_url": "assets/member-photos/WBUB-0187.svg",
     "active": true
   },
   {
@@ -2634,7 +2634,7 @@
     "phone": "9609932504",
     "validity": "30/12/2027",
     "phone_key": "9609932504",
-    "photo_url": "assets/member-photos/WBUB-0189.jpg",
+    "photo_url": "assets/member-photos/mostafa-molla-photo-square.jpg",
     "active": true
   },
   {
@@ -2650,7 +2650,7 @@
     "validity": "30/12/2027",
     "old_registration_id": "",
     "phone_key": "7797450937",
-    "photo_url": "assets/member-photos/WBUB-0191.jpg",
+    "photo_url": "assets/member-photos/WBUB-0191.svg",
     "active": true
   }
 ]
