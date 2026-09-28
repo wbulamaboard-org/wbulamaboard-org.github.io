@@ -39,6 +39,7 @@ button{border:0;border-radius:9px;padding:11px 15px;font-weight:900;cursor:point
 <textarea id="noticeBody" rows="6" style="width:100%;padding:13px;border:1px solid #cbd9d2;border-radius:9px;font:inherit;margin-top:7px;resize:vertical" placeholder="নোটিশের বিস্তারিত লিখুন..."></textarea>
 <div class="actions">
 <button class="primary" id="noticePreview">👁️ Preview</button>
+<button class="primary" id="noticeSubmit">🚀 Submit & Publish</button>
 <button class="secondary" id="noticeClear">Clear</button>
 </div>
 <div id="noticePreviewBox" class="row" hidden></div>
@@ -89,4 +90,36 @@ async function loadEditRequests(){if(!key.value.trim()){showEditMsg("err","Admin
 document.getElementById("loadEditRequests").onclick=loadEditRequests;
 document.getElementById("refreshEditRequests").onclick=loadEditRequests;
 document.getElementById("noticePreview").onclick=()=>{const t=document.getElementById("noticeTitle").value.trim(),b=document.getElementById("noticeBody").value.trim(),type=document.getElementById("noticeType").value,d=document.getElementById("noticeDate").value||new Date().toISOString().slice(0,10);const box=document.getElementById("noticePreviewBox");if(!t||!b){box.hidden=false;box.textContent="শিরোনাম ও বিস্তারিত লিখুন।";return}box.hidden=false;box.innerHTML="<span class='muted'>"+esc(type)+" • "+esc(d)+"</span><h3 style='margin:7px 0'>"+esc(t)+"</h3><p style='white-space:pre-wrap;margin:0'>"+esc(b)+"</p>"};document.getElementById("noticeClear").onclick=()=>{["noticeTitle","noticeBody"].forEach(id=>document.getElementById(id).value="");document.getElementById("noticePreviewBox").hidden=true};
+</script><script>
+(function(){
+ const btn=document.getElementById("noticeSubmit");
+ if(!btn)return;
+ btn.onclick=function(){
+   const type=document.getElementById("noticeType")?.value||"নোটিশ";
+   const date=document.getElementById("noticeDate")?.value||new Date().toISOString().slice(0,10);
+   const title=document.getElementById("noticeTitle")?.value.trim()||"";
+   const body=document.getElementById("noticeBody")?.value.trim()||"";
+   if(!title||!body){alert("শিরোনাম ও বিস্তারিত লিখুন।");return;}
+   const issueBody=[
+     "PUBLISH: YES",
+     "",
+     "### Type",
+     type,
+     "",
+     "### Date",
+     date,
+     "",
+     "### Title",
+     title,
+     "",
+     "### Body",
+     body,
+     "",
+     "### Author",
+     "West Bengal Ulama Board"
+   ].join("\n");
+   const url="https://github.com/wbulamaboard-org/wbulamaboard-org.github.io/issues/new?title="+encodeURIComponent("[NOTICE] "+title)+"&body="+encodeURIComponent(issueBody);
+   window.open(url,"_blank");
+ };
+})();
 </script></body></html>
