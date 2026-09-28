@@ -16,7 +16,21 @@ body{margin:0;background:#eef1ef;font-family:Arial,Helvetica,sans-serif;color:#1
 .front-body{padding:15px;position:relative}.photo{width:42%;aspect-ratio:.82;border:4px solid var(--gold);border-radius:16px;object-fit:cover;background:#f3f5f4;display:block}.photo.placeholder{object-fit:contain;padding:35px}.member-title{margin-top:10px;font-size:18px;font-weight:1000;color:var(--green);line-height:1.1}.role{font-size:11px;color:var(--red);font-weight:900;margin-top:3px}.details{margin-top:10px;font-size:10px;line-height:1.9}.details b{display:inline-block;width:78px;color:var(--green)}.qrbox{position:absolute;right:14px;bottom:14px;width:34%;background:#fff;border:3px solid var(--green);border-radius:13px;padding:7px;text-align:center}.qrbox img{width:100%;display:block}.qrlabel{font-size:8px;font-weight:1000;color:#fff;background:var(--green);margin:6px -7px -7px;padding:6px 3px;border-radius:0 0 9px 9px}.signature{position:absolute;left:15px;bottom:16px;font-size:8px;color:#555}.footer{position:absolute;bottom:0;left:0;width:100%;background:var(--green);color:#fff;text-align:center;padding:8px 4px;font-size:7px;font-weight:900;letter-spacing:.3px}
 .back .topband{padding-bottom:10px}.about,.responsibility{padding:14px 18px}.section-title{display:inline-block;background:var(--red);color:#fff;border-radius:0 16px 16px 0;padding:6px 14px;font-weight:1000;font-size:12px}.about p{font-size:10px;line-height:1.55;margin:10px 0}.responsibility ul{margin:9px 0;padding-left:18px;font-size:10px;line-height:1.7}.verifybox{margin:2px 18px 55px;padding:10px;border:2px solid var(--red);border-radius:12px;background:#fff;display:flex;gap:10px;align-items:center}.verifybox .mini{font-size:9px;line-height:1.5}.verifybox b{font-size:10px;color:var(--red)}.back .footer{padding:10px 4px}.website{font-weight:1000;color:var(--red)}
 @media(max-width:760px){.cards{grid-template-columns:1fr;max-width:390px}.idcard{border-width:5px}.brand h2{font-size:18px}}
-@media print{body{background:#fff}.id-tools{display:none}.id-page{padding:0}.cards{max-width:none;grid-template-columns:1fr 1fr;gap:8mm}.idcard{box-shadow:none;break-inside:avoid}}
+@page{size:A4 portrait;margin:0}
+@media print{
+ body{background:#fff}
+ .id-tools{display:none}
+ .id-page{padding:0}
+ .cards{display:block;max-width:none;margin:0}
+ .idcard{
+   width:85.6mm;height:53.98mm;aspect-ratio:auto;
+   margin:calc((297mm - 53.98mm)/2) auto 0;
+   box-sizing:border-box;box-shadow:none;
+   break-inside:avoid;page-break-after:always;
+   border-radius:3.2mm;border-width:1.4mm;
+ }
+ .idcard:last-child{page-break-after:auto}
+}
 </style>
 </head>
 <body>
@@ -25,7 +39,7 @@ body{margin:0;background:#eef1ef;font-family:Arial,Helvetica,sans-serif;color:#1
 <a href="wazeens.html">← Wazeen Directory</a>
 <button class="gold" id="downloadFront">🪪 Download Front</button>
 <button class="gold" id="downloadBack">🪪 Download Back</button>
-<button id="print">🖨 Print / Save PDF</button>
+<button id="print">🖨 Print / Save PDF</button><button class="gold" id="envelopePrint">📄 Envelope Print</button>
 </div>
 <div id="loading" style="text-align:center;font-weight:900">Loading member ID…</div>
 <div class="cards" id="cards" hidden>
@@ -74,6 +88,7 @@ async function save(el,filename){const canvas=await html2canvas(el,{scale:3,useC
 document.getElementById("downloadFront").onclick=()=>save(document.getElementById("front"),m.member_id+"-ID-Card-Front.png");
 document.getElementById("downloadBack").onclick=()=>save(document.getElementById("back"),m.member_id+"-ID-Card-Back.png");
 document.getElementById("print").onclick=()=>window.print();
+document.getElementById("envelopePrint").onclick=()=>window.print();
 }catch(e){document.getElementById("loading").textContent="এই সদস্যের ID Card তথ্য পাওয়া যায়নি।"}
 })();
 </script>
