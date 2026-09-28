@@ -235,7 +235,13 @@
  .premium-member-head{padding:11px 12px}
  .premium-member-head strong{font-size:15px}
 }
-</style><style>
+</style><style id="home-wazeen-directory-style">
+.home-wazeen-directory-link{display:flex;align-items:center;justify-content:center;gap:10px;margin:12px auto 0;width:min(100%,360px);padding:11px 16px;border-radius:10px;background:#315f59;color:#fff;font-size:12px;font-weight:900;letter-spacing:.2px;box-shadow:0 7px 16px rgba(49,95,89,.16)}
+.home-wazeen-directory-link span{font-size:17px;line-height:1}
+.home-wazeen-directory-link:hover{background:#244c47;transform:translateY(-1px)}
+@media(max-width:700px){.home-wazeen-directory-link{width:100%;font-size:11px;padding:10px 12px}}
+</style>
+<style>
 .home-wazeen-search{padding:18px 0 24px;background:#fff}
 .home-wazeen-search .search-shell{background:linear-gradient(135deg,#fffaf6,#f7f1eb);border:1px solid #ead8d3;border-radius:18px;padding:18px;box-shadow:0 8px 24px #00000008}
 .home-wazeen-search .search-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
@@ -486,6 +492,7 @@ nav{gap:17px;font-size:11px}nav a{padding:35px 0 11px;border-bottom-width:2px}na
 <button type="button" id="homeWazeenClear" class="wazeen-clear" type="button">মুছুন</button>
 </div>
 <div id="homeWazeenResults" class="home-wazeen-results" aria-live="polite"><div class="home-wazeen-empty">👤 নাম অথবা 📱 মোবাইল নম্বর দিয়ে খুঁজুন।</div></div>
+<a href="wazeens.html" class="home-wazeen-directory-link" aria-label="WAYEJIN DIRECTORY খুলুন">📚 WAYEJIN DIRECTORY <span>→</span></a>
 </div></div></section>
 <section class="premium-member-services">
   <div class="wrap">
