@@ -3,93 +3,77 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>WBUB ID Card</title>
-<link rel="stylesheet" href="assets/site.css">
 <style>
-:root{--green:#063b2e;--red:#c9000b;--gold:#c9a33a}
-body{margin:0;background:#eef1ef;font-family:Arial,Helvetica,sans-serif;color:#17382f}
-.id-page{padding:22px 10px 50px}.id-tools{max-width:1050px;margin:0 auto 18px;display:flex;gap:9px;flex-wrap:wrap}.id-tools a,.id-tools button{border:0;border-radius:10px;padding:12px 15px;background:var(--green);color:#fff;font-weight:900;text-decoration:none;cursor:pointer}.id-tools .gold{background:#a17e30}
-.cards{max-width:1050px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.idcard{position:relative;overflow:hidden;aspect-ratio:0.64;background:#fff;border:7px solid var(--red);border-radius:22px;box-shadow:0 15px 40px #0002}
-.idcard:before{content:"";position:absolute;inset:0;background:linear-gradient(145deg,rgba(201,163,58,.12),transparent 35%,rgba(6,59,46,.08));pointer-events:none}
-.topband{position:relative;padding:17px 15px 12px;background:#fff;border-bottom:5px solid var(--gold);display:flex;gap:10px;align-items:center}.logo{width:68px;height:68px;object-fit:contain}.brand h2{margin:0;font-size:21px;line-height:1;color:var(--green);font-weight:1000}.brand h2 span{color:var(--red)}.brand p{margin:5px 0 0;font-size:9px;font-weight:900;color:var(--green);letter-spacing:.6px}.tag{display:inline-block;margin-top:6px;background:var(--green);color:#fff;border-radius:20px;padding:4px 8px;font-size:7px;font-weight:900}
-.wave{height:20px;background:linear-gradient(165deg,var(--red) 0 42%,var(--gold) 43% 49%,var(--green) 50% 57%,#fff 58%);opacity:.95}
-.front-body{padding:15px;position:relative}.photo{width:42%;aspect-ratio:.82;border:4px solid var(--gold);border-radius:16px;object-fit:cover;background:#f3f5f4;display:block}.photo.placeholder{object-fit:contain;padding:35px}.member-title{margin-top:10px;font-size:18px;font-weight:1000;color:var(--green);line-height:1.1}.role{font-size:11px;color:var(--red);font-weight:900;margin-top:3px}.details{margin-top:10px;font-size:10px;line-height:1.9}.details b{display:inline-block;width:78px;color:var(--green)}.qrbox{position:absolute;right:14px;bottom:14px;width:34%;background:#fff;border:3px solid var(--green);border-radius:13px;padding:7px;text-align:center}.qrbox img{width:100%;display:block}.qrlabel{font-size:8px;font-weight:1000;color:#fff;background:var(--green);margin:6px -7px -7px;padding:6px 3px;border-radius:0 0 9px 9px}.signature{position:absolute;left:15px;bottom:16px;font-size:8px;color:#555}.footer{position:absolute;bottom:0;left:0;width:100%;background:var(--green);color:#fff;text-align:center;padding:8px 4px;font-size:7px;font-weight:900;letter-spacing:.3px}
-.back .topband{padding-bottom:10px}.about,.responsibility{padding:14px 18px}.section-title{display:inline-block;background:var(--red);color:#fff;border-radius:0 16px 16px 0;padding:6px 14px;font-weight:1000;font-size:12px}.about p{font-size:10px;line-height:1.55;margin:10px 0}.responsibility ul{margin:9px 0;padding-left:18px;font-size:10px;line-height:1.7}.verifybox{margin:2px 18px 55px;padding:10px;border:2px solid var(--red);border-radius:12px;background:#fff;display:flex;gap:10px;align-items:center}.verifybox .mini{font-size:9px;line-height:1.5}.verifybox b{font-size:10px;color:var(--red)}.back .footer{padding:10px 4px}.website{font-weight:1000;color:var(--red)}
-@media(max-width:760px){.cards{grid-template-columns:1fr;max-width:390px}.idcard{border-width:5px}.brand h2{font-size:18px}}
-@page{size:A4 portrait;margin:0}
-@media print{
- body{background:#fff}
- .id-tools{display:none}
- .id-page{padding:0}
- .cards{display:block;max-width:none;margin:0}
- .idcard{
-   width:85.6mm;height:53.98mm;aspect-ratio:auto;
-   margin:calc((297mm - 53.98mm)/2) auto 0;
-   box-sizing:border-box;box-shadow:none;
-   break-inside:avoid;page-break-after:always;
-   border-radius:3.2mm;border-width:1.4mm;
- }
- .idcard:last-child{page-break-after:auto}
-}
+*{box-sizing:border-box}body{margin:0;background:#eef1ef;font-family:Arial,Helvetica,sans-serif}.page{padding:18px 10px 50px}.tools{max-width:1000px;margin:0 auto 15px;display:flex;gap:8px;flex-wrap:wrap}.tools a,.tools button{border:0;border-radius:10px;padding:11px 14px;background:#063b2e;color:#fff;font-weight:900;text-decoration:none;cursor:pointer}.tools .gold{background:#a17e30}.cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1000px;margin:auto}.card{position:relative;width:100%;aspect-ratio:711/995;overflow:hidden;background:#fff}.template{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}.layer{position:absolute;inset:0}.photo{position:absolute;left:4.1%;top:28.1%;width:40.8%;height:32.9%;object-fit:cover;border-radius:5%;display:none}.field{position:absolute;background:#fff;color:#111;font-weight:700;line-height:1.1;white-space:nowrap;overflow:hidden}.name{left:47.2%;top:49.5%;width:47%;font-size:clamp(9px,1.55vw,16px)}.designation{left:47.2%;top:54.0%;width:47%;font-size:clamp(8px,1.45vw,15px)}.memberid{left:32.0%;top:62.8%;width:29%;font-size:clamp(8px,1.35vw,14px)}.district{left:32.0%;top:68.0%;width:29%;font-size:clamp(8px,1.35vw,14px)}.area{left:32.0%;top:73.2%;width:29%;font-size:clamp(8px,1.35vw,14px)}.phone{left:32.0%;top:78.4%;width:29%;font-size:clamp(8px,1.35vw,14px)}.valid{left:32.0%;top:83.6%;width:29%;font-size:clamp(8px,1.35vw,14px)}.qr{position:absolute;left:65.0%;top:61.2%;width:29.2%;height:19.0%;background:#fff;padding:2%;object-fit:contain}.back-qr{position:absolute;left:12%;top:69.2%;width:31%;height:14%;background:transparent;display:none}.print-note{text-align:center;color:#52615b;font-size:11px;font-weight:700;margin-top:10px}.loading{text-align:center;font-weight:900;padding:40px}.hidden{display:none!important}@media(max-width:760px){.cards{grid-template-columns:1fr;max-width:390px}}@media print{body{background:#fff}.tools,.print-note{display:none}.page{padding:0}.cards{display:block;max-width:none}.card{width:85.6mm;height:120mm;aspect-ratio:auto;margin:8mm auto;break-inside:avoid;page-break-after:always}.card:last-child{page-break-after:auto}}
 </style>
 </head>
 <body>
-<div class="id-page">
-<div class="id-tools">
+<div class="page">
+<div class="tools">
 <a href="wazeens.html">← Wazeen Directory</a>
-<button class="gold" id="downloadFront">🪪 Download Front</button>
-<button class="gold" id="downloadBack">🪪 Download Back</button>
-<button id="print">🖨 Print / Save PDF</button><button class="gold" id="envelopePrint">📄 Envelope Print</button>
+<button class="gold" id="frontBtn">🪪 Download Front</button>
+<button class="gold" id="backBtn">🪪 Download Back</button>
+<button id="printBtn">🖨 Print / Save PDF</button>
 </div>
-<div id="loading" style="text-align:center;font-weight:900">Loading member ID…</div>
-<div class="cards" id="cards" hidden>
-<section class="idcard front" id="front">
-<div class="topband"><img class="logo" src="assets/wbub-logo.svg"><div class="brand"><h2>WEST BENGAL <span>ULAMA BOARD</span></h2><p>WAYEJIN E FURFURA SHARIF</p><div class="tag">UNITY • EDUCATION • SOCIAL REFORM</div></div></div>
-<div class="wave"></div>
-<div class="front-body">
-<img id="photo" class="photo placeholder" src="assets/WBUB_Logo_Transparent.png">
-<div class="member-title" id="name">—</div><div class="role" id="role">OFFICIAL MEMBER</div>
-<div class="details"><div><b>Member ID</b><span id="mid">—</span></div><div><b>District</b><span id="district">—</span></div><div><b>Area</b><span id="area">—</span></div><div><b>Mobile No.</b><span id="phone">—</span></div><div><b>Valid Till</b><span id="valid">—</span></div></div>
-<div class="signature">Authorised Signature<br><b>West Bengal Ulama Board</b></div>
-<div class="qrbox"><img id="qr" alt="Member verification QR"><div class="qrlabel">SCAN FOR VERIFICATION</div></div>
-</div><div class="footer">DAWAH • SOCIAL WELFARE • COMMUNITY DEVELOPMENT</div>
+<div id="loading" class="loading">Loading member ID…</div>
+<div id="cards" class="cards hidden">
+<section class="card" id="frontCard">
+<img class="template" src="assets/wbub-id-card-front-template.png" crossorigin="anonymous" alt="">
+<div class="layer">
+<img id="memberPhoto" class="photo" crossorigin="anonymous" alt="">
+<div id="name" class="field name"></div>
+<div id="designation" class="field designation"></div>
+<div id="memberid" class="field memberid"></div>
+<div id="district" class="field district"></div>
+<div id="area" class="field area"></div>
+<div id="phone" class="field phone"></div>
+<div id="valid" class="field valid"></div>
+<img id="frontQr" class="qr" alt="Verification QR">
+</div>
 </section>
-<section class="idcard back" id="back">
-<div class="topband"><img class="logo" src="assets/wbub-logo.svg"><div class="brand"><h2>WEST BENGAL <span>ULAMA BOARD</span></h2><p>WAYEJIN E FURFURA SHARIF</p><div class="tag">UNITY • EDUCATION • SOCIAL REFORM</div></div></div>
-<div class="wave"></div>
-<div class="about"><div class="section-title">ABOUT US</div><p>West Bengal Ulama Board (WBUB) is a religious, educational and social organisation under the Wayejin E Furfura Sharif. We work for unity of Ulama, Islamic education, social reform and welfare of the community.</p></div>
-<div class="responsibility"><div class="section-title">MEMBER RESPONSIBILITIES</div><ul><li>Work for the welfare of Islam and society.</li><li>Maintain unity and respect among Ulama.</li><li>Support educational, social and humanitarian projects.</li><li>Follow the rules and guidelines of the organisation.</li></ul></div>
-<div class="verifybox"><div class="mini"><b>Scan QR Code</b><br>to verify this member on the official website.<br><span class="website">westbengalulamaboard.com</span></div></div>
-<div class="footer">FURFURA SHARIF JAMIYAT E ULAMA BANGLA ASAM BRANCH ORGANISATION</div>
+<section class="card" id="backCard">
+<img class="template" src="assets/wbub-id-card-back-template.png" crossorigin="anonymous" alt="">
 </section>
-</div></div>
+</div>
+<div class="print-note">প্রোফাইল থেকে Download ID Card চাপলে সদস্যভেদে তথ্য ও QR স্বয়ংক্রিয়ভাবে বসবে।</div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 (async()=>{
-const id=new URLSearchParams(location.search).get("id")||"";
-const load=async()=>{const r=await fetch("assets/master-member-database.json?v=20260928-20",{cache:"no-store"});if(!r.ok)throw Error("db");const data=await r.json();return data.find(x=>String(x.member_id||"").toLowerCase()===id.toLowerCase())};
-try{
-const m=await load();if(!m)throw Error("notfound");
-document.getElementById("loading").hidden=true;document.getElementById("cards").hidden=false;
-const text=(v)=>String(v??"").trim()||"—";
-document.getElementById("name").textContent=text(m.name);
-document.getElementById("role").textContent=text(m.designation||"OFFICIAL MEMBER");
-document.getElementById("mid").textContent=text(m.member_id);
-document.getElementById("district").textContent=text(m.district||m.address);
-document.getElementById("area").textContent=text(m.block||m.area);
-document.getElementById("phone").textContent=text(m.phone);
-document.getElementById("valid").textContent=text(m.valid_till||m.validity);
-const photo=m.photo_url||m.photo||"";
-if(photo){const p=document.getElementById("photo");p.classList.remove("placeholder");p.src=photo;p.crossOrigin="anonymous";}
-const q=document.getElementById("qr");const verify=new URL("verification.html?id="+encodeURIComponent(m.member_id),location.href).href;
-new QRCode(q,{text:verify,width:190,height:190,correctLevel:QRCode.CorrectLevel.M});
-async function save(el,filename){const canvas=await html2canvas(el,{scale:3,useCORS:true,allowTaint:false,backgroundColor:"#fff",imageTimeout:15000});const a=document.createElement("a");a.download=filename;a.href=canvas.toDataURL("image/png");a.click()}
-document.getElementById("downloadFront").onclick=()=>save(document.getElementById("front"),m.member_id+"-ID-Card-Front.png");
-document.getElementById("downloadBack").onclick=()=>save(document.getElementById("back"),m.member_id+"-ID-Card-Back.png");
-document.getElementById("print").onclick=()=>window.print();
-document.getElementById("envelopePrint").onclick=()=>window.print();
-}catch(e){document.getElementById("loading").textContent="এই সদস্যের ID Card তথ্য পাওয়া যায়নি।"}
+ const id=new URLSearchParams(location.search).get("id")||"";
+ try{
+  const res=await fetch("assets/master-member-database.json?v=20260928-22",{cache:"no-store"});
+  if(!res.ok) throw Error("db");
+  const data=await res.json();
+  const m=data.find(x=>String(x.member_id||"").toLowerCase()===id.toLowerCase());
+  if(!m) throw Error("member");
+  const t=v=>String(v??"").trim()||"—";
+  document.getElementById("name").textContent=t(m.name);
+  document.getElementById("designation").textContent=t(m.designation||"OFFICIAL MEMBER");
+  document.getElementById("memberid").textContent=t(m.member_id);
+  document.getElementById("district").textContent=t(m.district||m.address);
+  document.getElementById("area").textContent=t(m.block||m.area);
+  document.getElementById("phone").textContent=t(m.phone);
+  document.getElementById("valid").textContent=t(m.valid_till||m.validity);
+  const photo=m.photo_url||m.photo||"";
+  if(photo){const p=document.getElementById("memberPhoto");p.src=photo;p.style.display="block";}
+  const verify=new URL("verification.html?id="+encodeURIComponent(m.member_id),location.href).href;
+  const holder=document.createElement("div");
+  new QRCode(holder,{text:verify,width:180,height:180,correctLevel:QRCode.CorrectLevel.M});
+  const qimg=holder.querySelector("img")||holder.querySelector("canvas");
+  if(qimg){document.getElementById("frontQr").src=qimg.tagName==="CANVAS"?qimg.toDataURL("image/png"):qimg.src;}
+  document.getElementById("loading").classList.add("hidden");
+  document.getElementById("cards").classList.remove("hidden");
+  async function save(el,filename){
+   await new Promise(r=>setTimeout(r,250));
+   const canvas=await html2canvas(el,{scale:3,useCORS:true,allowTaint:false,backgroundColor:"#fff",imageTimeout:15000});
+   const a=document.createElement("a");a.download=filename;a.href=canvas.toDataURL("image/png");a.click();
+  }
+  document.getElementById("frontBtn").onclick=()=>save(document.getElementById("frontCard"),m.member_id+"-ID-Card-Front.png");
+  document.getElementById("backBtn").onclick=()=>save(document.getElementById("backCard"),m.member_id+"-ID-Card-Back.png");
+  document.getElementById("printBtn").onclick=()=>window.print();
+ }catch(e){document.getElementById("loading").textContent="এই সদস্যের ID Card তথ্য পাওয়া যায়নি।";}
 })();
 </script>
 </body></html>
