@@ -452,30 +452,41 @@ nav{gap:17px;font-size:11px}nav a{padding:35px 0 11px;border-bottom-width:2px}na
     </div>
   </div>
 </section>
-<section class="featured-news">
+<section class="home-photo-showcase" aria-label="বোর্ডের কার্যক্রমের ছবি">
   <div class="wrap">
-    <div class="featured-news-badge">🔴 বিশেষ সংবাদ • এখন প্রচারে</div>
-    <div class="featured-news-card">
-      <div class="featured-news-poster">
-        <img src="assets/featured-membership-poster.svg?v=20260928-2" alt="WAYEJIN E FURFURA SHARIF — নতুন সদস্য পদ গ্রহণ করুন">
+    <div class="home-photo-slider">
+      <div id="homePhotoSlides" class="home-photo-slides">
+        <div class="home-photo-loading">📸 বোর্ডের কার্যক্রমের ছবি লোড হচ্ছে...</div>
       </div>
-      <div class="featured-news-copy">
-        <span class="featured-news-kicker">বিশেষ ঘোষণা • ২০২৬</span>
-        <h2>WAYEJIN - E - FURFURA SHARIF<br>নতুন সদস্য পদ গ্রহণ করুন</h2>
-        <div class="featured-news-meta">
-          <span>👥 <b>সদস্যপদ:</b> নতুন সদস্য গ্রহণ চলছে</span>
-          <span>🪪 <b>পরিচয়পত্র:</b> সদস্য ID ও পরিচয় যাচাই</span>
-          <span>📚 <b>উদ্দেশ্য:</b> ঐক্য • শিক্ষা • সমাজ সংস্কার</span>
-          <span>🤝 <b>অংশগ্রহণ:</b> সমাজসেবামূলক কার্যক্রমে যুক্ত হোন</span>
-        </div>
-        <div class="featured-news-organizer"><b>আয়োজনে:</b> ওয়ায়েজিন এ ফুরফুরা শরীফ • পশ্চিমবঙ্গ উলামা বোর্ড</div>
-        <a class="featured-news-link" href="registration.html">এখনই সদস্য হন →</a>
-      </div>
+      <button class="home-photo-prev" id="homePhotoPrev" type="button" aria-label="আগের ছবি">‹</button>
+      <button class="home-photo-next" id="homePhotoNext" type="button" aria-label="পরের ছবি">›</button>
+      <div id="homePhotoDots" class="home-photo-dots" aria-label="ছবি পরিবর্তন"></div>
     </div>
-    <div class="featured-news-ticker"><span>🔔 বিশেষ প্রচার: WAYEJIN - E - FURFURA SHARIF — নতুন সদস্য পদ গ্রহণ করুন</span></div>
   </div>
 </section>
-<section class="today-notice" aria-label="আজকের গুরুত্বপূর্ণ ঘোষণা">
+<style id="home-photo-showcase-style">
+.home-photo-showcase{padding:28px 0 34px;background:#fff}
+.home-photo-slider{position:relative;width:100%;overflow:hidden;border-radius:18px;background:#f1f5f3;border:1px solid #e5ebe8;box-shadow:0 12px 30px rgba(20,55,45,.10)}
+.home-photo-slides{position:relative;width:100%;min-height:430px}
+.home-photo-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .55s ease;display:flex;align-items:center;justify-content:center;background:#eef3f0}
+.home-photo-slide.active{opacity:1;visibility:visible}
+.home-photo-slide img{width:100%;height:430px;object-fit:cover;display:block}
+.home-photo-prev,.home-photo-next{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;font-size:34px;line-height:1;cursor:pointer;z-index:4;backdrop-filter:blur(4px)}
+.home-photo-prev{left:16px}.home-photo-next{right:16px}
+.home-photo-prev:hover,.home-photo-next:hover{background:rgba(0,0,0,.65)}
+.home-photo-dots{position:absolute;left:50%;bottom:15px;transform:translateX(-50%);display:flex;gap:7px;z-index:5;padding:7px 10px;border-radius:20px;background:rgba(0,0,0,.28)}
+.home-photo-dot{width:8px;height:8px;border:0;border-radius:50%;padding:0;background:#fff8;cursor:pointer}
+.home-photo-dot.active{background:#fff;transform:scale(1.25)}
+.home-photo-loading{min-height:430px;display:grid;place-items:center;color:#697873;font-size:14px}
+@media(max-width:780px){
+.home-photo-showcase{padding:20px 0 25px}
+.home-photo-slider{border-radius:14px}
+.home-photo-slides,.home-photo-loading{min-height:270px}
+.home-photo-slide img{height:270px}
+.home-photo-prev,.home-photo-next{width:36px;height:36px;font-size:28px}
+.home-photo-prev{left:9px}.home-photo-next{right:9px}
+}
+</style><section class="today-notice" aria-label="আজকের গুরুত্বপূর্ণ ঘোষণা">
   <div class="wrap">
     <a class="today-notice-box" href="news-events.html">
       <span class="today-notice-icon">📢</span>
@@ -691,6 +702,33 @@ document.addEventListener("visibilitychange",()=>{
  btn.addEventListener("click",search);input.addEventListener("input",()=>{if(input.value.trim().length>=2)search()});input.addEventListener("keydown",e=>{if(e.key==="Enter")search()});
  clear.addEventListener("click",()=>{input.value="";activeFilter="all";document.querySelectorAll(".wazeen-filter").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>';input.focus()});
  load();
+})();
+</script><script id="home-photo-showcase-script">
+(function(){
+const API="https://script.google.com/macros/s/AKfycbzeuVRl-OYsiDU-Oc_YfDUKywTJ6bVTerzB0SvA0sjJO0iLpQ3XSyibbZ5pS1592hdHwA/exec";
+const box=document.getElementById("homePhotoSlides"),dots=document.getElementById("homePhotoDots");
+if(!box)return;
+let photos=[],index=0,timer=null;
+function show(i){
+ if(!photos.length)return;
+ index=(i+photos.length)%photos.length;
+ box.querySelectorAll(".home-photo-slide").forEach((s,n)=>s.classList.toggle("active",n===index));
+ dots.querySelectorAll(".home-photo-dot").forEach((d,n)=>d.classList.toggle("active",n===index));
+}
+function start(){clearInterval(timer);if(photos.length>1)timer=setInterval(()=>show(index+1),5000)}
+function render(){
+ box.innerHTML=photos.map((p,i)=>'<div class="home-photo-slide'+(i===0?' active':'')+'"><img loading="'+(i===0?'eager':'lazy')+'" src="'+p.url+'" alt="West Bengal Ulama Board কার্যক্রমের ছবি"></div>').join("");
+ dots.innerHTML=photos.map((_,i)=>'<button class="home-photo-dot'+(i===0?' active':'')+'" type="button" aria-label="ছবি '+(i+1)+'" data-i="'+i+'"></button>').join("");
+ dots.querySelectorAll(".home-photo-dot").forEach(d=>d.addEventListener("click",()=>{show(Number(d.dataset.i));start()}));
+ document.getElementById("homePhotoPrev")?.addEventListener("click",()=>{show(index-1);start()});
+ document.getElementById("homePhotoNext")?.addEventListener("click",()=>{show(index+1);start()});
+ start();
+}
+fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{
+ photos=(Array.isArray(d.files)?d.files:[]).filter(p=>p&&p.url).slice(0,8);
+ if(!photos.length)throw new Error("no photos");
+ render();
+}).catch(()=>{box.innerHTML='<div class="home-photo-loading">📸 ফটো গ্যালারি থেকে ছবি শিগগিরই এখানে দেখা যাবে।</div>';dots.innerHTML=""});
 })();
 </script></body>
 </html>
