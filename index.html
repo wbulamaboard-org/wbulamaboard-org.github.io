@@ -678,7 +678,7 @@ document.addEventListener("visibilitychange",()=>{
    }).join("");
  }
  function search(){const raw=input.value.trim();render(members.filter(r=>matches(r,raw)),raw)}
- async function load(){try{const r=await fetch("assets/master-member-database.json?v=20260928-11",{cache:"no-store"});if(!r.ok)throw 0;members=(await r.json()).filter(x=>x&&x.active!==false);out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>'}catch(_){out.innerHTML='<div class="home-wazeen-empty">ওয়ায়েজিন তথ্য লোড করা যায়নি।</div>'}}
+ async function load(){try{const r=await fetch("assets/master-member-database.json?v=20260928-12",{cache:"no-store"});if(!r.ok)throw 0;members=(await r.json()).filter(x=>x&&x.active!==false);out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>'}catch(_){out.innerHTML='<div class="home-wazeen-empty">ওয়ায়েজিন তথ্য লোড করা যায়নি।</div>'}}
  document.querySelectorAll(".wazeen-filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".wazeen-filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");activeFilter=b.dataset.filter;search()}));
  btn.addEventListener("click",search);input.addEventListener("input",()=>{if(input.value.trim().length>=2)search()});input.addEventListener("keydown",e=>{if(e.key==="Enter")search()});
  clear.addEventListener("click",()=>{input.value="";activeFilter="all";document.querySelectorAll(".wazeen-filter").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>';input.focus()});
