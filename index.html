@@ -731,19 +731,7 @@ fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(
 }).catch(()=>{box.innerHTML='<div class="home-photo-loading">📸 ফটো গ্যালারি থেকে ছবি শিগগিরই এখানে দেখা যাবে।</div>';dots.innerHTML=""});
 })();
 </script></body>
-</html<section class="home-activity-slideshow" aria-label="বোর্ডের কার্যক্রমের ছবি">
-  <div class="wrap">
-    <div class="home-photo-slider" id="homePhotoSlider">
-      <div class="home-photo-stage" id="homePhotoStage">
-        <div class="home-photo-loading">📷 বোর্ডের কার্যক্রমের ছবি লোড হচ্ছে...</div>
-      </div>
-      <button class="home-photo-prev" id="homePhotoPrev" type="button" aria-label="আগের ছবি">‹</button>
-      <button class="home-photo-next" id="homePhotoNext" type="button" aria-label="পরের ছবি">›</button>
-      <div class="home-photo-dots" id="homePhotoDots" aria-label="ছবির অবস্থান"></div>
-    </div>
-  </div>
-</section>
-<style id="home-photo-slideshow-style">
+</html<style id="home-photo-slideshow-style">
 .home-activity-slideshow{padding:24px 0 28px;background:#fff}
 .home-photo-slider{position:relative;width:100%;max-width:1120px;margin:auto;border-radius:18px;overflow:hidden;background:#f1f5f3;box-shadow:0 12px 32px rgba(0,0,0,.10)}
 .home-photo-stage{position:relative;width:100%;aspect-ratio:16/8.2;min-height:240px;display:grid;place-items:center}
@@ -898,33 +886,6 @@ document.addEventListener("visibilitychange",()=>{
  btn.addEventListener("click",search);input.addEventListener("input",()=>{if(input.value.trim().length>=2)search()});input.addEventListener("keydown",e=>{if(e.key==="Enter")search()});
  clear.addEventListener("click",()=>{input.value="";activeFilter="all";document.querySelectorAll(".wazeen-filter").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>';input.focus()});
  load();
-})();
-</script><script id="home-photo-showcase-script">
-(function(){
-const API="https://script.google.com/macros/s/AKfycbzeuVRl-OYsiDU-Oc_YfDUKywTJ6bVTerzB0SvA0sjJO0iLpQ3XSyibbZ5pS1592hdHwA/exec";
-const box=document.getElementById("homePhotoSlides"),dots=document.getElementById("homePhotoDots");
-if(!box)return;
-let photos=[],index=0,timer=null;
-function show(i){
- if(!photos.length)return;
- index=(i+photos.length)%photos.length;
- box.querySelectorAll(".home-photo-slide").forEach((s,n)=>s.classList.toggle("active",n===index));
- dots.querySelectorAll(".home-photo-dot").forEach((d,n)=>d.classList.toggle("active",n===index));
-}
-function start(){clearInterval(timer);if(photos.length>1)timer=setInterval(()=>show(index+1),5000)}
-function render(){
- box.innerHTML=photos.map((p,i)=>'<div class="home-photo-slide'+(i===0?' active':'')+'"><img loading="'+(i===0?'eager':'lazy')+'" src="'+p.url+'" alt="West Bengal Ulama Board কার্যক্রমের ছবি"></div>').join("");
- dots.innerHTML=photos.map((_,i)=>'<button class="home-photo-dot'+(i===0?' active':'')+'" type="button" aria-label="ছবি '+(i+1)+'" data-i="'+i+'"></button>').join("");
- dots.querySelectorAll(".home-photo-dot").forEach(d=>d.addEventListener("click",()=>{show(Number(d.dataset.i));start()}));
- document.getElementById("homePhotoPrev")?.addEventListener("click",()=>{show(index-1);start()});
- document.getElementById("homePhotoNext")?.addEventListener("click",()=>{show(index+1);start()});
- start();
-}
-fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{
- photos=(Array.isArray(d.files)?d.files:[]).filter(p=>p&&p.url).slice(0,8);
- if(!photos.length)throw new Error("no photos");
- render();
-}).catch(()=>{box.innerHTML='<div class="home-photo-loading">📸 ফটো গ্যালারি থেকে ছবি শিগগিরই এখানে দেখা যাবে।</div>';dots.innerHTML=""});
 })();
 </script></body>
 </html>
