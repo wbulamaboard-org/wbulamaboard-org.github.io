@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffdf5"/><stop offset="1" stop-color="#f5ead3"/></linearGradient>
+  <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#064f3d"/><stop offset="1" stop-color="#087b5b"/></linearGradient>
+  <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-opacity=".18"/></filter>
+</defs>
+<rect x="8" y="8" width="884" height="584" rx="30" fill="url(#bg)" stroke="#07533f" stroke-width="16"/>
+<path d="M45 510 Q170 430 295 510 T545 510 T795 510 L850 570 L50 570Z" fill="#064f3d"/>
+<g fill="#fff" opacity=".35">
+<circle cx="95" cy="110" r="75"/><circle cx="805" cy="110" r="75"/>
+</g>
+<text x="450" y="78" text-anchor="middle" font-family="Noto Sans Bengali, sans-serif" font-size="34" font-weight="800" fill="#fff" stroke="#07533f" stroke-width="18" paint-order="stroke">ওয়ায়েজিন এ ফুরফুরা শরীফ</text>
+<text x="450" y="78" text-anchor="middle" font-family="Noto Sans Bengali, sans-serif" font-size="34" font-weight="800" fill="#fff">ওয়ায়েজিন এ ফুরফুরা শরীফ</text>
+<text x="450" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="800" letter-spacing="3" fill="#07533f">WAYEJIN - E - FURFURA SHARIF</text>
+<path d="M180 145 H720" stroke="#b88928" stroke-width="4"/>
+
+<g fill="#07533f">
+  <rect x="95" y="235" width="55" height="145" rx="8"/><path d="M90 235 Q122 185 155 235Z"/>
+  <rect x="750" y="235" width="55" height="145" rx="8"/><path d="M745 235 Q777 185 810 235Z"/>
+  <path d="M270 380 V275 Q450 145 630 275 V380Z"/>
+  <path d="M360 380 V300 Q450 225 540 300 V380Z" fill="#18a36f"/>
+  <path d="M395 380 V315 Q450 270 505 315 V380Z" fill="#064f3d"/>
+  <path d="M430 380 V345 Q450 320 470 345 V380Z" fill="#f5ead3"/>
+</g>
+<circle cx="450" cy="255" r="72" fill="#1a9d6f" stroke="#b88928" stroke-width="7"/>
+<path d="M390 265 Q450 190 510 265Z" fill="#0a6b50"/>
+<text x="450" y="200" text-anchor="middle" font-family="Noto Sans Bengali, sans-serif" font-size="62" font-weight="900" fill="#fff">নতুন সদস্য</text>
+<rect x="235" y="220" width="430" height="86" rx="22" fill="#c90d18" filter="url(#shadow)"/>
+<text x="450" y="282" text-anchor="middle" font-family="Noto Sans Bengali, sans-serif" font-size="56" font-weight="900" fill="#fff">নতুন সদস্য পদ গ্রহণ করুন</text>
+<rect x="315" y="405" width="270" height="64" rx="32" fill="#c90d18" stroke="#fff" stroke-width="5"/>
+<text x="450" y="447" text-anchor="middle" font-family="Noto Sans Bengali, sans-serif" font-size="30" font-weight="900" fill="#fff">এখনই সদস্য হন →</text>
+<text x="450" y="505" text-anchor="middle" font-family="Noto Sans Bengali, sans-serif" font-size="22" font-weight="700" fill="#07533f">ঐক্য • শিক্ষা • সমাজ সংস্কার</text>
+</svg>
