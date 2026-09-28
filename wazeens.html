@@ -13,7 +13,10 @@
     return m ? "assets/member-photos/"+id+(m[1]==="0185"?".jpg":".png") : "";
   }
   function displayArea(r){
-    return r.address || [r.district,r.block].filter(Boolean).join(" • ") || "";
+    const d=String(r.district||"").trim();
+    const a=String(r.area||r.block||r.address||"").trim();
+    if(d||a) return (d?"জেলা: "+d:"")+(d&&a?" • ":"")+(a?"এলাকা: "+a:"");
+    return "";
   }
   function render(list){
     directory.innerHTML="";
@@ -53,7 +56,7 @@
     const raw=(search?.value||"").trim(), q=raw.toLowerCase(), phone=norm(raw);
     if(!raw){render(members);return;}
     render(members.filter(r=>{
-      const text=[r.member_id,r.name,r.name_en,r.designation,r.address,r.district,r.block,r.phone].join(" ").toLowerCase();
+      const text=[r.member_id,r.name,r.name_en,r.designation,r.address,r.district,r.area,r.block,r.phone].join(" ").toLowerCase();
       return text.includes(q) || (phone.length>=10 && norm(r.phone)===phone);
     }));
   }
