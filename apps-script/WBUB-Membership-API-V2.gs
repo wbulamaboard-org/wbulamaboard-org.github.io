@@ -33,6 +33,12 @@ function doGet(e) {
     var p = (e && e.parameter) || {};
     var action = String(p.action || '').trim().toLowerCase();
 
+    // Public photo archive endpoint: ?album=all|conference|events|social|board|2026
+    // Uses PHOTO_FOLDER_ID when configured; otherwise looks for "WBUB PHOTO ARCHIVE".
+    if (action === 'photo_archive' || Object.prototype.hasOwnProperty.call(p,'album')) {
+      return wbubPhotoArchive_(String(p.album || 'all').trim().toLowerCase());
+    }
+
     if (action === 'youth_profile') {
       return wbubYouthProfile_(String(p.youth_id || p.id || '').trim());
     }
@@ -572,6 +578,53 @@ function wbubJson_(o) {
   return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
 }
 
+
+function wbubPhotoArchiveFolder_() {
+  var cfg=wbubProps_();
+  if(cfg.photoFolderId) return DriveApp.getFolderById(cfg.photoFolderId);
+  var folders=DriveApp.getFoldersByName('WBUB PHOTO ARCHIVE');
+  if(folders.hasNext()) return folders.next();
+  // Backward-compatible fallback for an older folder name.
+  folders=DriveApp.getFoldersByName('WBUB PHOTO ARCHIVE');
+  if(folders.hasNext()) return folders.next();
+  throw new Error('PHOTO_ARCHIVE_FOLDER_NOT_FOUND');
+}
+
+function wbubPhotoAlbumFolder_(root,album) {
+  if(!album || album==='all') return root;
+  var names={
+    conference:['conference','উলামা সম্মেলন'],
+    events:['events','মাহফিল ও অনুষ্ঠান'],
+    social:['social','সমাজসেবা'],
+    board:['board','উলামা বোর্ড'],
+    '2026':['2026','২০২৬']
+  };
+  var list=names[album]||[];
+  for(var i=0;i<list.length;i++){
+    var it=root.getFoldersByName(list[i]);
+    if(it.hasNext()) return it.next();
+  }
+  return root;
+}
+
+function wbubPhotoArchive_(album) {
+  try {
+    var root=wbubPhotoArchiveFolder_(), folder=wbubPhotoAlbumFolder_(root,album), it=folder.getFiles(), files=[];
+    while(it.hasNext()){
+      var file=it.next(), mime=String(file.getMimeType()||'').toLowerCase();
+      if(mime.indexOf('image/')!==0) continue;
+      var id=file.getId();
+      // Gallery images must be viewable without a Google login.
+      try { file.setSharing(DriveApp.Access.ANYONE_WITH_LINK,DriveApp.Permission.VIEW); } catch(_){}
+      var url='https://drive.google.com/thumbnail?id='+encodeURIComponent(id)+'&sz=w1600';
+      files.push({id:id,name:file.getName(),url:url,original:'https://drive.google.com/file/d/'+encodeURIComponent(id)+'/view',modified:file.getLastUpdated().getTime()});
+    }
+    files.sort(function(a,b){return b.modified-a.modified;});
+    return wbubJson_({ok:true,album:album||'all',count:files.length,files:files});
+  } catch(e) {
+    return wbubJson_({ok:false,error:String(e.message||e),files:[]});
+  }
+}
 
 /* ================= YOUTH WING ================= */
 function wbubYouthSheet_() {
