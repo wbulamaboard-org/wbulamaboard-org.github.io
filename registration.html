@@ -16,6 +16,25 @@
 <h1>অনলাইন সদস্য নিবন্ধন</h1>
 <p class="muted">West Bengal Ulama Board • WAYEJIN E FURFURA SHARIF</p>
 <div class="notice"><strong>গুরুত্বপূর্ণ:</strong> নিচের ফর্মটি পূরণ করে আবেদন জমা দিন। তথ্য যাচাইয়ের পর প্রশাসনের পক্ষ থেকে আবেদনটির পরবর্তী অবস্থা জানানো হবে।</div>
+<div class="payment-box" style="margin:18px 0;background:#eef8f3;border:1px solid #cfe2d8;border-radius:14px;padding:18px">
+  <h2 style="margin:0 0 8px;color:#07513f;font-size:20px">💳 সদস্যপদ ফি — ₹500 (শুধু UPI)</h2>
+  <p style="margin:0 0 14px;color:#4d625b">অনলাইন সদস্যপদ ফি শুধুমাত্র UPI-এর মাধ্যমে প্রদান করুন।</p>
+  <div class="upi-pay-grid">
+    <div style="text-align:center">
+      <img class="upi-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=8&data=upi%3A%2F%2Fpay%3Fpa%3Dulama.board%2540ybl%26pn%3DWAYEJIN%2520E%2520FURFURA%2520SHARIF%26am%3D500%26cu%3DINR%26tn%3DWBUB%2520Membership%2520Fee" alt="₹500 UPI Payment QR Code">
+      <div style="font-size:12px;color:#65756f;margin-top:6px">QR স্ক্যান করে ₹500 পেমেন্ট করুন</div>
+    </div>
+    <div>
+      <strong>UPI ID</strong>
+      <div class="upi-id-box" style="margin-top:7px">
+        <input id="topMemberUpiId" value="ulama.board@ybl" readonly>
+        <button type="button" id="topCopyUpi">কপি</button>
+      </div>
+      <a href="upi://pay?pa=ulama.board%40ybl&pn=WAYEJIN%20E%20FURFURA%20SHARIF&am=500&cu=INR&tn=WBUB%20Membership%20Fee" class="btn" style="margin-top:12px;text-align:center;width:100%">📱 UPI অ্যাপে পেমেন্ট করুন</a>
+      <small class="muted" style="display:block;margin-top:8px">পেমেন্টের পর UTR / Transaction ID সংরক্ষণ করুন। ফর্মের পর্যালোচনা ধাপে এটি দিতে হবে।</small>
+    </div>
+  </div>
+</div>
 <div class="steps"><div id="s1" class="step active">১. ফর্ম পূরণ</div><div id="s2" class="step">২. আবেদন জমা</div></div>
 <form id="form">
 <div class="form-grid">
@@ -45,6 +64,8 @@
 </div></div></section></main>
 <script src="assets/member-workflow.js?v=20260925-12"></script><script src="assets/site.js" defer></script>
 <script>
+const topCopyUpi=document.getElementById("topCopyUpi");
+topCopyUpi?.addEventListener("click",async()=>{try{await navigator.clipboard.writeText("ulama.board@ybl");topCopyUpi.textContent="কপি হয়েছে ✓";}catch(_){const x=document.getElementById("topMemberUpiId");x.select();document.execCommand("copy");topCopyUpi.textContent="কপি হয়েছে ✓";}setTimeout(()=>topCopyUpi.textContent="কপি",1600)});
 const form=document.getElementById("form"),reviewBox=document.getElementById("reviewBox"),review=document.getElementById("review"),msg=document.getElementById("message"),receipt=document.getElementById("receipt"),reviewBtn=document.getElementById("reviewBtn"),submitBtn=document.getElementById("submitBtn"),editBtn=document.getElementById("editBtn");
 let payload=null,submitted=false;
 
