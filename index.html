@@ -1027,7 +1027,7 @@ nav{gap:17px;font-size:11px}nav a{padding:35px 0 11px;border-bottom-width:2px}na
     </a>
   </div>
 </section>
-<section class="home-gallery"><div class="wrap"><div class="gallery-head"><div><span class="gallery-kicker">PHOTO ARCHIVE</span><h2 class="section-title">ফটো গ্যালারি</h2><p>Google Drive Photo Archive থেকে সর্বশেষ ছবি</p></div><a class="gallery-all" href="photo-archive.html?album=all">সব ছবি দেখুন →</a></div><div id="homeGalleryGrid" class="home-gallery-grid"><div class="gallery-loading">📡 ছবি লোড হচ্ছে...</div></div></div></section>
+<section class="home-gallery"><div class="wrap"><div class="gallery-head"><div><span class="gallery-kicker">PHOTO ARCHIVE</span><h2 class="section-title">ফটো গ্যালারি</h2><p>ওয়ায়েজিন এ ফুরফুরা শরীফের সাম্প্রতিক ছবি</p></div><a class="gallery-all" href="photo-archive.html?album=all">সব ছবি দেখুন →</a></div><div id="homeGalleryGrid" class="home-gallery-grid"><div class="gallery-loading">📡 ছবি লোড হচ্ছে...</div></div></div></section>
 
 <section class="home-quick-services" aria-label="সদস্য ও যুব সেবা">
   <div class="wrap">
@@ -1112,16 +1112,29 @@ fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"})
 .then(d=>{
  const files=Array.isArray(d.files)?d.files:[];
  const seen=new Set();
-const items=files.filter(p=>{
+ const items=files.filter(p=>{
   if(!p||!p.url)return false;
   const key=String(p.url||"").split("?")[0]+"|"+String(p.name||"").trim().toLowerCase();
   if(seen.has(key))return false;
   seen.add(key); return true;
-}).slice(0,8);
- if(!items.length){grid.innerHTML='<div class="gallery-loading">📷 এখনো কোনো ছবি আপলোড করা হয়নি।</div>';return;}
- grid.innerHTML=items.map(p=>'<a class="home-gallery-item" href="photo-archive.html?album=all"><img loading="lazy" src="'+p.url+'" alt="'+(p.name||"Photo")+'"></a>').join("");
+ }).slice(0,8);
+ if(items.length){
+  grid.innerHTML=items.map(p=>'<a class="home-gallery-item" href="photo-archive.html?album=all"><img loading="lazy" src="'+p.url+'" alt="'+(p.name||"Photo")+'"></a>').join("");
+  return;
+ }
+ throw new Error("no-drive-photos");
 })
-.catch(()=>{grid.innerHTML='<div class="gallery-loading">📡 ফটো গ্যালারি সাময়িকভাবে লোড হচ্ছে।</div>';});
+.catch(()=>{
+ const fallback=[
+  ["assets/FB_IMG_1789891917922.jpg","ওয়ায়েজিন এ ফুরফুরা শরীফ"],
+  ["assets/FB_IMG_1789891992819.jpg","ওয়ায়েজিন এ ফুরফুরা শরীফ"],
+  ["assets/PIRJADA MEHRABUDDIN SIDDIQUE.jpg","পশ্চিমবঙ্গ উলামা বোর্ড"],
+  ["assets/controller_mehrab_uddin_siddiqui.jpg","উলামা বোর্ড"],
+  ["assets/about-board-speaker.jpg","পশ্চিমবঙ্গ উলামা বোর্ড"],
+  ["assets/amanullah-aman-director.jpg","ওয়ায়েজিন এ ফুরফুরা শরীফ"]
+ ];
+ grid.innerHTML=fallback.map(p=>'<a class="home-gallery-item" href="photo-archive.html?album=all"><img loading="lazy" src="'+p[0]+'" alt="'+p[1]+'"></a>').join("");
+});
 })();
 </script><script>
 (function(){
