@@ -786,7 +786,14 @@ document.addEventListener("visibilitychange",()=>{
 const API="https://script.google.com/macros/s/AKfycbzeuVRl-OYsiDU-Oc_YfDUKywTJ6bVTerzB0SvA0sjJO0iLpQ3XSyibbZ5pS1592hdHwA/exec";
 const box=document.getElementById("homePhotoSlides"),dots=document.getElementById("homePhotoDots");
 if(!box)return;
-let photos=[],index=0,timer=null;
+let photos=[
+ {url:"assets/FB_IMG_1789891917922.jpg",name:"WBUB Activity"},
+ {url:"assets/FB_IMG_1789891992819.jpg",name:"WBUB Activity"},
+ {url:"assets/PIRJADA MEHRABUDDIN SIDDIQUE.jpg",name:"Ulama Board"},
+ {url:"assets/Screenshot_2026-09-20-13-45-39-25_a23b203fd3aafc6dcb84e438dda678b6.jpg",name:"WBUB Event"},
+ {url:"assets/help_home_collage-1.jpg",name:"WBUB Social Service"},
+ {url:"assets/amanullah-9732111888-square-1.jpg",name:"WBUB Activity"}
+],index=0,timer=null;
 function show(i){
  if(!photos.length)return;
  index=(i+photos.length)%photos.length;
@@ -812,7 +819,7 @@ photos=raw.filter(p=>{
 });
  if(!photos.length)throw new Error("no photos");
  render();
-}).catch(()=>{box.innerHTML='<div class="home-photo-loading">📸 ফটো গ্যালারি থেকে ছবি শিগগিরই এখানে দেখা যাবে।</div>';dots.innerHTML=""});
+}).catch(()=>{render();});
 })();
 </script></body>
 </html>
