@@ -1180,5 +1180,16 @@ document.addEventListener("visibilitychange",()=>{
  clear.addEventListener("click",()=>{input.value="";activeFilter="all";document.querySelectorAll(".wazeen-filter").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>';input.focus()});
  load();
 })();
-</script></body>
+</script>
+<script id="wbub-home-order-fix">
+(function(){
+  function putHeroFirst(){
+    var main=document.querySelector('main');
+    var hero=main && main.querySelector('.premium-hero-v2');
+    if(main && hero && main.firstElementChild!==hero) main.insertBefore(hero,main.firstElementChild);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',putHeroFirst); else putHeroFirst();
+})();
+</script>
+</body>
 </html>
