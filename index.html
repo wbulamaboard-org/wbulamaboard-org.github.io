@@ -667,6 +667,53 @@ nav{gap:17px;font-size:11px}nav a{padding:35px 0 11px;border-bottom-width:2px}na
   .footer{margin-top:0!important}
 }
 </style>
+
+<style id="wbub-mobile-final-layout">
+@media(max-width:700px){
+  /* Mobile flow: services switch stays at the very bottom of homepage content */
+  main>.premium-hero{order:1!important}
+  main>.home-photo-showcase{order:2!important}
+  main>.today-notice{order:3!important}
+  main>.home-wazeen-search{order:4!important}
+  main>.home-gallery{display:block!important;order:5!important}
+  main>.upcoming-events{order:6!important}
+  main>.content{order:7!important}
+  main>.leadership{order:8!important}
+  main>.homepage-activities{order:9!important}
+  main>.services{order:10!important}
+  /* Replace the old six-card member-services block with one bottom switch */
+  main>.home-quick-services{display:none!important}
+  .services{display:block!important;padding:8px 0 18px!important;background:#fff!important}
+  .services .wrap{width:calc(100% - 24px)!important}
+  .services-switch{padding:0!important}
+  .services-switch-btn{min-height:58px!important;padding:9px 13px!important;border:0!important;border-radius:15px!important;background:linear-gradient(135deg,#075647,#0b6b59)!important;color:#fff!important;box-shadow:0 7px 18px rgba(7,86,71,.18)!important}
+  .services-switch-icon{width:38px!important;height:38px!important;flex-basis:38px!important;background:rgba(255,255,255,.15)!important;color:#fff!important;border-radius:10px!important;font-size:18px!important}
+  .services-switch-btn strong{font-size:16px!important;color:#fff!important}
+  .services-switch-btn small{font-size:7px!important;color:#d9eeea!important;margin-top:2px!important}
+  .services-switch-arrow{font-size:24px!important;color:#fff!important}
+  .services-panel{padding-top:8px!important}
+  .services-panel-grid{grid-template-columns:repeat(2,1fr)!important;gap:7px!important}
+  .services-panel .service{min-height:105px!important;padding:10px 5px!important;border-radius:11px!important}
+  .services-panel .service h3{font-size:12px!important}.services-panel .service p{font-size:8px!important}
+
+  /* Compact hero: background mosque image is reduced to about half its previous visual size */
+  .premium-hero-v2{min-height:0!important;height:430px!important}
+  .premium-hero-v2 .premium-hero-bg{background-size:50% auto!important;background-repeat:no-repeat!important;background-position:center bottom!important;transform:none!important;background-color:#dfe8df!important}
+  .premium-hero-v2 .premium-hero-overlay{background:linear-gradient(180deg,rgba(230,239,229,.18),rgba(7,63,53,.20) 58%,rgba(7,63,53,.56) 100%)!important}
+  .premium-hero-v2 .premium-hero-content{padding:20px 8px 35px!important}
+  .premium-hero-v2 h1{font-size:31px!important}
+  .premium-actions{margin-top:12px!important}
+  .premium-btn{min-height:58px!important}
+
+  /* Compact gallery image card */
+  .home-photo-showcase{padding:10px 0 12px!important}
+  .home-photo-slider{height:175px!important;min-height:175px!important}
+  .home-photo-slides,.home-photo-loading,.home-photo-slide,.home-photo-slide img{height:175px!important;min-height:175px!important}
+  .home-photo-slide img{object-fit:cover!important}
+  .home-gallery{padding:12px 0 16px!important}
+  .home-gallery-grid{gap:7px!important}
+}
+</style>
 </head>
 <body>
 <div class="topbar" style="display:none"></div>
