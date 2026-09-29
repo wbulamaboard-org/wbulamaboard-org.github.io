@@ -17,7 +17,7 @@
  * Optional: PHOTO_FOLDER_ID
  */
 
-var WBUB_YOUTH_HEADERS = ['youth_id','status','created_at','updated_at','name','mobile','whatsapp','age','district','block','education','profession','interests','address','photo_url'];
+var WBUB_YOUTH_HEADERS = ['youth_id','status','created_at','updated_at','name','mobile','whatsapp','age','district','block','education','profession','interests','address','photo_url','fee_amount','payment_status','transaction_id','payment_date'];
 
 var WBUB_BASE_HEADERS = [
   'application_no','wazeen_id','member_id','status','created_at','updated_at',
@@ -595,19 +595,21 @@ function wbubYouthRegister_(p){
   var mobile=wbubNormalizeMobile_(p.mobile);
   if(!/^[6-9]\\d{9}$/.test(mobile)) throw new Error('INVALID_MOBILE');
   var name=String(p.name||'').trim(); if(name.length<2) throw new Error('NAME_REQUIRED');
+  var transactionId=String(p.transaction_id||'').trim();
+  if(transactionId.length<4) throw new Error('TRANSACTION_ID_REQUIRED');
   var sh=wbubYouthSheet_(),map=wbubYouthMap_(sh),last=sh.getLastRow();
-  if(last>1 && map.mobile){var vals=sh.getRange(2,map.mobile,last-1,1).getDisplayValues();for(var i=0;i<vals.length;i++){if(wbubNormalizeMobile_(vals[i][0])===mobile){var row=i+2;if(p.photo_upload){var ep=wbubSavePhoto_(p.photo_upload,p.name||wbubYouthGet_(sh,map,row,'youth_id'));if(ep)wbubYouthSet_(sh,map,row,'photo_url',ep);}return wbubJson_({ok:true,existing:true,youth_id:wbubYouthGet_(sh,map,row,'youth_id'),status:wbubYouthGet_(sh,map,row,'status')||'ACTIVE',photo_url:wbubYouthGet_(sh,map,row,'photo_url')});}}}
+  if(last>1 && map.mobile){var vals=sh.getRange(2,map.mobile,last-1,1).getDisplayValues();for(var i=0;i<vals.length;i++){if(wbubNormalizeMobile_(vals[i][0])===mobile){var row=i+2;if(p.photo_upload){var ep=wbubSavePhoto_(p.photo_upload,p.name||wbubYouthGet_(sh,map,row,'youth_id'));if(ep)wbubYouthSet_(sh,map,row,'photo_url',ep);}wbubYouthSet_(sh,map,row,'fee_amount','100');wbubYouthSet_(sh,map,row,'payment_status','SUBMITTED');wbubYouthSet_(sh,map,row,'transaction_id',transactionId);wbubYouthSet_(sh,map,row,'payment_date',new Date());return wbubJson_({ok:true,existing:true,youth_id:wbubYouthGet_(sh,map,row,'youth_id'),status:wbubYouthGet_(sh,map,row,'status')||'ACTIVE',photo_url:wbubYouthGet_(sh,map,row,'photo_url'),fee_amount:'100',payment_status:'SUBMITTED'});}}}
   var max=0;
   if(last>1 && map.youth_id){sh.getRange(2,map.youth_id,last-1,1).getDisplayValues().forEach(function(a){var m=String(a[0]||'').match(/WBU-YOUTH\\/(\\d{5})\\/\\d{4}/);if(m)max=Math.max(max,Number(m[1]));});}
   var year=Utilities.formatDate(new Date(),Session.getScriptTimeZone()||'Asia/Kolkata','yyyy');
   var youthId='WBU-YOUTH/'+String(max+1).padStart(5,'0')+'/'+year,row=sh.getLastRow()+1;
   ['name','mobile','whatsapp','age','district','block','education','profession','interests','address'].forEach(function(k){if(p[k]!==undefined)wbubYouthSet_(sh,map,row,k,String(p[k]||'').trim());});
-  wbubYouthSet_(sh,map,row,'youth_id',youthId);wbubYouthSet_(sh,map,row,'status','ACTIVE');wbubYouthSet_(sh,map,row,'created_at',new Date());wbubYouthSet_(sh,map,row,'updated_at',new Date());
+  wbubYouthSet_(sh,map,row,'youth_id',youthId);wbubYouthSet_(sh,map,row,'status','ACTIVE');wbubYouthSet_(sh,map,row,'created_at',new Date());wbubYouthSet_(sh,map,row,'updated_at',new Date());wbubYouthSet_(sh,map,row,'fee_amount','100');wbubYouthSet_(sh,map,row,'payment_status','SUBMITTED');wbubYouthSet_(sh,map,row,'transaction_id',transactionId);wbubYouthSet_(sh,map,row,'payment_date',new Date());
   if(p.photo_upload){
     var youthPhoto=wbubSavePhoto_(p.photo_upload,p.name||youthId);
     if(youthPhoto) wbubYouthSet_(sh,map,row,'photo_url',youthPhoto);
   }
-  return wbubJson_({ok:true,existing:false,youth_id:youthId,status:'ACTIVE',photo_url:wbubYouthGet_(sh,map,row,'photo_url')});
+  return wbubJson_({ok:true,existing:false,youth_id:youthId,status:'ACTIVE',photo_url:wbubYouthGet_(sh,map,row,'photo_url'),fee_amount:'100',payment_status:'SUBMITTED'});
 }
 function wbubYouthProfile_(id){
   id=String(id||'').trim().toUpperCase(); if(!id) return wbubJson_({ok:false,found:false,error:'YOUTH_ID_REQUIRED'});
