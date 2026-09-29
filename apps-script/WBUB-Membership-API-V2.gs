@@ -270,15 +270,21 @@ function wbubHash_(s) {
 
 function wbubSavePhoto_(data,name) {
   var cfg=wbubProps_();
-  if(!cfg.photoFolderId) return '';
   try {
+    var folder=null;
+    if(cfg.photoFolderId) {
+      folder=DriveApp.getFolderById(cfg.photoFolderId);
+    } else {
+      var folders=DriveApp.getFoldersByName('WBUB Youth Photos');
+      folder=folders.hasNext()?folders.next():DriveApp.createFolder('WBUB Youth Photos');
+    }
     var s=String(data||'');
     var m=s.match(/^data:([^;]+);base64,(.+)$/);
     if(!m) return '';
     var bytes=Utilities.base64Decode(m[2]);
     var safe=String(name||'member').replace(/[^a-zA-Z0-9_-]/g,'_');
     var blob=Utilities.newBlob(bytes,m[1],safe+'-'+Date.now()+'.jpg');
-    return DriveApp.getFolderById(cfg.photoFolderId).createFile(blob).getUrl();
+    return folder.createFile(blob).getUrl();
   } catch(e) { return ''; }
 }
 
