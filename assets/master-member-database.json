@@ -3096,5 +3096,25 @@
     "active": true,
     "district": "North 24 Parganas",
     "area": "Rajarhat"
+  },
+  {
+    "member_id": "WBUB/15005/2026",
+    "serial": 194,
+    "source_page": "new card",
+    "name": "SK Sahajahan",
+    "name_en": "SK Sahajahan",
+    "address": "Dakshin Kalsur",
+    "district": "",
+    "block": "",
+    "designation": "Member of Ulama Board",
+    "phone": "9609165559",
+    "validity": "2026-2027",
+    "old_registration_id": "WBUB/15005/2026",
+    "phone_key": "9609165559",
+    "photo_url": "",
+    "id_card_url": "",
+    "card_url": "",
+    "active": true,
+    "area": "Dakshin Kalsur"
   }
 ]
