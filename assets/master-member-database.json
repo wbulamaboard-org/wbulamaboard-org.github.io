@@ -3081,5 +3081,20 @@
     "active": true,
     "district": "",
     "area": "Basudevpur"
+  },
+  {
+    "member_id": "WBUB/1214/25",
+    "serial": 193,
+    "name": "MD ABU SALEH MUSA JAHANGIR",
+    "address": "Rajarhat",
+    "designation": "SECRETARY (WBUB) RAJARHAT",
+    "phone": "+91 87714 27776",
+    "validity": "2025-2027",
+    "old_registration_id": "WBUB/1214/25",
+    "phone_key": "8771427776",
+    "photo_url": "assets/member-photos/WBUB-1214-25.jpg",
+    "active": true,
+    "district": "North 24 Parganas",
+    "area": "Rajarhat"
   }
 ]
