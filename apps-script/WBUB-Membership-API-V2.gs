@@ -33,11 +33,12 @@ function doGet(e) {
     var p = (e && e.parameter) || {};
     var action = String(p.action || '').trim().toLowerCase();
 
-    if (action === 'verify' || action === 'member_profile' || p.id) {
-      var id = String(p.id || p.member_id || '').trim();
-      if (action === 'youth_profile') {
+    if (action === 'youth_profile') {
       return wbubYouthProfile_(String(p.youth_id || p.id || '').trim());
     }
+
+    if (action === 'verify' || action === 'member_profile' || p.id) {
+      var id = String(p.id || p.member_id || '').trim();
     if (action === 'member_profile' && !id) {
         return wbubJson_({ok:false,found:false,error:'MEMBER_ID_REQUIRED'});
       }
