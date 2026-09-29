@@ -1207,17 +1207,19 @@ function render(){
  document.getElementById("homePhotoNext")?.addEventListener("click",()=>{show(index+1);start()});
  start();
 }
+/* Render local photos immediately so the homepage never stays on the loading screen. */
+render();
+/* Then refresh from the Drive/API source when available. */
 fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{
  const raw=(Array.isArray(d.files)?d.files:[]).filter(p=>p&&p.url);
-const seen=new Set();
-photos=raw.filter(p=>{
-  const key=String(p.url||"").split("?")[0]+"|"+String(p.name||"").trim().toLowerCase();
-  if(seen.has(key))return false;
-  seen.add(key); return true;
-});
- if(!photos.length)throw new Error("no photos");
- render();
-}).catch(()=>{render();});
+ const seen=new Set();
+ const remote=raw.filter(p=>{
+   const key=String(p.url||"").split("?")[0]+"|"+String(p.name||"").trim().toLowerCase();
+   if(seen.has(key))return false;
+   seen.add(key); return true;
+ });
+ if(remote.length){photos=remote;index=0;render();}
+}).catch(()=>{});
 })();
 </script></body>
 </html>
