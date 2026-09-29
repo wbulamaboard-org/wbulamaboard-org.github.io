@@ -8,6 +8,14 @@ const API="https://script.google.com/macros/s/AKfycbzeuVRl-OYsiDU-Oc_YfDUKywTJ6b
 const params=new URLSearchParams(location.search),initialAlbum=params.get("album")||"all";
 const grid=document.getElementById("photoGrid"),status=document.getElementById("status"),more=document.getElementById("more"),search=document.getElementById("search"),album=document.getElementById("album"),count=document.getElementById("count"),title=document.getElementById("title"),categories=document.getElementById("categories");
 let all=[],filtered=[],shown=0,STEP=24;
+const FALLBACK=[
+  {url:"assets/FB_IMG_1789891917922.jpg",original:"assets/FB_IMG_1789891917922.jpg",name:"ওয়ায়েজিন এ ফুরফুরা শরীফ"},
+  {url:"assets/FB_IMG_1789891992819.jpg",original:"assets/FB_IMG_1789891992819.jpg",name:"ওয়ায়েজিন এ ফুরফুরা শরীফ"},
+  {url:"assets/PIRJADA MEHRABUDDIN SIDDIQUE.jpg",original:"assets/PIRJADA MEHRABUDDIN SIDDIQUE.jpg",name:"পশ্চিমবঙ্গ উলামা বোর্ড"},
+  {url:"assets/controller_mehrab_uddin_siddiqui.jpg",original:"assets/controller_mehrab_uddin_siddiqui.jpg",name:"উলামা বোর্ড"},
+  {url:"assets/about-board-speaker.jpg",original:"assets/about-board-speaker.jpg",name:"পশ্চিমবঙ্গ উলামা বোর্ড"},
+  {url:"assets/amanullah-aman-director.jpg",original:"assets/amanullah-aman-director.jpg",name:"ওয়ায়েজিন এ ফুরফুরা শরীফ"}
+];
 album.value=[...album.options].some(o=>o.value===initialAlbum)?initialAlbum:"all";
 function render(){
   const q=search.value.trim().toLowerCase();
@@ -24,7 +32,18 @@ function loadAlbum(v){
   album.value=v; search.value=""; shown=0;
   title.textContent=v==="all"?"📸 সকল ছবি":"📸 "+(album.options[album.selectedIndex]?.text||"Photo Album");
   status.style.display="block";status.innerHTML="📡 Album থেকে ছবি লোড হচ্ছে...";grid.innerHTML="";more.innerHTML="";count.textContent="লোড হচ্ছে...";
-  fetch(API+"?album="+encodeURIComponent(v)+"&v="+Date.now(),{cache:"no-store"}).then(r=>r.text()).then(raw=>{let d;try{d=JSON.parse(raw)}catch(e){throw new Error("JSON response পাওয়া যায়নি")};if(!d.ok)throw new Error(d.error||"API error");all=Array.isArray(d.files)?d.files:[];shown=STEP;render()}).catch(e=>{all=[];shown=0;render();status.innerHTML="⚠️ Album লোড করা যায়নি।";count.textContent="0টি ছবি";});
+  fetch(API+"?album="+encodeURIComponent(v)+"&v="+Date.now(),{cache:"no-store"})
+    .then(r=>r.text())
+    .then(raw=>{
+      let d;try{d=JSON.parse(raw)}catch(e){d=null}
+      const driveFiles=d&&Array.isArray(d.files)?d.files:[];
+      all=driveFiles.length?driveFiles:FALLBACK;
+      shown=STEP;render();
+      if(!driveFiles.length) status.style.display="none";
+    })
+    .catch(e=>{
+      all=FALLBACK.slice();shown=STEP;render();status.style.display="none";
+    });
 }
 function syncCategory(v){categories?.querySelectorAll(".cat").forEach(b=>b.classList.toggle("active",b.dataset.album===v));}\nalbum.addEventListener("change",()=>{const v=album.value;syncCategory(v);history.replaceState(null,"","photo-archive.html"+(v==="all"?"":"?album="+encodeURIComponent(v)));loadAlbum(v)});\ncategories?.addEventListener("click",e=>{const b=e.target.closest(".cat");if(!b)return;const v=b.dataset.album;album.value=v;syncCategory(v);history.replaceState(null,"","photo-archive.html"+(v==="all"?"":"?album="+encodeURIComponent(v)));loadAlbum(v)});
 search.addEventListener("input",()=>{shown=STEP;render()});
