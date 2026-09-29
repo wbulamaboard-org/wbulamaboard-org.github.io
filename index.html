@@ -878,39 +878,40 @@ nav{gap:17px;font-size:11px}nav a{padding:35px 0 11px;border-bottom-width:2px}na
     </div>
   </div>
 </section>
-<section class="home-photo-showcase" aria-label="বোর্ডের কার্যক্রমের ছবি">
+<section class="home-about-photo" aria-label="পশ্চিমবঙ্গ উলামা বোর্ড সম্পর্কে">
   <div class="wrap">
-    <div class="home-photo-slider">
-      <div id="homePhotoSlides" class="home-photo-slides">
-        <div class="home-photo-loading">📸 বোর্ডের কার্যক্রমের ছবি লোড হচ্ছে...</div>
+    <div class="home-about-photo-card">
+      <div class="home-about-photo-image">
+        <img src="assets/help_home_collage-1.jpg" alt="পশ্চিমবঙ্গ উলামা বোর্ডের কার্যক্রম">
       </div>
-      <button class="home-photo-prev" id="homePhotoPrev" type="button" aria-label="আগের ছবি">‹</button>
-      <button class="home-photo-next" id="homePhotoNext" type="button" aria-label="পরের ছবি">›</button>
-      <div id="homePhotoDots" class="home-photo-dots" aria-label="ছবি পরিবর্তন"></div>
+      <div class="home-about-photo-content">
+        <span class="about-kicker">WEST BENGAL ULAMA BOARD</span>
+        <h2>পশ্চিমবঙ্গ উলামা বোর্ড সম্পর্কে</h2>
+        <p>ওয়ায়েজিন এ ফুরফুরা শরীফ — পশ্চিমবঙ্গ উলামা বোর্ডের নিয়ন্ত্রণে পরিচালিত একটি প্ল্যাটফর্ম। ইসলামী ঐক্য, শিক্ষা, সমাজ সংস্কার, ওলামায়ে কেরামের নেতৃত্ব এবং জনকল্যাণমূলক কার্যক্রমকে সামনে রেখে বোর্ড কাজ করে।</p>
+        <a href="about.html" class="btn">আরও পড়ুন →</a>
+      </div>
     </div>
   </div>
 </section>
-<style id="home-photo-showcase-style">
-.home-photo-showcase{padding:28px 0 34px;background:#fff}
-.home-photo-slider{position:relative;width:100%;overflow:hidden;border-radius:18px;background:#f1f5f3;border:1px solid #e5ebe8;box-shadow:0 12px 30px rgba(20,55,45,.10)}
-.home-photo-slides{position:relative;width:100%;min-height:430px}
-.home-photo-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .55s ease;display:flex;align-items:center;justify-content:center;background:#eef3f0}
-.home-photo-slide.active{opacity:1;visibility:visible}
-.home-photo-slide img{width:100%;height:430px;object-fit:cover;display:block}
-.home-photo-prev,.home-photo-next{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;font-size:34px;line-height:1;cursor:pointer;z-index:4;backdrop-filter:blur(4px)}
-.home-photo-prev{left:16px}.home-photo-next{right:16px}
-.home-photo-prev:hover,.home-photo-next:hover{background:rgba(0,0,0,.65)}
-.home-photo-dots{position:absolute;left:50%;bottom:15px;transform:translateX(-50%);display:flex;gap:7px;z-index:5;padding:7px 10px;border-radius:20px;background:rgba(0,0,0,.28)}
-.home-photo-dot{width:8px;height:8px;border:0;border-radius:50%;padding:0;background:#fff8;cursor:pointer}
-.home-photo-dot.active{background:#fff;transform:scale(1.25)}
-.home-photo-loading{min-height:430px;display:grid;place-items:center;color:#697873;font-size:14px}
-@media(max-width:780px){
-.home-photo-showcase{padding:20px 0 25px}
-.home-photo-slider{border-radius:14px}
-.home-photo-slides,.home-photo-loading{min-height:270px}
-.home-photo-slide img{height:270px}
-.home-photo-prev,.home-photo-next{width:36px;height:36px;font-size:28px}
-.home-photo-prev{left:9px}.home-photo-next{right:9px}
+<style id="home-about-photo-style">
+.home-about-photo{padding:14px 0 18px;background:#fff}
+.home-about-photo-card{overflow:hidden;border:1px solid #e3ebe8;border-radius:18px;background:#fff;box-shadow:0 10px 28px rgba(20,55,45,.09)}
+.home-about-photo-image{width:100%;height:270px;background:#edf3f0}
+.home-about-photo-image img{width:100%;height:100%;display:block;object-fit:cover}
+.home-about-photo-content{padding:18px 20px 20px}
+.home-about-photo-content .about-kicker{font-size:10px;font-weight:800;letter-spacing:1.2px;color:#a07a22}
+.home-about-photo-content h2{margin:5px 0 8px;font-size:26px;color:#075647}
+.home-about-photo-content p{margin:0 0 13px;line-height:1.75;color:#596b66;font-size:14px}
+.home-about-photo-content .btn{display:inline-block}
+@media(max-width:700px){
+ .home-about-photo{padding:10px 0 12px}
+ .home-about-photo-card{border-radius:14px}
+ .home-about-photo-image{height:165px}
+ .home-about-photo-content{padding:13px 14px 15px}
+ .home-about-photo-content .about-kicker{font-size:7px}
+ .home-about-photo-content h2{font-size:20px;margin:4px 0 6px}
+ .home-about-photo-content p{font-size:10px;line-height:1.65;margin-bottom:10px}
+ .home-about-photo-content .btn{font-size:10px;padding:7px 11px}
 }
 </style><section class="today-notice" aria-label="আজকের গুরুত্বপূর্ণ ঘোষণা">
   <div class="wrap">
@@ -932,7 +933,7 @@ nav{gap:17px;font-size:11px}nav a{padding:35px 0 11px;border-bottom-width:2px}na
 <div id="homeWazeenResults" class="home-wazeen-results" aria-live="polite"><div class="home-wazeen-empty">👤 নাম অথবা 📱 মোবাইল নম্বর দিয়ে খুঁজুন।</div></div>
 <a href="wazeens.html" class="home-wazeen-directory-link" aria-label="WAYEJIN DIRECTORY খুলুন">📚 WAYEJIN DIRECTORY <span>→</span></a>
 </div></div></section>
-<section class="content"><div class="wrap two-col"><div class="about-card"><h2 class="section-title">পশ্চিমবঙ্গ উলামা বোর্ড সম্পর্কে</h2><p>West Bengal Ulama Board (WBUB) — Waye­jin E Furfura Sharif is a platform of Ulama, scholars and well-wishers dedicated to Islamic unity, education, social reform and community welfare.</p><a class="btn" href="about.html">আরও পড়ুন →</a></div><div class="news-card"><div class="news-head"><h2 class="section-title" style="margin:0;font-size:23px">সর্বশেষ সংবাদ ও অনুষ্ঠান</h2><a class="view" href="news-events.html">সব দেখুন →</a></div><div class="news-list">
+<section class="content"><div class="wrap two-col"><div class="news-card"><div class="news-head"><h2 class="section-title" style="margin:0;font-size:23px">সর্বশেষ সংবাদ ও অনুষ্ঠান</h2><a class="view" href="news-events.html">সব দেখুন →</a></div><div class="news-list">
 <a class="news-item" href="news-events.html"><span class="date"><b>01</b>FEB</span><span><strong>ঐতিহাসিক উলামা সম্মেলন – ২০২৬</strong><small>ফুরফুরা দরবার শরীফে অনুষ্ঠিত হবে</small></span><span class="arrow">›</span></a>
 <a class="news-item" href="news-events.html"><span class="date"><b>29</b>DEC</span><span><strong>দক্ষিণ ২৪ পরগনা জেলা পরিকল্পনা সম্মেলন</strong><small>জেলা পরিকল্পনা ও সমন্বয়</small></span><span class="arrow">›</span></a>
 <a class="news-item" href="news-events.html"><span class="date"><b>09</b>NOV</span><span><strong>উত্তর ২৪ পরগনা পরিকল্পনা সম্মেলন</strong><small>জেলা পরিকল্পনা ও সমন্বয়</small></span><span class="arrow">›</span></a>
@@ -1178,48 +1179,6 @@ document.addEventListener("visibilitychange",()=>{
  btn.addEventListener("click",search);input.addEventListener("input",()=>{if(input.value.trim().length>=2)search()});input.addEventListener("keydown",e=>{if(e.key==="Enter")search()});
  clear.addEventListener("click",()=>{input.value="";activeFilter="all";document.querySelectorAll(".wazeen-filter").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>';input.focus()});
  load();
-})();
-</script><script id="home-photo-showcase-script">
-(function(){
-const API="https://script.google.com/macros/s/AKfycbzeuVRl-OYsiDU-Oc_YfDUKywTJ6bVTerzB0SvA0sjJO0iLpQ3XSyibbZ5pS1592hdHwA/exec";
-const box=document.getElementById("homePhotoSlides"),dots=document.getElementById("homePhotoDots");
-if(!box)return;
-let photos=[
- {url:"assets/FB_IMG_1789891917922.jpg",name:"WBUB Activity"},
- {url:"assets/FB_IMG_1789891992819.jpg",name:"WBUB Activity"},
- {url:"assets/PIRJADA MEHRABUDDIN SIDDIQUE.jpg",name:"Ulama Board"},
- {url:"assets/Screenshot_2026-09-20-13-45-39-25_a23b203fd3aafc6dcb84e438dda678b6.jpg",name:"WBUB Event"},
- {url:"assets/help_home_collage-1.jpg",name:"WBUB Social Service"},
- {url:"assets/amanullah-9732111888-square-1.jpg",name:"WBUB Activity"}
-],index=0,timer=null;
-function show(i){
- if(!photos.length)return;
- index=(i+photos.length)%photos.length;
- box.querySelectorAll(".home-photo-slide").forEach((s,n)=>s.classList.toggle("active",n===index));
- dots.querySelectorAll(".home-photo-dot").forEach((d,n)=>d.classList.toggle("active",n===index));
-}
-function start(){clearInterval(timer);if(photos.length>1)timer=setInterval(()=>show(index+1),5000)}
-function render(){
- box.innerHTML=photos.map((p,i)=>'<div class="home-photo-slide'+(i===0?' active':'')+'"><img loading="'+(i===0?'eager':'lazy')+'" src="'+p.url+'" alt="West Bengal Ulama Board কার্যক্রমের ছবি"></div>').join("");
- dots.innerHTML=photos.map((_,i)=>'<button class="home-photo-dot'+(i===0?' active':'')+'" type="button" aria-label="ছবি '+(i+1)+'" data-i="'+i+'"></button>').join("");
- dots.querySelectorAll(".home-photo-dot").forEach(d=>d.addEventListener("click",()=>{show(Number(d.dataset.i));start()}));
- document.getElementById("homePhotoPrev")?.addEventListener("click",()=>{show(index-1);start()});
- document.getElementById("homePhotoNext")?.addEventListener("click",()=>{show(index+1);start()});
- start();
-}
-/* Render local photos immediately so the homepage never stays on the loading screen. */
-render();
-/* Then refresh from the Drive/API source when available. */
-fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(d=>{
- const raw=(Array.isArray(d.files)?d.files:[]).filter(p=>p&&p.url);
- const seen=new Set();
- const remote=raw.filter(p=>{
-   const key=String(p.url||"").split("?")[0]+"|"+String(p.name||"").trim().toLowerCase();
-   if(seen.has(key))return false;
-   seen.add(key); return true;
- });
- if(remote.length){photos=remote;index=0;render();}
-}).catch(()=>{});
 })();
 </script></body>
 </html>
