@@ -29,21 +29,21 @@ function render(){
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));}
 function loadAlbum(v){
-  album.value=v; search.value=""; shown=0;
+  album.value=v; search.value=""; shown=STEP;
   title.textContent=v==="all"?"📸 সকল ছবি":"📸 "+(album.options[album.selectedIndex]?.text||"Photo Album");
-  status.style.display="block";status.innerHTML="📡 Album থেকে ছবি লোড হচ্ছে...";grid.innerHTML="";more.innerHTML="";count.textContent="লোড হচ্ছে...";
+  /* Show the website images immediately. Do not wait for Google Drive/API. */
+  all=FALLBACK.slice(); render();
+  status.style.display="none";
   fetch(API+"?album="+encodeURIComponent(v)+"&v="+Date.now(),{cache:"no-store"})
     .then(r=>r.text())
     .then(raw=>{
       let d;try{d=JSON.parse(raw)}catch(e){d=null}
       const driveFiles=d&&Array.isArray(d.files)?d.files:[];
-      all=driveFiles.length?driveFiles:FALLBACK;
-      shown=STEP;render();
-      if(!driveFiles.length) status.style.display="none";
+      if(driveFiles.length){
+        all=driveFiles; shown=STEP; render();
+      }
     })
-    .catch(e=>{
-      all=FALLBACK.slice();shown=STEP;render();status.style.display="none";
-    });
+    .catch(()=>{ /* Keep the already visible website gallery. */ });
 }
 function syncCategory(v){categories?.querySelectorAll(".cat").forEach(b=>b.classList.toggle("active",b.dataset.album===v));}\nalbum.addEventListener("change",()=>{const v=album.value;syncCategory(v);history.replaceState(null,"","photo-archive.html"+(v==="all"?"":"?album="+encodeURIComponent(v)));loadAlbum(v)});\ncategories?.addEventListener("click",e=>{const b=e.target.closest(".cat");if(!b)return;const v=b.dataset.album;album.value=v;syncCategory(v);history.replaceState(null,"","photo-archive.html"+(v==="all"?"":"?album="+encodeURIComponent(v)));loadAlbum(v)});
 search.addEventListener("input",()=>{shown=STEP;render()});
