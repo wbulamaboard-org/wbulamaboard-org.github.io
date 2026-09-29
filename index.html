@@ -1193,7 +1193,7 @@ document.addEventListener("visibilitychange",()=>{
    return name.includes(q)||(phone.length>=4&&norm(r.phone).includes(phone));
  }
  function render(list,raw){
-   if(!raw){out.innerHTML='<div class="home-wazeen-empty">নাম, মোবাইল, জেলা বা পদ লিখে খুঁজুন।</div>';return}
+   if(!raw){out.innerHTML='';return}
    if(!list.length){out.innerHTML='<div class="home-wazeen-empty">“'+esc(raw)+'” — কোনো ওয়ায়েজিন পাওয়া যায়নি। নামের অংশ, জেলা বা মোবাইল নম্বর দিয়ে আবার চেষ্টা করুন।</div>';return}
    out.innerHTML='<div class="home-wazeen-count">পাওয়া গেছে: <b>'+list.length+'</b> জন</div>'+list.slice(0,12).map(r=>{
      const p=photo(r), image=p?'<img loading="lazy" src="'+esc(p)+'" alt="'+esc(r.name||"Wazeen")+'">':'<div class="no-photo">و</div>';
