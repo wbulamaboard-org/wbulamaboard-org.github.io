@@ -235,6 +235,36 @@
  .premium-member-head{padding:11px 12px}
  .premium-member-head strong{font-size:15px}
 }
+</style><style id="home-wazeen-search-mobile-redesign">
+.wazeen-search-main{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:24px;align-items:center}
+.wazeen-search-left{min-width:0}
+.wazeen-search-left .search-head{margin-bottom:13px}
+.wazeen-search-left h2{margin:0;color:#075647;font-size:24px;font-weight:900}
+.wazeen-search-left .hint{margin-top:4px;color:#77817e;font-size:11px}
+.wazeen-search-left .search-row{display:flex;gap:9px}
+.wazeen-search-left input{flex:1;min-width:0;border:1px solid #d9e3df;background:#fff;border-radius:12px;padding:14px 15px;font-size:15px;outline:none}
+.wazeen-search-left input:focus{border-color:#267b6b;box-shadow:0 0 0 3px #267b6b18}
+.wazeen-search-left button{border:0;border-radius:12px;background:#c92732;color:#fff;font-weight:900;padding:0 23px;cursor:pointer}
+.wazeen-mic-visual{height:150px;border-radius:18px;background:linear-gradient(145deg,#edf8f4,#fff);border:1px solid #dceae5;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.wazeen-mic-circle{width:82px;height:82px;border-radius:50%;display:grid;place-items:center;background:#075647;box-shadow:0 9px 22px #07564722}
+.wazeen-mic-circle span{font-size:43px;line-height:1}
+.wazeen-mic-visual strong{margin-top:8px;color:#075647;font-size:12px;letter-spacing:1px}
+.wazeen-mic-visual small{color:#9b7b35;font-size:8px;letter-spacing:2px}
+.home-wazeen-results{margin-top:14px}
+@media(max-width:700px){
+ .wazeen-search-main{grid-template-columns:1fr 88px;gap:10px}
+ .wazeen-search-left h2{font-size:19px}
+ .wazeen-search-left .hint{font-size:9px}
+ .wazeen-search-left .search-row{gap:6px}
+ .wazeen-search-left input{padding:12px 11px;font-size:12px}
+ .wazeen-search-left button{padding:0 12px;font-size:11px}
+ .wazeen-mic-visual{height:118px;border-radius:14px}
+ .wazeen-mic-circle{width:60px;height:60px}
+ .wazeen-mic-circle span{font-size:31px}
+ .wazeen-mic-visual strong{font-size:9px;margin-top:5px}
+ .wazeen-mic-visual small{font-size:6px}
+ .home-wazeen-results{margin-top:9px}
+}
 </style><style id="home-wazeen-directory-style">
 .home-wazeen-directory-link{display:flex;align-items:center;justify-content:center;gap:10px;margin:12px auto 0;width:min(100%,360px);padding:11px 16px;border-radius:10px;background:#315f59;color:#fff;font-size:12px;font-weight:900;letter-spacing:.2px;box-shadow:0 7px 16px rgba(49,95,89,.16)}
 .home-wazeen-directory-link span{font-size:17px;line-height:1}
@@ -923,15 +953,17 @@ nav{gap:17px;font-size:11px}nav a{padding:35px 0 11px;border-bottom-width:2px}na
   </div>
 </section>
 <section class="home-wazeen-search"><div class="wrap"><div class="search-shell">
-<div class="search-head"><div class="search-icon">🎙️</div><div><h2>ওয়ায়েজিন খুঁজুন</h2><div class="hint">ওয়ায়েজিনের নাম অথবা মোবাইল নম্বর দিয়ে সহজে খুঁজুন</div></div></div>
-<div class="search-row"><input id="homeWazeenSearch" type="search" placeholder="ওয়ায়েজিনের নাম বা মোবাইল নম্বর লিখুন" autocomplete="off" inputmode="search"><button id="homeWazeenSearchBtn" type="button">খুঁজুন</button></div>
-<div class="wazeen-search-tools">
-<button type="button" class="wazeen-filter active" data-filter="name">👤 নাম দিয়ে</button>
-<button type="button" class="wazeen-filter" data-filter="phone">📱 মোবাইল দিয়ে</button>
-<button type="button" id="homeWazeenClear" class="wazeen-clear" type="button">মুছুন</button>
+<div class="wazeen-search-main">
+  <div class="wazeen-search-left">
+    <div class="search-head"><div><h2>ওয়ায়েজিন খুঁজুন</h2><div class="hint">নাম অথবা মোবাইল নম্বর দিয়ে সহজে খুঁজুন</div></div></div>
+    <div class="search-row"><input id="homeWazeenSearch" type="search" placeholder="ওয়ায়েজিনের নাম বা মোবাইল নম্বর লিখুন" autocomplete="off" inputmode="search"><button id="homeWazeenSearchBtn" type="button">খুঁজুন</button></div>
+  </div>
+  <div class="wazeen-mic-visual" aria-hidden="true">
+    <div class="wazeen-mic-circle"><span>🎙️</span></div>
+    <strong>WAYEJIN</strong><small>SEARCH</small>
+  </div>
 </div>
-<div id="homeWazeenResults" class="home-wazeen-results" aria-live="polite"><div class="home-wazeen-empty">👤 নাম অথবা 📱 মোবাইল নম্বর দিয়ে খুঁজুন।</div></div>
-<a href="wazeens.html" class="home-wazeen-directory-link" aria-label="WAYEJIN DIRECTORY খুলুন">📚 WAYEJIN DIRECTORY <span>→</span></a>
+<div id="homeWazeenResults" class="home-wazeen-results" aria-live="polite"></div>
 </div></div></section>
 <section class="content"><div class="wrap two-col"><div class="news-card"><div class="news-head"><h2 class="section-title" style="margin:0;font-size:23px">সর্বশেষ সংবাদ ও অনুষ্ঠান</h2><a class="view" href="news-events.html">সব দেখুন →</a></div><div class="news-list">
 <a class="news-item" href="news-events.html"><span class="date"><b>01</b>FEB</span><span><strong>ঐতিহাসিক উলামা সম্মেলন – ২০২৬</strong><small>ফুরফুরা দরবার শরীফে অনুষ্ঠিত হবে</small></span><span class="arrow">›</span></a>
