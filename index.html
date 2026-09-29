@@ -1066,6 +1066,7 @@ nav{gap:17px;font-size:11px}nav a{padding:35px 0 11px;border-bottom-width:2px}na
     <a class="btn" href="activities.html">কার্যক্রম দেখুন →</a>
   </div>
 </section>
+</main>
 <footer class="footer"><div class="wrap footer-grid"><div><div class="footer-brand"><img src="assets/WBUB_Logo_Transparent_Final.png" alt="WBUB Logo"><div><strong>WEST BENGAL ULAMA BOARD</strong><p>WAYEJIN E FURFURA SHARIF</p><p>ঐক্য • শিক্ষা • সমাজ সংস্কার</p></div></div></div><div><h3>দ্রুত লিংক</h3><p><a href="index.html">Home</a></p><p><a href="about.html">About Us</a></p><p><a href="registration.html">Membership</a></p><p><a href="activities.html">Projects</a></p></div><div><h3>সদস্য সেবা</h3><p><a href="news-events.html">News & Events</a></p><p><a href="wazeens.html">ওয়ায়েজিন ডিরেক্টরি</a></p><p><a href="verification.html">Verification</a></p><p><a href="contact.html">Contact</a></p></div><div><h3>যোগাযোগ</h3><p>প্রধান কার্যালয় – ফুরফুরা শরীফ</p><p>শাখা কার্যালয় – শিমুলতলা হাসপাতাল মোড়, বাসন্তী</p><p>দক্ষিণ ২৪ পরগনা, পশ্চিমবঙ্গ</p><p>info@westbengalulamaboard.com</p></div></div></footer>
 <div class="bottom"><div class="wrap"><span>© 2026 West Bengal Ulama Board. All Rights Reserved.</span><span>দীনের জন্য। মানুষের জন্য।</span></div></div>
 <script src="assets/wazeens.js?v=20260928-11"></script><script src="assets/site.js" defer></script>
@@ -1192,4 +1193,22 @@ document.addEventListener("visibilitychange",()=>{
 })();
 </script>
 </body>
+
+<style id="wbub-mobile-home-order-real-fix">
+@media(max-width:700px){
+  /* Final intended mobile order: Hero -> About -> Notice -> Search -> Gallery -> Events -> Content -> Leadership -> Activities -> Services */
+  main{display:flex!important;flex-direction:column!important}
+  main>.premium-hero{order:1!important}
+  main>.home-about-photo{order:2!important}
+  main>.home-photo-showcase{order:3!important}
+  main>.today-notice{order:4!important}
+  main>.home-wazeen-search{order:5!important}
+  main>.home-gallery{order:6!important}
+  main>.upcoming-events{order:7!important}
+  main>.content{order:8!important}
+  main>.leadership{order:9!important}
+  main>.homepage-activities{order:10!important}
+  main>.services{order:11!important}
+}
+</style>
 </html>
