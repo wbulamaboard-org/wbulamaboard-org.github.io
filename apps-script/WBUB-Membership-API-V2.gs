@@ -17,6 +17,8 @@
  * Optional: PHOTO_FOLDER_ID
  */
 
+var WBUB_YOUTH_HEADERS = ['youth_id','status','created_at','updated_at','name','mobile','whatsapp','age','district','block','education','profession','interests','address','photo_url'];
+
 var WBUB_BASE_HEADERS = [
   'application_no','wazeen_id','member_id','status','created_at','updated_at',
   'name','father','mobile','whatsapp','district','block','area','address',
@@ -33,7 +35,10 @@ function doGet(e) {
 
     if (action === 'verify' || action === 'member_profile' || p.id) {
       var id = String(p.id || p.member_id || '').trim();
-      if (action === 'member_profile' && !id) {
+      if (action === 'youth_profile') {
+      return wbubYouthProfile_(String(p.youth_id || p.id || '').trim());
+    }
+    if (action === 'member_profile' && !id) {
         return wbubJson_({ok:false,found:false,error:'MEMBER_ID_REQUIRED'});
       }
       return wbubVerify_(id);
@@ -55,6 +60,7 @@ function doPost(e) {
     var action = String(p.action || '').trim().toLowerCase();
 
     if (action === 'register') return wbubRegister_(p);
+    if (action === 'youth_register') return wbubYouthRegister_(p);
     if (action === 'razorpay_create_order') return wbubRazorpayCreateOrder_(p);
     if (action === 'razorpay_verify_payment') return wbubRazorpayVerifyPayment_(p);
 
@@ -556,4 +562,49 @@ function wbubParsePost_(e) {
 
 function wbubJson_(o) {
   return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
+}
+
+
+/* ================= YOUTH WING ================= */
+function wbubYouthSheet_() {
+  var cfg=wbubProps_();
+  if(!cfg.sheetId) throw new Error('DATABASE_SHEET_ID_NOT_SET');
+  var ss=SpreadsheetApp.openById(cfg.sheetId);
+  var sh=ss.getSheetByName('Youth') || ss.insertSheet('Youth');
+  var current=sh.getLastColumn()?sh.getRange(1,1,1,sh.getLastColumn()).getDisplayValues()[0]:[];
+  var norm=current.map(function(x){return String(x||'').trim().toLowerCase();});
+  WBUB_YOUTH_HEADERS.forEach(function(h){if(norm.indexOf(h.toLowerCase())<0){sh.getRange(1,sh.getLastColumn()+1).setValue(h);norm.push(h.toLowerCase());}});
+  return sh;
+}
+function wbubYouthMap_(sh){
+  var h=sh.getRange(1,1,1,sh.getLastColumn()).getDisplayValues()[0],m={};
+  h.forEach(function(v,i){var k=String(v||'').trim().toLowerCase().replace(/[^a-z0-9_]+/g,'_');if(k)m[k]=i+1;});
+  return m;
+}
+function wbubYouthGet_(sh,map,row,key){return map[key]?String(sh.getRange(row,map[key]).getDisplayValue()||'').trim():'';}
+function wbubYouthSet_(sh,map,row,key,value){if(!map[key]){var col=sh.getLastColumn()+1;sh.getRange(1,col).setValue(key);map[key]=col;}sh.getRange(row,map[key]).setValue(value);}
+function wbubYouthRegister_(p){
+  var mobile=wbubNormalizeMobile_(p.mobile);
+  if(!/^[6-9]\\d{9}$/.test(mobile)) throw new Error('INVALID_MOBILE');
+  var name=String(p.name||'').trim(); if(name.length<2) throw new Error('NAME_REQUIRED');
+  var sh=wbubYouthSheet_(),map=wbubYouthMap_(sh),last=sh.getLastRow();
+  if(last>1 && map.mobile){var vals=sh.getRange(2,map.mobile,last-1,1).getDisplayValues();for(var i=0;i<vals.length;i++){if(wbubNormalizeMobile_(vals[i][0])===mobile){var row=i+2;return wbubJson_({ok:true,existing:true,youth_id:wbubYouthGet_(sh,map,row,'youth_id'),status:wbubYouthGet_(sh,map,row,'status')||'ACTIVE'});}}}
+  var max=0;
+  if(last>1 && map.youth_id){sh.getRange(2,map.youth_id,last-1,1).getDisplayValues().forEach(function(a){var m=String(a[0]||'').match(/WBU-YOUTH\\/(\\d{5})\\/\\d{4}/);if(m)max=Math.max(max,Number(m[1]));});}
+  var year=Utilities.formatDate(new Date(),Session.getScriptTimeZone()||'Asia/Kolkata','yyyy');
+  var youthId='WBU-YOUTH/'+String(max+1).padStart(5,'0')+'/'+year,row=sh.getLastRow()+1;
+  ['name','mobile','whatsapp','age','district','block','education','profession','interests','address'].forEach(function(k){if(p[k]!==undefined)wbubYouthSet_(sh,map,row,k,String(p[k]||'').trim());});
+  wbubYouthSet_(sh,map,row,'youth_id',youthId);wbubYouthSet_(sh,map,row,'status','ACTIVE');wbubYouthSet_(sh,map,row,'created_at',new Date());wbubYouthSet_(sh,map,row,'updated_at',new Date());
+  return wbubJson_({ok:true,existing:false,youth_id:youthId,status:'ACTIVE'});
+}
+function wbubYouthProfile_(id){
+  id=String(id||'').trim().toUpperCase(); if(!id) return wbubJson_({ok:false,found:false,error:'YOUTH_ID_REQUIRED'});
+  var sh=wbubYouthSheet_(),map=wbubYouthMap_(sh),last=sh.getLastRow();
+  if(last<2) return wbubJson_({ok:true,found:false});
+  var row=0; for(var i=2;i<=last;i++){if(wbubYouthGet_(sh,map,i,'youth_id').toUpperCase()===id){row=i;break;}}
+  if(!row) return wbubJson_({ok:true,found:false});
+  var record={}; Object.keys(map).forEach(function(k){record[k]=wbubYouthGet_(sh,map,row,k);});
+  /* Never expose phone/address publicly through verification. */
+  delete record.mobile; delete record.whatsapp; delete record.address;
+  return wbubJson_({ok:true,found:true,record:record});
 }
