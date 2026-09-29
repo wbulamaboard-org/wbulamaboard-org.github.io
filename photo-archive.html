@@ -14,10 +14,37 @@
 </div>
 <div id="more" class="more"></div>
 <div class="note">📁 <strong>ফটো গ্যালারি:</strong> এই পেজে ওয়েবসাইটে সংরক্ষিত ছবিগুলো সরাসরি দেখানো হচ্ছে। Google Drive সংযোগ আলাদা করে ঠিক করার পর নতুন Drive ছবিগুলোও এখানে স্বয়ংক্রিয়ভাবে যোগ করা যাবে।</div></div></section></main><footer><div class="wrap"><b>WAYEJIN E FURFURA SHARIF</b><p>WEST BENGAL ULAMA BOARD</p></div></footer><script src="assets/site.js" defer></script><script>
-const search=document.getElementById("search"),grid=document.getElementById("photoGrid"),count=document.getElementById("count"),categories=document.getElementById("categories"),album=document.getElementById("album");
-function filterPhotos(){const q=(search.value||"").trim().toLowerCase();let n=0;grid.querySelectorAll(".photo").forEach(x=>{const ok=!q||x.querySelector("img").alt.toLowerCase().includes(q);x.style.display=ok?"block":"none";if(ok)n++;});count.textContent=n+"টি ছবি";}
-search.addEventListener("input",filterPhotos);
-categories?.addEventListener("click",e=>{const b=e.target.closest(".cat");if(!b)return;categories.querySelectorAll(".cat").forEach(x=>x.classList.remove("active"));b.classList.add("active");album.value=b.dataset.album;filterPhotos();});
-album.addEventListener("change",filterPhotos);
-filterPhotos();
+const API="https://script.google.com/macros/s/AKfycbzeuVRl-OYsiDO-Uc_OCYFDUKywTJ6bVTerzB0SvA0sjJO0iLpQ3XSyibbZ5pS1592hdHwA/exec";
+const params=new URLSearchParams(location.search),initialAlbum=params.get("album")||"all";
+const grid=document.getElementById("photoGrid"),status=document.getElementById("status"),more=document.getElementById("more"),search=document.getElementById("search"),album=document.getElementById("album"),count=document.getElementById("count"),categories=document.getElementById("categories");
+let all=[],filtered=[],shown=0,STEP=24;
+album.value=[...album.options].some(o=>o.value===initialAlbum)?initialAlbum:"all";
+function render(){
+ const q=search.value.trim().toLowerCase();
+ filtered=all.filter(p=>!q||String(p.name||"").toLowerCase().includes(q));
+ shown=Math.min(Math.max(shown,STEP),filtered.length);
+ if(!filtered.length){grid.innerHTML="";more.innerHTML="";status.style.display="block";status.innerHTML="🔎 কোনো ছবি পাওয়া যায়নি।";count.textContent="০টি ছবি";return;}
+ status.style.display="none";
+ grid.innerHTML=filtered.slice(0,shown).map(p=>'<a class="photo" href="'+(p.original||p.url)+'" target="_blank" rel="noopener"><img loading="lazy" src="'+p.url+'" alt="'+String(p.name||"Photo").replace(/"/g,"&quot;")+'"></a>').join("");
+ more.innerHTML=shown<filtered.length?'<button type="button" onclick="shown=Math.min(shown+STEP,filtered.length);render()">আরও ছবি দেখুন →</button>':"";
+ count.textContent=filtered.length+"টি ছবি";
+}
+function loadAlbum(v){
+ album.value=v;search.value="";shown=STEP;
+ status.style.display="block";status.innerHTML="📡 ছবি লোড হচ্ছে...";count.textContent="লোড হচ্ছে...";
+ fetch(API+"?album="+encodeURIComponent(v)+"&v="+Date.now(),{cache:"no-store"})
+ .then(r=>r.text()).then(raw=>{
+   let d;try{d=JSON.parse(raw)}catch(e){throw new Error("API_JSON_ERROR")};
+   if(!d.ok)throw new Error(d.error||"API_ERROR");
+   all=Array.isArray(d.files)?d.files:[];render();
+ }).catch(e=>{
+   all=[];shown=0;grid.innerHTML="";more.innerHTML="";
+   status.style.display="block";status.innerHTML="⚠️ Photo Archive API এখনও চালু হয়নি। Google Apps Script-টি একবার নতুন কোড দিয়ে Deploy করতে হবে।";count.textContent="০টি ছবি";
+ });
+}
+categories?.addEventListener("click",e=>{const b=e.target.closest(".cat");if(!b)return;const v=b.dataset.album;categories.querySelectorAll(".cat").forEach(x=>x.classList.remove("active"));b.classList.add("active");history.replaceState(null,"","photo-archive.html"+(v==="all"?"":"?album="+encodeURIComponent(v)));loadAlbum(v)});
+album.addEventListener("change",()=>{const v=album.value;categories?.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x.dataset.album===v));loadAlbum(v)});
+search.addEventListener("input",()=>{shown=STEP;render()});
+categories?.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x.dataset.album===album.value));
+loadAlbum(album.value);
 </script></body></html>
