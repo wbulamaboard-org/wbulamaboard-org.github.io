@@ -714,6 +714,27 @@ nav{gap:17px;font-size:11px}nav a{padding:35px 0 11px;border-bottom-width:2px}na
   .home-gallery-grid{gap:7px!important}
 }
 </style>
+
+<style id="wbub-mobile-hero-final-fix">
+@media(max-width:700px){
+  /* Final mobile hero: full-width image, shorter visual area — no boxed/rectangle background */
+  .premium-hero-v2{height:390px!important;min-height:390px!important;overflow:hidden!important;background:#496d62!important}
+  .premium-hero-v2 .premium-hero-bg{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;background-size:cover!important;background-position:center 62%!important;background-repeat:no-repeat!important;transform:none!important;background-color:transparent!important}
+  .premium-hero-v2 .premium-hero-overlay{position:absolute!important;inset:0!important;background:linear-gradient(180deg,rgba(8,54,45,.28),rgba(8,54,45,.38) 55%,rgba(8,54,45,.60))!important}
+  .premium-hero-v2 .premium-hero-content{position:relative!important;z-index:3!important;padding:18px 8px 28px!important}
+  .premium-hero-v2 h1{font-size:29px!important;line-height:1.04!important;margin-bottom:7px!important}
+  .premium-board{font-size:12px!important}
+  .premium-sub{font-size:7px!important}
+  .premium-actions{margin-top:10px!important;gap:7px!important}
+  .premium-btn{min-height:55px!important;border-radius:11px!important;font-size:10px!important}
+  /* Make the photo slider compact without leaving a giant empty panel */
+  .home-photo-showcase{padding:9px 0 10px!important}
+  .home-photo-slider{height:145px!important;min-height:145px!important}
+  .home-photo-slides,.home-photo-loading,.home-photo-slide,.home-photo-slide img{height:145px!important;min-height:145px!important}
+  .home-photo-loading{font-size:11px!important}
+  .home-photo-prev,.home-photo-next{width:32px!important;height:32px!important;font-size:23px!important}
+}
+</style>
 </head>
 <body>
 <div class="topbar" style="display:none"></div>
