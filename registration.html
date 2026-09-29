@@ -17,8 +17,8 @@
 <p class="muted">West Bengal Ulama Board • WAYEJIN E FURFURA SHARIF</p>
 <div class="notice"><strong>গুরুত্বপূর্ণ:</strong> নিচের ফর্মটি পূরণ করে আবেদন জমা দিন। তথ্য যাচাইয়ের পর প্রশাসনের পক্ষ থেকে আবেদনটির পরবর্তী অবস্থা জানানো হবে।</div>
 <div class="payment-box" style="margin:18px 0;background:#eef8f3;border:1px solid #cfe2d8;border-radius:14px;padding:18px">
-  <h2 style="margin:0 0 8px;color:#07513f;font-size:20px">💳 সদস্যপদ ফি — ₹500 (শুধু UPI)</h2>
-  <p style="margin:0 0 14px;color:#4d625b">অনলাইন সদস্যপদ ফি শুধুমাত্র UPI-এর মাধ্যমে প্রদান করুন।</p>
+  <h2 style="margin:0 0 8px;color:#07513f;font-size:20px">💳 অনলাইন সদস্যপদ ফি — ₹500</h2>
+  <p style="margin:0 0 14px;color:#4d625b"><strong>শুধু UPI পেমেন্ট</strong> — অন্য কোনো পেমেন্ট পদ্ধতি নেই। QR স্ক্যান করুন অথবা UPI ID ব্যবহার করুন।</p>
   <div class="upi-pay-grid">
     <div style="text-align:center">
       <img class="upi-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=8&data=upi%3A%2F%2Fpay%3Fpa%3Dulama.board%2540ybl%26pn%3DWAYEJIN%2520E%2520FURFURA%2520SHARIF%26am%3D500%26cu%3DINR%26tn%3DWBUB%2520Membership%2520Fee" alt="₹500 UPI Payment QR Code">
@@ -62,7 +62,7 @@
 <div id="message" hidden></div>
 <div id="receipt" class="receipt" hidden></div>
 </div></div></section></main>
-<script src="assets/member-workflow.js?v=20260925-12"></script><script src="assets/site.js" defer></script>
+<script src="assets/member-workflow.js?v=20260929-1"></script><script src="assets/site.js" defer></script>
 <script>
 const topCopyUpi=document.getElementById("topCopyUpi");
 topCopyUpi?.addEventListener("click",async()=>{try{await navigator.clipboard.writeText("ulama.board@ybl");topCopyUpi.textContent="কপি হয়েছে ✓";}catch(_){const x=document.getElementById("topMemberUpiId");x.select();document.execCommand("copy");topCopyUpi.textContent="কপি হয়েছে ✓";}setTimeout(()=>topCopyUpi.textContent="কপি",1600)});
