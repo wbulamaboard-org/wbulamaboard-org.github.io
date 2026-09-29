@@ -57,8 +57,12 @@
     el.style.fontSize=(parseFloat(getComputedStyle(el).fontSize)-0.5)+"px";
    }
   }
-  fitText(document.getElementById("name"),7.5,11);
-  fitText(document.getElementById("designation"),6,7.5);
+  // Reveal cards before measuring text so fitText can use the real field width.
+  document.getElementById("loading").classList.add("hidden");
+  document.getElementById("cards").classList.remove("hidden");
+  await new Promise(r=>requestAnimationFrame(r));
+  fitText(document.getElementById("name"),6.5,10.5);
+  fitText(document.getElementById("designation"),5.5,7.5);
   document.getElementById("memberid").textContent=t(m.member_id);
   document.getElementById("district").textContent=t(m.district);
   document.getElementById("area").textContent=t(m.area||m.block);
@@ -71,8 +75,6 @@
   qr.innerHTML="";
   new QRCode(qr,{text:verify,width:260,height:260,correctLevel:QRCode.CorrectLevel.H});
   await new Promise(r=>setTimeout(r,250));
-  document.getElementById("loading").classList.add("hidden");
-  document.getElementById("cards").classList.remove("hidden");
   async function save(el,filename){
    await new Promise(r=>setTimeout(r,250));
    const canvas=await html2canvas(el,{scale:3,useCORS:true,allowTaint:false,backgroundColor:"#fff",imageTimeout:15000});
