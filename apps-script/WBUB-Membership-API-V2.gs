@@ -62,6 +62,7 @@ function doPost(e) {
 
     if (action === 'register') return wbubRegister_(p);
     if (action === 'youth_register') return wbubYouthRegister_(p);
+    if (action === 'youth_profile') return wbubYouthProfile_(String(p.youth_id || p.id || '').trim());
     if (action === 'razorpay_create_order') return wbubRazorpayCreateOrder_(p);
     if (action === 'razorpay_verify_payment') return wbubRazorpayVerifyPayment_(p);
 
