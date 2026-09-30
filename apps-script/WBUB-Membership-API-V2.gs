@@ -582,6 +582,8 @@ function wbubJson_(o) {
 function wbubPhotoArchiveFolder_() {
   var cfg=wbubProps_();
   if(cfg.photoFolderId) return DriveApp.getFolderById(cfg.photoFolderId);
+  // Main public Photo Archive folder supplied for the website.
+  return DriveApp.getFolderById('15wBDUmaWkjt_C-ixRDuD-Rq54cZ5NqE5');
   var folders=DriveApp.getFoldersByName('WBUB PHOTO ARCHIVE');
   if(folders.hasNext()) return folders.next();
   // Backward-compatible fallback for an older folder name.
