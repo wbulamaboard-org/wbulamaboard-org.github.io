@@ -60,9 +60,16 @@
   }
 
   async function init(){
-    let members=[]; try{members=await loadMembers();}catch(_){}
+    const root=document.getElementById("wazeenProfile");
+    if(!root) return;
+    let members=[];
+    try{
+      members=await loadMembers();
+    }catch(err){
+      root.innerHTML='<div class="profile-card modern-profile"><div class="profile-content"><h1 style="font-size:24px">প্রোফাইল লোড হচ্ছে না</h1><p style="color:#65766f;margin:12px 0">ডাটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।</p><a class="btn" href="wazeens.html">← ওয়েজিন ডিরেক্টরি</a></div></div>';
+      return;
+    }
     const home=document.getElementById("homeWazeens"); if(home) home.innerHTML=members.slice(0,6).map(card).join("")||'<div class="empty">ওয়েজিনদের তথ্য পাওয়া যায়নি।</div>';
-    const root=document.getElementById("wazeenProfile"); if(!root)return;
     const id=new URLSearchParams(location.search).get("id")||"", lower=id.toLowerCase();
     const legacyNames={"mehrab-uddin":"pirjada mehrabuddin siddique","yunus-ali":"md younus ali baidya","amanullah-aman":"maulana amanullah aman","jamat-ali":"maulana jamat ali","khairuzzaman":"maulana khairuzzaman"};
     let member=members.find(x=>String(x.member_id||"").toLowerCase()===lower);
