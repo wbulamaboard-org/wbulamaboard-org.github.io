@@ -47,7 +47,7 @@
       '<div class="profile-kicker"><span>'+esc(w.designation||"WAYEJIN • ULAMA BOARD")+'</span></div>'+
       '<h1>'+esc(name)+'</h1>'+
       (w.name_en&&w.name_en!==name?'<div class="profile-en">'+esc(w.name_en)+'</div>':"")+
-      (phone?'<div class="profile-phone">📱 '+esc(w.phone)+'</div>':"")+
+      (phone?'<div class="profile-phone">📱 '+esc(w.phone)+'</div><div class="contact-actions"><a class="contact-btn call" href="tel:+91'+phone+'">📞 ফোন করুন</a><a class="contact-btn whatsapp" href="https://wa.me/91'+phone+'" target="_blank" rel="noopener">💬 WhatsApp</a></div>':"")+
       '<div class="info-grid">'+
       '<div class="info-item"><span>সদস্য আইডি</span><strong>'+esc(w.member_id||"—")+'</strong></div>'+
       '<div class="info-item"><span>পদ</span><strong>'+esc(w.designation||"—")+'</strong></div>'+
