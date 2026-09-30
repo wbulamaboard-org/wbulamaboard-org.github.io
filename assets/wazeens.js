@@ -32,6 +32,12 @@
     ].map(([k,label])=>{const u=url(w[k]||w[k+"_url"]);return u?'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+label+'</a>':""}).filter(Boolean).join("");
     const yt=url(w.youtube||w.youtube_url);
     const fb=url(w.facebook||w.facebook_url);
+    const mediaSection=(social||yt||fb)?(
+      '<section class="profile-section"><div class="section-title"><span>◆</span><h2>সামাজিক যোগাযোগ ও মিডিয়া</h2></div>'+
+      (social?'<div class="social-grid">'+social+'</div>':"")+
+      ((yt||fb)?'<div class="media-search">'+(yt?'<a href="'+esc(yt)+'" target="_blank" rel="noopener">▶ YouTube ভিডিও</a>':"")+(fb?'<a href="'+esc(fb)+'" target="_blank" rel="noopener">● Facebook ভিডিও</a>':"")+'</div>':"")+
+      '</section>'
+    ):"";
 
     root.innerHTML =
       '<div class="profile-card modern-profile">'+
@@ -51,10 +57,7 @@
       '</div>'+
       (phone?'<div class="quick-actions"><a href="tel:+91'+phone+'">📞 কল করুন</a><a href="https://wa.me/91'+phone+'" target="_blank" rel="noopener">💬 WhatsApp</a></div>':"")+
       '<section class="profile-section"><div class="section-title"><span>◆</span><h2>পরিচিতি</h2></div><p>'+esc(w.bio||"WAYEJIN E FURFURA SHARIF-এর সঙ্গে যুক্ত ওয়েজিন।")+'</p></section>'+
-      '<section class="profile-section"><div class="section-title"><span>◆</span><h2>সামাজিক যোগাযোগ ও মিডিয়া</h2></div>'+
-      '<div class="social-grid">'+social+'</div>'+
-      ((yt||fb)?'<div class="media-search">'+(yt?'<a href="'+esc(yt)+'" target="_blank" rel="noopener">▶ YouTube ভিডিও</a>':"")+(fb?'<a href="'+esc(fb)+'" target="_blank" rel="noopener">● Facebook ভিডিও</a>':"")+'</div>':"")+'</section>'+
-      '<div class="profile-actions"><a class="btn" href="wazeens.html">← সব ওয়েজিন</a><a class="btn" href="verification.html?id='+encodeURIComponent(w.member_id||id)+'">✓ ID যাচাই</a><a class="btn" href="wazeen-car-board.html?id='+encodeURIComponent(w.member_id||id)+'">🚗 Car Board</a></div>'+
+      mediaSection+      '<div class="profile-actions"><a class="btn" href="wazeens.html">← সব ওয়েজিন</a><a class="btn" href="verification.html?id='+encodeURIComponent(w.member_id||id)+'">✓ ID যাচাই</a><a class="btn" href="wazeen-car-board.html?id='+encodeURIComponent(w.member_id||id)+'">🚗 Car Board</a></div>'+
       '<div class="download-actions"><a class="download-btn id" href="wazeen-id-card.html?id='+encodeURIComponent(w.member_id||id)+'">🪪 ID Card দেখুন / ডাউনলোড</a><a class="download-btn car" href="wazeen-car-board.html?id='+encodeURIComponent(w.member_id||id)+'">🚗 Car Board ডাউনলোড</a></div>'+
       '</div></div>';
 
