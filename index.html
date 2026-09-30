@@ -1120,7 +1120,7 @@ fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"})
   seen.add(key); return true;
  }).slice(0,8);
  if(items.length){
-  grid.innerHTML=items.map(p=>'<a class="home-gallery-item" href="gallery.html"><img loading="lazy" src="'+p.url+'" alt="'+(p.name||"Photo")+'"></a>').join("");
+  grid.innerHTML=items.map(p=>'<a class="home-gallery-item" href="gallery.html"><img loading="lazy" src="'+p.url+'" alt="'+(p.name||"Photo")+'" onerror="this.onerror=null;this.src=\''+(p.original||p.url)+'\'"></a>').join("");
   return;
  }
  throw new Error("no-drive-photos");
