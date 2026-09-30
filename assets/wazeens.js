@@ -6,7 +6,11 @@
       return /^https?:$/.test(u.protocol) ? u.href : "";
     } catch (_) { return ""; }
   };
-  const photoUrl = r => String(r?.photo_url || r?.photo || "").trim();
+  const photoUrl = r => {
+    const raw = String(r?.photo_url || r?.photo || "").trim();
+    if(!raw) return "";
+    return raw + (raw.includes("?") ? "&" : "?") + "v=20260930-2";
+  };
 
   async function loadMembers(){
     const res = await fetch("assets/master-member-database.json?v=20260928-10", {cache:"no-store"});
