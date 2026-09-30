@@ -1126,11 +1126,7 @@ fetch(API+"?album=all&v="+Date.now(),{cache:"no-store"})
 })
 .catch(()=>{
  const fallback=[
-  ["assets/FB_IMG_1789891917922.jpg","ওয়ায়েজিন এ ফুরফুরা শরীফ"],
   ["assets/FB_IMG_1789891992819.jpg","ওয়ায়েজিন এ ফুরফুরা শরীফ"],
-  ["assets/PIRJADA MEHRABUDDIN SIDDIQUE.jpg","পশ্চিমবঙ্গ উলামা বোর্ড"],
-  ["assets/controller_mehrab_uddin_siddiqui.jpg","উলামা বোর্ড"],
-  ["assets/about-board-speaker.jpg","পশ্চিমবঙ্গ উলামা বোর্ড"],
   ["assets/amanullah-aman-director.jpg","ওয়ায়েজিন এ ফুরফুরা শরীফ"]
  ];
  grid.innerHTML=fallback.map(p=>'<a class="home-gallery-item" href="gallery.html"><img loading="lazy" src="'+p[0]+'" alt="'+p[1]+'"></a>').join("");
