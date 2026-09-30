@@ -1017,6 +1017,39 @@ nav{gap:17px;font-size:11px}nav a{padding:35px 0 11px;border-bottom-width:2px}na
 </section>
 
 
+<section class="home-photo-showcase" aria-label="ফটো গ্যালারি">
+  <div class="wrap">
+    <a class="home-photo-card" href="gallery.html">
+      <img src="assets/FB_IMG_1789891917922.jpg" alt="ওয়েজিন এ ফুরফুরা শরীফ — ফটো গ্যালারি">
+      <div class="home-photo-overlay">
+        <span class="home-photo-kicker">PHOTO GALLERY</span>
+        <strong>📸 ফটো গ্যালারি</strong>
+        <small>আমাদের অনুষ্ঠান ও কার্যক্রমের ছবি দেখতে এখানে প্রবেশ করুন →</small>
+      </div>
+    </a>
+  </div>
+</section>
+<style id="home-photo-showcase-style">
+.home-photo-showcase{padding:12px 0 24px;background:#fff}
+.home-photo-card{position:relative;display:block;height:270px;border-radius:16px;overflow:hidden;background:#eef3f0;box-shadow:0 10px 28px #00000010;border:1px solid #e5e2dd}
+.home-photo-card img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 35%;transition:transform .45s ease}
+.home-photo-card:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,43,35,.82) 0%,rgba(4,43,35,.48) 43%,rgba(4,43,35,.08) 100%)}
+.home-photo-card:hover img{transform:scale(1.03)}
+.home-photo-overlay{position:absolute;z-index:2;left:28px;top:50%;transform:translateY(-50%);max-width:520px;color:#fff}
+.home-photo-kicker{display:inline-block;color:#e7c566;font-size:10px;font-weight:900;letter-spacing:1.8px;margin-bottom:8px}
+.home-photo-overlay strong{display:block;font-family:"Noto Serif Bengali","Noto Sans Bengali",Georgia,serif;font-size:31px;line-height:1.15}
+.home-photo-overlay small{display:block;margin-top:8px;color:#f0f5f2;font-size:12px;line-height:1.6}
+@media(max-width:600px){
+ .home-photo-showcase{padding:8px 0 18px}
+ .home-photo-card{height:190px;border-radius:13px}
+ .home-photo-card:after{background:linear-gradient(90deg,rgba(4,43,35,.84),rgba(4,43,35,.30))}
+ .home-photo-overlay{left:17px;right:14px;max-width:none}
+ .home-photo-kicker{font-size:8px;margin-bottom:5px}
+ .home-photo-overlay strong{font-size:23px}
+ .home-photo-overlay small{font-size:9px;margin-top:5px}
+}
+</style>
+
 <section class="home-quick-services" aria-label="সদস্য ও যুব সেবা">
   <div class="wrap">
     <div class="quick-services-head">
