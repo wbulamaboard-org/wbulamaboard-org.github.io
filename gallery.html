@@ -6,6 +6,8 @@
 <style>
 .gallery-page{padding:58px 0}.gallery-head{text-align:center;max-width:760px;margin:0 auto 28px}.gallery-head h1{margin-bottom:10px}.gallery-head p{color:#687871}.album-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.album{position:relative;display:block;min-height:210px;border-radius:18px;overflow:hidden;background:#07382c;color:#fff;box-shadow:0 12px 30px rgba(7,54,42,.12);text-decoration:none}.album img{width:100%;height:210px;object-fit:cover;display:block;opacity:.78;transition:.25s}.album:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.72))}.album:hover img{transform:scale(1.04);opacity:.9}.album-info{position:absolute;z-index:2;left:16px;right:16px;bottom:14px}.album-info strong{display:block;font-size:19px}.album-info small{display:block;margin-top:4px;opacity:.9}.archive-note{margin-top:24px;padding:18px 20px;border-radius:15px;background:#fff8df;border-left:5px solid #d2ad4a;color:#5e563e;line-height:1.7}.archive-link{margin-top:22px;text-align:center}.btn-gallery{display:inline-block;padding:12px 20px;border-radius:10px;background:#07513f;color:#fff;font-weight:900;text-decoration:none}
 @media(max-width:760px){.album-grid{grid-template-columns:1fr 1fr}.album,.album img{min-height:170px;height:170px}.album-info strong{font-size:15px}}@media(max-width:480px){.gallery-page{padding:42px 0}.album-grid{grid-template-columns:1fr}.album,.album img{height:190px}}
+</style><style>
+.gallery-live{margin-top:10px}.live-photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.live-photo{display:block;text-decoration:none;color:inherit;border-radius:14px;overflow:hidden;background:#fff;border:1px solid #e4e7e8}.live-photo img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}.live-photo span{display:block;padding:9px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}@media(max-width:700px){.live-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
 </style></head><body>
 <div class="top">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ • ঐক্য • শিক্ষা • সমাজ সংস্কার</div>
 <header><div class="wrap nav"><a class="brand" href="index.html">ওয়েজিন ফুরফুরা শরীফ <small>WAYEJIN E FURFURA SHARIF</small></a><button class="menu-btn" type="button" onclick="document.querySelector('nav').classList.toggle('open')">☰ মেনু</button><nav><a href="index.html">হোম</a><a href="about.html">পরিচিতি</a><a href="wazeens.html">ওয়েজিন</a><a href="gallery.html" aria-current="page">ফটো গ্যালারি</a><a href="news-events.html">অনুষ্ঠান</a><a href="contact.html">যোগাযোগ</a></nav></div></header>
@@ -21,4 +23,34 @@
 </div>
 <div class="archive-note"><strong>নতুন ছবি যোগ করার ব্যবস্থা:</strong> ভবিষ্যতে Admin Google Drive-এর নির্দিষ্ট Photo Archive ফোল্ডারে ছবি Upload করবেন। Website-এ হাজার হাজার ছবি একসাথে না এনে Album ও 20–30টি করে ছবি দেখানো হবে—তাই মোবাইলেও সাইট দ্রুত থাকবে।</div>
 <div class="archive-link"><a class="btn-gallery" href="photo-archive.html?album=all">📷 Photo Archive খুলুন →</a></div>
-</div></section></main><footer><div class="wrap"><b>WAYEJIN E FURFURA SHARIF</b><p>WEST BENGAL ULAMA BOARD</p><p>ঐক্য • শিক্ষা • সমাজ সংস্কার</p></div></footer><script src="assets/site.js" defer></script></body></html>
+</div></section></main><footer><div class="wrap"><b>WAYEJIN E FURFURA SHARIF</b><p>WEST BENGAL ULAMA BOARD</p><p>ঐক্য • শিক্ষা • সমাজ সংস্কার</p></div></footer><script src="assets/site.js" defer></script><script>
+(function(){
+  const API="https://script.google.com/macros/s/AKfycbzeuVRl-OYsiDU-Oc_YFDUKywTJ6bVTerzB0SvA0sjJO0iLpQ3XSyibbZ5pS1592hdHwA/exec";
+  const fallback="assets/help_home_collage-1.jpg";
+  const cards=[...document.querySelectorAll(".album")];
+  const albums=["all","conference","events","social","board","2026"];
+  const recent=document.createElement("section");
+  recent.className="gallery-live";
+  recent.innerHTML='<div class="gallery-head" style="margin-top:32px"><h2>সাম্প্রতিক ছবি</h2><p>Google Drive Photo Archive থেকে সরাসরি ছবি</p></div><div class="live-photo-grid"></div>';
+  const grid=recent.querySelector(".live-photo-grid");
+  document.querySelector(".archive-note")?.before(recent);
+  function load(album,index){
+    return fetch(API+"?album="+encodeURIComponent(album)+"&v="+Date.now(),{cache:"no-store"})
+      .then(r=>r.json()).then(d=>{
+        const files=Array.isArray(d.files)?d.files:[];
+        if(files[0]&&cards[index]){
+          const im=cards[index].querySelector("img");
+          if(im) im.src=files[0].url;
+        }
+        if(album==="all"){
+          files.slice(0,12).forEach(f=>{
+            const a=document.createElement("a"); a.className="live-photo"; a.href=f.original||f.url; a.target="_blank"; a.rel="noopener";
+            a.innerHTML='<img src="'+f.url+'" alt="'+(f.name||"ফটো")+'"><span>'+((f.name||"সাম্প্রতিক ছবি").replace(/</g,"&lt;"))+'</span>';
+            grid.appendChild(a);
+          });
+        }
+      }).catch(()=>{});
+  }
+  albums.forEach((a,i)=>load(a,i));
+})();
+</script></body></html>
