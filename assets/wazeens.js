@@ -1,7 +1,7 @@
 (() => {
   const esc = v => String(v ?? "").replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
   const safeUrl = v => { try { const u = new URL(String(v || "").trim()); return /^https?:$/.test(u.protocol) ? u.href : ""; } catch (_) { return ""; } };
-  const photoUrl = r => { const raw = String(r?.photo_url || r?.photo || "").trim(); return raw ? raw + (raw.includes("?") ? "&" : "?") + "v=20260930-6" : ""; };
+  const photoUrl = r => { const raw = String(r?.photo_url || r?.photo || "").trim(); return raw ? raw + (raw.includes("?") ? "&" : "?") + "v=20260930-7" : ""; };
 
   async function loadMembers(){
     const res = await fetch("assets/master-member-database.json?v=20260930-14",{cache:"no-store"});
@@ -55,6 +55,7 @@
       '<div class="media-search"><a href="'+esc(youtube)+'" target="_blank" rel="noopener">▶ YouTube ভিডিও</a><a href="'+esc(facebook)+'" target="_blank" rel="noopener">● Facebook ভিডিও</a></div>'+
       (videos?'<div class="video-links">'+videos+'</div>':"")+'</section>'+
       '<div class="profile-actions"><a class="btn" href="wazeens.html">← সব ওয়েজিন</a><a class="btn" href="verification.html?id='+encodeURIComponent(w.member_id||id)+'">✓ ID যাচাই</a><a class="btn" href="wazeen-car-board.html?id='+encodeURIComponent(w.member_id||id)+'">🚗 Car Board</a><a class="btn gold" href="wazeen-id-card.html?id='+encodeURIComponent(w.member_id||id)+'">🪪 ID Card</a></div>'+
+      '<a class="car-download" href="wazeen-car-board.html?id='+encodeURIComponent(w.member_id||id)+'">⬇️ Car Board ডাউনলোড</a>'+
       '</div></div>';
   }
 
@@ -69,6 +70,8 @@
     if(!member){root.innerHTML='<div class="profile-card modern-profile"><div class="profile-content"><h1>ওয়েজিনের প্রোফাইল পাওয়া যায়নি</h1><a class="btn" href="wazeens.html">← ওয়েজিন ডিরেক্টরি</a></div></div>';return;}
     document.title=(member.name||"Wazeen")+" | WAYEJIN E FURFURA SHARIF";
     renderProfile(root,member,id);
+    root.querySelectorAll("*").forEach(el=>{ if(el.textContent.trim()==")">") el.remove(); });
+    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT); const bad=[]; while(walker.nextNode()){ const t=walker.currentNode; if(t.nodeValue.trim()==")">" || t.nodeValue.trim()==="ও") bad.push(t); } bad.forEach(t=>t.remove());
   }
   init();
 })();
