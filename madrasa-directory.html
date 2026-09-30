@@ -7,36 +7,23 @@
 <meta name="description" content="ওলামা বোর্ড সংযুক্ত মাদ্রাসার ডিজিটাল ডিরেক্টরি।">
 <link rel="stylesheet" href="assets/site.css">
 <style>
-:root{--green:#07513f;--gold:#a17e30}
-.madrasa-page{padding:42px 0 70px;background:linear-gradient(180deg,#f7faf8,#fff 45%)}
-.hero{max-width:900px;margin:auto;text-align:center}
-.kicker{display:inline-block;color:var(--gold);font-weight:900;font-size:11px;letter-spacing:1.8px}
-.hero h1{margin:8px 0 4px;color:#07382c;font-size:clamp(27px,5vw,44px);line-height:1.2}
-.hero h2{margin:0;color:var(--gold);font-size:clamp(16px,3vw,23px)}
-.hero p{max-width:700px;margin:12px auto;color:#687871;line-height:1.8;font-size:13px}
-.tagline{display:inline-block;margin-top:8px;padding:9px 15px;border-radius:999px;background:#fff8e8;border:1px solid #ead9a9;color:#76591e;font-weight:800;font-size:12px}
-.search{max-width:800px;margin:26px auto 22px;background:#fff;border:1px solid #d6e3dc;border-radius:16px;box-shadow:0 12px 30px rgba(7,54,42,.08);display:flex;align-items:center;overflow:hidden}
-.search span{padding-left:16px;font-size:21px;color:var(--gold)}
-.search input{flex:1;border:0;outline:0;padding:15px 12px;font-size:14px;background:transparent}
-.stats{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:0 auto 26px}
-.stats span{background:#fff;border:1px solid #e1e9e4;border-radius:999px;padding:7px 12px;font-size:11px;color:#60766d}
-.stats b{color:var(--gold)}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.card{background:#fff;border:1px solid #dce7e1;border-radius:18px;padding:18px;box-shadow:0 8px 24px rgba(7,54,42,.07)}
-.card h3{margin:0;color:#07382c;font-size:16px;line-height:1.45}
-.card .id{display:inline-block;margin:0 0 9px;padding:4px 9px;border-radius:999px;background:#f8f1df;border:1px solid #ead9a9;color:#8b6925;font-size:10px;font-weight:900}
-.card p{margin:7px 0;color:#6d7c75;font-size:11px;line-height:1.55}
-.badge{display:inline-block;margin-top:7px;color:#07513f;background:#edf6f1;border-radius:999px;padding:5px 9px;font-size:9px;font-weight:900}
-.actions{display:flex;gap:7px;margin-top:13px}
-.actions a{flex:1;text-align:center;text-decoration:none;border-radius:9px;padding:9px 5px;font-size:10px;font-weight:900;background:#07513f;color:#fff}
-.actions a.secondary{background:#f4f0e5;color:#76591e}
-.empty{grid-column:1/-1;text-align:center;padding:34px;background:#fff;border:1px dashed #d2dfd8;border-radius:16px;color:#718078;font-size:13px}
-.join{max-width:850px;margin:30px auto 0;background:linear-gradient(135deg,#07513f,#0a6650);color:#fff;border-radius:20px;padding:26px;text-align:center;box-shadow:0 15px 35px rgba(7,81,63,.16)}
-.join h2{margin:0 0 8px;font-size:22px}.join p{margin:0 auto 15px;max-width:650px;font-size:12px;line-height:1.8;opacity:.92}
-.join a{display:inline-block;background:#fff;color:#07513f;text-decoration:none;border-radius:10px;padding:10px 18px;font-size:11px;font-weight:900}
-.note{text-align:center;color:#89948f;font-size:9px;margin-top:18px}
+:root{--green:#07513f;--green2:#0b7a60;--red:#d83435;--gold:#d8ae42;--cream:#fff8df;--ink:#143e35}
+body{background:#f6faf8}
+.madrasa-page{padding:26px 0 60px;background:linear-gradient(180deg,#f2faf7 0%,#fff 48%,#fff8ef 100%)}
+.hero{position:relative;max-width:1000px;margin:auto;text-align:center;overflow:hidden;padding:34px 22px 30px;border-radius:24px;background:linear-gradient(135deg,#063d31,#08775b 58%,#0b936d);color:#fff;box-shadow:0 16px 38px rgba(5,65,50,.18)}
+.hero:before,.hero:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.13);border-radius:50%;pointer-events:none}.hero:before{width:360px;height:360px;left:-180px;bottom:-250px}.hero:after{width:250px;height:250px;right:-100px;top:-140px}
+.kicker{position:relative;z-index:1;display:inline-block;color:#f5d66d;font-weight:900;font-size:11px;letter-spacing:2px}
+.hero h1{position:relative;z-index:1;margin:9px 0 5px;color:#fff;font-size:clamp(25px,5vw,42px);line-height:1.2;text-shadow:0 2px 8px #0004}
+.hero h2{position:relative;z-index:1;margin:0;color:#f7d76b;font-size:clamp(17px,3vw,24px)}
+.hero p{position:relative;z-index:1;max-width:760px;margin:13px auto;color:#eaf7f2;line-height:1.85;font-size:13px}
+.tagline{position:relative;z-index:1;display:inline-block;margin-top:6px;padding:10px 18px;border-radius:999px;background:#fff8df;color:#76591e;border:1px solid #ecd47d;font-weight:900;font-size:12px;box-shadow:0 7px 18px #0002}
+.stats{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px auto 18px}.stats span{background:#fff;border:1px solid #d9e7e1;border-radius:999px;padding:8px 13px;font-size:10px;color:#567169;box-shadow:0 3px 10px #00000008}.stats b{color:#c18d19}
+.search{max-width:850px;margin:0 auto 20px;background:#fff;border:2px solid #d8e8e1;border-radius:15px;box-shadow:0 10px 26px #07513f12;display:flex;align-items:center;overflow:hidden}.search span{padding-left:15px;font-size:23px;color:#c18d19}.search input{flex:1;border:0;outline:0;padding:15px 12px;font-size:14px;background:transparent;color:#173f36}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{position:relative;background:#fff;border:1px solid #dbe8e2;border-radius:17px;padding:17px;box-shadow:0 9px 24px #07513f0d;overflow:hidden}.card:before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:linear-gradient(90deg,#08775b,#d8ae42,#d83435)}.card h3{margin:0;color:#12483c;font-size:16px;line-height:1.45}.card .id{display:inline-block;margin:0 0 9px;padding:4px 9px;border-radius:999px;background:#fff7dc;border:1px solid #ead38a;color:#8a681d;font-size:10px;font-weight:900}.card p{margin:7px 0;color:#64766f;font-size:11px;line-height:1.55}.badge{display:inline-block;margin-top:7px;color:#07513f;background:#e8f7ef;border:1px solid #bfe4d1;border-radius:999px;padding:5px 9px;font-size:9px;font-weight:900}.actions{display:flex;gap:7px;margin-top:13px}.actions a{flex:1;text-align:center;text-decoration:none;border-radius:9px;padding:9px 5px;font-size:10px;font-weight:900;background:#07513f;color:#fff}.actions a.secondary{background:#fff4d6;color:#76591e;border:1px solid #ead28b}
+.empty{grid-column:1/-1;text-align:center;padding:30px 18px;background:#fff;border:1px dashed #cbdcd4;border-radius:16px;color:#718078;font-size:13px}
+.join{max-width:850px;margin:22px auto 0;background:linear-gradient(135deg,#08775b,#063d31);color:#fff;border-radius:20px;padding:24px;text-align:center;box-shadow:0 15px 35px #07513f20}.join h2{margin:0 0 7px;font-size:21px}.join p{margin:0 auto 14px;max-width:650px;font-size:11px;line-height:1.8;color:#e7f4ef}.join a{display:inline-block;background:#d83435;color:#fff;text-decoration:none;border-radius:10px;padding:11px 19px;font-size:11px;font-weight:900;box-shadow:0 7px 16px #0002}.note{text-align:center;color:#89948f;font-size:9px;margin-top:16px}
 @media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.madrasa-page{padding:32px 0 55px}.grid{grid-template-columns:1fr}.card{padding:15px}}
+@media(max-width:560px){.madrasa-page{padding:18px 0 45px}.hero{border-radius:18px;padding:27px 15px 24px}.hero h1{font-size:27px}.hero h2{font-size:18px}.hero p{font-size:11px;line-height:1.8}.tagline{font-size:10px;padding:9px 13px}.stats{margin:10px auto 14px}.stats span{font-size:9px;padding:7px 10px}.search{margin-bottom:16px;border-radius:13px}.search input{font-size:12px;padding:13px 9px}.grid{grid-template-columns:1fr;gap:11px}.card{padding:15px}.join{margin-top:17px;padding:20px 15px;border-radius:16px}}
 </style>
 </head>
 <body>
