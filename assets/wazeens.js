@@ -70,8 +70,6 @@
     if(!member){root.innerHTML='<div class="profile-card modern-profile"><div class="profile-content"><h1>ওয়েজিনের প্রোফাইল পাওয়া যায়নি</h1><a class="btn" href="wazeens.html">← ওয়েজিন ডিরেক্টরি</a></div></div>';return;}
     document.title=(member.name||"Wazeen")+" | WAYEJIN E FURFURA SHARIF";
     renderProfile(root,member,id);
-    root.querySelectorAll("*").forEach(el=>{ if(el.textContent.trim()==")">") el.remove(); });
-    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT); const bad=[]; while(walker.nextNode()){ const t=walker.currentNode; if(t.nodeValue.trim()==")">" || t.nodeValue.trim()==="ও") bad.push(t); } bad.forEach(t=>t.remove());
   }
   init();
 })();
