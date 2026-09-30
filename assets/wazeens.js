@@ -16,7 +16,7 @@
 
   function directoryCard(r){
     const p=photo(r);
-    const img=p?'<img src="'+esc(p)+'" alt="'+esc(r.name||"Wazeen")+'" loading="lazy" onerror="this.style.visibility='hidden'">':'<div class="wazeen-card-photo no-photo">و</div>';
+    const img=p?'<img src="'+esc(p)+'" alt="'+esc(r.name||"Wazeen")+'" loading="lazy" onerror="this.style.visibility=&quot;hidden&quot;">':'<div class="wazeen-card-photo no-photo">و</div>';
     return '<a class="wazeen-folder" href="wazeen-profile.html?id='+encodeURIComponent(r.member_id||"")+'"><span class="folder-tab">'+esc(r.member_id||"")+'</span>'+img+'<h3>'+esc(String(r.name||"—").toUpperCase())+'</h3><p>'+esc(r.designation||"WAYEJIN")+'</p><span class="open">প্রোফাইল দেখুন →</span></a>';
   }
 
