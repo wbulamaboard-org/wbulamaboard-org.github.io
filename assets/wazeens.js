@@ -22,7 +22,7 @@
   function card(r){
     const src = photoUrl(r);
     const img = src
-      ? '<img src="'+esc(src)+'" alt="'+esc(r.name || "Wazeen")+'" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';this.insertAdjacentHTML(\'afterend\',\'<div class=\"no-photo\">و</div>\')">'
+      ? '<img src="'+esc(src)+'" alt="'+esc(r.name || "Wazeen")+'" loading="lazy" onerror="this.onerror=null;this.remove()"no-photo\">و</div>\')">'
       : '<div class="no-photo">و</div>';
     const district = String(r.district || "").trim();
     const area = String(r.area || r.block || r.address || "").trim();
@@ -56,7 +56,7 @@
 
     root.innerHTML =
       '<div class="profile-card"><div class="profile-cover"></div><div class="profile-body">'+
-      (image ? '<img class="profile-photo" src="'+esc(image)+'" alt="'+esc(name)+'" onerror="this.onerror=null;this.style.display=\'none\';this.insertAdjacentHTML(\'afterend\',\'<div class=\"profile-photo no-photo\">و</div>\')">' : '<div class="profile-photo no-photo">و</div>')+
+      (image ? '<img class="profile-photo" src="'+esc(image)+'" alt="'+esc(name)+'" onerror="this.onerror=null;this.remove()"profile-photo no-photo\">و</div>\')">' : '<div class="profile-photo no-photo">و</div>')+
       '<div class="profile-role">'+esc(w.designation || "WAYEJIN • ULAMA BOARD")+'</div>'+
       '<h1>'+esc(name)+'</h1>'+
       (w.name_en && w.name_en !== name ? '<div class="profile-en">'+esc(w.name_en)+'</div>' : '')+
