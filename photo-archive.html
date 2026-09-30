@@ -25,7 +25,7 @@ function render(){
  shown=Math.min(Math.max(shown,STEP),filtered.length);
  if(!filtered.length){grid.innerHTML="";more.innerHTML="";status.style.display="block";status.innerHTML="🔎 কোনো ছবি পাওয়া যায়নি।";count.textContent="০টি ছবি";return;}
  status.style.display="none";
- grid.innerHTML=filtered.slice(0,shown).map(p=>'<a class="photo" href="'+(p.original||p.url)+'" target="_blank" rel="noopener"><img loading="lazy" src="'+p.url+'" alt="'+String(p.name||"Photo").replace(/"/g,"&quot;")+'"></a>').join("");
+ grid.innerHTML=filtered.slice(0,shown).map(p=>'<a class="photo" href="'+(p.original||p.url)+'" target="_blank" rel="noopener"><img loading="lazy" src="'+p.url+'" alt="'+String(p.name||"Photo").replace(/"/g,"&quot;")+'" onerror="this.onerror=null;this.src=\''+(p.original||p.url)+'\'"></a>').join("");
  more.innerHTML=shown<filtered.length?'<button type="button" onclick="shown=Math.min(shown+STEP,filtered.length);render()">আরও ছবি দেখুন →</button>':"";
  count.textContent=filtered.length+"টি ছবি";
 }
