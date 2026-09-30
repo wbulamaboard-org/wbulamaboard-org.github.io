@@ -856,23 +856,10 @@ nav{gap:17px;font-size:11px}nav a{padding:35px 0 11px;border-bottom-width:2px}na
 }
 </style>
 <style id="madrasa-home-promo-style">
-.home-madrasa-promo{padding:18px 0 38px;background:linear-gradient(180deg,#fff 0%,#f8fbf9 100%)}
-.madrasa-promo-card{position:relative;overflow:hidden;border-radius:18px;background:#fff;border:1px solid #e6e1d9;box-shadow:0 12px 32px #00000010}
-.madrasa-promo-card img{display:block;width:100%;height:270px;max-height:270px;object-fit:cover;object-position:center}
-.madrasa-promo-content{position:absolute;left:0;right:0;bottom:0;padding:16px 20px;background:linear-gradient(180deg,transparent,rgba(3,42,32,.94) 35%);color:#fff;display:flex;align-items:flex-end;justify-content:space-between;gap:14px}
-.madrasa-promo-content h2{margin:0 0 4px;font-family:Georgia,"Noto Sans Bengali",serif;font-size:clamp(20px,2.5vw,28px)}
-.madrasa-promo-content p{margin:0;color:#e5f1ed;font-size:11px;line-height:1.5}
-.madrasa-promo-btn{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;padding:10px 16px;border-radius:9px;background:#d9342b;color:#fff;font-weight:900;font-size:12px;box-shadow:0 7px 18px #0005}
-.madrasa-promo-btn:hover{background:#b52d29}
-@media(max-width:600px){
- .home-madrasa-promo{padding:10px 0 28px}
- .madrasa-promo-card{border-radius:14px}
- .madrasa-promo-card img{height:180px;min-height:180px;max-height:180px;object-fit:cover}
- .madrasa-promo-content{position:relative;padding:14px;background:linear-gradient(135deg,#063f31,#087b5d);display:block}
- .madrasa-promo-content h2{font-size:20px}
- .madrasa-promo-content p{font-size:10px;margin-bottom:10px}
- .madrasa-promo-btn{width:100%;box-sizing:border-box;font-size:12px}
-}
+.home-madrasa-promo{padding:10px 0 22px;background:#fff}
+.madrasa-promo-card{display:block;max-width:100%;overflow:hidden;border-radius:18px;background:#fff;border:1px solid #e6e1d9;box-shadow:0 10px 28px #00000010}
+.madrasa-promo-content h2{font-weight:800}.madrasa-promo-card:hover{transform:translateY(-1px)}
+@media(max-width:600px){.home-madrasa-promo{padding:8px 0 18px}.madrasa-promo-card{border-radius:15px}.madrasa-promo-content{padding:18px 15px 19px!important}.madrasa-promo-content h2{font-size:21px!important}.madrasa-promo-content p{font-size:10px!important;margin-bottom:14px!important}.madrasa-promo-btn{font-size:12px!important;padding:11px 14px!important}}
 </style></head>
 <body>
 <div class="topbar" style="display:none"></div>
@@ -1088,13 +1075,13 @@ nav{gap:17px;font-size:11px}nav a{padding:35px 0 11px;border-bottom-width:2px}na
 }
 </style>
 <section class="home-madrasa-promo"><div class="wrap">
-  <div class="madrasa-promo-card">
-    <img src="assets/madrasa-home-banner.svg?v=20261001-1" alt="মাদ্রাসা সংযুক্তি ও শিক্ষা সেবা">
-    <div class="madrasa-promo-content">
-      <div><h2>মাদ্রাসা সংযুক্তি ও শিক্ষা সেবা</h2><p>ওলামা বোর্ড সংযুক্ত মাদ্রাসাগুলোর জন্য ডিরেক্টরি, তথ্য সমন্বয় ও সাংগঠনিক সেবা।</p></div>
-      <a class="madrasa-promo-btn" href="madrasa-directory.html">🕌 মাদ্রাসা ডিরেক্টরি দেখুন</a>
+  <a class="madrasa-promo-card" href="madrasa-directory.html" aria-label="মাদ্রাসা ডিরেক্টরি দেখুন">
+    <div class="madrasa-promo-content" style="position:relative;background:linear-gradient(135deg,#063f31,#087b5d);padding:22px 20px 24px;color:#fff">
+      <h2 style="margin:0 0 8px;font-family:Georgia,"Noto Sans Bengali",serif;font-size:clamp(22px,4vw,34px);line-height:1.25">মাদ্রাসা সংযুক্তি ও শিক্ষা সেবা</h2>
+      <p style="margin:0 0 18px;color:#e5f1ed;font-size:12px;line-height:1.6">ওলামা বোর্ড সংযুক্ত মাদ্রাসাগুলোর জন্য ডিরেক্টরি, তথ্য সমন্বয় ও সাংগঠনিক সেবা।</p>
+      <span class="madrasa-promo-btn" style="display:flex;width:100%;box-sizing:border-box;align-items:center;justify-content:center;padding:12px 16px;border-radius:10px;background:#d9342b;color:#fff;font-weight:900;font-size:13px">🕌 মাদ্রাসা ডিরেক্টরি দেখুন</span>
     </div>
-  </div>
+  </a>
 </div></section><section class="leadership"><div class="wrap"><h2 class="section-title">নেতৃত্ব</h2><div class="lead-grid">
 <div class="leader"><img src="assets/FB_IMG_1789891917922.jpg" alt="Controller"><h3>Pirjada Mehrab Uddin Siddiqui Al Quraish</h3><p>কন্ট্রোলার • উলামা বোর্ড</p></div>
 <div class="leader"><img src="assets/file_00000000df888211b75f11be6eacb18a.png" alt="President"><h3>Md Younus Ali Baidya</h3><p>সভাপতি • উলামা বোর্ড</p></div>
