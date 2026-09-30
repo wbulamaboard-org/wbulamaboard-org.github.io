@@ -9,7 +9,7 @@
   const photoUrl = r => {
     const raw = String(r?.photo_url || r?.photo || "").trim();
     if(!raw) return "";
-    return raw + (raw.includes("?") ? "&" : "?") + "v=20260930-2";
+    return raw + (raw.includes("?") ? "&" : "?") + "v=20260930-4";
   };
 
   async function loadMembers(){
