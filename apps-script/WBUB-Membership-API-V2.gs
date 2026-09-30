@@ -609,20 +609,52 @@ function wbubPhotoAlbumFolder_(root,album) {
   return root;
 }
 
+function wbubCollectPhotoFiles_(folder, files, seenFolders) {
+  var folderId=folder.getId();
+  if(seenFolders[folderId]) return;
+  seenFolders[folderId]=true;
+
+  var it=folder.getFiles();
+  while(it.hasNext()){
+    var file=it.next(), mime=String(file.getMimeType()||'').toLowerCase();
+    if(mime.indexOf('image/')!==0) continue;
+    var id=file.getId();
+    // Gallery images should be viewable without a Google login.
+    try { file.setSharing(DriveApp.Access.ANYONE_WITH_LINK,DriveApp.Permission.VIEW); } catch(_){}
+    files.push({
+      id:id,
+      name:file.getName(),
+      url:'https://drive.google.com/thumbnail?id='+encodeURIComponent(id)+'&sz=w1600',
+      original:'https://drive.google.com/file/d/'+encodeURIComponent(id)+'/view',
+      modified:file.getLastUpdated().getTime()
+    });
+  }
+
+  // Also include images inside nested subfolders.
+  var dirs=folder.getFolders();
+  while(dirs.hasNext()) wbubCollectPhotoFiles_(dirs.next(),files,seenFolders);
+}
+
 function wbubPhotoArchive_(album) {
   try {
-    var root=wbubPhotoArchiveFolder_(), folder=wbubPhotoAlbumFolder_(root,album), it=folder.getFiles(), files=[];
-    while(it.hasNext()){
-      var file=it.next(), mime=String(file.getMimeType()||'').toLowerCase();
-      if(mime.indexOf('image/')!==0) continue;
-      var id=file.getId();
-      // Gallery images must be viewable without a Google login.
-      try { file.setSharing(DriveApp.Access.ANYONE_WITH_LINK,DriveApp.Permission.VIEW); } catch(_){}
-      var url='https://drive.google.com/thumbnail?id='+encodeURIComponent(id)+'&sz=w1600';
-      files.push({id:id,name:file.getName(),url:url,original:'https://drive.google.com/file/d/'+encodeURIComponent(id)+'/view',modified:file.getLastUpdated().getTime()});
-    }
-    files.sort(function(a,b){return b.modified-a.modified;});
-    return wbubJson_({ok:true,album:album||'all',count:files.length,files:files});
+    var root=wbubPhotoArchiveFolder_();
+    var folder=wbubPhotoAlbumFolder_(root,album);
+    var files=[];
+    wbubCollectPhotoFiles_(folder,files,{});
+
+    // Prevent duplicate Drive entries from appearing in the gallery.
+    var seen={}, unique=[];
+    files.forEach(function(f){
+      if(!seen[f.id]) { seen[f.id]=true; unique.push(f); }
+    });
+    unique.sort(function(a,b){return b.modified-a.modified;});
+
+    return wbubJson_({
+      ok:true,
+      album:album||'all',
+      count:unique.length,
+      files:unique
+    });
   } catch(e) {
     return wbubJson_({ok:false,error:String(e.message||e),files:[]});
   }
