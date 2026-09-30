@@ -580,16 +580,9 @@ function wbubJson_(o) {
 
 
 function wbubPhotoArchiveFolder_() {
-  var cfg=wbubProps_();
-  if(cfg.photoFolderId) return DriveApp.getFolderById(cfg.photoFolderId);
-  // Main public Photo Archive folder supplied for the website.
+  // The website Photo Archive uses this exact Google Drive folder.
+  // Do not allow an old PHOTO_FOLDER_ID property to override it.
   return DriveApp.getFolderById('15wBDUmaWkjt_C-ixRDuD-Rq54cZ5NqE5');
-  var folders=DriveApp.getFoldersByName('WBUB PHOTO ARCHIVE');
-  if(folders.hasNext()) return folders.next();
-  // Backward-compatible fallback for an older folder name.
-  folders=DriveApp.getFoldersByName('WBUB PHOTO ARCHIVE');
-  if(folders.hasNext()) return folders.next();
-  throw new Error('PHOTO_ARCHIVE_FOLDER_NOT_FOUND');
 }
 
 function wbubPhotoAlbumFolder_(root,album) {
