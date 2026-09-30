@@ -54,7 +54,7 @@
       '<div class="social-grid">'+(social||'<span class="empty-social">সামাজিক লিংক এখনো যোগ করা হয়নি</span>')+'</div>'+
       '<div class="media-search"><a href="'+esc(youtube)+'" target="_blank" rel="noopener">▶ YouTube ভিডিও</a><a href="'+esc(facebook)+'" target="_blank" rel="noopener">● Facebook ভিডিও</a></div>'+
       (videos?'<div class="video-links">'+videos+'</div>':"")+'</section>'+
-      '<div class="profile-actions"><a class="btn" href="wazeens.html">← সব ওয়েজিন</a><a class="btn" href="verification.html?id='+encodeURIComponent(w.member_id||id)+'">✓ ID যাচাই</a><a class="btn gold" href="wazeen-id-card.html?id='+encodeURIComponent(w.member_id||id)+'">🪪 ID Card</a></div>'+
+      '<div class="profile-actions"><a class="btn" href="wazeens.html">← সব ওয়েজিন</a><a class="btn" href="verification.html?id='+encodeURIComponent(w.member_id||id)+'">✓ ID যাচাই</a><a class="btn" href="wazeen-car-board.html?id='+encodeURIComponent(w.member_id||id)+'">🚗 Car Board</a><a class="btn gold" href="wazeen-id-card.html?id='+encodeURIComponent(w.member_id||id)+'">🪪 ID Card</a></div>'+
       '</div></div>';
   }
 
