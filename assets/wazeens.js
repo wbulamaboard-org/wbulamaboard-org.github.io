@@ -4,7 +4,7 @@
   const url = v => { try { const u=new URL(String(v||"").trim(),location.href); return /^https?:$/.test(u.protocol)?u.href:""; } catch(e){ return ""; } };
   const photo = r => {
     const p=String(r?.photo_url||r?.photo||"").trim();
-    return p ? p + (p.includes("?")?"&":"?") + "v=20260930-9" : "";
+    return p ? p + (p.includes("?")?"&":"?") + "v=20260930-17" : "";
   };
 
   async function members(){
@@ -30,15 +30,15 @@
     const social=[
       ["facebook","🔵 Facebook"],["youtube","▶️ YouTube"],["instagram","🟣 Instagram"],["website","🌐 Website"]
     ].map(([k,label])=>{const u=url(w[k]||w[k+"_url"]);return u?'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+label+'</a>':""}).filter(Boolean).join("");
-    const yt=url(w.youtube||w.youtube_url)||("https://www.youtube.com/results?search_query="+encodeURIComponent(name));
-    const fb=url(w.facebook||w.facebook_url)||("https://www.facebook.com/search/videos/?q="+encodeURIComponent(name));
+    const yt=url(w.youtube||w.youtube_url);
+    const fb=url(w.facebook||w.facebook_url);
 
     root.innerHTML =
       '<div class="profile-card modern-profile">'+
       '<div class="profile-hero"><div class="hero-pattern"></div><div class="profile-badge">WAYEJIN</div></div>'+
       '<div class="profile-content">'+
       '<div class="photo-wrap">'+(p?'<img class="profile-photo" src="'+esc(p)+'" alt="'+esc(name)+'">':'<div class="profile-photo no-photo">و</div>')+'</div>'+
-      '<div class="profile-kicker">'+esc(w.designation||"WAYEJIN • ULAMA BOARD")+'</div>'+
+      '<div class="profile-kicker"><span>'+esc(w.designation||"WAYEJIN • ULAMA BOARD")+'</span></div>'+
       '<h1>'+esc(name)+'</h1>'+
       (w.name_en&&w.name_en!==name?'<div class="profile-en">'+esc(w.name_en)+'</div>':"")+
       (phone?'<div class="profile-phone">📱 '+esc(w.phone)+'</div>':"")+
@@ -52,10 +52,10 @@
       (phone?'<div class="quick-actions"><a href="tel:+91'+phone+'">📞 কল করুন</a><a href="https://wa.me/91'+phone+'" target="_blank" rel="noopener">💬 WhatsApp</a></div>':"")+
       '<section class="profile-section"><div class="section-title"><span>◆</span><h2>পরিচিতি</h2></div><p>'+esc(w.bio||"WAYEJIN E FURFURA SHARIF-এর সঙ্গে যুক্ত ওয়েজিন।")+'</p></section>'+
       '<section class="profile-section"><div class="section-title"><span>◆</span><h2>সামাজিক যোগাযোগ ও মিডিয়া</h2></div>'+
-      '<div class="social-grid">'+(social||'<span class="empty-social">সামাজিক লিংক এখনো যোগ করা হয়নি</span>')+'</div>'+
-      '<div class="media-search"><a href="'+esc(yt)+'" target="_blank" rel="noopener">▶ YouTube ভিডিও</a><a href="'+esc(fb)+'" target="_blank" rel="noopener">● Facebook ভিডিও</a></div></section>'+
-      '<div class="profile-actions"><a class="btn" href="wazeens.html">← সব ওয়েজিন</a><a class="btn" href="verification.html?id='+encodeURIComponent(w.member_id||id)+'">✓ ID যাচাই</a><a class="btn" href="wazeen-car-board.html?id='+encodeURIComponent(w.member_id||id)+'">🚗 Car Board</a><a class="btn gold" href="wazeen-id-card.html?id='+encodeURIComponent(w.member_id||id)+'">🪪 ID Card</a></div>'+
-      '<a class="car-download" href="wazeen-car-board.html?id='+encodeURIComponent(w.member_id||id)+'">⬇️ Car Board ডাউনলোড</a>'+
+      '<div class="social-grid">'+social+'</div>'+
+      ((yt||fb)?'<div class="media-search">'+(yt?'<a href="'+esc(yt)+'" target="_blank" rel="noopener">▶ YouTube ভিডিও</a>':"")+(fb?'<a href="'+esc(fb)+'" target="_blank" rel="noopener">● Facebook ভিডিও</a>':"")+'</div>':"")+'</section>'+
+      '<div class="profile-actions"><a class="btn" href="wazeens.html">← সব ওয়েজিন</a><a class="btn" href="verification.html?id='+encodeURIComponent(w.member_id||id)+'">✓ ID যাচাই</a><a class="btn" href="wazeen-car-board.html?id='+encodeURIComponent(w.member_id||id)+'">🚗 Car Board</a></div>'+
+      '<div class="download-actions"><a class="download-btn id" href="wazeen-id-card.html?id='+encodeURIComponent(w.member_id||id)+'">🪪 ID Card দেখুন / ডাউনলোড</a><a class="download-btn car" href="wazeen-car-board.html?id='+encodeURIComponent(w.member_id||id)+'">🚗 Car Board ডাউনলোড</a></div>'+
       '</div></div>';
 
     const im=root.querySelector(".profile-photo");
