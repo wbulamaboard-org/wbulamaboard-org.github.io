@@ -24,6 +24,11 @@ body{background:#f6faf8}
 .join{max-width:850px;margin:22px auto 0;background:linear-gradient(135deg,#08775b,#063d31);color:#fff;border-radius:20px;padding:24px;text-align:center;box-shadow:0 15px 35px #07513f20}.join h2{margin:0 0 7px;font-size:21px}.join p{margin:0 auto 14px;max-width:650px;font-size:11px;line-height:1.8;color:#e7f4ef}.join a{display:inline-block;background:#d83435;color:#fff;text-decoration:none;border-radius:10px;padding:11px 19px;font-size:11px;font-weight:900;box-shadow:0 7px 16px #0002}.note{text-align:center;color:#89948f;font-size:9px;margin-top:16px}
 @media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.madrasa-page{padding:18px 0 45px}.hero{border-radius:18px;padding:27px 15px 24px}.hero h1{font-size:27px}.hero h2{font-size:18px}.hero p{font-size:11px;line-height:1.8}.tagline{font-size:10px;padding:9px 13px}.stats{margin:10px auto 14px}.stats span{font-size:9px;padding:7px 10px}.search{margin-bottom:16px;border-radius:13px}.search input{font-size:12px;padding:13px 9px}.grid{grid-template-columns:1fr;gap:11px}.card{padding:15px}.join{margin-top:17px;padding:20px 15px;border-radius:16px}}
+
+.madrasa-gallery{max-width:1000px;margin:0 auto 18px;background:#fff;border:1px solid #dce9e3;border-radius:18px;padding:12px;box-shadow:0 8px 22px rgba(7,54,42,.07)}
+.gallery-title{display:flex;align-items:center;gap:10px;padding:4px 5px 11px;color:#07513f}.gallery-title>span{width:38px;height:38px;border-radius:10px;background:#fff4d5;display:grid;place-items:center;font-size:20px}.gallery-title strong{display:block;font-size:15px}.gallery-title small{display:block;margin-top:2px;color:#7b8882;font-size:9px}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.gallery-grid figure{margin:0;position:relative;overflow:hidden;border-radius:13px;background:#eaf2ef;height:145px}.gallery-grid img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .3s}.gallery-grid figure:hover img{transform:scale(1.04)}.gallery-grid figcaption{position:absolute;left:0;right:0;bottom:0;padding:8px 9px;background:linear-gradient(transparent,rgba(0,0,0,.72));color:#fff;font-size:10px;font-weight:800}
+@media(max-width:560px){.madrasa-gallery{border-radius:15px;padding:10px;margin-bottom:13px}.gallery-grid{grid-template-columns:repeat(3,1fr);gap:6px}.gallery-grid figure{height:92px;border-radius:9px}.gallery-grid figcaption{font-size:8px;padding:5px}.gallery-title strong{font-size:13px}.gallery-title small{font-size:8px}}
 </style>
 </head>
 <body>
@@ -40,6 +45,14 @@ body{background:#f6faf8}
 <h2>ওলামা বোর্ড সংযুক্ত মাদ্রাসা</h2>
 <p>আপনার এলাকার মাদ্রাসাকে একটি সংগঠিত ডিজিটাল ডিরেক্টরিতে যুক্ত করুন। স্থানীয়/আঞ্চলিক মাদ্রাসা কমিটির পরিচালনায় এবং ওলামা বোর্ডের সমন্বয় ও সহায়তার মাধ্যমে শিক্ষা প্রতিষ্ঠানগুলোর তথ্য ও যোগাযোগকে সুসংগঠিত করার উদ্যোগ।</p>
 <div class="tagline">“আপনার মাদ্রাসা — আমাদের সম্মিলিত প্ল্যাটফর্ম”</div>
+</div>
+<div class="madrasa-gallery" aria-label="মাদ্রাসার ছবি">
+  <div class="gallery-title"><span>🕌</span><div><strong>মাদ্রাসার কিছু চিত্র</strong><small>দ্বীনি শিক্ষা প্রতিষ্ঠানের অনুপ্রেরণামূলক ছবি</small></div></div>
+  <div class="gallery-grid">
+    <figure><img src="https://www.darululoomhusainiaislampur.in/img_big/g2.jpg" alt="মাদ্রাসা ভবন" loading="lazy"><figcaption>মাদ্রাসা শিক্ষা ভবন</figcaption></figure>
+    <figure><img src="https://burhan-e-quadria.in/assets/images/campus1.jpg" alt="মাদ্রাসা ক্যাম্পাস" loading="lazy"><figcaption>মাদ্রাসা ক্যাম্পাস</figcaption></figure>
+    <figure><img src="https://1.bp.blogspot.com/-KSRziqFbmMY/YA99TvdAB7I/AAAAAAAAARc/GoHLA_qaZ-QatyDYGd_H5pBRkNpPOPUxwCNcBGAsYHQ/w640-h485/Copy%2Bof%2BCopy%2Bof%2B20170826_063040%2B-%2BCopy.jpg" alt="ইসলামিক শিক্ষা প্রতিষ্ঠান" loading="lazy"><figcaption>ইসলামিক শিক্ষা প্রতিষ্ঠান</figcaption></figure>
+  </div>
 </div>
 <div class="stats"><span>মোট সংযুক্ত মাদ্রাসা: <b id="count">0</b></span><span>ডিজিটাল প্রোফাইল</span><span>QR Verification</span></div>
 <div class="search"><span>⌕</span><input id="q" type="search" placeholder="মাদ্রাসার নাম, জেলা, এলাকা বা ID দিয়ে খুঁজুন"></div>
