@@ -1,42 +1,43 @@
 (() => {
+  "use strict";
   const esc = v => String(v ?? "").replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
-  const safeUrl = v => { try { const u = new URL(String(v || "").trim()); return /^https?:$/.test(u.protocol) ? u.href : ""; } catch (_) { return ""; } };
-  const photoUrl = r => { const raw = String(r?.photo_url || r?.photo || "").trim(); return raw ? raw + (raw.includes("?") ? "&" : "?") + "v=20260930-7" : ""; };
+  const url = v => { try { const u=new URL(String(v||"").trim(),location.href); return /^https?:$/.test(u.protocol)?u.href:""; } catch(e){ return ""; } };
+  const photo = r => {
+    const p=String(r?.photo_url||r?.photo||"").trim();
+    return p ? p + (p.includes("?")?"&":"?") + "v=20260930-9" : "";
+  };
 
-  async function loadMembers(){
-    const res = await fetch("assets/master-member-database.json?v=20260930-14",{cache:"no-store"});
-    if(!res.ok) throw new Error("member-db");
-    const data = await res.json();
-    return Array.isArray(data) ? data.filter(x=>x && x.active!==false).sort((a,b)=>(Number(a.serial)||999999)-(Number(b.serial)||999999)) : [];
+  async function members(){
+    const res=await fetch("assets/master-member-database.json?v=20260930-15",{cache:"no-store"});
+    if(!res.ok) throw new Error("database");
+    const data=await res.json();
+    return Array.isArray(data)?data.filter(x=>x&&x.active!==false):[];
   }
 
-  function card(r){
-    const src=photoUrl(r);
-    const img=src ? '<img class="wazeen-card-photo" src="'+esc(src)+'" alt="'+esc(r.name||"Wazeen")+'" loading="lazy" onerror="this.remove()">' : '<div class="wazeen-card-photo no-photo">و</div>';
-    return '<a class="wazeen-folder" href="wazeen-profile.html?id='+encodeURIComponent(r.member_id||"")+'">'+
-      '<span class="folder-tab">'+esc(r.member_id||"")+'</span>'+img+
-      '<h3>'+esc(String(r.name||"—").toUpperCase())+'</h3><p>'+esc(r.designation||"WAYEJIN")+'</p>'+
-      '<span class="open">প্রোফাইল দেখুন →</span></a>';
+  function directoryCard(r){
+    const p=photo(r);
+    const img=p?'<img src="'+esc(p)+'" alt="'+esc(r.name||"Wazeen")+'" loading="lazy" onerror="this.style.visibility='hidden'">':'<div class="wazeen-card-photo no-photo">و</div>';
+    return '<a class="wazeen-folder" href="wazeen-profile.html?id='+encodeURIComponent(r.member_id||"")+'"><span class="folder-tab">'+esc(r.member_id||"")+'</span>'+img+'<h3>'+esc(String(r.name||"—").toUpperCase())+'</h3><p>'+esc(r.designation||"WAYEJIN")+'</p><span class="open">প্রোফাইল দেখুন →</span></a>';
   }
 
-  function renderProfile(root,w,id){
+  function render(root,w,id){
     const name=String(w.name||"Wazeen");
     const phone=String(w.phone||"").replace(/\D/g,"").slice(-10);
-    const image=photoUrl(w);
     const district=String(w.district||"").trim()||"—";
     const area=String(w.area||w.block||w.address||"").trim()||"—";
     const validity=String(w.valid_till||w.validity||"").trim()||"—";
+    const p=photo(w);
     const social=[
       ["facebook","🔵 Facebook"],["youtube","▶️ YouTube"],["instagram","🟣 Instagram"],["website","🌐 Website"]
-    ].map(([k,label])=>{const u=safeUrl(w[k]||w[k+"_url"]);return u?'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+label+'</a>':""}).filter(Boolean).join("");
-    const youtube=safeUrl(w.youtube||w.youtube_url)||("https://www.youtube.com/results?search_query="+encodeURIComponent(name));
-    const facebook=safeUrl(w.facebook||w.facebook_url)||("https://www.facebook.com/search/videos/?q="+encodeURIComponent(name));
-    const videos=(Array.isArray(w.video_links)?w.video_links:[]).map(v=>v&&safeUrl(v.url)?'<a class="video-link" href="'+esc(safeUrl(v.url))+'" target="_blank" rel="noopener"><b>▶</b><span>'+esc(v.title||"ভিডিও")+'</span><em>দেখুন</em></a>':"").join("");
+    ].map(([k,label])=>{const u=url(w[k]||w[k+"_url"]);return u?'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+label+'</a>':""}).filter(Boolean).join("");
+    const yt=url(w.youtube||w.youtube_url)||("https://www.youtube.com/results?search_query="+encodeURIComponent(name));
+    const fb=url(w.facebook||w.facebook_url)||("https://www.facebook.com/search/videos/?q="+encodeURIComponent(name));
 
-    root.innerHTML='<div class="profile-card modern-profile">'+
+    root.innerHTML =
+      '<div class="profile-card modern-profile">'+
       '<div class="profile-hero"><div class="hero-pattern"></div><div class="profile-badge">WAYEJIN</div></div>'+
       '<div class="profile-content">'+
-      '<div class="photo-wrap">'+(image?'<img class="profile-photo" src="'+esc(image)+'" alt="'+esc(name)+'" onerror="this.onerror=null;this.remove()">':'<div class="profile-photo no-photo">و</div>')+'</div>'+
+      '<div class="photo-wrap">'+(p?'<img class="profile-photo" src="'+esc(p)+'" alt="'+esc(name)+'">':'<div class="profile-photo no-photo">و</div>')+'</div>'+
       '<div class="profile-kicker">'+esc(w.designation||"WAYEJIN • ULAMA BOARD")+'</div>'+
       '<h1>'+esc(name)+'</h1>'+
       (w.name_en&&w.name_en!==name?'<div class="profile-en">'+esc(w.name_en)+'</div>':"")+
@@ -52,31 +53,36 @@
       '<section class="profile-section"><div class="section-title"><span>◆</span><h2>পরিচিতি</h2></div><p>'+esc(w.bio||"WAYEJIN E FURFURA SHARIF-এর সঙ্গে যুক্ত ওয়েজিন।")+'</p></section>'+
       '<section class="profile-section"><div class="section-title"><span>◆</span><h2>সামাজিক যোগাযোগ ও মিডিয়া</h2></div>'+
       '<div class="social-grid">'+(social||'<span class="empty-social">সামাজিক লিংক এখনো যোগ করা হয়নি</span>')+'</div>'+
-      '<div class="media-search"><a href="'+esc(youtube)+'" target="_blank" rel="noopener">▶ YouTube ভিডিও</a><a href="'+esc(facebook)+'" target="_blank" rel="noopener">● Facebook ভিডিও</a></div>'+
-      (videos?'<div class="video-links">'+videos+'</div>':"")+'</section>'+
+      '<div class="media-search"><a href="'+esc(yt)+'" target="_blank" rel="noopener">▶ YouTube ভিডিও</a><a href="'+esc(fb)+'" target="_blank" rel="noopener">● Facebook ভিডিও</a></div></section>'+
       '<div class="profile-actions"><a class="btn" href="wazeens.html">← সব ওয়েজিন</a><a class="btn" href="verification.html?id='+encodeURIComponent(w.member_id||id)+'">✓ ID যাচাই</a><a class="btn" href="wazeen-car-board.html?id='+encodeURIComponent(w.member_id||id)+'">🚗 Car Board</a><a class="btn gold" href="wazeen-id-card.html?id='+encodeURIComponent(w.member_id||id)+'">🪪 ID Card</a></div>'+
       '<a class="car-download" href="wazeen-car-board.html?id='+encodeURIComponent(w.member_id||id)+'">⬇️ Car Board ডাউনলোড</a>'+
       '</div></div>';
+
+    const im=root.querySelector(".profile-photo");
+    if(im) im.addEventListener("error",()=>{ im.replaceWith(Object.assign(document.createElement("div"),{className:"profile-photo no-photo",textContent:"و"})); },{once:true});
   }
 
   async function init(){
     const root=document.getElementById("wazeenProfile");
-    if(!root) return;
-    let members=[];
-    try{
-      members=await loadMembers();
-    }catch(err){
-      root.innerHTML='<div class="profile-card modern-profile"><div class="profile-content"><h1 style="font-size:24px">প্রোফাইল লোড হচ্ছে না</h1><p style="color:#65766f;margin:12px 0">ডাটাবেস সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।</p><a class="btn" href="wazeens.html">← ওয়েজিন ডিরেক্টরি</a></div></div>';
+    let list=[];
+    try{ list=await members(); }catch(e){
+      if(root) root.innerHTML='<div class="profile-card modern-profile"><div class="profile-content"><h1>প্রোফাইল লোড হচ্ছে না</h1><p>ডাটাবেস সংযোগে সমস্যা হয়েছে। আবার চেষ্টা করুন।</p></div></div>';
       return;
     }
-    const home=document.getElementById("homeWazeens"); if(home) home.innerHTML=members.slice(0,6).map(card).join("")||'<div class="empty">ওয়েজিনদের তথ্য পাওয়া যায়নি।</div>';
-    const id=new URLSearchParams(location.search).get("id")||"", lower=id.toLowerCase();
-    const legacyNames={"mehrab-uddin":"pirjada mehrabuddin siddique","yunus-ali":"md younus ali baidya","amanullah-aman":"maulana amanullah aman","jamat-ali":"maulana jamat ali","khairuzzaman":"maulana khairuzzaman"};
-    let member=members.find(x=>String(x.member_id||"").toLowerCase()===lower);
-    if(!member&&legacyNames[lower]) member=members.find(x=>String(x.name||"").toLowerCase()===legacyNames[lower]);
-    if(!member){root.innerHTML='<div class="profile-card modern-profile"><div class="profile-content"><h1>ওয়েজিনের প্রোফাইল পাওয়া যায়নি</h1><a class="btn" href="wazeens.html">← ওয়েজিন ডিরেক্টরি</a></div></div>';return;}
-    document.title=(member.name||"Wazeen")+" | WAYEJIN E FURFURA SHARIF";
-    renderProfile(root,member,id);
+    const home=document.getElementById("homeWazeens");
+    if(home) home.innerHTML=list.slice(0,6).map(directoryCard).join("")||'<div class="empty">ওয়েজিনদের তথ্য পাওয়া যায়নি।</div>';
+    if(!root) return;
+    const id=new URLSearchParams(location.search).get("id")||"";
+    const key=id.toLowerCase();
+    const legacy={"mehrab-uddin":"pirjada mehrabuddin siddique","yunus-ali":"md younus ali baidya","amanullah-aman":"maulana amanullah aman","jamat-ali":"maulana jamat ali","khairuzzaman":"maulana khairuzzaman"};
+    let w=list.find(x=>String(x.member_id||"").toLowerCase()===key);
+    if(!w&&legacy[key]) w=list.find(x=>String(x.name||"").toLowerCase()===legacy[key]);
+    if(!w){
+      root.innerHTML='<div class="profile-card modern-profile"><div class="profile-content"><h1>ওয়েজিনের প্রোফাইল পাওয়া যায়নি</h1><a class="btn" href="wazeens.html">← ওয়েজিন ডিরেক্টরি</a></div></div>';
+      return;
+    }
+    document.title=(w.name||"Wazeen")+" | WAYEJIN E FURFURA SHARIF";
+    render(root,w,id);
   }
-  init();
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init); else init();
 })();
