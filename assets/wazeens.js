@@ -7,7 +7,9 @@
   };
   window.WBUB_CLEAN_PROFILE_PHOTOS = cleanProfilePhotos;
   const photo = r => {
-    const clean=cleanProfilePhotos[String(r?.member_id||"").trim()];\n    if(clean) return clean;\n    const p=String(r?.photo_url||r?.photo||"").trim();
+    const clean=cleanProfilePhotos[String(r?.member_id||"").trim()];
+    if(clean) return clean;
+    const p=String(r?.photo_url||r?.photo||"").trim();
     return p ? p + (p.includes("?")?"&":"?") + "v=20261001-3" : "";
   };
 
