@@ -66,6 +66,7 @@ function doPost(e) {
     var p = wbubParsePost_(e);
     var action = String(p.action || '').trim().toLowerCase();
 
+    if (action === 'madrasa_register') return wbubMadrasaRegister_(p);
     if (action === 'register') return wbubRegister_(p);
     if (action === 'youth_register') return wbubYouthRegister_(p);
     if (action === 'youth_profile') return wbubYouthProfile_(String(p.youth_id || p.id || '').trim());
@@ -204,6 +205,40 @@ function wbubFindMobile_(sh,map,mobile) {
     if(wbubNormalizeMobile_(vals[i][0])===want) out.push(i+2);
   }
   return out;
+}
+
+function wbubMadrasaRegister_(p) {
+  var mobile=wbubNormalizeMobile_(p.phone || p.mobile);
+  if(!/^[6-9]\d{9}$/.test(mobile)) throw new Error('INVALID_MOBILE');
+
+  var sh=wbubSheet_(), map=wbubMap_(sh);
+  var last=sh.getLastRow();
+  if(last>1 && map.mobile && map.application_type){
+    var rows=wbubRows_(sh,map);
+    for(var i=rows.length-1;i>=0;i--){
+      if(String(rows[i].application_type||'').toLowerCase()==='madrasa_directory' &&
+         wbubNormalizeMobile_(rows[i].mobile)===mobile){
+        wbubSet_(sh,map,rows[i]._row,'status','PENDING');
+        wbubSet_(sh,map,rows[i]._row,'updated_at',new Date());
+        return wbubJson_({ok:true,reused:true,application_no:rows[i].application_no,status:'PENDING',application_type:'madrasa_directory'});
+      }
+    }
+  }
+
+  var row=sh.getLastRow()+1;
+  var app=wbubApplicationNo_(sh,map);
+  var fields=['name','manager','madrasa_registration_no','pan_no','established','education','district','block','post','pin','address','whatsapp','committee_president','committee_phone','teachers','students','about'];
+  fields.forEach(function(k){if(p[k]!==undefined) wbubSet_(sh,map,row,k,String(p[k]||'').trim());});
+  wbubSet_(sh,map,row,'mobile',mobile);
+  wbubSet_(sh,map,row,'application_no',app);
+  wbubSet_(sh,map,row,'application_type','madrasa_directory');
+  wbubSet_(sh,map,row,'category','madrasa');
+  wbubSet_(sh,map,row,'status','PENDING');
+  wbubSet_(sh,map,row,'payment_status','NOT_REQUIRED');
+  wbubSet_(sh,map,row,'fee_amount',0);
+  wbubSet_(sh,map,row,'created_at',new Date());
+  wbubSet_(sh,map,row,'updated_at',new Date());
+  return wbubJson_({ok:true,reused:false,application_no:app,status:'PENDING',application_type:'madrasa_directory'});
 }
 
 function wbubRegister_(p) {
