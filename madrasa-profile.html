@@ -25,7 +25,22 @@ h1{font-size:30px;margin:14px 0 8px}.sub{color:#6b7c76}.status{display:inline-bl
 <div class="status" id="status">সংযুক্ত প্রোফাইল</div>
 <div class="actions"><a class="btn" href="madrasa-directory.html">← মাদ্রাসা ডিরেক্টরি</a><a class="btn alt" id="statusLink" href="#">আবেদনের স্ট্যাটাস</a></div>
 </section>
-<section class="grid">
+<section class="card" style="margin-bottom:18px">
+<h2>📂 মাদ্রাসার সম্পূর্ণ ডকুমেন্ট ও মিডিয়া সেন্টার</h2>
+<p class="sub">এখান থেকে মাদ্রাসার ছবি, Gallery, রেজিস্ট্রেশন/অন্যান্য PDF, শিক্ষক ও শিক্ষার্থীর নথি এবং বোর্ড-প্রদত্ত সার্টিফিকেট/আইডি সংরক্ষণ ও দেখানো হবে।</p>
+<div class="actions">
+<a class="btn" href="madrasa-registration.html">⬆️ নতুন তথ্য / ফাইল আপলোড</a>
+<a class="btn alt" href="madrasa-status.html?application_no=WEFS%2FAPP%2F2026%2F00000012">📌 আবেদন স্ট্যাটাস</a>
+</div>
+<div class="grid" style="margin-top:16px">
+<div class="card"><h2>📷 মাদ্রাসার ছবি</h2><div id="profilePhotos"><div class="empty">আপলোড করা ছবি এখানে আসবে।</div></div></div>
+<div class="card"><h2>🖼️ Gallery</h2><div id="profileGallery"><div class="empty">Gallery ছবি এখানে আসবে।</div></div></div>
+<div class="card"><h2>📄 গুরুত্বপূর্ণ Documents</h2><div id="profileDocs"><div class="empty">PDF/Document এখানে আসবে।</div></div></div>
+<div class="card"><h2>👨‍🏫 Teacher Files</h2><div id="profileTeachers"><div class="empty">শিক্ষক ফাইল এখানে আসবে।</div></div></div>
+<div class="card"><h2>👨‍🎓 Student Files</h2><div id="profileStudents"><div class="empty">শিক্ষার্থী ফাইল এখানে আসবে।</div></div></div>
+<div class="card"><h2>🏅 Board Certificate / ID</h2><div id="profileCertificate"><div class="empty">বোর্ড থেকে Certificate/ID প্রকাশ হলে এখানে দেখা যাবে।</div></div></div>
+</div>
+</section><section class="grid">
 <div class="card"><h2>🏫 মাদ্রাসার পরিচিতি</h2><div id="basic"><div class="row"><div class="label">মাদ্রাসার নাম</div><div class="value">MADRASA NIJAMIYA</div></div><div class="row"><div class="label">Application No</div><div class="value">WEFS/APP/2026/00000012</div></div></div></div>
 <div class="card"><h2>📞 যোগাযোগ</h2><div id="contact"><div class="row"><div class="label">মোবাইল</div><div class="value">9732111888</div></div></div></div>
 <div class="card"><h2>📚 শিক্ষা ও প্রশাসন</h2><div id="education"><div class="empty">তথ্য লোড হচ্ছে…</div></div></div>
@@ -58,6 +73,15 @@ try{
  }
  const f=await WBUB_WORKFLOW.submitApplication({action:"madrasa_files",madrasa_id:APP});
  const list=f&&(f.files||f.records||f.data||[]);
+ const by=(cat)=>Array.isArray(list)?list.filter(z=>String(z.category||"").toLowerCase()===cat):[];
+ const links=(arr,empty)=> (arr.length?arr.map(z=>'<div class="file"><span>'+esc(z.file_name||z.name||"File")+'</span>'+(z.url||z.file_url||z.download_url?'<a target="_blank" href="'+esc(z.url||z.file_url||z.download_url)+'">দেখুন</a>':"")+'</div>').join(""):'<div class="empty">'+empty+'</div>');
+ document.getElementById("profilePhotos").innerHTML=links(by("photo"),"কোনো মাদ্রাসার ছবি আপলোড নেই।");
+ document.getElementById("profileGallery").innerHTML=links(by("gallery"),"কোনো Gallery ছবি আপলোড নেই।");
+ document.getElementById("profileDocs").innerHTML=links(by("documents"),"কোনো Document আপলোড নেই।");
+ document.getElementById("profileTeachers").innerHTML=links(by("teacher"),"কোনো Teacher file আপলোড নেই।");
+ document.getElementById("profileStudents").innerHTML=links(by("student"),"কোনো Student file আপলোড নেই।");
+ const cert=Array.isArray(list)?list.filter(z=>["certificate","board_certificate","madrasa_certificate","id_card"].includes(String(z.category||"").toLowerCase())):[];
+ document.getElementById("profileCertificate").innerHTML=links(cert,"এখনও বোর্ড Certificate/ID প্রকাশ করা হয়নি।");
  document.getElementById("gallery").innerHTML=files((Array.isArray(list)?list:[]).filter(z=>["photo","gallery"].includes(String(z.category||"").toLowerCase())));
  document.getElementById("documents").innerHTML=files((Array.isArray(list)?list:[]).filter(z=>!["photo","gallery","teacher","student"].includes(String(z.category||"").toLowerCase())));
 }catch(e){document.getElementById("education").innerHTML='<div class="empty">বর্তমানে বিস্তারিত তথ্য সার্ভার থেকে পাওয়া যায়নি।</div>';document.getElementById("people").innerHTML='<div class="empty">বর্তমানে বিস্তারিত তথ্য সার্ভার থেকে পাওয়া যায়নি।</div>';}
