@@ -108,7 +108,7 @@ applicationCheck.onclick=async()=>{
   const st=String((x&&((x.status||x.application_status||x.approval_status)))||"Pending");
   const name=(x&&((x.name||x.madrasa_name)))||"";
   applicationResult.style.color="#145b3d";
-  applicationResult.innerHTML="<b>📌 আবেদন পাওয়া গেছে</b><br>Application No: "+esc(no)+"<br>অবস্থা: <b>"+esc(st)+"</b>"+(name?"<br>মাদ্রাসা: <b>"+esc(name)+"</b>":"")+"<br><a href='madrasa-status.html' style='display:inline-block;margin-top:7px;color:#07513f;font-weight:900'>বিস্তারিত স্ট্যাটাস দেখুন →</a>";
+  applicationResult.innerHTML="<b>📌 আবেদন পাওয়া গেছে</b><br>Application No: "+esc(no)+"<br>অবস্থা: <b>"+esc(st)+"</b>"+(name?"<br>মাদ্রাসা: <b>"+esc(name)+"</b>":"")+"<br><a href='madrasa-status.html?application_no="+encodeURIComponent(no)+"&mobile="+encodeURIComponent(m)+"' style='display:inline-block;margin-top:7px;color:#07513f;font-weight:900'>বিস্তারিত স্ট্যাটাস দেখুন →</a>";
  }catch(e){applicationResult.style.color="#9a2525";applicationResult.textContent="আবেদন পাওয়া যায়নি। Application No ও মোবাইল নম্বর ঠিক আছে কিনা দেখুন।"}
  finally{applicationCheck.disabled=false;applicationCheck.textContent="🔍 স্ট্যাটাস দেখুন"}
 };
