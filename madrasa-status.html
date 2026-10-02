@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>মাদ্রাসা আবেদন স্ট্যাটাস | West Bengal Ulama Board</title>
+<meta name="description" content="মাদ্রাসা সংযুক্তির আবেদনের স্ট্যাটাস দেখুন।">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+:root{--g:#07513f;--g2:#15936d;--gold:#d8ad3e;--red:#c9362e}
+body{background:linear-gradient(135deg,#f7fbf8,#fffaf0,#f4f9ff)}
+.wrap{max-width:900px;margin:auto;padding:0 16px}.page{padding:30px 0 60px}
+.hero{background:linear-gradient(120deg,#063e32,#08755a,#15936d);color:#fff;border-radius:28px;padding:30px 24px;box-shadow:0 18px 45px rgba(4,59,48,.2);margin-bottom:20px}.hero h1{margin:0;font-size:clamp(27px,6vw,42px)}.hero p{margin:9px 0 0;line-height:1.7;color:#eaf8f1}
+.card{background:#fff;border:1px solid #dce6e0;border-radius:24px;padding:20px;box-shadow:0 14px 40px rgba(7,54,42,.1)}
+label{display:block;font-weight:900;color:#164b3e;margin:0 0 7px}.field{margin-bottom:14px}.field input{width:100%;box-sizing:border-box;padding:14px;border:1px solid #cbd9d2;border-radius:11px;font:inherit}.field input:focus{outline:0;border-color:#24956e;box-shadow:0 0 0 4px rgba(37,147,108,.09)}
+button{width:100%;border:0;border-radius:12px;padding:14px;background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;font-weight:900;font-size:15px;cursor:pointer}.message{margin-top:14px;padding:13px;border-radius:11px;line-height:1.6}.error{background:#fff0f0;color:#8a2222;border:1px solid #f1c4c4}.success{background:#e8f7ef;color:#145b3d;border:1px solid #b9e6cd}
+.result{margin-top:18px}.status{padding:16px;border-radius:16px;background:#f5fbf8;border:1px solid #d7e8df}.status-badge{display:inline-block;padding:7px 13px;border-radius:999px;background:#fff3cd;color:#805f00;font-weight:900}.rows{margin-top:12px}.row{display:flex;justify-content:space-between;gap:15px;padding:11px 0;border-bottom:1px solid #e2ebe6;font-size:13px}.row:last-child{border-bottom:0}.row strong{text-align:right;color:#173f34}.files{margin-top:15px}.file{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:11px;border:1px solid #dce6e0;border-radius:11px;margin-top:8px}.file a{background:#eef7f2;color:var(--g);padding:7px 9px;border-radius:8px;text-decoration:none;font-weight:800;font-size:12px}.actions{display:flex;gap:10px;margin-top:16px}.actions a{flex:1;text-align:center;text-decoration:none;padding:12px;border-radius:11px;background:#f1f6f3;color:#17372d;font-weight:900}
+@media(max-width:600px){.card{padding:15px}.row{display:block}.row strong{display:block;text-align:left;margin-top:3px}.file{align-items:flex-start;flex-direction:column}.file a{display:block;text-align:center}.actions{flex-direction:column}}
+</style></head>
+<body><div class="top">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ • ঐক্য • শিক্ষা • সমাজ সংস্কার</div>
+<header><div class="wrap nav"><a class="brand" href="index.html">ওয়েজিন ফুরফুরা শরীফ<small>WAYEJIN E FURFURA SHARIF</small></a><nav><a href="index.html">হোম</a><a href="madrasa-directory.html">মাদ্রাসা ডিরেক্টরি</a><a href="madrasa-registration.html">মাদ্রাসা আবেদন</a></nav></div></header>
+<main><div class="wrap page"><div class="hero"><h1>🔎 মাদ্রাসা আবেদন স্ট্যাটাস</h1><p>আপনার Application No এবং আবেদনের সময় দেওয়া মোবাইল নম্বর দিয়ে আবেদনটির বর্তমান অবস্থা দেখুন।</p></div>
+<div class="card"><div class="field"><label>Application No *</label><input id="appNo" value="" placeholder="যেমন: WEFS/APP/2026/00000012" autocomplete="off"></div>
+<div class="field"><label>মোবাইল নম্বর *</label><input id="mobile" inputmode="numeric" maxlength="10" placeholder="আবেদনের সময় দেওয়া ১০ সংখ্যার মোবাইল" autocomplete="tel"></div>
+<button id="check">🔍 স্ট্যাটাস দেখুন</button><div id="msg" class="message" hidden></div><div id="result" class="result" hidden></div>
+<div class="actions"><a href="madrasa-registration.html">🕌 নতুন মাদ্রাসা আবেদন</a><a href="madrasa-directory.html">🏫 মাদ্রাসা ডিরেক্টরি</a></div></div></div></main>
+<script src="assets/member-workflow.js?v=20261002-1"></script>
+<script>
+const $=id=>document.getElementById(id),msg=$("msg"),result=$("result"),check=$("check");
+const esc=v=>WBUB_WORKFLOW.escapeHtml(v);
+const mobile=v=>WBUB_WORKFLOW.normalizeMobile(v);
+function show(t,c){msg.className="message "+c;msg.textContent=t;msg.hidden=false}
+function val(o,...ks){for(const k of ks){if(o&&o[k]!=null&&String(o[k]).trim()!=="")return o[k]}return ""}
+function statusText(v){const s=String(v||"").trim().toLowerCase();if(["approved","approve","approved by admin"].includes(s))return "অনুমোদিত";if(["rejected","reject"].includes(s))return "প্রত্যাখ্যাত";if(["pending","pending approval","under review","submitted"].includes(s))return "যাচাইাধীন / Pending";return v||"প্রক্রিয়াধীন"}
+function render(d){
+ const r=val(d,"record","data","application"); const x=(r&&typeof r==="object")?r:d;
+ const st=val(x,"status","application_status","approval_status","state")||"Pending";
+ const app=val(x,"application_no","applicationNo","id")||$("appNo").value.trim();
+ let html='<div class="status"><span class="status-badge">📌 '+esc(statusText(st))+'</span><div class="rows">';
+ const fields=[["Application No",app],["মাদ্রাসার নাম",val(x,"name","madrasa_name")],["প্রধান/মুহতামিম",val(x,"manager","muhatamim","principal")],["মোবাইল",val(x,"mobile","phone")],["জেলা",val(x,"district")],["আবেদনের তারিখ",val(x,"created_at","createdAt","date","submitted_at")],["সর্বশেষ আপডেট",val(x,"updated_at","updatedAt")]];
+ for(const [a,b] of fields)if(b)html+='<div class="row"><span>'+esc(a)+'</span><strong>'+esc(b)+'</strong></div>';
+ html+='</div></div>';
+ const files=Array.isArray(val(x,"files","documents"))?val(x,"files","documents"):[];
+ if(files.length){html+='<div class="files"><strong>📁 সংযুক্ত ফাইল</strong>';for(const f of files){const u=val(f,"url","download_url");html+='<div class="file"><span>'+esc(val(f,"name","file_name")||"ফাইল")+'</span>'+(u?'<a href="'+esc(u)+'" target="_blank" rel="noopener">খুলুন / ডাউনলোড</a>':"")+'</div>'}html+='</div>'}
+ result.innerHTML=html;result.hidden=false
+}
+check.onclick=async()=>{const no=$("appNo").value.trim(),m=mobile($("mobile").value);result.hidden=true;if(!no){show("Application No দিন।","error");return}if(!/^[6-9]\d{9}$/.test(m)){show("সঠিক ১০ সংখ্যার মোবাইল নম্বর দিন।","error");return}check.disabled=true;check.textContent="খোঁজা হচ্ছে…";msg.hidden=true;
+ try{const d=await WBUB_WORKFLOW.submitApplication({action:"madrasa_status",application_no:no,mobile:m,id:no});if(!d||d.found===false||d.ok===false&&!d.record)throw new Error((d&&d.error)||"APPLICATION_NOT_FOUND");render(d);show("আবেদনের তথ্য পাওয়া গেছে।","success")}catch(e){show("আবেদনটি পাওয়া যায়নি। Application No ও মোবাইল নম্বর ঠিক আছে কিনা দেখুন।","error")}finally{check.disabled=false;check.textContent="🔍 স্ট্যাটাস দেখুন"}};
+</script></body></html>
