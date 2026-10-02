@@ -1,4 +1,11 @@
 {
-  "updated": "2026-10-01",
-  "madrasas": []
+  "updated": "2026-10-02",
+  "madrasas": [
+    {
+      "application_no": "WEFS/APP/2026/00000012",
+      "name": "MADRASA NIJAMIYA",
+      "mobile": "9732111888",
+      "published": true
+    }
+  ]
 }
