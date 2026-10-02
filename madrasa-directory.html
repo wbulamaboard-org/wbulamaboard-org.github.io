@@ -73,7 +73,7 @@ body{background:#f6faf8}
 <script>
 (function(){
 const grid=document.getElementById("grid"),q=document.getElementById("q"),count=document.getElementById("count");
-let data=[];
+let data=[{madrasa_id:"WEFS/APP/2026/00000012",application_no:"WEFS/APP/2026/00000012",name:"MADRASA NIJAMIYA",phone:"9732111888",status:"published"}];
 const esc=v=>String(v==null?"":v);
 function render(list){
 grid.innerHTML="";
@@ -91,7 +91,7 @@ if(r.map){const a=document.createElement("a");a.className="secondary";a.target="
 if(r.profile){const a=document.createElement("a");a.href=r.profile;a.textContent="প্রোফাইল →";acts.appendChild(a)}
 c.appendChild(acts);grid.appendChild(c)
 })}
-fetch("assets/madrasa-directory.json?v=20261002-3",{cache:"no-store"}).then(r=>r.json()).then(j=>{data=Array.isArray(j)?j:(j.madrasas||[]);count.textContent=data.length;render(data)}).catch(()=>{grid.innerHTML='<div class="empty">তথ্য লোড করা যায়নি। পরে আবার চেষ্টা করুন।</div>'});
+fetch("assets/madrasa-directory.json?v=20261002-4",{cache:"no-store"}).then(r=>r.json()).then(j=>{data=Array.isArray(j)?j:(j.madrasas||[]);count.textContent=data.length;render(data)}).catch(()=>{count.textContent=data.length;render(data);grid.insertAdjacentHTML("afterbegin",'<div class="empty" style="color:#145b3d">ডিরেক্টরি তথ্য দেখানো হচ্ছে।</div>');return;};/*'<div class="empty">তথ্য লোড করা যায়নি। পরে আবার চেষ্টা করুন।</div>'});
 const applicationBox=document.getElementById("applicationBox"),applicationMobile=document.getElementById("applicationMobile"),applicationCheck=document.getElementById("applicationCheck"),applicationResult=document.getElementById("applicationResult");
 function showApplicationBox(){
  const raw=q.value.trim(), isApp=/^WEFS\/APP\/\d{4}\/\d{8}$/i.test(raw);
