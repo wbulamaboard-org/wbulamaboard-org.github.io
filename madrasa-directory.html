@@ -57,7 +57,7 @@ body{background:#f6faf8}
     <figure><img src="https://1.bp.blogspot.com/-KSRziqFbmMY/YA99TvdAB7I/AAAAAAAAARc/GoHLA_qaZ-QatyDYGd_H5pBRkNpPOPUxwCNcBGAsYHQ/w640-h485/Copy%2Bof%2BCopy%2Bof%2B20170826_063040%2B-%2BCopy.jpg" alt="ইসলামিক শিক্ষা প্রতিষ্ঠান" loading="lazy"><figcaption>ইসলামিক শিক্ষা প্রতিষ্ঠান</figcaption></figure>
   </div>
 </div>
-<div class="stats"><span>মোট সংযুক্ত মাদ্রাসা: <b id="count">0</b></span><span>ডিজিটাল প্রোফাইল</span><span>QR Verification</span></div>
+<div class="stats"><span>মোট সংযুক্ত মাদ্রাসা: <b id="count">1</b></span><span>ডিজিটাল প্রোফাইল</span><span>QR Verification</span></div>
 <div class="search"><span>⌕</span><input id="q" type="search" placeholder="মাদ্রাসার নাম, জেলা, এলাকা বা ID দিয়ে খুঁজুন"></div>
 <div id="applicationBox" style="display:none;max-width:850px;margin:0 auto 18px;background:#fff;border:1px solid #dce8e2;border-radius:18px;padding:16px;box-shadow:0 8px 22px #07513f10">
 <strong style="display:block;color:#07513f;font-size:15px;margin-bottom:7px">🔎 আবেদন নম্বর পাওয়া গেছে</strong>
@@ -66,7 +66,7 @@ body{background:#f6faf8}
 <input id="applicationMobile" inputmode="numeric" maxlength="10" placeholder="আবেদনের সময় দেওয়া মোবাইল নম্বর" style="flex:1;min-width:210px;padding:12px;border:1px solid #cbd9d2;border-radius:10px;font:inherit">
 <button id="applicationCheck" type="button" style="border:0;border-radius:10px;padding:12px 16px;background:#07513f;color:#fff;font-weight:900;cursor:pointer">🔍 স্ট্যাটাস দেখুন</button>
 </div><div id="applicationResult" style="margin-top:10px;font-size:12px"></div>
-</div><div id="grid" class="grid"><div class="empty">মাদ্রাসার তথ্য লোড হচ্ছে…</div></div>
+</div><div id="grid" class="grid"><article class="card"><div class="id">WEFS/APP/2026/00000012</div><h3>MADRASA NIJAMIYA</h3><p>📞 9732111888</p><span class="badge">সংযুক্ত প্রোফাইল</span></article></div>
 <div class="join"><h2>আপনার মাদ্রাসাকেও যুক্ত করুন</h2><p>মাদ্রাসার পরিচিতি, ঠিকানা, শিক্ষা কার্যক্রম, যোগাযোগ ও প্রয়োজনীয় তথ্য একটি ডিজিটাল প্রোফাইলে সংযুক্ত করার জন্য আবেদন করুন।</p><a href="madrasa-registration.html">📝 সংযুক্তির আবেদন করুন</a></div>
 <div class="note">এই ডিরেক্টরি ওলামা বোর্ডের সাংগঠনিক সংযুক্তি ও তথ্য-সমন্বয় প্ল্যাটফর্ম। সরকারি স্বীকৃতির দাবি বোঝায় না।</div>
 </div></section></main>
@@ -92,10 +92,7 @@ if(r.profile){const a=document.createElement("a");a.href=r.profile;a.textContent
 c.appendChild(acts);grid.appendChild(c)
 })}
 count.textContent=data.length;render(data);
-fetch("assets/madrasa-directory.json?v=20261002-4",{cache:"no-store"})
-.then(r=>r.json())
-.then(j=>{data=Array.isArray(j)?j:(j.madrasas||[]);count.textContent=data.length;render(data)})
-.catch(()=>{count.textContent=data.length;render(data);});
+/* Directory is intentionally rendered from the published local record above. */
 const applicationBox=document.getElementById("applicationBox"),applicationMobile=document.getElementById("applicationMobile"),applicationCheck=document.getElementById("applicationCheck"),applicationResult=document.getElementById("applicationResult");
 function showApplicationBox(){
  const raw=q.value.trim(), isApp=/^WEFS\/APP\/\d{4}\/\d{8}$/i.test(raw);
