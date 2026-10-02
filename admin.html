@@ -13,11 +13,11 @@ button{border:0;border-radius:9px;padding:11px 15px;font-weight:900;cursor:point
 @media(max-width:600px){#editRequestsList .row>div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}.actions{display:flex;flex-wrap:wrap}.actions button{flex:1 1 180px}}
 </style></head>
 <body>
-<header><div class="wrap nav"><a class="brand" href="index.html">ওয়েজিন ফুরফুরা শরীফ<small>WAYEJIN E FURFURA SHARIF</small></a><nav><a href="registration.html">নিবন্ধন</a><a href="status.html">স্ট্যাটাস</a><a href="verification.html">ভেরিফিকেশন</a></nav></div></header>
+<header><div class="wrap nav"><a class="brand" href="index.html">ওয়েজিন ফুরফুরা শরীফ<small>WAYEJIN E FURFURA SHARIF</small></a><nav><a href="registration.html">নিবন্ধন</a><a href="status.html">স্ট্যাটাস</a><a href="verification.html">ভেরিফিকেশন</a><a href="admin.html">🔐 Admin</a></nav></div></header>
 <main><section><div class="wrap admin">
 <div class="head"><h1>Member Approval Panel</h1><p class="muted">PENDING আবেদন যাচাই করে Approve বা Reject করুন।</p></div>
 <div class="panel"><h2>Admin Key</h2><label>Apps Script Admin Key</label><input id="key" type="password" autocomplete="off" placeholder="Admin Key লিখুন"><div class="actions"><button class="primary" id="load">Pending Applications দেখুন</button><a href="admin-location.html" style="text-decoration:none"><button type="button" class="secondary">📍 Live Location</button></a></div><div id="msg" class="msg" hidden></div></div>
-<div class="panel" id="editRequestsPanel">
+<div class="panel" id="madrasaAdminPanel"><h2>🕌 Madrasa Management</h2><p class="muted">মাদ্রাসার নতুন আবেদন এখানে যাচাই করে Approve / Reject করা যাবে। Uploaded file-ও দেখা যাবে।</p><div class="actions"><button class="primary" id="loadMadrasa">Pending Madrasa Applications দেখুন</button><button class="secondary" id="refreshMadrasa">↻ Refresh</button></div><div id="madrasaMsg" class="msg" hidden></div><div id="madrasaList"></div></div><div class="panel" id="editRequestsPanel">
 <h2>📝 Member Profile Edit Requests</h2>
 <p class="muted">সদস্যের Edit Profile থেকে পাঠানো পরিবর্তনের অনুরোধ এখানে Pending থাকবে। Approve করলে Official Member Database আপডেট হবে।</p>
 <div class="actions">
@@ -121,5 +121,34 @@ document.getElementById("noticePreview").onclick=()=>{const t=document.getElemen
    const url="https://github.com/wbulamaboard-org/wbulamaboard-org.github.io/issues/new?title="+encodeURIComponent("[NOTICE] "+title)+"&body="+encodeURIComponent(issueBody);
    window.open(url,"_blank");
  };
+})();
+</script><script src="assets/member-workflow.js?v=20261002-1"></script>
+<script>
+(function(){
+var list=document.getElementById("madrasaList"),mmsg=document.getElementById("madrasaMsg"),load=document.getElementById("loadMadrasa"),refresh=document.getElementById("refreshMadrasa");
+if(!list)return;
+function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]})}
+function show(t,x){mmsg.className="msg "+t;mmsg.textContent=x;mmsg.hidden=false}
+async function api(p){return WBUB_WORKFLOW.submitApplication(p)}
+async function loadM(){
+ if(!key.value.trim()){show("err","Admin Key দিন।");return}
+ list.innerHTML="<div class='empty'>লোড হচ্ছে…</div>";
+ try{
+  var d=await api({action:"pending",admin_key:key.value.trim()});
+  if(!d||d.ok!==true)throw new Error(d&&d.error||"LIST_FAILED");
+  var a=(d.records||[]).filter(function(r){return String(r.application_type||"").toLowerCase()==="madrasa_directory"||String(r.category||"").toLowerCase()==="madrasa"});
+  if(!a.length){list.innerHTML="<div class='empty'>কোনো Pending Madrasa Application নেই।</div>";return}
+  list.innerHTML=a.map(function(r,i){
+   return "<div class='row'><h3 style='margin:0 0 10px'>🏫 "+esc(r.name||"Madrasa")+" <span class='status'>["+esc(r.status||"PENDING")+"]</span></h3>"+
+   "<div class='grid'><div><span class='muted'>Application</span><br><strong>"+esc(r.application_no)+"</strong></div><div><span class='muted'>Mobile</span><br><strong>"+esc(r.mobile)+"</strong></div><div><span class='muted'>District</span><br><strong>"+esc(r.district)+"</strong></div><div><span class='muted'>Manager</span><br><strong>"+esc(r.manager||"—")+"</strong></div></div>"+
+   "<p class='muted'>ঠিকানা: "+esc(r.address||"—")+"<br>Teachers: "+esc(r.teachers||"—")+" • Students: "+esc(r.students||"—")+"</p>"+
+   "<div class='actions'><button class='secondary' data-mf='"+i+"'>📁 Files</button><button class='primary' data-ma='"+i+"'>✓ Approve</button><button class='danger' data-mr='"+i+"'>✕ Reject</button></div><div id='mf"+i+"' class='row' style='display:none;margin-top:10px'></div></div>";
+  }).join("");
+  Array.from(list.querySelectorAll("[data-mf]")).forEach(function(b){b.onclick=async function(){var i=Number(b.dataset.mf),box=document.getElementById("mf"+i);box.style.display="block";box.textContent="Files loading…";try{var d=await api({action:"madrasa_files",madrasa_id:a[i].application_no}),fs=d.files||[];box.innerHTML=fs.length?fs.map(function(f){return "<div style='padding:7px 0;border-bottom:1px solid #ddd'>📄 "+esc(f.name||f.file_name||"File")+" "+(f.url?"<a href='"+esc(f.url)+"' target='_blank' rel='noopener'>Open</a> ":"")+(f.download_url?"<a href='"+esc(f.download_url)+"' target='_blank' rel='noopener'>Download</a>":"")+"</div>"}).join(""):"কোনো ফাইল নেই।"}catch(e){box.textContent="Files আনা যায়নি।"}}});
+  Array.from(list.querySelectorAll("[data-ma]")).forEach(function(b){b.onclick=async function(){var r=a[Number(b.dataset.ma)];if(!confirm("এই Madrasa Application Approve করবেন?\n"+r.application_no))return;b.disabled=true;try{var d=await api({action:"approve",application_no:r.application_no,admin_key:key.value.trim()});if(!d||d.ok!==true)throw new Error(d&&d.error||"APPROVE_FAILED");show("ok","Approved হয়েছে। ID: "+(d.member_id||"তৈরি হয়েছে"));await loadM()}catch(e){show("err","Approve করা যায়নি: "+(e.message||e));b.disabled=false}}});
+  Array.from(list.querySelectorAll("[data-mr]")).forEach(function(b){b.onclick=async function(){var r=a[Number(b.dataset.mr)],reason=prompt("Reject করার কারণ লিখুন:","তথ্য যাচাই প্রয়োজন");if(reason===null)return;b.disabled=true;try{var d=await api({action:"reject",application_no:r.application_no,admin_key:key.value.trim(),reason:reason});if(!d||d.ok!==true)throw new Error(d&&d.error||"REJECT_FAILED");show("ok","Application Reject হয়েছে।");await loadM()}catch(e){show("err","Reject করা যায়নি: "+(e.message||e));b.disabled=false}}});
+ }catch(e){show("err","Madrasa তালিকা আনা যায়নি: "+(e.message||e));list.innerHTML=""}
+}
+load.onclick=loadM;refresh.onclick=loadM;
 })();
 </script></body></html>
