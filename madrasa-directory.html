@@ -59,7 +59,14 @@ body{background:#f6faf8}
 </div>
 <div class="stats"><span>মোট সংযুক্ত মাদ্রাসা: <b id="count">0</b></span><span>ডিজিটাল প্রোফাইল</span><span>QR Verification</span></div>
 <div class="search"><span>⌕</span><input id="q" type="search" placeholder="মাদ্রাসার নাম, জেলা, এলাকা বা ID দিয়ে খুঁজুন"></div>
-<div id="grid" class="grid"><div class="empty">মাদ্রাসার তথ্য লোড হচ্ছে…</div></div>
+<div id="applicationBox" style="display:none;max-width:850px;margin:0 auto 18px;background:#fff;border:1px solid #dce8e2;border-radius:18px;padding:16px;box-shadow:0 8px 22px #07513f10">
+<strong style="display:block;color:#07513f;font-size:15px;margin-bottom:7px">🔎 আবেদন নম্বর পাওয়া গেছে</strong>
+<div style="font-size:11px;color:#65766f;margin-bottom:11px">Pending আবেদন ডিরেক্টরিতে প্রকাশিত হয় না। আবেদনটি দেখতে মোবাইল নম্বর দিয়ে স্ট্যাটাস যাচাই করুন।</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<input id="applicationMobile" inputmode="numeric" maxlength="10" placeholder="আবেদনের সময় দেওয়া মোবাইল নম্বর" style="flex:1;min-width:210px;padding:12px;border:1px solid #cbd9d2;border-radius:10px;font:inherit">
+<button id="applicationCheck" type="button" style="border:0;border-radius:10px;padding:12px 16px;background:#07513f;color:#fff;font-weight:900;cursor:pointer">🔍 স্ট্যাটাস দেখুন</button>
+</div><div id="applicationResult" style="margin-top:10px;font-size:12px"></div>
+</div><div id="grid" class="grid"><div class="empty">মাদ্রাসার তথ্য লোড হচ্ছে…</div></div>
 <div class="join"><h2>আপনার মাদ্রাসাকেও যুক্ত করুন</h2><p>মাদ্রাসার পরিচিতি, ঠিকানা, শিক্ষা কার্যক্রম, যোগাযোগ ও প্রয়োজনীয় তথ্য একটি ডিজিটাল প্রোফাইলে সংযুক্ত করার জন্য আবেদন করুন।</p><a href="madrasa-registration.html">📝 সংযুক্তির আবেদন করুন</a></div>
 <div class="note">এই ডিরেক্টরি ওলামা বোর্ডের সাংগঠনিক সংযুক্তি ও তথ্য-সমন্বয় প্ল্যাটফর্ম। সরকারি স্বীকৃতির দাবি বোঝায় না।</div>
 </div></section></main>
@@ -84,8 +91,28 @@ if(r.map){const a=document.createElement("a");a.className="secondary";a.target="
 if(r.profile){const a=document.createElement("a");a.href=r.profile;a.textContent="প্রোফাইল →";acts.appendChild(a)}
 c.appendChild(acts);grid.appendChild(c)
 })}
-fetch("assets/madrasa-directory.json?v=20261001-1",{cache:"no-store"}).then(r=>r.json()).then(j=>{data=Array.isArray(j)?j:(j.madrasas||[]);count.textContent=data.length;render(data)}).catch(()=>{grid.innerHTML='<div class="empty">তথ্য লোড করা যায়নি। পরে আবার চেষ্টা করুন।</div>'});
-q.addEventListener("input",()=>{const s=q.value.trim().toLowerCase();render(data.filter(r=>[r.madrasa_id,r.name,r.address,r.manager,r.education].join(" ").toLowerCase().includes(s)))});
+fetch("assets/madrasa-directory.json?v=20261002-2",{cache:"no-store"}).then(r=>r.json()).then(j=>{data=Array.isArray(j)?j:(j.madrasas||[]);count.textContent=data.length;render(data)}).catch(()=>{grid.innerHTML='<div class="empty">তথ্য লোড করা যায়নি। পরে আবার চেষ্টা করুন।</div>'});
+const applicationBox=document.getElementById("applicationBox"),applicationMobile=document.getElementById("applicationMobile"),applicationCheck=document.getElementById("applicationCheck"),applicationResult=document.getElementById("applicationResult");
+function showApplicationBox(){
+ const raw=q.value.trim(), isApp=/^WEFS\/APP\/\d{4}\/\d{8}$/i.test(raw);
+ applicationBox.style.display=isApp?"block":"none";applicationResult.textContent="";if(isApp)applicationMobile.focus();
+}
+applicationCheck.onclick=async()=>{
+ const no=q.value.trim(), m=WBUB_WORKFLOW.normalizeMobile(applicationMobile.value);
+ if(!/^[6-9]\d{9}$/.test(m)){applicationResult.style.color="#9a2525";applicationResult.textContent="সঠিক ১০ সংখ্যার মোবাইল নম্বর দিন।";return}
+ applicationCheck.disabled=true;applicationCheck.textContent="খোঁজা হচ্ছে…";
+ try{
+  const d=await WBUB_WORKFLOW.submitApplication({action:"madrasa_status",application_no:no,id:no,mobile:m});
+  const x=d&&((d.record&&typeof d.record==="object")?d.record:(d.data&&typeof d.data==="object"?d.data:d));
+  if(!d||d.found===false||d.ok===false&&!d.record)throw new Error((d&&d.error)||"NOT_FOUND");
+  const st=String((x&&((x.status||x.application_status||x.approval_status)))||"Pending");
+  const name=(x&&((x.name||x.madrasa_name)))||"";
+  applicationResult.style.color="#145b3d";
+  applicationResult.innerHTML="<b>📌 আবেদন পাওয়া গেছে</b><br>Application No: "+esc(no)+"<br>অবস্থা: <b>"+esc(st)+"</b>"+(name?"<br>মাদ্রাসা: <b>"+esc(name)+"</b>":"")+"<br><a href='madrasa-status.html' style='display:inline-block;margin-top:7px;color:#07513f;font-weight:900'>বিস্তারিত স্ট্যাটাস দেখুন →</a>";
+ }catch(e){applicationResult.style.color="#9a2525";applicationResult.textContent="আবেদন পাওয়া যায়নি। Application No ও মোবাইল নম্বর ঠিক আছে কিনা দেখুন।"}
+ finally{applicationCheck.disabled=false;applicationCheck.textContent="🔍 স্ট্যাটাস দেখুন"}
+};
+q.addEventListener("input",()=>{const s=q.value.trim().toLowerCase();render(data.filter(r=>[r.madrasa_id,r.name,r.address,r.manager,r.education].join(" ").toLowerCase().includes(s)));showApplicationBox()});
 })();
 </script>
 </body></html>
