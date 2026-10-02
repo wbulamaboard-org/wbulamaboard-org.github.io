@@ -88,7 +88,7 @@ if(r.education){const p=document.createElement("p");p.textContent="📚 "+r.educ
 const b=document.createElement("span");b.className="badge";b.textContent=r.status==="verified"?"✓ Verified Profile":"সংযুক্ত প্রোফাইল";c.appendChild(b);
 const acts=document.createElement("div");acts.className="actions";
 if(r.map){const a=document.createElement("a");a.className="secondary";a.target="_blank";a.rel="noopener";a.href=r.map;a.textContent="📍 Map";acts.appendChild(a)}
-if(r.profile){const a=document.createElement("a");a.href=r.profile;a.textContent="প্রোফাইল →";acts.appendChild(a)}
+const a=document.createElement("a");a.href="madrasa-profile.html?application_no="+encodeURIComponent(r.application_no||r.madrasa_id||"");a.textContent="প্রোফাইল →";acts.appendChild(a)
 c.appendChild(acts);grid.appendChild(c)
 })}
 count.textContent=data.length;render(data);
