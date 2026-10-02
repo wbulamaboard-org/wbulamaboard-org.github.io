@@ -91,6 +91,7 @@ if(r.map){const a=document.createElement("a");a.className="secondary";a.target="
 if(r.profile){const a=document.createElement("a");a.href=r.profile;a.textContent="প্রোফাইল →";acts.appendChild(a)}
 c.appendChild(acts);grid.appendChild(c)
 })}
+count.textContent=data.length;render(data);
 fetch("assets/madrasa-directory.json?v=20261002-4",{cache:"no-store"})
 .then(r=>r.json())
 .then(j=>{data=Array.isArray(j)?j:(j.madrasas||[]);count.textContent=data.length;render(data)})
