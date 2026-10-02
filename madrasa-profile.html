@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MADRASA NIJAMIYA — Digital Profile</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f8f6;color:#123f35;font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif}
+header{background:linear-gradient(135deg,#064b3d,#08765e);color:#fff;padding:28px 18px 34px}header .wrap,.wrap{max-width:920px;margin:auto}
+.brand{font-weight:800;letter-spacing:.3px}.arabic{font-size:20px;margin-bottom:4px}.brand small{opacity:.8}
+.hero{margin:-18px auto 18px;background:#fff;border-radius:24px;padding:24px;box-shadow:0 12px 30px #064b3d18;border:1px solid #dce9e3}
+.id{display:inline-block;background:#fff5c9;color:#765f0b;border:1px solid #ead88b;border-radius:30px;padding:8px 14px;font-weight:800;font-size:13px}
+h1{font-size:30px;margin:14px 0 8px}.sub{color:#6b7c76}.status{display:inline-block;margin-top:10px;background:#e4f6ed;color:#126044;border-radius:20px;padding:7px 12px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}.card{background:#fff;border:1px solid #dce8e2;border-radius:18px;padding:18px;box-shadow:0 5px 18px #064b3d0d}.card h2{font-size:19px;margin:0 0 13px;color:#07513f}.row{padding:8px 0;border-bottom:1px dashed #dce5e1}.row:last-child{border-bottom:0}.label{font-size:12px;color:#73827d}.value{font-weight:650;margin-top:2px;white-space:pre-wrap}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.btn{display:inline-block;text-decoration:none;border:0;border-radius:12px;padding:11px 15px;background:#08765e;color:#fff;font-weight:800}.btn.alt{background:#edf5f1;color:#07513f}.empty{color:#788680;padding:14px 0}footer{padding:28px 18px;color:#718079;text-align:center;font-size:12px}
+.file{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #edf1ef}.file a{color:#08765e;font-weight:700;text-decoration:none}
+@media(max-width:600px){h1{font-size:25px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="arabic">واعظینِ فرفورہ شریف</div><div class="brand">WAYEJIN E FURFURA SHARIF <small>• WEST BENGAL ULAMA BOARD</small></div></div></header>
+<main class="wrap">
+<section class="hero">
+<div class="id" id="appNo">WEFS/APP/2026/00000012</div>
+<h1 id="name">MADRASA NIJAMIYA</h1>
+<div class="sub">ডিজিটাল মাদ্রাসা প্রোফাইল</div>
+<div class="status" id="status">সংযুক্ত প্রোফাইল</div>
+<div class="actions"><a class="btn" href="madrasa-directory.html">← মাদ্রাসা ডিরেক্টরি</a><a class="btn alt" id="statusLink" href="#">আবেদনের স্ট্যাটাস</a></div>
+</section>
+<section class="grid">
+<div class="card"><h2>🏫 মাদ্রাসার পরিচিতি</h2><div id="basic"><div class="row"><div class="label">মাদ্রাসার নাম</div><div class="value">MADRASA NIJAMIYA</div></div><div class="row"><div class="label">Application No</div><div class="value">WEFS/APP/2026/00000012</div></div></div></div>
+<div class="card"><h2>📞 যোগাযোগ</h2><div id="contact"><div class="row"><div class="label">মোবাইল</div><div class="value">9732111888</div></div></div></div>
+<div class="card"><h2>📚 শিক্ষা ও প্রশাসন</h2><div id="education"><div class="empty">তথ্য লোড হচ্ছে…</div></div></div>
+<div class="card"><h2>🖼️ Gallery / ছবি</h2><div id="gallery"><div class="empty">কোনো ছবি যুক্ত নেই।</div></div></div>
+<div class="card"><h2>📄 Documents</h2><div id="documents"><div class="empty">কোনো ডকুমেন্ট যুক্ত নেই।</div></div></div>
+<div class="card"><h2>👨‍🏫 শিক্ষক ও 👨‍🎓 শিক্ষার্থী</h2><div id="people"><div class="empty">তথ্য লোড হচ্ছে…</div></div></div>
+</section>
+</main>
+<footer>এই প্রোফাইল ওলামা বোর্ডের সাংগঠনিক সংযুক্তি ও তথ্য-সমন্বয় প্ল্যাটফর্ম। সরকারি স্বীকৃতির দাবি বোঝায় না।</footer>
+<script src="assets/member-workflow.js?v=20261002-1"></script>
+<script>
+const APP=new URLSearchParams(location.search).get("application_no")||"WEFS/APP/2026/00000012";
+const esc=v=>String(v==null?"":v);
+document.getElementById("statusLink").href="madrasa-status.html?application_no="+encodeURIComponent(APP);
+function rows(obj,fields){return fields.map(([k,l])=>obj[k]!=null&&obj[k]!==""?'<div class="row"><div class="label">'+esc(l)+'</div><div class="value">'+esc(obj[k])+'</div></div>':"").join("")||'<div class="empty">তথ্য পাওয়া যায়নি।</div>'}
+function files(list){
+return (Array.isArray(list)?list:[]).map(f=>'<div class="file"><span>'+esc(f.file_name||f.name||"File")+'</span>'+(f.url||f.file_url||f.download_url?'<a target="_blank" href="'+esc(f.url||f.file_url||f.download_url)+'">দেখুন</a>':"")).join("")||'<div class="empty">কোনো ফাইল যুক্ত নেই।</div>';
+}
+(async()=>{
+try{
+ const d=await WBUB_WORKFLOW.submitApplication({action:"madrasa_profile",application_no:APP,id:APP});
+ const x=d&&((d.record&&typeof d.record==="object")?d.record:(d.data&&typeof d.data==="object"?d.data:d));
+ if(x&&typeof x==="object"){
+  document.getElementById("name").textContent=x.name||x.madrasa_name||"MADRASA NIJAMIYA";
+  document.getElementById("status").textContent=x.status||x.application_status||"সংযুক্ত প্রোফাইল";
+  document.getElementById("basic").innerHTML=rows(x,[["name","মাদ্রাসার নাম"],["manager","পরিচালক/ম্যানেজার"],["registration_no","রেজিস্ট্রেশন নম্বর"],["pan","PAN"],["established","প্রতিষ্ঠার সাল"],["education","শিক্ষা কার্যক্রম"],["district","জেলা"],["block","ব্লক"],["post","পোস্ট"],["pin","PIN"],["address","ঠিকানা"],["about","পরিচিতি"]]);
+  document.getElementById("contact").innerHTML=rows(x,[["phone","মোবাইল"],["whatsapp","WhatsApp"],["committee_president","কমিটি সভাপতি"],["committee_phone","সভাপতির ফোন"]]);
+  document.getElementById("education").innerHTML=rows(x,[["education","শিক্ষা কার্যক্রম"],["teachers","শিক্ষক সংখ্যা/তথ্য"],["students","শিক্ষার্থী সংখ্যা/তথ্য"]]);
+  document.getElementById("people").innerHTML=rows(x,[["teachers","শিক্ষক"],["students","শিক্ষার্থী"]]);
+ }
+ const f=await WBUB_WORKFLOW.submitApplication({action:"madrasa_files",madrasa_id:APP});
+ const list=f&&(f.files||f.records||f.data||[]);
+ document.getElementById("gallery").innerHTML=files((Array.isArray(list)?list:[]).filter(z=>["photo","gallery"].includes(String(z.category||"").toLowerCase())));
+ document.getElementById("documents").innerHTML=files((Array.isArray(list)?list:[]).filter(z=>!["photo","gallery","teacher","student"].includes(String(z.category||"").toLowerCase())));
+}catch(e){document.getElementById("education").innerHTML='<div class="empty">বর্তমানে বিস্তারিত তথ্য সার্ভার থেকে পাওয়া যায়নি।</div>';document.getElementById("people").innerHTML='<div class="empty">বর্তমানে বিস্তারিত তথ্য সার্ভার থেকে পাওয়া যায়নি।</div>';}
+})();
+</script>
+</body></html>
