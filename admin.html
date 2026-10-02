@@ -50,7 +50,7 @@ button{border:0;border-radius:9px;padding:11px 15px;font-weight:900;cursor:point
 <div class="panel" id="listPanel" hidden><div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap"><div><h2 style="margin:0">Pending Applications</h2><p class="muted" style="margin:5px 0 0">Approve করলে আবেদন APPROVED হবে।</p></div><button class="secondary" id="refresh">↻ Refresh</button><a href="wazeen-admin.html" style="text-decoration:none"><button type="button" class="primary">🎙️ Leadership Management</button></a></div><div id="list"></div></div>
 </div></section></main>
 <script>
-const API="https://script.google.com/macros/s/AKfycbyPeDxvvzwhGdIukIaQUEqZsPmXet4K-niN16XusC8z-G27PsA_pf1CzMLs9Cw6dTUqcg/exec";
+const API="https://script.google.com/macros/s/AKfycbzeuVRl-OYsiDU-Oc_YfDUKywTJ6bVTerzB0SvA0sjJO0iLpQ3XSyibbZ5pS1592hdHwA/exec";
 const key=document.getElementById("key"),loadBtn=document.getElementById("load"),refresh=document.getElementById("refresh"),msg=document.getElementById("msg"),list=document.getElementById("list"),panel=document.getElementById("listPanel");
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
 function show(type,t){msg.className="msg "+type;msg.textContent=t;msg.hidden=false}
