@@ -29,7 +29,7 @@ h1{font-size:30px;margin:14px 0 8px}.sub{color:#6b7c76}.status{display:inline-bl
 <h2>📂 মাদ্রাসার সম্পূর্ণ ডকুমেন্ট ও মিডিয়া সেন্টার</h2>
 <p class="sub">এখান থেকে মাদ্রাসার ছবি, Gallery, রেজিস্ট্রেশন/অন্যান্য PDF, শিক্ষক ও শিক্ষার্থীর নথি এবং বোর্ড-প্রদত্ত সার্টিফিকেট/আইডি সংরক্ষণ ও দেখানো হবে।</p>
 <div class="actions">
-<a class="btn" href="madrasa-registration.html">⬆️ নতুন তথ্য / ফাইল আপলোড</a>
+<a class="btn" id="uploadLink" href="#">⬆️ নতুন তথ্য / ফাইল আপলোড</a>
 <a class="btn alt" href="madrasa-status.html?application_no=WEFS%2FAPP%2F2026%2F00000012">📌 আবেদন স্ট্যাটাস</a>
 </div>
 <div class="grid" style="margin-top:16px">
@@ -55,6 +55,7 @@ h1{font-size:30px;margin:14px 0 8px}.sub{color:#6b7c76}.status{display:inline-bl
 const APP=new URLSearchParams(location.search).get("application_no")||"WEFS/APP/2026/00000012";
 const esc=v=>String(v==null?"":v);
 document.getElementById("statusLink").href="madrasa-status.html?application_no="+encodeURIComponent(APP);
+document.getElementById("uploadLink").href="madrasa-upload.html?application_no="+encodeURIComponent(APP);
 function rows(obj,fields){return fields.map(([k,l])=>obj[k]!=null&&obj[k]!==""?'<div class="row"><div class="label">'+esc(l)+'</div><div class="value">'+esc(obj[k])+'</div></div>':"").join("")||'<div class="empty">তথ্য পাওয়া যায়নি।</div>'}
 function files(list){
 return (Array.isArray(list)?list:[]).map(f=>'<div class="file"><span>'+esc(f.file_name||f.name||"File")+'</span>'+(f.url||f.file_url||f.download_url?'<a target="_blank" href="'+esc(f.url||f.file_url||f.download_url)+'">দেখুন</a>':"")).join("")||'<div class="empty">কোনো ফাইল যুক্ত নেই।</div>';
