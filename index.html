@@ -1010,7 +1010,7 @@ nav{gap:17px;font-size:11px}nav a{padding:35px 0 11px;border-bottom-width:2px}na
       <div><span class="gallery-kicker">UPCOMING EVENT</span><h2 class="section-title">আসন্ন অনুষ্ঠান</h2></div>
       <a class="gallery-all" href="news-events.html">সব অনুষ্ঠান →</a>
     </div>
-    <a class="upcoming-event-card" href="news-events.html">
+    <a class="upcoming-event-card" data-event-date="2026-10-01" href="news-events.html">
       <div class="upcoming-event-date"><b>01</b><span>অক্টোবর<br>২০২৬</span></div>
       <div class="upcoming-event-info">
         <strong>পবিত্র ঈদে মিলাদুন্নবী ﷺ উপলক্ষে জিকির ও ওয়াজ মাহফিল</strong>
@@ -1022,6 +1022,35 @@ nav{gap:17px;font-size:11px}nav a{padding:35px 0 11px;border-bottom-width:2px}na
     </a>
   </div>
 </section>
+<script id="wbub-auto-hide-past-events">
+(function(){
+  function hidePastEvents(){
+    var section=document.querySelector('.upcoming-events');
+    if(!section)return;
+    var cards=section.querySelectorAll('.upcoming-event-card[data-event-date]');
+    var now=new Date();
+    var today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+    var visible=0;
+    cards.forEach(function(card){
+      var raw=card.getAttribute('data-event-date')||'';
+      var parts=raw.split('-').map(Number);
+      if(parts.length!==3 || parts.some(function(n){return !isFinite(n);})) return;
+      var eventDay=new Date(parts[0],parts[1]-1,parts[2]);
+      if(today>eventDay){
+        card.remove();
+      }else{
+        visible++;
+      }
+    });
+    if(cards.length && visible===0) section.style.display='none';
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',hidePastEvents);
+  }else{
+    hidePastEvents();
+  }
+})();
+</script>
 
 
 <section class="home-quick-services" aria-label="সদস্য ও যুব সেবা">
