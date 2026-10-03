@@ -136,8 +136,16 @@ async function loadM(){
  try{
   var d=await api({action:"pending",admin_key:key.value.trim()});
   if(!d||d.ok!==true)throw new Error(d&&d.error||"LIST_FAILED");
-  var a=(d.records||[]).filter(function(r){return String(r.application_type||"").toLowerCase()==="madrasa_directory"||String(r.category||"").toLowerCase()==="madrasa"});
-  if(!a.length){try{var s=await api({action:"madrasa_status",application_no:"WEFS/APP/2026/00000012",mobile:"9732111888",id:"WEFS/APP/2026/00000012"});if(s&&s.found!==false){a=[s.record||s.data||{application_no:"WEFS/APP/2026/00000012",name:"MADRASA NIJAMIYA",mobile:"9732111888",status:"Pending"}];}else{list.innerHTML="<div class='empty'>কোনো Pending Madrasa Application নেই।</div>";return}}catch(e){list.innerHTML="<div class='empty'>কোনো Pending Madrasa Application নেই।</div>";return}}
+  var a=(d.records||[]).filter(function(r){
+   var type=String(r.application_type||"").toLowerCase();
+   var cat=String(r.category||"").toLowerCase();
+   var status=String(r.status||"").toLowerCase();
+   return (type==="madrasa_directory"||cat==="madrasa") && (!status || status==="pending" || status==="unpaid");
+  });
+  if(!a.length){
+   list.innerHTML="<div class='empty'>কোনো Pending Madrasa Application নেই। Approved আবেদন আর এখানে দেখানো হবে না।</div>";
+   return;
+  }
   list.innerHTML=a.map(function(r,i){
    return "<div class='row'><h3 style='margin:0 0 10px'>🏫 "+esc(r.name||"Madrasa")+" <span class='status'>["+esc(r.status||"PENDING")+"]</span></h3>"+
    "<div class='grid'><div><span class='muted'>Application</span><br><strong>"+esc(r.application_no)+"</strong></div><div><span class='muted'>Mobile</span><br><strong>"+esc(r.mobile)+"</strong></div><div><span class='muted'>District</span><br><strong>"+esc(r.district)+"</strong></div><div><span class='muted'>Manager</span><br><strong>"+esc(r.manager||"—")+"</strong></div></div>"+
