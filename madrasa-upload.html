@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>মাদ্রাসা ফাইল আপলোড — WAYEJIN E FURFURA SHARIF</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f8f6;color:#123f35;font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif}
+header{background:linear-gradient(135deg,#064b3d,#08765e);color:#fff;padding:28px 18px 34px}
+.wrap{max-width:720px;margin:auto}.arabic{font-size:20px;margin-bottom:4px}.brand{font-weight:800}.brand small{opacity:.8}
+.card{background:#fff;border:1px solid #dce8e2;border-radius:22px;padding:22px;margin:18px 0;box-shadow:0 8px 24px #064b3d10}
+.id{display:inline-block;background:#fff5c9;color:#765f0b;border:1px solid #ead88b;border-radius:30px;padding:8px 14px;font-weight:800;font-size:13px}
+h1{font-size:27px;margin:14px 0 6px}.sub{color:#718079;line-height:1.7}
+label{display:block;font-weight:750;margin:16px 0 7px;color:#07513f}
+select,input{width:100%;padding:14px;border:1px solid #cddbd5;border-radius:13px;background:#fff;font:inherit;color:#123f35}
+.btn{width:100%;border:0;border-radius:13px;padding:14px;background:#08765e;color:#fff;font-weight:800;font-size:16px;margin-top:16px}
+.btn:disabled{opacity:.65}.back{display:inline-block;text-decoration:none;background:#edf5f1;color:#07513f;border-radius:12px;padding:11px 14px;font-weight:800;margin-top:8px}
+.message{padding:13px 15px;border-radius:13px;margin-top:14px;line-height:1.5}.success{background:#e4f6ed;color:#126044}.error{background:#fff0f0;color:#9a2929}
+.file{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #edf1ef}.file:last-child{border-bottom:0}.file a{color:#08765e;font-weight:750;text-decoration:none;white-space:nowrap}
+.empty{color:#788680;padding:10px 0}footer{text-align:center;color:#718079;font-size:12px;padding:10px 18px 30px}
+@media(max-width:600px){h1{font-size:24px}.card{padding:18px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="arabic">واعظینِ فرفورہ شریف</div><div class="brand">WAYEJIN E FURFURA SHARIF <small>• WEST BENGAL ULAMA BOARD</small></div></div></header>
+<main class="wrap">
+<section class="card">
+<div class="id" id="appNo">Application No</div>
+<h1>📂 মাদ্রাসার ছবি ও ফাইল আপলোড</h1>
+<div class="sub">এই পেজ থেকে সরাসরি অনুমোদিত মাদ্রাসার ছবি, Gallery, PDF/Document, শিক্ষক ও শিক্ষার্থীর ফাইল যুক্ত করতে পারবেন।</div>
+<a class="back" id="profileLink" href="#">← মাদ্রাসা প্রোফাইলে ফিরুন</a>
+</section>
+
+<section class="card">
+<h2>⬆️ নতুন ফাইল আপলোড</h2>
+<label for="fileCategory">ফাইলের ধরন</label>
+<select id="fileCategory">
+<option value="photo">📷 মাদ্রাসার মূল ছবি / Logo</option>
+<option value="gallery">🖼️ Gallery Photo</option>
+<option value="documents">📄 Registration / অন্যান্য Document</option>
+<option value="teacher">👨‍🏫 Teacher File</option>
+<option value="student">👨‍🎓 Student File</option>
+</select>
+<label for="fileInput">ফাইল নির্বাচন করুন</label>
+<input id="fileInput" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf">
+<div class="sub" style="margin-top:8px">সর্বোচ্চ ৮ MB • JPG, PNG, WebP অথবা PDF</div>
+<button class="btn" id="uploadFile">⬆️ ফাইল আপলোড করুন</button>
+<div id="fileMsg" class="message" hidden></div>
+</section>
+
+<section class="card">
+<h2>📁 আপলোড করা ফাইল</h2>
+<div id="fileList"><div class="empty">ফাইল তালিকা লোড হচ্ছে…</div></div>
+</section>
+</main>
+<footer>এই প্রোফাইল ওলামা বোর্ডের সাংগঠনিক সংযুক্তি ও তথ্য-সমন্বয় প্ল্যাটফর্ম।</footer>
+
+<script src="assets/member-workflow.js?v=20261002-1"></script>
+<script>
+const APP=new URLSearchParams(location.search).get("application_no")||"";
+const esc=v=>String(v==null?"":v);
+const appNo=document.getElementById("appNo"),fileInput=document.getElementById("fileInput"),fileCategory=document.getElementById("fileCategory"),uploadFile=document.getElementById("uploadFile"),fileMsg=document.getElementById("fileMsg"),fileList=document.getElementById("fileList");
+appNo.textContent=APP||"Application No missing";
+document.getElementById("profileLink").href=APP?"madrasa-profile.html?application_no="+encodeURIComponent(APP):"madrasa-directory.html";
+function show(t,c){fileMsg.className="message "+c;fileMsg.textContent=t;fileMsg.hidden=false}
+function size(n){if(n<1024)return n+" B";if(n<1024*1024)return (n/1024).toFixed(1)+" KB";return (n/1024/1024).toFixed(1)+" MB"}
+async function loadFiles(){
+ if(!APP){fileList.innerHTML='<div class="message error">Application No পাওয়া যায়নি। প্রোফাইল থেকে আবার File Upload খুলুন।</div>';return}
+ try{
+  const d=await WBUB_WORKFLOW.submitApplication({action:"madrasa_files",madrasa_id:APP});
+  const files=(d&&d.files)||[];
+  fileList.innerHTML=files.length?files.map(x=>'<div class="file"><div><b>'+esc(x.name||x.file_name||"ফাইল")+'</b><div class="sub">'+esc(x.mime_type||"")+" • "+size(Number(x.size||0))+'</div></div><div>'+(x.url?'<a target="_blank" rel="noopener" href="'+esc(x.url)+'">খুলুন</a>':"")+(x.download_url?' &nbsp;<a target="_blank" rel="noopener" href="'+esc(x.download_url)+'">ডাউনলোড</a>':"")+'</div></div>').join(""):'<div class="empty">এখনও কোনো ফাইল আপলোড করা হয়নি।</div>';
+ }catch(e){fileList.innerHTML='<div class="message error">ফাইল তালিকা এখন লোড করা যাচ্ছে না।</div>'}
+}
+function readData(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(String(r.result||""));r.onerror=()=>reject(new Error("FILE_READ_FAILED"));r.readAsDataURL(file)})}
+uploadFile.onclick=async()=>{
+ const file=fileInput.files&&fileInput.files[0];
+ if(!APP){show("Application No পাওয়া যায়নি।","error");return}
+ if(!file){show("আগে একটি ফাইল নির্বাচন করুন।","error");return}
+ if(file.size>8*1024*1024){show("ফাইলের আকার ৮ MB-এর বেশি হতে পারবে না।","error");return}
+ const allowed=["image/jpeg","image/png","image/webp","application/pdf"];
+ if(!allowed.includes(file.type)){show("শুধু JPG, PNG, WebP অথবা PDF ফাইল আপলোড করা যাবে।","error");return}
+ uploadFile.disabled=true;uploadFile.textContent="আপলোড হচ্ছে…";
+ try{
+  const data=await readData(file);
+  const d=await WBUB_WORKFLOW.submitApplication({action:"madrasa_upload",madrasa_id:APP,category:fileCategory.value,file_name:file.name,mime_type:file.type,base64:data});
+  if(!d||!d.ok)throw new Error((d&&d.error)||"UPLOAD_FAILED");
+  fileInput.value="";show("✅ ফাইল সফলভাবে আপলোড হয়েছে।","success");await loadFiles();
+ }catch(e){show("ফাইল আপলোড করা যায়নি। "+(e&&e.message?e.message:"আবার চেষ্টা করুন।"),"error")}
+ finally{uploadFile.disabled=false;uploadFile.textContent="⬆️ ফাইল আপলোড করুন"}
+};
+loadFiles();
+</script>
+</body>
+</html>
