@@ -68,8 +68,7 @@
   document.getElementById("area").textContent=t(m.area||m.block);
   document.getElementById("phone").textContent=t(m.phone);
   document.getElementById("valid").textContent=t(m.valid_till||m.validity);
-  const photo=m.photo_url||m.photo||"";
-  if(photo){const p=document.getElementById("memberPhoto");p.src=photo;p.style.display="block";}
+  const photo=m.photo_url||m.photo||""; // Photo intentionally disabled on the ID card.
   const verify=new URL("verification.html?id="+encodeURIComponent(m.member_id),location.href).href;
   const qr=document.getElementById("frontQr");
   qr.innerHTML="";
