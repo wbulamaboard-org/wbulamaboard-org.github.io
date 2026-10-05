@@ -70,14 +70,8 @@
   document.getElementById("phone").textContent=t(m.phone);
   document.getElementById("valid").textContent=t(m.valid_till||m.validity);
   const photo=document.getElementById("memberPhoto");
-  const memberPhotoUrl=String(m.photo_url||"").trim();
-  if(memberPhotoUrl){
-   photo.src=memberPhotoUrl+"?v=20261005-3";
-   photo.style.display="block";
-   photo.onerror=()=>{photo.style.display="none"};
-  }else{
-   photo.style.display="none";
-  }
+  photo.removeAttribute("src");
+  photo.style.display="none";
   const verify="https://wbulamaboard-org.github.io/verification.html?id="+encodeURIComponent(m.member_id);
   const qr=document.getElementById("frontQr");
   qr.innerHTML="";
