@@ -70,11 +70,11 @@
   document.getElementById("phone").textContent=t(m.phone);
   document.getElementById("valid").textContent=t(m.valid_till||m.validity);
   const photo=document.getElementById("memberPhoto");
-  if(String(m.member_id||"").toUpperCase()==="WBUB-0003"){
-   photo.src="assets/member-photos/WBUB-0003.png?v=20261005-1";
-   photo.style.display="block";
-   photo.onerror=()=>{photo.style.display="none"};
-  }else{photo.style.display="none"}
+  const memberId=String(m.member_id||"").trim().toUpperCase();
+  const photoExt=memberId==="WBUB-0003"?"png":"jpg";
+  photo.src="assets/member-photos/"+memberId+"."+photoExt+"?v=20261005-2";
+  photo.style.display="block";
+  photo.onerror=()=>{photo.style.display="none"};
   const verify="https://wbulamaboard-org.github.io/verification.html?id="+encodeURIComponent(m.member_id);
   const qr=document.getElementById("frontQr");
   qr.innerHTML="";
