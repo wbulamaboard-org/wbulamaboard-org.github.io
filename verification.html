@@ -27,7 +27,7 @@ function esc(v){return String(v??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt
 function generateQR(memberId){
  const box=document.getElementById("qrcode"); if(!box)return;
  box.innerHTML="";
- const verifyUrl=new URL("verification.html?id="+encodeURIComponent(memberId),location.href).href;
+ const verifyUrl="https://wbulamaboard-org.github.io/verification.html?id="+encodeURIComponent(memberId);
  if(window.QRCode){new QRCode(box,{text:verifyUrl,width:150,height:150,correctLevel:QRCode.CorrectLevel.M});}
 }
 async function loadMembers(){if(MEMBERS.length)return;const r=await fetch("assets/master-member-database.json?v=20260929-1",{cache:"no-store"});MEMBERS=await r.json()}
