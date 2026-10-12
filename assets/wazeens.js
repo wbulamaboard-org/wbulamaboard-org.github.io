@@ -14,7 +14,7 @@
   };
 
   async function members(){
-    const res=await fetch("assets/master-member-database.json?v=20260930-15",{cache:"no-store"});
+    const res=await fetch("assets/master-member-database.json?v=20261012-1",{cache:"no-store"});
     if(!res.ok) throw new Error("database");
     const data=await res.json();
     return Array.isArray(data)?data.filter(x=>x&&x.active!==false):[];
