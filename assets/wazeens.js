@@ -11,7 +11,7 @@
     if(clean) return clean;
     const p=String(r?.photo_url||r?.photo||"").trim();
     const memberId=String(r?.member_id||"").toUpperCase();
-    const version=memberId==="WBUB-0090"?"v=20261105-1":memberId==="WBUB-0124"?"v=20261105-2":"v=20261001-3";
+    const version=memberId==="WBUB-0090"?"v=20261105-1":memberId==="WBUB-0124"?"v=20261105-3":"v=20261001-3";
     return p ? p + (p.includes("?")?"&":"?") + version : "";
   };
 
