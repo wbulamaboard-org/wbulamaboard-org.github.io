@@ -9,7 +9,7 @@
 .sticker{position:relative;width:100%;aspect-ratio:2.4/1;overflow:hidden;background:#fff;border-radius:18px;box-shadow:0 0 0 5px #071b58,0 0 0 8px #e6b93f}
 .sticker-art{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block}
 /* Hide the QR/logo and scan text baked into the artwork; the live member QR is rendered above this clean white panel. */
-.qr-cleanup{position:absolute;left:81.2%;top:36.8%;width:16.8%;height:46.5%;background:#fff;border:2px solid #071b58;border-radius:8px;z-index:3}
+.qr-cleanup{position:absolute;left:80.2%;top:34%;width:18.8%;height:48%;background:#fff;border:2px solid #071b58;border-radius:8px;z-index:3}
 .bike-qr{position:absolute;left:82.3%;top:40.2%;width:14.4%;aspect-ratio:1;background:#fff;padding:3px;border:2px solid #071b58;border-radius:7px;display:flex;align-items:center;justify-content:center;z-index:4}
 .bike-qr canvas,.bike-qr img{width:100%!important;height:100%!important;display:block!important}
 .qr-label{position:absolute;left:82%;top:75.2%;width:15%;text-align:center;font-size:clamp(6px,.85vw,10px);font-weight:900;color:#071b58;z-index:5}
@@ -17,7 +17,7 @@
 @media(max-width:600px){.stage{padding:14px 9px}.sticker{border-radius:12px}.bike-qr{padding:2px;border-width:1px}.qr-label{font-size:5px}}
 @media print{@page{size:A5 landscape;margin:0}body{background:#fff}.actions,.caption{display:none!important}.stage{width:210mm;height:148.5mm;margin:0;padding:18mm 5mm;box-shadow:none;border-radius:0}.sticker{width:200mm;height:83.33mm;margin:0 auto;aspect-ratio:auto;box-shadow:0 0 0 1.2mm #071b58,0 0 0 2mm #e6b93f;border-radius:4mm}}
 </style></head><body>
-<div class="actions"><a class="btn" href="index.html">← হোম</a><button class="btn" onclick="window.print()">🖨️ A4-এর হাফ সাইজে প্রিন্ট</button><span class="note">প্রিন্ট পেপার: A5 Landscape (A4-এর অর্ধেক) • 300 DPI উপযোগী ডিজাইন</span></div>
+<div class="actions"><a class="btn" href="index.html">← হোম</a><button class="btn" onclick="downloadBikeSticker()">⬇️ PNG ডাউনলোড</button><button class="btn" onclick="window.print()">🖨️ প্রিন্ট</button><span class="note">প্রিন্ট পেপার: A5 Landscape (A4-এর অর্ধেক) • 300 DPI উপযোগী ডিজাইন</span></div>
 <div class="stage"><div class="sticker">
 <img class="sticker-art" src="assets/WBUB_Bike_Sticker_Final-1.jpg?v=20261105-1" alt="West Bengal Ulama Board final bike sticker design">
 <div class="qr-cleanup" aria-hidden="true"></div><div class="bike-qr" id="bikeQr" role="img" aria-label="প্রত্যেক সদস্যের আলাদা QR যাচাইকরণ কোড"></div>
@@ -48,4 +48,28 @@
   cap.textContent=(person.name||"সদস্য")+" • "+(person.member_id||id)+" • QR স্ক্যান করে সদস্য যাচাই করুন";
  }catch(e){box.style.display="none";label.style.display="none";cap.textContent="সদস্যের QR তৈরি করা যায়নি। আবার চেষ্টা করুন।";}
 })();
+
+async function downloadBikeSticker(){
+ const id=new URLSearchParams(location.search).get("id")||"";
+ const img=document.querySelector(".sticker-art");
+ const qr=document.querySelector("#bikeQr canvas, #bikeQr img");
+ if(!id||!qr){alert("সদস্যের QR তৈরি হওয়ার পর ডাউনলোড করুন।");return;}
+ try{
+  const canvas=document.createElement("canvas");canvas.width=3450;canvas.height=1438;
+  const ctx=canvas.getContext("2d");
+  await new Promise((resolve,reject)=>{if(img.complete&&img.naturalWidth)resolve();else{img.onload=resolve;img.onerror=reject;}});
+  ctx.drawImage(img,0,0,canvas.width,canvas.height);
+  const sx=canvas.width,sy=canvas.height;
+  const rx=.802*sx,ry=.34*sy,rw=.188*sx,rh=.48*sy;
+  ctx.fillStyle="#fff";ctx.fillRect(rx,ry,rw,rh);
+  ctx.strokeStyle="#071b58";ctx.lineWidth=12;ctx.strokeRect(rx+8,ry+8,rw-16,rh-16);
+  const qx=.823*sx,qy=.402*sy,qw=.144*sx;
+  if(qr.tagName==="CANVAS")ctx.drawImage(qr,qx,qy,qw,qw);else{
+   const qimg=new Image();qimg.crossOrigin="anonymous";qimg.src=qr.src;
+   await new Promise((resolve,reject)=>{qimg.onload=resolve;qimg.onerror=reject;});ctx.drawImage(qimg,qx,qy,qw,qw);
+  }
+  ctx.fillStyle="#071b58";ctx.font="bold 34px Arial";ctx.textAlign="center";ctx.fillText("SCAN TO VERIFY",.895*sx,.752*sy);
+  const a=document.createElement("a");a.download="WBUB-Bike-Sticker-"+id+".png";a.href=canvas.toDataURL("image/png");a.click();
+ }catch(e){alert("ডাউনলোড তৈরি করা যায়নি। পেজটি রিফ্রেশ করে আবার চেষ্টা করুন।");}
+}
 </script></body></html>
