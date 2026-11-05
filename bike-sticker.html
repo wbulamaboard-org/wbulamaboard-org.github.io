@@ -8,6 +8,8 @@
 .stage{width:min(1000px,calc(100% - 24px));margin:0 auto 30px;background:#fff;padding:24px 16px;box-shadow:0 12px 30px #0002;border-radius:14px}
 .sticker{position:relative;width:100%;aspect-ratio:2.4/1;overflow:hidden;background:#fff;border-radius:18px;box-shadow:0 0 0 5px #071b58,0 0 0 8px #e6b93f}
 .sticker-art{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block}
+/* Hide the QR/logo and scan text baked into the artwork; the live member QR is rendered above this clean white panel. */
+.qr-cleanup{position:absolute;left:81.2%;top:36.8%;width:16.8%;height:46.5%;background:#fff;border:2px solid #071b58;border-radius:8px;z-index:3}
 .bike-qr{position:absolute;left:82.3%;top:40.2%;width:14.4%;aspect-ratio:1;background:#fff;padding:3px;border:2px solid #071b58;border-radius:7px;display:flex;align-items:center;justify-content:center;z-index:4}
 .bike-qr canvas,.bike-qr img{width:100%!important;height:100%!important;display:block!important}
 .qr-label{position:absolute;left:82%;top:75.2%;width:15%;text-align:center;font-size:clamp(6px,.85vw,10px);font-weight:900;color:#071b58;z-index:5}
@@ -18,7 +20,7 @@
 <div class="actions"><a class="btn" href="index.html">← হোম</a><button class="btn" onclick="window.print()">🖨️ A4-এর হাফ সাইজে প্রিন্ট</button><span class="note">প্রিন্ট পেপার: A5 Landscape (A4-এর অর্ধেক) • 300 DPI উপযোগী ডিজাইন</span></div>
 <div class="stage"><div class="sticker">
 <img class="sticker-art" src="assets/WBUB_Bike_Sticker_Final-1.jpg?v=20261105-1" alt="West Bengal Ulama Board final bike sticker design">
-<div class="bike-qr" id="bikeQr" role="img" aria-label="প্রত্যেক সদস্যের আলাদা QR যাচাইকরণ কোড"></div>
+<div class="qr-cleanup" aria-hidden="true"></div><div class="bike-qr" id="bikeQr" role="img" aria-label="প্রত্যেক সদস্যের আলাদা QR যাচাইকরণ কোড"></div>
 <div class="qr-label">SCAN TO VERIFY</div>
 </div><div class="caption" id="caption">নতুন অনুমোদিত বাইক স্টিকার • সদস্যভিত্তিক QR যাচাইকরণ</div></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js'"></script>
