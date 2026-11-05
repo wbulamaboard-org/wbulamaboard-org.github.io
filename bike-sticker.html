@@ -12,9 +12,9 @@
 .qr-cleanup{position:absolute;left:80.2%;top:37.8%;width:17%;height:37%;background:#fff;border:0;border-radius:0;z-index:3}
 .bike-qr{position:absolute;left:82.1%;top:40.5%;width:14%;aspect-ratio:1;background:#fff;padding:3px;border:2px solid #071b58;border-radius:7px;display:flex;align-items:center;justify-content:center;z-index:4}
 .bike-qr canvas,.bike-qr img{width:100%!important;height:100%!important;display:block!important}
-.member-name{position:absolute;left:9.8%;top:84.3%;width:54.8%;text-align:center;font-size:clamp(9px,1.4cqw,18px);font-weight:900;line-height:1.1;color:#071b58;z-index:5;overflow-wrap:anywhere}.member-id{position:absolute;left:73.1%;top:84.3%;width:24.8%;text-align:center;font-size:clamp(8px,1.2cqw,16px);font-weight:800;color:#071b58;z-index:5}.qr-label{position:absolute;left:80.6%;top:69.5%;width:16.2%;text-align:center;font-size:clamp(7px,1.1cqw,14px);font-weight:900;color:#071b58;z-index:5;text-align:center;font-size:clamp(6px,.85vw,10px);font-weight:900;color:#071b58;z-index:5}
+.member-name{position:absolute;left:9.8%;top:84.3%;width:54.8%;text-align:center;font-size:clamp(12px,2.25cqw,27px);font-weight:900;line-height:1.1;color:#071b58;z-index:5;overflow-wrap:anywhere}.member-id{position:absolute;left:73.1%;top:84.3%;width:24.8%;text-align:center;font-size:clamp(11px,2.05cqw,25px);font-weight:800;color:#071b58;z-index:5}.qr-label{position:absolute;left:80.6%;top:69.5%;width:16.2%;text-align:center;font-size:clamp(7px,1.1cqw,14px);font-weight:900;color:#071b58;z-index:5;text-align:center;font-size:clamp(6px,.85vw,10px);font-weight:900;color:#071b58;z-index:5}
 .caption{text-align:center;color:#5e6877;font-size:12px;margin-top:14px}
-@media(max-width:600px){.stage{padding:14px 9px}.sticker{border-radius:12px}.bike-qr{padding:2px;border-width:1px}.qr-label{font-size:5px}.member-name{font-size:9px}.member-id{font-size:8px}}
+@media(max-width:600px){.stage{padding:14px 9px}.sticker{border-radius:12px}.bike-qr{padding:2px;border-width:1px}.qr-label{font-size:5px}.member-name{font-size:12px}.member-id{font-size:11px}}
 @media print{@page{size:A5 landscape;margin:0}body{background:#fff}.actions,.caption{display:none!important}.stage{width:210mm;height:148.5mm;margin:0;padding:24.25mm 5mm;box-shadow:none;border-radius:0}.sticker{width:200mm;height:100mm;margin:0 auto;aspect-ratio:auto;box-shadow:0 0 0 1.2mm #071b58,0 0 0 2mm #e6b93f;border-radius:4mm}}
 </style></head><body>
 <div class="actions"><a class="btn" href="index.html">← হোম</a><button class="btn" onclick="downloadBikeSticker()">⬇️ PNG ডাউনলোড</button><button class="btn" onclick="window.print()">🖨️ প্রিন্ট</button><span class="note">প্রিন্ট পেপার: A5 Landscape (A4-এর অর্ধেক) • 300 DPI উপযোগী ডিজাইন</span></div>
@@ -72,7 +72,7 @@ async function downloadBikeSticker(){
    const qimg=new Image();qimg.crossOrigin="anonymous";qimg.src=qr.src;
    await new Promise((resolve,reject)=>{qimg.onload=resolve;qimg.onerror=reject;});ctx.drawImage(qimg,qx,qy,qw,qw);
   }
-  ctx.fillStyle="#071b58";ctx.textAlign="center";ctx.textBaseline="middle";ctx.font="bold 44px Arial";ctx.fillText((currentMember&&currentMember.name)||"MEMBER",.372*sx,.866*sy,.548*sx);ctx.font="bold 42px Arial";ctx.fillText((currentMember&&currentMember.member_id)||id,.855*sx,.866*sy,.248*sx);
+  ctx.fillStyle="#071b58";ctx.textAlign="center";ctx.textBaseline="middle";ctx.font="bold 68px Arial";ctx.fillText((currentMember&&currentMember.name)||"MEMBER",.372*sx,.866*sy,.548*sx);ctx.font="bold 64px Arial";ctx.fillText((currentMember&&currentMember.member_id)||id,.855*sx,.866*sy,.248*sx);
   const a=document.createElement("a");a.download="WBUB-Bike-Sticker-"+id+".png";a.href=canvas.toDataURL("image/png");a.click();
  }catch(e){alert("ডাউনলোড তৈরি করা যায়নি। পেজটি রিফ্রেশ করে আবার চেষ্টা করুন।");}
 }
