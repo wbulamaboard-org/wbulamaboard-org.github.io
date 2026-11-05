@@ -64,7 +64,7 @@
 
       '<section class="profile-section"><div class="section-title"><span>◆</span><h2>পরিচিতি</h2></div><p>'+esc(w.bio||"WAYEJIN E FURFURA SHARIF-এর সঙ্গে যুক্ত ওয়েজিন।")+'</p></section>'+
       mediaSection+      '<div class="profile-actions"><a class="btn" href="wazeens.html">← সব ওয়েজিন</a><a class="btn" href="verification.html?id='+encodeURIComponent(w.member_id||id)+'">✓ ID যাচাই</a></div>'+
-      '<div class="download-actions"><a class="download-btn id" href="wazeen-id-card.html?id='+encodeURIComponent(w.member_id||id)+'">🪪 ID Card দেখুন / ডাউনলোড</a></div>'+
+      '<div class="download-actions"><a class="download-btn id" href="wazeen-id-card.html?id='+encodeURIComponent(w.member_id||id)+'">🪪 ID Card দেখুন / ডাউনলোড</a><a class="download-btn car" href="wazeen-car-board.html?id='+encodeURIComponent(w.member_id||id)+'">🚗 Car Board ডাউনলোড</a></div>'+
       '</div></div>';
 
     const im=root.querySelector(".profile-photo");
