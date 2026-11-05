@@ -7,17 +7,17 @@
 </defs>
 <rect width="1536" height="768" rx="46" fill="#fff"/><rect x="8" y="8" width="1520" height="752" rx="42" fill="url(#red)" stroke="#e00013" stroke-width="12"/><rect x="25" y="25" width="1486" height="718" rx="32" fill="none" stroke="#fff" stroke-width="10"/><path d="M25 640 L1510 28 V710 Q1510 743 1478 743 H58 Q25 743 25 710Z" fill="url(#blue)"/>
 <rect x="35" y="35" width="1466" height="698" rx="28" fill="none" stroke="#fff" stroke-width="5"/>
-<image href="../WBUB_Logo_Transparent_Final.png" x="42" y="42" width="260" height="260" preserveAspectRatio="xMidYMid meet"/>
+
 <path d="M310 54V276" stroke="#fff" stroke-width="8"/>
-<text x="330" y="171" fill="#fff" font-family="Arial Narrow,Arial,sans-serif" font-size="102" font-weight="900" letter-spacing="-3">WEST BENGAL ULAMA BOARD</text>
-<text x="378" y="255" fill="#fff000" font-family="Arial, sans-serif" font-size="58" font-weight="900">WAYEJIN E FURFURA SHARIF</text>
+<text x="330" y="171" textLength="825" lengthAdjust="spacingAndGlyphs" fill="#fff" font-family="Impact,Arial Narrow,Arial,sans-serif" font-size="102" font-weight="900" letter-spacing="-2">WEST BENGAL ULAMA BOARD</text>
+<text x="378" y="255" textLength="735" lengthAdjust="spacingAndGlyphs" fill="#fff000" font-family="Arial,sans-serif" font-size="58" font-weight="900">WAYEJIN E FURFURA SHARIF</text>
 <rect x="1168" y="62" width="335" height="212" rx="42" fill="#fff000" stroke="#080808" stroke-width="9"/><rect x="1182" y="76" width="307" height="184" rx="32" fill="#fff" stroke="#111" stroke-width="5"/><path d="M1188 148H1483V248H1188Z" fill="#df0010"/><text x="1335" y="139" text-anchor="middle" fill="#10236e" font-family="Arial,sans-serif" font-size="43" font-weight="900">WBUB OFFICIAL</text><text x="1335" y="224" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="65" font-weight="900" filter="url(#shadow)">ON DUTY</text>
 <path d="M54 307H1480M54 326H1480" stroke="#fff" stroke-width="8"/>
-<g fill="none" stroke="url(#gold)" stroke-width="9" stroke-linejoin="round"><path d="M225 363l34 48-34 48-34-48z M225 379l20 32-20 32-20-32z M225 394l11 17-11 17-11-17z"/><path d="M1305 363l34 48-34 48-34-48z M1305 379l20 32-20 32-20-32z M1305 394l11 17-11 17-11-17z"/></g>
+<g fill="none" stroke="#ffe000" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"><path d="M225 350l18 24 29 11-29 11-18 25-18-25-29-11 29-11z M225 363l10 22-10 22-10-22z M225 373l5 12-5 12-5-12z"/><path d="M1305 350l18 24 29 11-29 11-18 25-18-25-29-11 29-11z M1305 363l10 22-10 22-10-22z M1305 373l5 12-5 12-5-12z"/><path d="M225 350v-18m0 96v-18m-47-25h-18m112 0h-18 M1305 350v-18m0 96v-18m-47-25h-18m112 0h-18"/></g>
 <text x="770" y="478" text-anchor="middle" fill="#fff" font-family="Arial Black,Arial,sans-serif" font-size="150" font-weight="900" letter-spacing="2" filter="url(#shadow)">WAYEJIN</text>
 <text x="770" y="550" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="62" font-weight="900" filter="url(#shadow)">(ISLAMIC SPEAKER)</text>
 <path d="M55 579H1270M55 612H1270" stroke="#fff" stroke-width="9"/>
-<text x="57" y="678" fill="#fff" font-family="Arial Narrow,Arial,sans-serif" font-size="43" font-weight="900">FURFURA SHARIF JAMIYAT E ULAMA BANGLA ASAM BRANCH ORGANISATION</text>
+<text x="57" y="678" textLength="1200" lengthAdjust="spacingAndGlyphs" fill="#fff" font-family="Impact,Arial Narrow,Arial,sans-serif" font-size="43" font-weight="900">FURFURA SHARIF JAMIYAT E ULAMA BANGLA ASAM BRANCH ORGANISATION</text>
 <path d="M1277 626V713" stroke="#fff" stroke-width="7"/>
 <!-- One blank reserved QR frame. Member QR is inserted by the page. -->
 <rect x="1280" y="522" width="216" height="208" rx="28" fill="#fff" stroke="#e00013" stroke-width="10"/>
