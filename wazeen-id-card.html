@@ -70,13 +70,14 @@
   document.getElementById("phone").textContent=t(m.phone);
   document.getElementById("valid").textContent=t(m.valid_till||m.validity);
   const photo=document.getElementById("memberPhoto");
-  // Show the uploaded portrait only on WBUB-0198's card; all other members keep the blank photo area.
+  // Show the member's uploaded portrait on the digital ID card.
   photo.removeAttribute("src");
   photo.style.display="none";
-  if(String(m.member_id||"").toUpperCase()==="WBUB-0198" && m.photo_url){
+  if(m.photo_url){
    photo.onload=()=>{photo.style.display="block";};
    photo.onerror=()=>{photo.style.display="none";};
-   photo.src=String(m.member_id||"").toUpperCase()==="WBUB-0090" ? m.photo_url+(m.photo_url.includes("?")?"&":"?")+"v=20261105-1" : m.photo_url;
+   const photoVersion=String(m.member_id||"").toUpperCase()==="WBUB-0124"?"v=20261105-3":String(m.member_id||"").toUpperCase()==="WBUB-0090"?"v=20261105-1":"v=20261105-3";
+   photo.src=m.photo_url+(m.photo_url.includes("?")?"&":"?")+photoVersion;
   }
   const verify="https://wbulamaboard-org.github.io/verification.html?id="+encodeURIComponent(m.member_id);
   const qr=document.getElementById("frontQr");
