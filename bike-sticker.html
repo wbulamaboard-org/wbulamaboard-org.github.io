@@ -7,13 +7,13 @@
 </style></head><body>
 <div class="actions"><a class="btn" href="index.html">← হোম</a><button class="btn" onclick="window.print()">🖨️ A4-এর হাফ সাইজে প্রিন্ট</button><span class="note">প্রিন্ট পেপার: A5 Landscape (A4-এর অর্ধেক) • 300 DPI উপযোগী ডিজাইন</span></div>
 <div class="stage"><div class="sticker"><div class="inner">
-<img class="logo" src="assets/WBUB_Logo_Transparent_Final.png" alt="West Bengal Ulama Board Logo">
+<img class="logo" src="WBUB_Logo_Transparent_Final.png?v=20261105-2" alt="West Bengal Ulama Board Logo">
 <div class="heading">West Bengal Ulama Board</div><div class="greenline"></div>
 <div class="sub">Wayejin Furfura Sharif</div>
 <div class="dutyrow"><div class="duty">ON DUTY</div><div class="bike">🏍</div></div>
 <div class="footer">ধর্মীয় দায়িত্বে নিয়োজিত</div><div class="mosque">☪ ▥ ▴ ▥</div><div class="bike-qr" id="bikeQr"></div><div class="qr-label">SCAN TO VERIFY</div>
 </div></div><div class="caption">বাইকের লম্বা স্টিকার • বোর্ডের আসল লোগো ব্যবহার করা হয়েছে</div></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js'"></script>
 <script>
 (async function(){
  const id=new URLSearchParams(location.search).get("id")||"";
@@ -25,9 +25,15 @@
   const list=await res.json();
   const person=list.find(x=>String(x.member_id||"").toLowerCase()===id.toLowerCase()&&x.active!==false);
   if(!person)throw new Error("member");
-  if(typeof QRCode==="undefined")throw new Error("qr");
   const verify="https://wbulamaboard-org.github.io/verification.html?id="+encodeURIComponent(person.member_id||id);
-  new QRCode(box,{text:verify,width:220,height:220,colorDark:"#000000",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});
+  if(typeof QRCode!=="undefined"){
+   new QRCode(box,{text:verify,width:220,height:220,colorDark:"#000000",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});
+  } else {
+   const qrImg=document.createElement("img");
+   qrImg.alt="Member verification QR code";qrImg.referrerPolicy="no-referrer";
+   qrImg.src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&format=png&data="+encodeURIComponent(verify);
+   await new Promise((resolve,reject)=>{qrImg.onload=()=>{box.replaceChildren(qrImg);resolve()};qrImg.onerror=reject;});
+  }
   cap.textContent=(person.name||"সদস্য")+" • "+(person.member_id||id)+" • QR স্ক্যান করে সদস্য যাচাই করুন";
  }catch(e){box.style.display="none";label.style.display="none";cap.textContent="সদস্যের QR তৈরি করা যায়নি। আবার চেষ্টা করুন।";}
 })();
