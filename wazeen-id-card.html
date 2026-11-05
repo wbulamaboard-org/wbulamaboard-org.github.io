@@ -76,7 +76,7 @@
   if(String(m.member_id||"").toUpperCase()==="WBUB-0198" && m.photo_url){
    photo.onload=()=>{photo.style.display="block";};
    photo.onerror=()=>{photo.style.display="none";};
-   photo.src=m.photo_url;
+   photo.src=String(m.member_id||"").toUpperCase()==="WBUB-0090" ? m.photo_url+(m.photo_url.includes("?")?"&":"?")+"v=20261105-1" : m.photo_url;
   }
   const verify="https://wbulamaboard-org.github.io/verification.html?id="+encodeURIComponent(m.member_id);
   const qr=document.getElementById("frontQr");
