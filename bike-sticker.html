@@ -9,10 +9,10 @@
 .sticker{position:relative;width:100%;aspect-ratio:2.4/1;overflow:hidden;background:#fff;border-radius:18px;box-shadow:0 0 0 5px #071b58,0 0 0 8px #e6b93f}
 .sticker-art{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block}
 /* Hide the QR/logo and scan text baked into the artwork; the live member QR is rendered above this clean white panel. */
-.qr-cleanup{position:absolute;left:80.2%;top:34%;width:18.8%;height:48%;background:#fff;border:2px solid #071b58;border-radius:8px;z-index:3}
-.bike-qr{position:absolute;left:82.3%;top:40.2%;width:14.4%;aspect-ratio:1;background:#fff;padding:3px;border:2px solid #071b58;border-radius:7px;display:flex;align-items:center;justify-content:center;z-index:4}
+.qr-cleanup{position:absolute;left:82.1%;top:37.5%;width:15.8%;height:45.5%;background:#fff;border:2px solid #071b58;border-radius:8px;z-index:3}
+.bike-qr{position:absolute;left:83%;top:40.5%;width:13.2%;aspect-ratio:1;background:#fff;padding:3px;border:2px solid #071b58;border-radius:7px;display:flex;align-items:center;justify-content:center;z-index:4}
 .bike-qr canvas,.bike-qr img{width:100%!important;height:100%!important;display:block!important}
-.qr-label{position:absolute;left:82%;top:75.2%;width:15%;text-align:center;font-size:clamp(6px,.85vw,10px);font-weight:900;color:#071b58;z-index:5}
+.qr-label{position:absolute;left:82.7%;top:75.5%;width:14.2%;text-align:center;font-size:clamp(6px,.85vw,10px);font-weight:900;color:#071b58;z-index:5}
 .caption{text-align:center;color:#5e6877;font-size:12px;margin-top:14px}
 @media(max-width:600px){.stage{padding:14px 9px}.sticker{border-radius:12px}.bike-qr{padding:2px;border-width:1px}.qr-label{font-size:5px}}
 @media print{@page{size:A5 landscape;margin:0}body{background:#fff}.actions,.caption{display:none!important}.stage{width:210mm;height:148.5mm;margin:0;padding:18mm 5mm;box-shadow:none;border-radius:0}.sticker{width:200mm;height:83.33mm;margin:0 auto;aspect-ratio:auto;box-shadow:0 0 0 1.2mm #071b58,0 0 0 2mm #e6b93f;border-radius:4mm}}
@@ -60,15 +60,15 @@ async function downloadBikeSticker(){
   await new Promise((resolve,reject)=>{if(img.complete&&img.naturalWidth)resolve();else{img.onload=resolve;img.onerror=reject;}});
   ctx.drawImage(img,0,0,canvas.width,canvas.height);
   const sx=canvas.width,sy=canvas.height;
-  const rx=.802*sx,ry=.34*sy,rw=.188*sx,rh=.48*sy;
+  const rx=.821*sx,ry=.375*sy,rw=.158*sx,rh=.455*sy;
   ctx.fillStyle="#fff";ctx.fillRect(rx,ry,rw,rh);
   ctx.strokeStyle="#071b58";ctx.lineWidth=12;ctx.strokeRect(rx+8,ry+8,rw-16,rh-16);
-  const qx=.823*sx,qy=.402*sy,qw=.144*sx;
+  const qx=.83*sx,qy=.405*sy,qw=.132*sx;
   if(qr.tagName==="CANVAS")ctx.drawImage(qr,qx,qy,qw,qw);else{
    const qimg=new Image();qimg.crossOrigin="anonymous";qimg.src=qr.src;
    await new Promise((resolve,reject)=>{qimg.onload=resolve;qimg.onerror=reject;});ctx.drawImage(qimg,qx,qy,qw,qw);
   }
-  ctx.fillStyle="#071b58";ctx.font="bold 34px Arial";ctx.textAlign="center";ctx.fillText("SCAN TO VERIFY",.895*sx,.752*sy);
+  ctx.fillStyle="#071b58";ctx.font="bold 34px Arial";ctx.textAlign="center";ctx.fillText("SCAN TO VERIFY",.898*sx,.755*sy);
   const a=document.createElement("a");a.download="WBUB-Bike-Sticker-"+id+".png";a.href=canvas.toDataURL("image/png");a.click();
  }catch(e){alert("ডাউনলোড তৈরি করা যায়নি। পেজটি রিফ্রেশ করে আবার চেষ্টা করুন।");}
 }
