@@ -3149,5 +3149,22 @@
     "phone_key": "9832777951",
     "active": true,
     "area": "Hadipur, Uttar Chandpur"
+  },
+  {
+    "member_id": "WBUB-0198",
+    "serial": 198,
+    "source_page": "new member entry",
+    "name": "মাওলানা জুলফিকার ঢালী",
+    "name_en": "Maulana Zulfikar Dhali",
+    "address": "বাসন্তী, দক্ষিণ ২৪ পরগনা, পশ্চিমবঙ্গ",
+    "district": "South 24 Parganas",
+    "block": "Basanti",
+    "designation": "ID Card Agent",
+    "phone": "+91 98363 09529",
+    "validity": "",
+    "old_registration_id": "",
+    "phone_key": "9836309529",
+    "active": true,
+    "area": "Basanti"
   }
 ]
