@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="600" viewBox="0 0 1200 600">
+<defs>
+ <linearGradient id="red" x2="0" y2="1"><stop stop-color="#ed090d"/><stop offset="1" stop-color="#a80009"/></linearGradient>
+ <linearGradient id="blue" x2="0" y2="1"><stop stop-color="#061c88"/><stop offset="1" stop-color="#02094e"/></linearGradient>
+ <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feGaussianBlur in="SourceAlpha" stdDeviation="3"/><feOffset dy="4"/><feComponentTransfer><feFuncA type="linear" slope=".55"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect x="5" y="5" width="1190" height="590" rx="28" fill="#fff" stroke="#d00012" stroke-width="10"/>
+<rect x="19" y="19" width="1162" height="562" rx="20" fill="url(#blue)"/>
+<path d="M20 20H1180V155L20 490Z" fill="url(#red)"/>
+<image xlink:href="wbub-logo.svg" x="34" y="34" width="190" height="190" preserveAspectRatio="xMidYMid meet"/>
+<text x="245" y="105" fill="#fff" font-family="Arial, sans-serif" font-size="55" font-weight="900" letter-spacing="-1">WEST BENGAL ULAMA BOARD</text>
+<text x="260" y="158" fill="#ffe000" font-family="Arial, sans-serif" font-size="39" font-weight="900">WAYEJIN E FURFURA SHARIF</text>
+<rect x="925" y="35" width="230" height="142" rx="22" fill="#fff" stroke="#e5c52d" stroke-width="8"/>
+<rect x="936" y="46" width="208" height="52" rx="12" fill="#fff"/>
+<text x="1040" y="82" text-anchor="middle" fill="#06207b" font-family="Arial,sans-serif" font-size="30" font-weight="900">WBUB OFFICIAL</text>
+<rect x="936" y="101" width="208" height="64" rx="8" fill="#d4000d"/>
+<text x="1040" y="148" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="43" font-weight="900">ON DUTY</text>
+<path d="M45 238H1155M45 253H1155" stroke="#fff" stroke-width="5"/>
+<g fill="none" stroke="#ffd900" stroke-width="5">
+ <path d="M155 290l18 30-18 30-18-30z M155 270l10 20-10 20-10-20z M155 320l10 20-10 20-10-20z"/>
+ <path d="M1045 290l18 30-18 30-18-30z M1045 270l10 20-10 20-10-20z M1045 320l10 20-10 20-10-20z"/>
+ <path d="M115 320h80M1005 320h80"/>
+</g>
+<text x="600" y="365" text-anchor="middle" fill="#fff" font-family="Arial Black, Arial, sans-serif" font-size="120" font-weight="900" filter="url(#shadow)">WAYEJIN</text>
+<text x="600" y="423" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="48" font-weight="900" filter="url(#shadow)">(ISLAMIC SPEAKER)</text>
+<path d="M45 455H1005M45 474H1005" stroke="#fff" stroke-width="5"/>
+<text x="45" y="535" fill="#fff" font-family="Arial,sans-serif" font-size="28" font-weight="900">FURFURA SHARIF JAMIYAT E ULAMA BANGLA ASAM</text>
+<text x="45" y="565" fill="#fff" font-family="Arial,sans-serif" font-size="22" font-weight="800">BRANCH ORGANISATION</text>
+<!-- Reserved blank QR window: each member's real QR is overlaid by the page at runtime. -->
+<rect x="1018" y="405" width="142" height="142" rx="15" fill="#fff" stroke="#d00012" stroke-width="7"/>
+<rect x="1028" y="415" width="122" height="122" rx="9" fill="#fff" stroke="#fff" stroke-width="2"/>
+</svg>
