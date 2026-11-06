@@ -3167,5 +3167,22 @@
     "active": true,
     "area": "Basanti",
     "photo_url": "assets/a_clean_high_resolution_circular_profile_portrai.png"
+  },
+  {
+    "member_id": "WBUB-0199",
+    "serial": 199,
+    "source_page": "new member entry",
+    "name": "Mahibulla Molla",
+    "name_en": "Mahibulla Molla",
+    "address": "Baradabad, PO-Ghoshpur, Minakhan, North 24 Parganas, West Bengal",
+    "district": "North 24 Parganas",
+    "block": "Minakhan",
+    "designation": "General Member",
+    "phone": "+91 80016 23874",
+    "phone_key": "8001623874",
+    "validity": "2026-2027",
+    "old_registration_id": "",
+    "active": true,
+    "area": "Baradabad, Ghoshpur"
   }
 ]
