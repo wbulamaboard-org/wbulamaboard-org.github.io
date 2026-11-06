@@ -2204,8 +2204,7 @@
     "old_registration_id": "WB.UB/1078/2025",
     "phone_key": "9064132899",
     "photo_url": "assets/member-photos/WBUB-0139.png",
-    "active": false,
-    "status": "SUSPENDED",
+    "active": true,
     "district": "",
     "area": "Kansona"
   },
