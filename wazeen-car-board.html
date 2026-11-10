@@ -37,9 +37,27 @@
     const canvas=document.createElement("canvas");
     canvas.width=3450;canvas.height=2475;
     const ctx=canvas.getContext("2d");
-    ctx.drawImage(bg,0,0,canvas.width,canvas.height);
-    const qx=canvas.width*.847,qy=canvas.height*.699,qw=canvas.width*.112;
-    ctx.drawImage(qrSource,qx,qy,qw,qw);
+    if(!ctx)throw new Error("CANVAS");
+    // Export the exact same geometry as the on-screen preview.
+    // The artwork is 2:1 and vertically centered inside the 11.5:8.25 board.
+    const boardRect=board.getBoundingClientRect();
+    const artwork=board.querySelector(".artwork");
+    const artworkRect=artwork.getBoundingClientRect();
+    const qrRect=document.getElementById("qr").getBoundingClientRect();
+    const scaleX=canvas.width/boardRect.width;
+    const scaleY=canvas.height/boardRect.height;
+    ctx.fillStyle="#ffffff";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    const ax=(artworkRect.left-boardRect.left)*scaleX;
+    const ay=(artworkRect.top-boardRect.top)*scaleY;
+    const aw=artworkRect.width*scaleX;
+    const ah=artworkRect.height*scaleY;
+    ctx.drawImage(bg,ax,ay,aw,ah);
+    const qx=(qrRect.left-boardRect.left)*scaleX;
+    const qy=(qrRect.top-boardRect.top)*scaleY;
+    const qw=qrRect.width*scaleX;
+    const qh=qrRect.height*scaleY;
+    ctx.drawImage(qrSource,qx,qy,qw,qh);
     const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/png"));
     if(!blob)throw new Error("PNG");
     const url=URL.createObjectURL(blob),a=document.createElement("a");
