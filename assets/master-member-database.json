@@ -3199,5 +3199,20 @@
     "validity": "2026-2027",
     "active": true,
     "area": "Murali, Duttapukur"
+  },
+  {
+    "member_id": "WBUB-0201",
+    "serial": 201,
+    "source_page": "new directory entry",
+    "name": "Sahanaj Alom Mondal",
+    "name_en": "Sahanaj Alom Mondal",
+    "address": "Baduria, North 24 Parganas, West Bengal - 743401",
+    "district": "North 24 Parganas",
+    "block": "Baduria",
+    "designation": "District Advisor, North 24 Parganas",
+    "phone": "+91 96475 51219",
+    "phone_key": "9647551219",
+    "active": true,
+    "area": "Baduria"
   }
 ]
