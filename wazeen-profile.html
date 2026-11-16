@@ -72,4 +72,35 @@
 @media(min-width:621px){
   .profile-card.modern-profile .profile-photo{width:142px!important;height:142px!important;margin-top:-71px!important}
 }
-</style></style></head><body><div class="top">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ • ঐক্য • শিক্ষা • সমাজ সংস্কার</div><header><div class="wrap nav"><a class="brand" href="index.html">وَاعِظِيْنِ فُرْفُرَه شَرِيْف <small>WAYEJIN E FURFURA SHARIF</small></a><button class="menu-btn" type="button" onclick="document.querySelector('nav').classList.toggle('open')">☰ মেনু</button><nav><a href="index.html">হোম</a><a href="wazeens.html">ওয়েজিন</a><a href="registration.html">নিবন্ধন</a><a href="verification.html">ভেরিফিকেশন</a></nav></div></header><main><section class="profile-page"><div class="wrap"><div id="wazeenProfile"></div></div></section></main><footer><div class="wrap"><b>WAYEJIN E FURFURA SHARIF</b><p>WEST BENGAL ULAMA BOARD</p><p>ঐক্য • শিক্ষা • সমাজ সংস্কার</p></div></footer><script src="assets/wazeens.js?v=20261116-302"></script><script src="assets/site.js" defer></script></body></html>
+</style></style></head><body><div class="top">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ • ঐক্য • শিক্ষা • সমাজ সংস্কার</div><header><div class="wrap nav"><a class="brand" href="index.html">وَاعِظِيْنِ فُرْفُرَه شَرِيْف <small>WAYEJIN E FURFURA SHARIF</small></a><button class="menu-btn" type="button" onclick="document.querySelector('nav').classList.toggle('open')">☰ মেনু</button><nav><a href="index.html">হোম</a><a href="wazeens.html">ওয়েজিন</a><a href="registration.html">নিবন্ধন</a><a href="verification.html">ভেরিফিকেশন</a></nav></div></header><main><section class="profile-page"><div class="wrap"><div id="wazeenProfile"></div></div></section></main><footer><div class="wrap"><b>WAYEJIN E FURFURA SHARIF</b><p>WEST BENGAL ULAMA BOARD</p><p>ঐক্য • শিক্ষা • সমাজ সংস্কার</p></div></footer><script src="assets/wazeens.js?v=20261116-302"></script><script>
+/* Safe profile fallback: ensures the member profile still appears if the main directory script fails. */
+window.addEventListener("load",function(){
+  setTimeout(async function(){
+    const root=document.getElementById("wazeenProfile");
+    if(!root || root.children.length) return;
+    const id=new URLSearchParams(location.search).get("id")||"";
+    if(!id){root.innerHTML='<div style="padding:28px;text-align:center;background:#fff;border-radius:16px">সদস্যের ID পাওয়া যায়নি। <a href="wazeens.html">ডিরেক্টরিতে ফিরুন</a></div>';return;}
+    try{
+      const response=await fetch("assets/master-member-database.json?v=20261116-profilefix",{cache:"no-store"});
+      if(!response.ok) throw new Error("database");
+      const rows=await response.json();
+      const m=rows.find(x=>String(x.member_id||"").toLowerCase()===id.toLowerCase()&&x.active!==false);
+      if(!m) throw new Error("member");
+      const safe=v=>String(v||"—").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+      const photo=String(m.photo_url||m.photo||"").trim();
+      root.innerHTML='<article style="max-width:760px;margin:20px auto;padding:24px;background:#fff;border:1px solid #dce7e1;border-radius:20px;box-shadow:0 12px 32px #07382c18;text-align:center;color:#17382e">'+
+        (photo?'<img src="'+safe(photo)+'" alt="" style="width:130px;height:130px;object-fit:cover;border-radius:50%;border:5px solid #ead9a8">':'')+
+        '<p style="color:#a17e30;font-weight:800">'+safe(m.designation||"WAYEJIN")+'</p><h1 style="font-size:25px">'+safe(m.name)+'</h1>'+
+        '<p><b>Member ID:</b> '+safe(m.member_id)+'</p><p><b>জেলা:</b> '+safe(m.district)+'　<b>এলাকা:</b> '+safe(m.area||m.block)+'</p><p><b>মোবাইল:</b> '+safe(m.phone)+'</p>'+
+        '<p style="display:grid;gap:9px;margin-top:22px">'+
+        '<a style="display:block;padding:13px;background:#a17e30;color:white;border-radius:10px;text-decoration:none;font-weight:800" href="wazeen-id-card.html?id='+encodeURIComponent(m.member_id)+'">🪪 ID Card Download</a>'+
+        '<a style="display:block;padding:13px;background:#07513f;color:white;border-radius:10px;text-decoration:none;font-weight:800" href="wazeen-car-board.html?id='+encodeURIComponent(m.member_id)+'">🚗 Car Board Download</a>'+
+        '<a style="display:block;padding:13px;background:#09245e;color:white;border-radius:10px;text-decoration:none;font-weight:800" href="bike-sticker.html?id='+encodeURIComponent(m.member_id)+'">🏍️ Bike Sticker Download</a></p>'+
+        '<a href="wazeens.html" style="color:#07513f">← ওয়েজিন ডিরেক্টরি</a></article>';
+      document.title=(m.name||"Wazeen")+" | WAYEJIN E FURFURA SHARIF";
+    }catch(e){
+      root.innerHTML='<div style="padding:28px;text-align:center;background:#fff;border-radius:16px"><h2>প্রোফাইল লোড করা যায়নি</h2><p>ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।</p><a href="wazeens.html">ওয়েজিন ডিরেক্টরি</a></div>';
+    }
+  },1200);
+});
+</script><script src="assets/site.js" defer></script></body></html>
