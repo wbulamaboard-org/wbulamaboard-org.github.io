@@ -14,13 +14,13 @@
  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
  function roleTitle(value){
   let s=String(value||"WAYEJIN").trim().toUpperCase();
-  s=s.replace(/\\(WBUB\\)/g,"")
-     .replace(/\\bW\\.?\\s*B\\.?\\s*ULAMA\\s+BOARD\\b/g,"")
-     .replace(/\\bWEST\\s+BENGAL\\s+ULAMA\\s+BOARD\\b/g,"")
-     .replace(/\\s+/g," ").trim()
+  s=s.replace(/\(WBUB\)/g,"")
+     .replace(/\bW\.?\s*B\.?\s*ULAMA\s+BOARD\b/g,"")
+     .replace(/\bWEST\s+BENGAL\s+ULAMA\s+BOARD\b/g,"")
+     .replace(/\s+/g," ").trim()
      .replace(/[,;:]+$/,"").trim();
-  s=s.replace(/^VICE[- ]+PRESIDENT\\b/,"VICE PRESIDENT");
-  s=s.replace(/^GENERAL[- ]+SECRETARY\\b/,"GENERAL SECRETARY");
+  s=s.replace(/^VICE[- ]+PRESIDENT\b/,"VICE PRESIDENT");
+  s=s.replace(/^GENERAL[- ]+SECRETARY\b/,"GENERAL SECRETARY");
   return s+" (WBUB)";
  }
  if(!id){loading.innerHTML='সদস্য আইডি পাওয়া যায়নি। <a href="wazeens.html">ওয়েজিন ডিরেক্টরি থেকে সদস্য নির্বাচন করুন</a>।';return;}
