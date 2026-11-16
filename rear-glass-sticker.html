@@ -33,7 +33,7 @@ header{background:#073d32;color:#fff;padding:14px 16px;font-weight:800}header sm
  #sheet .member{font-size:.62in;border-width:.035in}
  body.mirror #sheet .sticker-content{transform:scaleX(-1)}
 }
-body.mirror .preview-wrap .sticker-content{transform:scaleX(-1)}
+/* Preview always remains readable; mirror is applied only to print/download output. */
 </style></head><body>
 <header>WAYEJIN E FURFURA SHARIF<small>WEST BENGAL ULAMA BOARD</small></header>
 <div class="actions">
@@ -48,7 +48,7 @@ body.mirror .preview-wrap .sticker-content{transform:scaleX(-1)}
   <div class="words"><div class="board">WEST BENGAL ULAMA BOARD</div><div class="way">WAYEJIN E FURFURA SHARIF</div></div>
   <div class="member">OFFICIAL MEMBER</div>
  </div></div>
- <div class="controls"><label><input type="checkbox" id="mirror" checked onchange="document.body.classList.toggle('mirror',this.checked)"> ভিতর থেকে কাঁচে লাগানোর জন্য Mirror Print</label><span>প্রতি স্টিকার: ৯ × ৬ ইঞ্চি • ৩০০ DPI</span></div>
+ <div class="controls"><label><input type="checkbox" id="mirror" checked onchange="document.body.classList.toggle('mirror',this.checked)"> ভিতর থেকে কাঁচে লাগানোর জন্য Mirror Print</label><span>প্রিভিউ সবসময় সোজা দেখাবে। কাঁচের ভিতরে লাগানোর জন্য ডাউনলোড/প্রিন্টে Mirror Print ব্যবহার করুন।<br>প্রতি স্টিকার: ৯ × ৬ ইঞ্চি • ৩০০ DPI</span></div>
  <div class="note">১৮ × ১২ ইঞ্চি কাগজে ২ × ২ বিন্যাসে মোট ৪টি স্টিকার প্রিন্ট হবে। প্রিন্ট করার সময় Actual Size / 100% রাখুন। সাধারণ প্রিন্টারের কাগজে নয়—কাঁচের ভিতরে লাগানোর উপযোগী transparent reverse-print vinyl ব্যবহার করুন।</div>
 </div>
 <div id="sheet" aria-hidden="true"></div>
