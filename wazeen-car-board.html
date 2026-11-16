@@ -14,7 +14,7 @@
  const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
  function roleTitle(value){
   let s=String(value||"WAYEJIN").trim().replace(/\s*,\s*W\.B\. Ulama Board/ig,"").replace(/\s*,\s*West Bengal Ulama Board/ig,"").replace(/\s+/g," ").trim();
-  if(/^Vice[- ]President\b/i.test(s))return "VICE PRESIDENT, WEST BENGAL ULAMA BOARD";
+  if(/^Vice[- ]President\b/i.test(s))return "VICE PRESIDENT, WEST BENGAL ULAMA BOARD (WBUB)";
   if(/^President(?: of Ulama Board)?$/i.test(s))return "PRESIDENT";
   if(/^Member(?: of|,)\s*(the\s*)?(Ulama Board|W\.B\. Ulama Board)?$/i.test(s)||/^General Member$|^Ulama Member$/i.test(s))return "MEMBER";
   return s.toUpperCase();
