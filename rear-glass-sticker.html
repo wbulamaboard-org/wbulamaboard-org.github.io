@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rear Glass Sticker | West Bengal Ulama Board</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef1f4;color:#14264d;font-family:Arial,"Noto Sans Bengali",sans-serif}
+header{background:#073d32;color:#fff;padding:14px 16px;font-weight:800}header small{display:block;color:#e7d38d;letter-spacing:1px;margin-top:3px}
+.actions{max-width:980px;margin:16px auto;padding:0 14px;display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.btn{border:0;border-radius:10px;padding:12px 16px;background:#09245e;color:#fff;font-weight:800;text-decoration:none;cursor:pointer}
+.btn.gold{background:#a17e30}.hint{max-width:980px;margin:0 auto 12px;padding:12px 14px;background:#fff;border:1px solid #dce2ea;border-radius:12px;font-size:13px;line-height:1.55}
+.preview-wrap{max-width:980px;margin:0 auto 30px;padding:16px;background:#fff;border-radius:16px;box-shadow:0 12px 30px #0002}
+.sticker{width:100%;aspect-ratio:3/2;position:relative;overflow:hidden;border-radius:3%;border:clamp(4px,.7vw,8px) solid #071b63;box-shadow:inset 0 0 0 5px #fff,inset 0 0 0 10px #f4d400;background:linear-gradient(153deg,#f20b0b 0 48%,#07165f 48% 100%);color:#fff}
+.sticker:before{content:"";position:absolute;inset:2.5%;border:3px solid #fff;border-radius:2.5%;pointer-events:none}
+.sticker-content{position:absolute;inset:7% 4.5%;display:grid;grid-template-columns:24% 76%;grid-template-rows:52% 40%;align-items:center}
+.logo{grid-column:1;grid-row:1/3;width:88%;aspect-ratio:1;object-fit:contain;justify-self:center;filter:drop-shadow(0 2px 2px #0008)}
+.words{grid-column:2;grid-row:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5%;min-width:0}
+.board{font-family:Impact,"Arial Narrow",Arial,sans-serif;font-weight:1000;letter-spacing:.02em;white-space:nowrap;text-align:center;font-size:clamp(18px,5.3vw,68px);line-height:1.03;text-shadow:2px 3px 2px #000b}
+.way{font-family:Arial,sans-serif;background:#ffdf00;color:#06195e;border-radius:999px;padding:1.3% 4%;font-weight:1000;font-style:italic;white-space:nowrap;font-size:clamp(10px,2.8vw,35px);box-shadow:0 3px 3px #0008}
+.member{grid-column:2;grid-row:2;justify-self:center;align-self:center;width:86%;text-align:center;border:3px solid #fff;border-radius:999px;padding:1.3% 2%;font-size:clamp(18px,5.4vw,70px);font-weight:1000;letter-spacing:.02em;text-shadow:2px 3px 2px #000b;background:#06165e}
+.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:14px;color:#44516a;font-size:13px}
+.controls label{display:flex;align-items:center;gap:7px;background:#f4f6f8;padding:9px 12px;border-radius:9px}
+.note{font-size:12px;color:#5b6574;margin-top:10px;line-height:1.5}
+#sheet{display:none}
+@media print{
+ @page{size:18in 12in;margin:0}
+ html,body{width:18in;height:12in;margin:0!important;background:#fff!important}
+ header,.actions,.hint,.preview-wrap{display:none!important}
+ #sheet{display:grid!important;width:18in;height:12in;grid-template-columns:9in 9in;grid-template-rows:6in 6in;gap:0;page-break-after:avoid}
+ #sheet .sticker{width:9in;height:6in;aspect-ratio:auto;border-radius:.18in;border-width:.07in;box-shadow:inset 0 0 0 .04in #fff,inset 0 0 0 .08in #f4d400}
+ #sheet .sticker:before{border-width:.035in}
+ #sheet .logo{filter:none}
+ #sheet .board{font-size:.56in}
+ #sheet .way{font-size:.31in}
+ #sheet .member{font-size:.62in;border-width:.035in}
+ body.mirror #sheet .sticker-content{transform:scaleX(-1)}
+}
+body.mirror .preview-wrap .sticker-content{transform:scaleX(-1)}
+</style></head><body>
+<header>WAYEJIN E FURFURA SHARIF<small>WEST BENGAL ULAMA BOARD</small></header>
+<div class="actions">
+<a class="btn" href="wazeens.html">← ডিরেক্টরি</a>
+<button class="btn gold" onclick="downloadSticker()">⬇️ PNG ডাউনলোড (একটি)</button>
+<button class="btn" onclick="window.print()">🖨️ ১৮ × ১২ ইঞ্চি প্রিন্ট (৪টি)</button>
+</div>
+<div class="hint"><b>গাড়ির পিছনের কাঁচের ভিতরে লাগানোর স্টিকার</b><br>এক লাইনে WEST BENGAL ULAMA BOARD, নিচে WAYEJIN E FURFURA SHARIF এবং OFFICIAL MEMBER। সাদামাটা, কম লেখা ও আগের লাল-নীল-হলুদ রং রাখা হয়েছে।</div>
+<div class="preview-wrap">
+ <div class="sticker" id="mainSticker"><div class="sticker-content">
+  <img class="logo" src="assets/wbub-logo.svg" alt="WBUB Logo">
+  <div class="words"><div class="board">WEST BENGAL ULAMA BOARD</div><div class="way">WAYEJIN E FURFURA SHARIF</div></div>
+  <div class="member">OFFICIAL MEMBER</div>
+ </div></div>
+ <div class="controls"><label><input type="checkbox" id="mirror" checked onchange="document.body.classList.toggle('mirror',this.checked)"> ভিতর থেকে কাঁচে লাগানোর জন্য Mirror Print</label><span>প্রতি স্টিকার: ৯ × ৬ ইঞ্চি • ৩০০ DPI</span></div>
+ <div class="note">১৮ × ১২ ইঞ্চি কাগজে ২ × ২ বিন্যাসে মোট ৪টি স্টিকার প্রিন্ট হবে। প্রিন্ট করার সময় Actual Size / 100% রাখুন। সাধারণ প্রিন্টারের কাগজে নয়—কাঁচের ভিতরে লাগানোর উপযোগী transparent reverse-print vinyl ব্যবহার করুন।</div>
+</div>
+<div id="sheet" aria-hidden="true"></div>
+<script>
+const logo=new Image();logo.src="assets/wbub-logo.svg";
+function makeStickerMarkup(){return '<div class="sticker"><div class="sticker-content"><img class="logo" src="assets/wbub-logo.svg" alt=""><div class="words"><div class="board">WEST BENGAL ULAMA BOARD</div><div class="way">WAYEJIN E FURFURA SHARIF</div></div><div class="member">OFFICIAL MEMBER</div></div></div>'}
+document.getElementById("sheet").innerHTML=makeStickerMarkup()+makeStickerMarkup()+makeStickerMarkup()+makeStickerMarkup();
+function drawOne(ctx,x,y,w,h,mirror){
+ ctx.save();if(mirror){ctx.translate(x+w,y);ctx.scale(-1,1);}else ctx.translate(x,y);
+ const sx=w/1800,sy=h/1200;ctx.scale(sx,sy);
+ const grad=ctx.createLinearGradient(0,0,1800,1200);grad.addColorStop(0,"#f20b0b");grad.addColorStop(.48,"#f20b0b");grad.addColorStop(.481,"#07165f");grad.addColorStop(1,"#07165f");
+ ctx.fillStyle=grad;roundRect(ctx,8,8,1784,1184,65);ctx.fill();
+ ctx.lineWidth=22;ctx.strokeStyle="#071b63";roundRect(ctx,10,10,1780,1180,64);ctx.stroke();
+ ctx.lineWidth=13;ctx.strokeStyle="#fff";roundRect(ctx,36,36,1728,1128,48);ctx.stroke();
+ ctx.lineWidth=9;ctx.strokeStyle="#f4d400";roundRect(ctx,53,53,1694,1094,39);ctx.stroke();
+ if(logo.complete&&logo.naturalWidth){ctx.drawImage(logo,95,260,400,400);}
+ ctx.textAlign="center";ctx.textBaseline="middle";ctx.font="1000 116px Arial";ctx.fillStyle="#000";ctx.fillText("WEST BENGAL ULAMA BOARD",1110,405+7,1220);
+ ctx.fillStyle="#fff";ctx.fillText("WEST BENGAL ULAMA BOARD",1110,405,1220);
+ roundRect(ctx,600,510,1090,160,70);ctx.fillStyle="#ffdf00";ctx.fill();
+ ctx.fillStyle="#06195e";ctx.font="italic 900 70px Arial";ctx.fillText("WAYEJIN E FURFURA SHARIF",1145,590,1000);
+ roundRect(ctx,520,755,1180,270,135);ctx.fillStyle="#06165e";ctx.fill();ctx.lineWidth=12;ctx.strokeStyle="#fff";ctx.stroke();
+ ctx.fillStyle="#fff";ctx.font="1000 132px Arial";ctx.fillText("OFFICIAL MEMBER",1110,890,1080);
+ ctx.restore();
+}
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function downloadSticker(){
+ const canvas=document.createElement("canvas");canvas.width=2700;canvas.height=1800;const ctx=canvas.getContext("2d");
+ if(!logo.complete){logo.onload=()=>downloadSticker();return;}
+ drawOne(ctx,0,0,2700,1800,document.getElementById("mirror").checked);
+ const a=document.createElement("a");a.download="WBUB-Rear-Glass-Sticker-9x6in-300DPI.png";a.href=canvas.toDataURL("image/png");a.click();
+}
+document.getElementById("mirror").checked=true;document.body.classList.add("mirror");
+</script></body></html>
