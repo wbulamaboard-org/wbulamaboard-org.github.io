@@ -45,17 +45,21 @@
    const button=document.getElementById("download"),oldLabel=button.textContent;
    button.disabled=true;button.textContent="ছবি তৈরি হচ্ছে…";
    try{
-    const bg=board.querySelector(".board-bg");
+    const bg=board.querySelector(".board-bg"),logo=board.querySelector(".official-logo");
     if(!bg.complete)await new Promise((resolve,reject)=>{bg.onload=resolve;bg.onerror=reject;});
+    if(!logo.complete)await new Promise((resolve,reject)=>{logo.onload=resolve;logo.onerror=reject;});
     const qrSource=document.querySelector("#qr canvas")||document.querySelector("#qr img");
     if(!qrSource)throw new Error("QR");
     const canvas=document.createElement("canvas");canvas.width=3000;canvas.height=2100;
     const ctx=canvas.getContext("2d");if(!ctx)throw new Error("CANVAS");
-    const boardRect=board.getBoundingClientRect(),artwork=board.querySelector(".artwork"),artworkRect=artwork.getBoundingClientRect(),qrSourceRect=(document.querySelector("#qr canvas")||document.querySelector("#qr img")).getBoundingClientRect(),roleRect=document.getElementById("designationText").getBoundingClientRect();
+    const boardRect=board.getBoundingClientRect(),artwork=board.querySelector(".artwork"),artworkRect=artwork.getBoundingClientRect(),qrSourceRect=(document.querySelector("#qr canvas")||document.querySelector("#qr img")).getBoundingClientRect(),roleRect=document.getElementById("designationText").getBoundingClientRect(),logoRect=logo.getBoundingClientRect(),coverRect=board.querySelector(".logo-cover").getBoundingClientRect(),dividerRect=board.querySelector(".logo-divider").getBoundingClientRect();
     const sx=canvas.width/boardRect.width,sy=canvas.height/boardRect.height;
     ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvas.width,canvas.height);
     const ax=(artworkRect.left-boardRect.left)*sx,ay=(artworkRect.top-boardRect.top)*sy,aw=artworkRect.width*sx,ah=artworkRect.height*sy;
     ctx.drawImage(bg,ax,ay,aw,ah);
+    const cx=(coverRect.left-boardRect.left)*sx,cy=(coverRect.top-boardRect.top)*sy,cw=coverRect.width*sx,ch=coverRect.height*sy;ctx.fillStyle="#fa0202";ctx.fillRect(cx,cy,cw,ch);
+    const dx=(dividerRect.left-boardRect.left)*sx,dy=(dividerRect.top-boardRect.top)*sy,dw=dividerRect.width*sx,dh=dividerRect.height*sy;ctx.fillStyle="#ffffff";ctx.fillRect(dx,dy,dw,dh);
+    const lx=(logoRect.left-boardRect.left)*sx,ly=(logoRect.top-boardRect.top)*sy,lw=logoRect.width*sx,lh=logoRect.height*sy;ctx.drawImage(logo,lx,ly,lw,lh);
     const px=(roleRect.left-boardRect.left)*sx,py=(roleRect.top-boardRect.top)*sy,pw=roleRect.width*sx,ph=roleRect.height*sy;
     const maxWidth=pw*.94,fontSize=parseFloat(getComputedStyle(document.getElementById("designationText")).fontSize)*sx;ctx.font="900 "+fontSize+"px Arial,sans-serif";ctx.fillStyle="#ffe600";ctx.textAlign="center";ctx.textBaseline="middle";ctx.shadowColor="#111111";ctx.shadowBlur=3;
     ctx.fillText(title,px+pw*.5,py+ph*.5,maxWidth);ctx.shadowBlur=0;
