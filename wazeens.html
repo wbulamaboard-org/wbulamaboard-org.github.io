@@ -110,7 +110,7 @@
   }
   async function load(){
     try{
-      const res=await fetch("assets/master-member-database.json?v=20261110-200",{cache:"no-store"});
+      const res=await fetch("assets/master-member-database.json?v=20261125-202",{cache:"no-store"});
       if(!res.ok) throw new Error("database");
       members=(await res.json()).filter(r=>r && r.active!==false);
       const count=document.getElementById("memberCount");
