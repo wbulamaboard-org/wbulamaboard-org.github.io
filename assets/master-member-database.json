@@ -3215,5 +3215,19 @@
     "active": true,
     "area": "Baduria",
     "photo_url": "https://wbulamaboard-org.github.io/assets/member-photos/WBUB-0201.jpg"
+  },
+  {
+    "member_id": "WBUB-0202",
+    "serial": 202,
+    "source_page": "new directory entry",
+    "name": "Moulana Sayed Anowar",
+    "name_en": "Moulana Sayed Anowar",
+    "address": "Kalikata, South 24 Parganas, West Bengal",
+    "district": "South 24 Parganas",
+    "designation": "Wayejin-e-Furfura Sharif",
+    "phone": "+91 8481816005",
+    "phone_key": "8481816005",
+    "active": true,
+    "area": "Kalikata"
   }
 ]
